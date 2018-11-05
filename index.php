@@ -7,6 +7,6 @@
  */
 print "Salut c'est un test";
 print "OK, cool.";
-print "test";
+print "test bien";
 
 ?>
