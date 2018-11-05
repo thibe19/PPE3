@@ -6,4 +6,5 @@
  * Time: 15:30
  */
 print "Salut c'est un test";
+print "OK, cool.";
 ?>
