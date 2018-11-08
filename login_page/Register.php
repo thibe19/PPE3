@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>Inscription</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -36,7 +36,7 @@
 						Inscription
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire : ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire : ex@abc.xyz"> <!-- Champ inscription mail  -->
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -44,16 +44,16 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
+					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire"> <!-- Champ inscription Login  -->
 						<input class="input100" type="text" name="login" placeholder="Login">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
+							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
-						<input class="input100" type="password" name="pass" placeholder="Mot de passe">
+						<input class="input100" type="password" name="pass" placeholder="Mot de passe">	<!-- Champ inscription Mot de passe  -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -61,7 +61,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
-						<input class="input100" type="password" name="pass_verification" placeholder="Vérification Mot de passe">
+						<input class="input100" type="password" name="pass_verification" placeholder="Vérification Mot de passe"> <!-- Champ inscription Vérification de mot passe  -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -71,24 +71,24 @@
 
 
 
-					<div class="container-login100-form-btn">
+					<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
 						<button class="login100-form-btn">
-							Login
+							Prochaine étape
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
+					<div class="text-center p-t-12">	<!-- Bouton si mot de passe ou login utilisé -->
 						<span class="txt1">
-							Forgot
+							Oublier
 						</span>
 						<a class="txt2" href="#">
-							Username / Password?
+							Login / Mot de Passe?
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
+					<div class="text-center p-t-136">	<!-- Page de connection -->
 						<a class="txt2" href="#">
-							Create your Account
+							Se connecter
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
