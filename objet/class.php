@@ -1,5 +1,6 @@
 <?php
 
+//date 08/11/2018
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
@@ -388,7 +389,7 @@ class Offre
     //Emploi
     $this -> salaire_emploi = $salaire_emploi;
     $this -> desc_emploi = $desc_emploi;
-    
+
   }
 
 
