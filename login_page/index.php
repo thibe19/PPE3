@@ -1,17 +1,25 @@
 <?php
 	session_start();
-	if (isset($_POST['email']) && isset($_POST['pass']) ) {
+
+	//test les identifiants et mot de passes
+	if (isset($_POST['email']) && isset($_POST['pass'])) {
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['mdp'] = $_POST['pass'];
+
+
+		// TODO: cookie pour rester connecté
 		/*if(isset($_POST['stay'])){
+			setcookie('email',$_SESSION['email'],time()+4147200);
 		}*/
+
+		//Si l'utilisateur est connecté renvoie vers le site
 		//header("Location: ../");
 	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>Connexion</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
