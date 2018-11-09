@@ -20,9 +20,14 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<link rel="stylesheet" href="css/style.css">
+<!--===============================================================================================-->
 
 </head>
 <body>
+<?php if (empty($_GET['E1']) && empty($_GET['E2'])) { ?>
+
+
 
 	<div class="limiter">
 		<div class="container-login100">
@@ -70,32 +75,149 @@
 
 
 
+					<!-- <form action="#" method="post"> -->
+						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
+							<button name="E1" value="1" class="login100-form-btn">
+								Prochaine étape
+							</button>
+						</div>
+					<!-- </form> -->
 
-					<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
-						<button class="login100-form-btn">
-							Prochaine étape
-						</button>
+
+	<?php
+}
+	if (isset($_GET['E1']) == 1) {
+		?>
+
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<div class="login100-pic js-tilt" data-tilt>
+						<img src="images/img-01.png" alt="IMG">
 					</div>
 
-					<div class="text-center p-t-12">	<!-- Bouton si mot de passe ou login utilisé -->
-						<span class="txt1">
-							Oublier
+					<form class="login100-form validate-form">
+						<span class="login100-form-title">
+							Inscription
 						</span>
-						<a class="txt2" href="#">
-							Login / Mot de Passe?
-						</a>
+
+						<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
+							<input class="input100" type="text" name="numa" placeholder="Numéro Adresse">	<!-- Champ inscription Mot de passe  -->
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+
+						<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
+							<input class="input100" type="text" name="rue" placeholder="Rue">	<!-- Champ inscription Mot de passe  -->
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+
+						<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
+							<input class="input100" type="text" name="cp" placeholder="Code postal">	<!-- Champ inscription Mot de passe  -->
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+
+						<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
+							<input class="input100" type="text" name="ville" placeholder="Ville">	<!-- Champ inscription Mot de passe  -->
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+							</span>
+						</div>
+
+
+					<!-- <form action="#" method="post"> -->
+						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
+							<button name="E2" value="2" class="login100-form-btn">
+								Prochaine étape
+							</button>
+						</div>
+					<!-- </form> -->
+
+		<?php
+	}
+	if (isset($_GET['E2']) == 2) {
+		?>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<div class="login100-pic js-tilt" data-tilt>
+						<img src="images/img-01.png" alt="IMG">
 					</div>
 
-					<div class="text-center p-t-136">	<!-- Page de connection -->
-						<a class="txt2" href="#">
-							Se connecter
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
-			</div>
+					<form class="login100-form validate-form">
+						<span class="login100-form-title">
+							Inscription
+						</span>
+
+						<table>
+							<tr>
+								<td>
+									<label class="switch">
+										<input type="radio" name="stay">
+										<span class="slider round"></span>
+									</label>
+								</td>
+								<td> <p> &nbsp Rester connecté </p> </td>
+							</tr>
+						</table>
+
+						<table>
+							<tr>
+								<td>
+									<label class="switch">
+										<input type="radio" name="stay">
+										<span class="slider round"></span>
+									</label>
+								</td>
+								<td> <p> &nbsp Rester connecté </p> </td>
+							</tr>
+						</table>
+
+
+
+
+					<!-- <form action="#" method="post"> -->
+						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
+							<button name="E1" value="2" class="login100-form-btn">
+								Prochaine étape
+							</button>
+						</div>
+					<!-- </form> -->
+		<?php
+	}
+	 ?>
+
+
+	 <!-- FIN DE LA CASE BOUTON FOOTER -->
+	 <div class="text-center p-t-12">	<!-- Bouton si mot de passe ou login utilisé -->
+			<span class="txt1">
+				Oublier
+			</span>
+			<a class="txt2" href="#">
+				Login / Mot de Passe?
+			</a>
 		</div>
-	</div>
+
+
+		<div class="text-center p-t-136">	<!-- Page de connection -->
+			<a class="txt2" href="#">
+				Se connecter
+				<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+			</a>
+		</div>
+	</form>
+</div>
+</div>
+</div>
 
 
 
