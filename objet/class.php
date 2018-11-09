@@ -1,5 +1,6 @@
 <?php
 
+//date 08/11/2018
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
@@ -375,14 +376,20 @@ class Offre
 
 
 
-  function __construct($id_offre='',$lib_offre='',$niveau_req='',$date_offre='',$Date_fin_stage='',$note_stage='',$desc_utilisateur_stage='',$salaire_emploi='')
+  function __construct($id_offre='',$lib_offre='',$niveau_req='',$date_offre='',$Date_fin_stage='',$note_stage='',$desc_utilisateur_stage='',$salaire_emploi='',$desc_emploi='')
   {
-    $this -> id_post = $id_post;
-    $this -> titre_post = $titre_post;
-    $this -> contenu_post = $contenu_post;
-    $this -> date_post = $date_post;
-    $this -> heure_post = $heure_post;
-    $this -> id_cat = $id_cat;
+    $this -> id_offre = $id_offre;
+    $this -> lib_offre = $lib_offre;
+    $this -> niveau_req = $niveau_req;
+    $this -> date_offre = $date_offre;
+    //Stage
+    $this -> Date_fin_stage = $Date_fin_stage;
+    $this -> note_stage = $note_stage;
+    $this -> desc_utilisateur_stage = $desc_utilisateur_stage;
+    //Emploi
+    $this -> salaire_emploi = $salaire_emploi;
+    $this -> desc_emploi = $desc_emploi;
+
   }
 
 
