@@ -1,6 +1,6 @@
 <?php
 
-//date 08/11/2018
+//date 09/11/2018
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
@@ -371,7 +371,7 @@ class Offre
   Private $note_stage;
   Private $desc_utilisateur_stage;
   ////Emploi/////
-  Private $salaire_emploi; //fourchette
+  Private $salaire_emploi;
   Private $desc_emploi;
 
 
@@ -392,6 +392,81 @@ class Offre
 
   }
 
+  ///////////////////////////////////////// Get ///////////////////////////////////////////
+  public function getid_offre()
+  {
+    return $this-> id_offre;
+  }
+  public function getlib_offre()
+  {
+    return $this-> lib_offre;
+  }
+  public function getniveau_req()
+  {
+    return $this-> niveau_req;
+  }
+  public function getdate_offre()
+  {
+    return $this-> date_offre;
+  }
+  public function getDate_fin_stage()
+  {
+    return $this-> Date_fin_stage;
+  }
+  public function getnote_stage()
+  {
+    return $this-> note_stage;
+  }
+  public function getdesc_utilisateur_stage()
+  {
+    return $this-> desc_utilisateur_stage;
+  }
+  public function getsalaire_emploi()
+  {
+    return $this-> salaire_emploi;
+  }
+  public function getdesc_emploi()
+  {
+    return $this-> desc_emploi;
+  }
+
+  //////////////////////////////////////////// SET  /////////////////////////////////////////////
+  public function setid_offre($id_offre)
+  {
+    $this-> id_offre = $id_offre;
+  }
+  public function setlib_offre($lib_offre)
+  {
+    $this-> lib_offre = $lib_offre;
+  }
+  public function setniveau_req($niveau_req)
+  {
+    $this-> niveau_req = $niveau_req;
+  }
+  public function setdate_offre($date_offre)
+  {
+    $this-> date_offre = $date_offre;
+  }
+  public function setDate_fin_stage($Date_fin_stage)
+  {
+    $this-> Date_fin_stage = $Date_fin_stage;
+  }
+  public function setnote_stage($note_stage)
+  {
+    $this-> note_stage = $note_stage;
+  }
+  public function setdesc_utilisateur_stage($desc_utilisateur_stage)
+  {
+    $this-> desc_utilisateur_stage = $desc_utilisateur_stage;
+  }
+  public function setsalaire_emploi($salaire_emploi)
+  {
+    $this-> salaire_emploi = $salaire_emploi;
+  }
+  public function setdesc_emploi($desc_emploi)
+  {
+    $this-> desc_emploi = $desc_emploi;
+  }
 
 
 
