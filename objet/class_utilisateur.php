@@ -1,6 +1,6 @@
 <?php
 /**
-* Utilisateur   date modif : 14/11/2018  vertion:0.0.2
+* Utilisateur/Eleve/Entreprise   date modif : 14/11/2018  vertion:0.0.2
 */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
