@@ -6,10 +6,7 @@
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
 class Utilisateur {
-  Private $SQL;	//déclaration des variables -- [  BDD  ]
-	Private $conn;
-	Private $req;
-  /////////////
+
   Private $id_user; // déclaration des variables -- [  USER  ]
   Private $nom_user;
   Private $login_user;
@@ -32,11 +29,9 @@ class Utilisateur {
   /////////////
   Private $id_amis; // déclaration des variables -- [  AMIS  ]
 
-  Public function __construct($SQL="", $conn="", $req="", $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
+  Public function __construct( $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
   $ville="", $photo="", $prenom="", $choix="", $nomresp="", $code="", $site="", $amis="")	{  //Constructeur
-    $this -> SQL = $SQL;
-    $this -> conn = $conn;
-    $this -> req = $req;
+
     $this -> id_user = $id;
     $this -> nom_user = $nom;
     $this -> login_user = $login;
@@ -86,7 +81,7 @@ class Utilisateur {
 
 
 /////////////////////// insert inscription ////////////////////////////////////////
-  Public function inscription($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site) {
+  Public function inscription($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site, $conn) {
     if ($mdp == $mdpc) {
       $requet="INSERT INTO Utilisateur
                VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$CP', '$ville','$photo');";
@@ -104,7 +99,7 @@ class Utilisateur {
     }
   }
 ////////////////////////////// Update Entreprise /////////////////////////////
-  Public function modififier_entreprise($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id) {
+  Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn) {
     $requet="UPDATE Utilisateur
 						 SET nom_user = '$nom',
                  login_user = '$login',
@@ -128,7 +123,7 @@ class Utilisateur {
   }
 
 /////////////////// Update Eleve ////////////////////
-  Public function modifier_eleve($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $id) {
+  Public function modifier_eleve($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $id, $conn) {
     $requet="UPDATE Utilisateur
 						 SET nom_user = '$nom',
                  login_user = '$login',
@@ -153,11 +148,13 @@ class Utilisateur {
   }
 
 ///////////////////////// Insert Amis ///////////////////////////////////////////
-  Public function ajouter_amis($SQL, $conn, $req, $id, $amis) {
-    $requet="INSERT INTO ajoute-amis
+  Public function ajouter_amis($id, $amis, $conn) {
+    $requet="INSERT INTO ajoute_amis
              VALUES ('$id', '$amis');";
     $conn->Query($requet);
   }
+
+
 
 }
  ?>
