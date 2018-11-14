@@ -1,6 +1,6 @@
 <?php
 
-//date 09/11/2018
+//date 14/11/2018
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
@@ -365,7 +365,7 @@ class Offre
   Private $id_offre;
   Private $lib_offre;
   Private $niveau_req;
-  Private $date_offre;
+  Private $date_debut_offre;
   /////Starge/////
   Private $Date_fin_stage;
   Private $note_stage;
@@ -381,14 +381,14 @@ class Offre
     $this -> id_offre = $id_offre;
     $this -> lib_offre = $lib_offre;
     $this -> niveau_req = $niveau_req;
-    $this -> date_offre = $date_offre;
+    $this -> date_debut_offre = $date_debut_offre;
     //Stage
     $this -> Date_fin_stage = $Date_fin_stage;
-    $this -> note_stage = $note_stage;
-    $this -> desc_utilisateur_stage = $desc_utilisateur_stage;
+    $this -> note_user_stage = $note_stage;
+    $this -> desc_user_stage = $desc_utilisateur_stage;
     //Emploi
-    $this -> salaire_emploi = $salaire_emploi;
-    $this -> desc_emploi = $desc_emploi;
+    $this -> salaire_emp = $salaire_emp;
+    $this -> desc_emp = $desc_emp;
 
   }
 
@@ -405,29 +405,29 @@ class Offre
   {
     return $this-> niveau_req;
   }
-  public function getdate_offre()
+  public function getdate_debut_offre()
   {
-    return $this-> date_offre;
+    return $this-> date_debut_offre;
   }
   public function getDate_fin_stage()
   {
     return $this-> Date_fin_stage;
   }
-  public function getnote_stage()
+  public function getnote_user_stage()
   {
-    return $this-> note_stage;
+    return $this-> note_user_stage;
   }
-  public function getdesc_utilisateur_stage()
+  public function getdesc_user_stage()
   {
-    return $this-> desc_utilisateur_stage;
+    return $this-> desc_user_stage;
   }
-  public function getsalaire_emploi()
+  public function getsalaire_emp()
   {
-    return $this-> salaire_emploi;
+    return $this-> salaire_emp;
   }
-  public function getdesc_emploi()
+  public function getdesc_emp()
   {
-    return $this-> desc_emploi;
+    return $this-> desc_emp;
   }
 
   //////////////////////////////////////////// SET  /////////////////////////////////////////////
@@ -443,29 +443,29 @@ class Offre
   {
     $this-> niveau_req = $niveau_req;
   }
-  public function setdate_offre($date_offre)
+  public function setdate_debut_offre($date_debut_offre)
   {
-    $this-> date_offre = $date_offre;
+    $this-> date_debut_offre = $date_debut_offre;
   }
   public function setDate_fin_stage($Date_fin_stage)
   {
     $this-> Date_fin_stage = $Date_fin_stage;
   }
-  public function setnote_stage($note_stage)
+  public function setnote_user_stage($note_stage)
   {
     $this-> note_stage = $note_stage;
   }
-  public function setdesc_utilisateur_stage($desc_utilisateur_stage)
+  public function setdesc_user_stage($desc_user_stage)
   {
-    $this-> desc_utilisateur_stage = $desc_utilisateur_stage;
+    $this-> desc_user_stage = $desc_user_stage;
   }
-  public function setsalaire_emploi($salaire_emploi)
+  public function setsalaire_emp($salaire_emp)
   {
-    $this-> salaire_emploi = $salaire_emploi;
+    $this-> salaire_emp = $salaire_emp;
   }
-  public function setdesc_emploi($desc_emploi)
+  public function setdesc_emp($desc_emp)
   {
-    $this-> desc_emploi = $desc_emploi;
+    $this-> desc_emp = $desc_emp;
   }
 
 
