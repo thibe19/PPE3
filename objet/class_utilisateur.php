@@ -19,18 +19,9 @@ class Utilisateur {
   Private $CP_addr;
   Private $ville_addr;
   Private $photo_user;
-  /////////////
-  Private $prenom_eleve; // déclaration des variables -- [  ELEVE  ]
-  Private $choix_position;
-  /////////////
-  Private $nom_resp; // déclaration des variables -- [  ENTREPRISE  ]
-  Private $cope_APE;
-  Private $site_web;
-  /////////////
-  Private $id_amis; // déclaration des variables -- [  AMIS  ]
 
   Public function __construct( $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
-  $ville="", $photo="", $prenom="", $choix="", $nomresp="", $code="", $site="", $amis="")	{  //Constructeur
+  $ville="", $photo="")	{  //Constructeur
 
     $this -> id_user = $id;
     $this -> nom_user = $nom;
@@ -44,15 +35,7 @@ class Utilisateur {
     $this -> CP_addr = $CP;
     $this -> ville_addr = $ville;
     $this -> photo_user = $photo;
-    // variables -- [  ELEVE  ]
-    $this -> prenom_eleve = $prenom;
-    $this -> choix_position = $choix;
-    // variables -- [  ENTREPRISE  ]
-    $this -> nom_resp = $nomresp;
-    $this -> cope_APE = $code;
-    $this -> site_web = $site;
-    // variables -- [  AMIS  ]
-    $this -> id_amis = $amis;
+    
   }
 
   /////////////////// LES GETS /////////////////////

@@ -1,19 +1,36 @@
 <?php
+    /*
+     *  14/11/18
+     *  Connection au site web
+     *
+     *  v0.0.2
+     */
+
+    //Connection a la base de donnée
+    require ('../ToolBox/bdd.inc.php');
 	session_start();
 
+
 	//test les identifiants et mot de passes
-	if (isset($_POST['email']) && isset($_POST['pass'])) {
-		$_SESSION['email'] = $_POST['email'];
-		$_SESSION['mdp'] = $_POST['pass'];
+	if (isset($_POST['login']) && isset($_POST['pass'])) {
+		$login = $_POST['login'];
+		$mdp = $_POST['pass'];
 
+		$SQL = "SELECT * FROM Utilisateur 
+                WHERE login_user='$login' AND mdp_user='$mdp'";
+		$req = $conn->Query($SQL)or die("L'utilisateur n'existe pas");
+		$req = $req->fetchAll();
 
-		// TODO: cookie pour rester connecté
-		/*if(isset($_POST['stay'])){
-			setcookie('email',$_SESSION['email'],time()+4147200);
-		}*/
-
-		//Si l'utilisateur est connecté renvoie vers le site
-		//header("Location: ../");
+		//Test si l'identifiant et le mot de passe existe et corresponds
+		if($req){
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['mdp'] = $_POST['pass'];
+            if(isset($_POST['stay'])){
+			setcookie('login',$_SESSION['login'],time()+4147200);
+			setcookie('mdp',$_SESSION['mdp'],time()+4147200);
+		    }
+            header("Location: ../");
+        }
 	}
 ?>
 <!DOCTYPE html>
@@ -55,15 +72,15 @@
 						Member Login
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email">
+					<div class="wrap-input100 validate-input" data-validate = "Vous devez entrer votre identifiant de connexion">
+						<input class="input100" type="text" name="login" placeholder="Identifiant">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input" data-validate = "Vous devez entrer votre mot de passe">
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
