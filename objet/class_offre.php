@@ -110,6 +110,8 @@ class Offre
     $this-> desc_emp = $desc_emp;
   }
 
+
+
   ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
   public function insert_offre_stage($lib_offre ,$niveau_req ,$date_debut_offre ,$Date_fin_stage ,$note_stage,$desc_utilisateur_stage ,$conn )
   {
@@ -139,6 +141,10 @@ class Offre
     $res = $conn->Query($SQL);
 
   }
+
+
+
+  
   ///////////////////////////////////////////// Update  ////////////////////////////////////////////
   public function update_offre($id_offre , $lib_offre ,$niveau_req ,$date_debut_offre ,$Date_fin_stage ,$note_stage,$desc_utilisateur_stage ,$salaire_emp ,$desc_emp ,$conn)
   {

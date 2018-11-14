@@ -73,6 +73,9 @@ class Post
     $this-> id_cat = $id_cat;
   }
 
+
+
+
   ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
   public function insert_post($titre_post ,$contenu_post ,$date_post ,$heure_post ,$id_cat ,$conn )
   {
@@ -87,6 +90,7 @@ class Post
     $res = $conn->Query($SQL);
 
   }
+
 
   ///////////////////////////////////////////// Update  ////////////////////////////////////////////
   public function update_post($id_post ,$titre_post ,$contenu_post ,$date_post ,$heure_post ,$id_cat ,$conn)
