@@ -232,7 +232,7 @@ class Evenement
     $desc_event = $this-> desc_event;
     $lib_type_event = $this-> lib_type_event;
 
-    $sql = "UPDATE Evenement SET date_event = '$date_event',
+    $SQL = "UPDATE Evenement SET date_event = '$date_event',
                                  desc_event = '$desc_eventsc',
                                  lib_type_event = '$lib_type_event'
                             WHERE id_event = $id_event";
@@ -345,7 +345,7 @@ class Post
     $id_cat = $this-> id_cat;
 
 
-    $sql = "UPDATE post SET titre_post = '$titre_post',
+    $SQL = "UPDATE post SET titre_post = '$titre_post',
                                   contenu_post = '$contenu_post',
                                   date_post = '$date_post'
                                   heure_post = '$heure_post'
@@ -468,9 +468,55 @@ class Offre
     $this-> desc_emp = $desc_emp;
   }
 
+  ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
+  public function insert_offre_stage($lib_offre ,$niveau_req ,$date_debut_offre ,$Date_fin_stage ,$note_stage,$desc_utilisateur_stage ,$conn )
+  {
+    $lib_offre = $this-> lib_offre;
+    $niveau_req = $this-> niveau_req;
+    $date_debut_offre = $this-> date_debut_offre;
+    $Date_fin_stage = $this-> Date_fin_stage;
+    $note_stage = $this-> note_stage;
+    $desc_utilisateur_stage = $this-> desc_utilisateur_stage;
 
 
+    $SQL = "INSERT INTO OStage VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$Date_fin_stage')";     //A faire
+    $res = $conn->Query($SQL);
 
+  }
+
+  public function insert_offre_emploi($lib_offre ,$niveau_req ,$date_debut_offre ,$salaire_emp ,$desc_emp ,$conn )
+  {
+    $lib_offre = $this-> lib_offre;
+    $niveau_req = $this-> niveau_req;
+    $date_debut_offre = $this-> date_debut_offre;
+    $salaire_emp = $this-> salaire_emp;
+    $desc_emp = $this-> desc_emp;
+
+
+    $SQL = "INSERT INTO OEmploi VALUES('', ...)";     //A faire
+    $res = $conn->Query($SQL);
+
+  }
+  ///////////////////////////////////////////// Update  ////////////////////////////////////////////
+  public function update_offre($id_offre , $lib_offre ,$niveau_req ,$date_debut_offre ,$Date_fin_stage ,$note_stage,$desc_utilisateur_stage ,$salaire_emp ,$desc_emp ,$conn)
+  {
+    $id_offre = $this-> id_offre;
+    $lib_offre = $this-> lib_offre;
+    $niveau_req = $this-> niveau_req;
+    $date_debut_offre = $this-> date_debut_offre;
+    //Emploi
+    $salaire_emp = $this-> salaire_emp;
+    $desc_emp = $this-> desc_emp;
+    //Stage
+    $Date_fin_stage = $this-> Date_fin_stage;
+    $note_stage = $this-> note_stage;
+    $desc_utilisateur_stage = $this-> desc_utilisateur_stage;
+
+    $SQL = "UPDATE offre SET ******
+                            WHERE id_offre = $id_offre";
+    $res = $conn->Query($SQL);
+
+  }
 
 
 
