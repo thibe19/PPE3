@@ -11,7 +11,6 @@ class Utilisateur {
   Private $nom_user;
   Private $login_user;
   Private $mdp_user;
-  Private $mdp_user_confirmation; // Confirmation du MOT DE PASSE
   Private $email_user;
   Private $num_tel_user;
   Private $num_addr;
@@ -20,14 +19,13 @@ class Utilisateur {
   Private $ville_addr;
   Private $photo_user;
 
-  Public function __construct( $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
+  Public function __construct( $id="", $nom="", $login="", $mdp="", , $email="", $numt="", $numa="", $rue="", $CP="",
   $ville="", $photo="")	{  //Constructeur
 
     $this -> id_user = $id;
     $this -> nom_user = $nom;
     $this -> login_user = $login;
     $this -> mdp_user = $mdp;
-    $this -> mdp_user_confirmation = $mdpc;
     $this -> email_user = $email;
     $this -> num_tel_user = $numt;
     $this -> num_addr = $numa;
@@ -46,10 +44,6 @@ class Utilisateur {
 		Return $this->mdp_user;
 	}
 
-  Public function get_mdpc() {		//Récupère la valeur
-		Return $this->mdp_user_confirmation;
-	}
-
   /////////////////// LES SETS /////////////////////
   /// .
   /// .
@@ -61,8 +55,8 @@ class Utilisateur {
 
 
 /////////////////////// insert inscription ////////////////////////////////////////
-  Public function inscription($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site, $conn) {
-    if ($mdp == $mdpc) {
+  Public function inscription($mdp,, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site, $conn) {
+
       $requet="INSERT INTO Utilisateur
                VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$CP', '$ville','$photo');";
       $conn->Query($requet);
@@ -73,10 +67,7 @@ class Utilisateur {
                VALUES ('$nomresp', '$code', '$site');";
       $conn->Query($requet);
       return "Vous êtes inscrit";
-    }
-    else {
-      return "Les mots de passes ne correspondent pas.";
-    }
+
   }
 
 
