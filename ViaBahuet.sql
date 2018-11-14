@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 14 nov. 2018 à 08:26
+-- Généré le :  mer. 14 nov. 2018 à 09:28
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -77,18 +77,7 @@ CREATE TABLE `Diplome` (
 CREATE TABLE `Eleve` (
   `id_user` int(11) NOT NULL,
   `prenom_eleve` varchar(30) COLLATE latin1_bin NOT NULL,
-  `choix_position` int(11) NOT NULL,
-  `nom_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `login_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `mdp_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `email_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `tel_ser` int(11) NOT NULL,
-  `num_addr_user` varchar(6) COLLATE latin1_bin NOT NULL,
-  `rue_addr_user` varchar(100) COLLATE latin1_bin NOT NULL,
-  `CP_addr_user` int(11) NOT NULL,
-  `ville_addr_user` varchar(40) COLLATE latin1_bin NOT NULL,
-  `photo_user` varchar(6) COLLATE latin1_bin NOT NULL,
-  `desc_user` longtext COLLATE latin1_bin NOT NULL
+  `choix_position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 -- --------------------------------------------------------
@@ -126,18 +115,7 @@ CREATE TABLE `Entreprise` (
   `id_user` int(11) NOT NULL,
   `nom_resp` varchar(30) COLLATE latin1_bin NOT NULL,
   `code_APE` varchar(5) COLLATE latin1_bin NOT NULL,
-  `site_web` varchar(255) COLLATE latin1_bin NOT NULL,
-  `nom_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `login_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `mdp_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `email_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `tel_ser` int(11) NOT NULL,
-  `num_addr_user` varchar(6) COLLATE latin1_bin NOT NULL,
-  `rue_addr_user` varchar(100) COLLATE latin1_bin NOT NULL,
-  `CP_addr_user` int(11) NOT NULL,
-  `ville_addr_user` varchar(40) COLLATE latin1_bin NOT NULL,
-  `photo_user` varchar(6) COLLATE latin1_bin NOT NULL,
-  `desc_user` longtext COLLATE latin1_bin NOT NULL
+  `site_web` varchar(255) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 -- --------------------------------------------------------
@@ -174,9 +152,6 @@ CREATE TABLE `OEmploi` (
   `id_offre` int(11) NOT NULL,
   `salaire_emp` double NOT NULL,
   `desc_emp` longtext COLLATE latin1_bin NOT NULL,
-  `lib_offre` varchar(255) COLLATE latin1_bin NOT NULL,
-  `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
-  `date_debut_offre` date NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
@@ -207,9 +182,6 @@ CREATE TABLE `OStage` (
   `date_fin_stage` date NOT NULL,
   `note_user_stage` int(11) NOT NULL,
   `desc_user_stage` longtext COLLATE latin1_bin NOT NULL,
-  `lib_offre` varchar(255) COLLATE latin1_bin NOT NULL,
-  `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
-  `date_debut_offre` date NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
@@ -305,6 +277,13 @@ CREATE TABLE `Utilisateur` (
   `photo_user` varchar(6) COLLATE latin1_bin NOT NULL,
   `desc_user` longtext COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Utilisateur`
+--
+
+INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`) VALUES
+(1, 'test', 'test', 'test', 'test', 0, 'test', 'test', 0, 'test', 'test', 'test');
 
 --
 -- Index pour les tables déchargées
@@ -446,6 +425,58 @@ ALTER TABLE `type_event`
 --
 ALTER TABLE `Utilisateur`
   ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Categorie`
+--
+ALTER TABLE `Categorie`
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Diplome`
+--
+ALTER TABLE `Diplome`
+  MODIFY `id_diplome` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Evenement`
+--
+ALTER TABLE `Evenement`
+  MODIFY `id_event` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Offre`
+--
+ALTER TABLE `Offre`
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Post`
+--
+ALTER TABLE `Post`
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Preferences`
+--
+ALTER TABLE `Preferences`
+  MODIFY `id_pref` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `type_event`
+--
+ALTER TABLE `type_event`
+  MODIFY `id_type_event` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Utilisateur`
+--
+ALTER TABLE `Utilisateur`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
