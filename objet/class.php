@@ -1,6 +1,6 @@
 <?php
 
-//date 09/11/2018
+//date 14/11/2018
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
