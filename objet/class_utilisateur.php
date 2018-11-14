@@ -1,6 +1,6 @@
 <?php
 /**
-* Utilisateur/Eleve/Entreprise   date modif : 14/11/2018  vertion:0.0.2
+* Utilisateur/Eleve/Entreprise   date modif : 14/11/2018  vertion:0.0.3
 */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -19,13 +19,14 @@ class Utilisateur {
   Private $ville_addr;
   Private $photo_user;
 
-  Public function __construct( $id="", $nom="", $login="", $mdp="", , $email="", $numt="", $numa="", $rue="", $CP="",
+  Public function __construct( $id="", $nom="", $login="", $mdp="", $email="", $numt="", $numa="", $rue="", $CP="",
   $ville="", $photo="")	{  //Constructeur
 
     $this -> id_user = $id;
     $this -> nom_user = $nom;
     $this -> login_user = $login;
     $this -> mdp_user = $mdp;
+    $this -> mdp_user_confirmation = $mdpc;
     $this -> email_user = $email;
     $this -> num_tel_user = $numt;
     $this -> num_addr = $numa;
@@ -55,8 +56,7 @@ class Utilisateur {
 
 
 /////////////////////// insert inscription ////////////////////////////////////////
-  Public function inscription($mdp,, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site, $conn) {
-
+  Public function inscription($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site, $conn) {
       $requet="INSERT INTO Utilisateur
                VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$CP', '$ville','$photo');";
       $conn->Query($requet);
@@ -67,7 +67,6 @@ class Utilisateur {
                VALUES ('$nomresp', '$code', '$site');";
       $conn->Query($requet);
       return "Vous êtes inscrit";
-
   }
 
 
