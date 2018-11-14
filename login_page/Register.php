@@ -1,6 +1,10 @@
+<?php
+// Register date modif : 14/11/2018 Version 0.0.2
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 	<title>Inscription</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,17 +80,33 @@
 
 
 					<!-- <form action="#" method="post"> -->
-						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
-							<button name="E1" value="1" class="login100-form-btn">
+						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape ///////////: name="E1" value="1" -->
+							<button onclick="checkPw(pass,pass_verification)" class="login100-form-btn">
 								Prochaine étape
 							</button>
 						</div>
 					<!-- </form> -->
 
+					<script type="text/javascript">
+						function checkPw(pass,pass_verification) {
+							var pass = name.pass.value;
+
+							console.log(pass);
+
+						}
+					</script>
+
 
 	<?php
 	}
 	if (isset($_POST['E1']) == 1) {
+
+
+
+		echo $_POST['email'], " ";
+		echo $_POST['login'], " ";
+		echo $_POST['pass'], " ";
+		echo $_POST['pass_verification'], " ";
 		?>
 
 		<div class="limiter">
@@ -143,6 +163,7 @@
 					<!-- </form> -->
 
 		<?php
+
 	}
 	if (isset($_POST['E2']) == 2) {
 		?>
@@ -177,7 +198,7 @@
 
 							<input type="file" name="photo" placeholder="Photo de Profil">	<!-- Champ inscription Mot de passe  -->
 
-
+								<!-- TEST INPUT FILE  -->
 
 					<!-- <form action="#" method="post"> -->
 						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
