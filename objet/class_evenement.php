@@ -53,6 +53,9 @@ class Evenement
   {
     $this-> lib_type_event = $lib_type_event;
   }
+
+
+
   ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
   public function insert_event($date_event,$desc_event ,$lib_type_event ,$conn )
   {
@@ -80,6 +83,9 @@ class Evenement
     $res = $conn->Query($SQL);
 
   }
+
+
+
 
 }
 

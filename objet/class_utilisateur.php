@@ -84,6 +84,8 @@ class Utilisateur {
 		$this->mdp_user_confirmation=$mdpc;
 	}
 
+
+/////////////////////// insert inscription ////////////////////////////////////////
   Public function inscription($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $nomresp, $code, $site) {
     if ($mdp == $mdpc) {
       $requet="INSERT INTO Utilisateur
@@ -101,7 +103,7 @@ class Utilisateur {
       return "Les mots de passes ne correspondent pas.";
     }
   }
-
+////////////////////////////// Update Entreprise /////////////////////////////
   Public function modififier_entreprise($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id) {
     $requet="UPDATE Utilisateur
 						 SET nom_user = '$nom',
@@ -125,6 +127,7 @@ class Utilisateur {
     $req=$conn->Query($requet);
   }
 
+/////////////////// Update Eleve ////////////////////
   Public function modifier_eleve($SQL, $conn, $req, $mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $id) {
     $requet="UPDATE Utilisateur
 						 SET nom_user = '$nom',
@@ -149,6 +152,7 @@ class Utilisateur {
     $req=$conn->Query($requet);
   }
 
+///////////////////////// Insert Amis ///////////////////////////////////////////
   Public function ajouter_amis($SQL, $conn, $req, $id, $amis) {
     $requet="INSERT INTO ajoute-amis
              VALUES ('$id', '$amis');";
