@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 14 nov. 2018 à 09:28
+-- Généré le :  mer. 14 nov. 2018 à 10:24
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -80,6 +80,13 @@ CREATE TABLE `Eleve` (
   `choix_position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Déchargement des données de la table `Eleve`
+--
+
+INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `choix_position`) VALUES
+(1, 'JC', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +124,13 @@ CREATE TABLE `Entreprise` (
   `code_APE` varchar(5) COLLATE latin1_bin NOT NULL,
   `site_web` varchar(255) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Entreprise`
+--
+
+INSERT INTO `Entreprise` (`id_user`, `nom_resp`, `code_APE`, `site_web`) VALUES
+(2, 'dupond', '', '');
 
 -- --------------------------------------------------------
 
@@ -274,8 +288,8 @@ CREATE TABLE `Utilisateur` (
   `rue_addr_user` varchar(100) COLLATE latin1_bin NOT NULL,
   `CP_addr_user` int(11) NOT NULL,
   `ville_addr_user` varchar(40) COLLATE latin1_bin NOT NULL,
-  `photo_user` varchar(6) COLLATE latin1_bin NOT NULL,
-  `desc_user` longtext COLLATE latin1_bin NOT NULL
+  `photo_user` varchar(6) COLLATE latin1_bin DEFAULT NULL,
+  `desc_user` longtext COLLATE latin1_bin
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 --
@@ -283,7 +297,8 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`) VALUES
-(1, 'test', 'test', 'test', 'test', 0, 'test', 'test', 0, 'test', 'test', 'test');
+(1, 'test', 'test', 'test', 'test', 0, 'test', 'test', 0, 'test', 'test', 'test'),
+(2, 'Danone', 'danonino', 'danone', 'test@danone.fr', 0, '23', 'rue danone', 0, 'PARIS', '', '');
 
 --
 -- Index pour les tables déchargées
@@ -476,7 +491,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
