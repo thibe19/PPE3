@@ -9,7 +9,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
@@ -105,7 +105,7 @@
 							<input class="input100" type="text" name="numa" placeholder="Numéro Adresse">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-map-marker-alt" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -113,7 +113,7 @@
 							<input class="input100" type="text" name="rue" placeholder="Rue">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-road" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -121,7 +121,7 @@
 							<input class="input100" type="text" name="cp" placeholder="Code postal">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-map-marked" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -129,7 +129,7 @@
 							<input class="input100" type="text" name="ville" placeholder="Ville">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-city" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -162,7 +162,7 @@
 							<input class="input100" type="text" name="surname" placeholder="Nom">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-user" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -170,7 +170,7 @@
 							<input class="input100" type="tel" name="nummt" placeholder="Numéro XX.XX.XX.XX.XX">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
-								<i class="fa fa-lock" aria-hidden="true"></i>
+								<i class="fa fa-phone" aria-hidden="true"></i>
 							</span>
 						</div>
 
@@ -257,7 +257,7 @@
 									<input class="input100" type="text" name="name" placeholder="Prénom">	<!-- Champ inscription Mot de passe  -->
 									<span class="focus-input100"></span>
 									<span class="symbol-input100">
-										<i class="fa fa-lock" aria-hidden="true"></i>
+										<i class="fa fa-user" aria-hidden="true"></i>
 									</span>
 								</div>
 
@@ -350,7 +350,7 @@
 										<input class="input100" type="text" name="nameresp" placeholder="Nom responsable">	<!-- Champ inscription Mot de passe  -->
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
-											<i class="fa fa-lock" aria-hidden="true"></i>
+											<i class="fa fa-user" aria-hidden="true"></i>
 										</span>
 									</div>
 
@@ -358,7 +358,7 @@
 										<input class="input100" type="text" name="APE" placeholder="Code APE">	<!-- Champ inscription Mot de passe  -->
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
-											<i class="fa fa-lock" aria-hidden="true"></i>
+											<i class="fa fa-id-card-alt" aria-hidden="true"></i>
 										</span>
 									</div>
 
@@ -366,7 +366,7 @@
 										<input class="input100" type="text" name="web" placeholder="Site internet">	<!-- Champ inscription Mot de passe  -->
 										<span class="focus-input100"></span>
 										<span class="symbol-input100">
-											<i class="fa fa-lock" aria-hidden="true"></i>
+											<i class="fab fa-internet-explorer" aria-hidden="true"></i>
 										</span>
 									</div>
 
@@ -399,7 +399,7 @@
 								<input class="input100" type="text" name="nameresp" placeholder="Nom responsable">	<!-- Champ inscription Mot de passe  -->
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
-									<i class="fa fa-lock" aria-hidden="true"></i>
+									<i class="fa fa-user" aria-hidden="true"></i>
 								</span>
 							</div>
 
@@ -407,7 +407,7 @@
 								<input class="input100" type="text" name="APE" placeholder="Code APE">	<!-- Champ inscription Mot de passe  -->
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
-									<i class="fa fa-lock" aria-hidden="true"></i>
+									<i class="fa fa-id-card-alt" aria-hidden="true"></i>
 								</span>
 							</div>
 
@@ -415,7 +415,7 @@
 								<input class="input100" type="text" name="web" placeholder="Site internet">	<!-- Champ inscription Mot de passe  -->
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
-									<i class="fa fa-lock" aria-hidden="true"></i>
+									<i class="fab fa-internet-explorer" aria-hidden="true"></i>
 								</span>
 							</div>
 
@@ -443,10 +443,10 @@
 							 Inscription
 						 </span>
 
-						
+						 <p> LES PREFERENCES BESOIN DE LA PAGE QUI CORRESPOND </p>
 
 					 <!-- <form action="#" method="post"> -->
-						 <div class="container-login100-form-btn">	<!-- Bouton accer prochaine é	tape  -->
+						 <div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
 							 <button name="C1" value="1" class="login100-form-btn">
 								 Finaliser
 							 </button>
