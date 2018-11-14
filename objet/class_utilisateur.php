@@ -29,11 +29,9 @@ class Utilisateur {
   /////////////
   Private $id_amis; // déclaration des variables -- [  AMIS  ]
 
-  Public function __construct($SQL="", $conn="", $req="", $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
+  Public function __construct( $id="", $nom="", $login="", $mdp="", $mdpc="", $email="", $numt="", $numa="", $rue="", $CP="",
   $ville="", $photo="", $prenom="", $choix="", $nomresp="", $code="", $site="", $amis="")	{  //Constructeur
-    $this -> SQL = $SQL;
-    $this -> conn = $conn;
-    $this -> req = $req;
+
     $this -> id_user = $id;
     $this -> nom_user = $nom;
     $this -> login_user = $login;
@@ -151,7 +149,7 @@ class Utilisateur {
 
 ///////////////////////// Insert Amis ///////////////////////////////////////////
   Public function ajouter_amis($id, $amis, $conn) {
-    $requet="INSERT INTO ajoute-amis
+    $requet="INSERT INTO ajoute_amis
              VALUES ('$id', '$amis');";
     $conn->Query($requet);
   }
