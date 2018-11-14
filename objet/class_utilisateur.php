@@ -58,9 +58,6 @@ class Utilisateur {
 		$this->mdp_user=$mdp;
 	}
 
-  Public function set_mdp($mdpc) {	//Modifie la valeur
-		$this->mdp_user_confirmation=$mdpc;
-	}
 
 
 /////////////////////// insert inscription ////////////////////////////////////////

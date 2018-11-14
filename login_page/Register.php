@@ -1,5 +1,7 @@
 <?php
 // Register date modif : 14/11/2018 Version 0.0.2
+require('../objet/class_utilisateur.php');
+session_start();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +26,9 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 <!--===============================================================================================-->
+
 
 </head>
 <body>
@@ -46,7 +49,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire : ex@abc.xyz"> <!-- Champ inscription mail  -->
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="email" placeholder="Email" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -54,7 +57,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire"> <!-- Champ inscription Login  -->
-						<input class="input100" type="text" name="login" placeholder="Login">
+						<input class="input100" type="text" name="login" placeholder="Login" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -62,7 +65,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
-						<input class="input100" type="password" id="pass_n" name="pass" value="" placeholder="Mot de passe">	<!-- Champ inscription Mot de passe  -->
+						<input class="input100" type="password" id="pass_n" name="pass" value="" placeholder="Mot de passe" required>	<!-- Champ inscription Mot de passe  -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -70,7 +73,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
-						<input class="input100" type="password" id="pass_v" name="pass_verification" value="" placeholder="Vérification Mot de passe"> <!-- Champ inscription Vérification de mot passe  -->
+						<input class="input100" type="password" id="pass_v" name="pass_verification" value="" placeholder="Vérification Mot de passe" required> <!-- Champ inscription Vérification de mot passe  -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -81,38 +84,39 @@
 
 					<!-- <form action="#" method="post"> -->
 						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape /////////// name="E1" value="1" -->
-							<button onclick="checkPw()" class="login100-form-btn">
+							<button name="E1" value="1" class="login100-form-btn">
 								Prochaine étape
 							</button>
 						</div>
 					<!-- </form> -->
 
-					<script type="text/javascript">
-						function checkPw() {
-							var pass = document.getElementById("pass_n").value;
-							var pass_v = document.getElementById("pass_v").value;
-							if (pass != pass_v) {
-								alert("pas égaux");
-							}
-							else {
 
-							}
-						}
-					</script>
 
 
 	<?php
-	}
-	if (isset($_POST['E1']) == 1) {
+  }
 
+  //Test des mot de passes
+  if (isset($_POST['pass']) && isset($_POST['pass_verification'])) {
+    if ($_POST['pass'] != $_POST['pass_verification']) {
+      ?>
 
+      <script>
+        if(confirm('Mot de passe différent'))
+        {
+          window.location = "./Register.php";
+        }
+      </script>
 
-		echo $_POST['email'], " ";
-		echo $_POST['login'], " ";
-		echo $_POST['pass'], " ";
-		echo $_POST['pass_verification'], " ";
+      <?php
+    }
+    else{
+
+	if (isset($_POST['E1'])) {
+    $_SESSION['pass'] = $_POST['pass'];
+    $_SESSION['mail'] = $_POST['email'];
+    $_SESSION['login'] = $_POST['login'];
 		?>
-
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100">
@@ -167,9 +171,15 @@
 					<!-- </form> -->
 
 		<?php
-
+      }
+    }
 	}
-	if (isset($_POST['E2']) == 2) {
+	if (isset($_POST['E2'])) {
+    $_SESSION['numa'] = $_POST['numa'].'<br>';
+    $_SESSION['rue'] = $_POST['rue'].'<br>';
+    $_SESSION['cp'] = $_POST['cp'].'<br>';
+    $_SESSION['ville'] = $_POST['ville'].'<br>';
+
 		?>
 		<div class="limiter">
 			<div class="container-login100">
@@ -192,7 +202,7 @@
 						</div>
 
 						<div class="wrap-input100 validate-input" data-validate = "Champ obligatoire">
-							<input class="input100" type="tel" name="nummt" placeholder="Numéro XX.XX.XX.XX.XX">	<!-- Champ inscription Mot de passe  -->
+							<input class="input100" type="tel" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" name="numt" placeholder="Numéro XX XX XX XX XX">	<!-- Champ inscription Mot de passe  -->
 							<span class="focus-input100"></span>
 							<span class="symbol-input100">
 								<i class="fa fa-phone" aria-hidden="true"></i>
@@ -213,8 +223,24 @@
 					<!-- </form> -->
 		<?php
 	}
-	if (isset($_POST['E3']) == 3) {
+	if (isset($_POST['E3'])) {
 		?>
+
+    <!-- LES INPUTS POUR LE TRANSFERT -->
+
+    <?php
+
+      $_SESSION['surname'] = $_POST['surname'];
+      $_SESSION['numt'] = $_POST['numt'];
+      $_SESSION['photo'] = $_POST['photo'];
+
+
+
+     ?>
+
+
+
+
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100">
@@ -251,8 +277,7 @@
 							</tr>
 						</table>
 
-						<!-- LES INPUTS POUR LE TRANSFERT -->
-						<input type="hidden" name="surname" value="<?php echo $_POST['surname']; ?>">
+
 
 					<!-- <form action="#" method="post"> -->
 						<div class="container-login100-form-btn">	<!-- Bouton accer prochaine étape  -->
@@ -263,8 +288,12 @@
 					<!-- </form> -->
 		<?php
 		}
-		if (isset($_POST['E4']) == 4) {
-			if ($_POST['stay'] == "eleve") {
+		if (isset($_POST['E4'])) {
+      //////// LES SESSIONS
+      $_SESSION['stay'] = $_POST['stay'];
+
+
+			if ($_SESSION['stay'] == "eleve") {
 				?>
 				<div class="limiter">
 					<div class="container-login100">
@@ -290,7 +319,7 @@
 									<tr>
 										<td>
 											<label class="switch">
-												<input type="radio" value="eleve" name="stay">
+												<input type="radio" value="eleve" name="stayp">
 												<span class="slider round"></span>
 											</label>
 										</td>
@@ -299,7 +328,7 @@
 									<tr>
 										<td>
 											<label class="switch">
-												<input type="radio" value="eleve" name="stay">
+												<input type="radio" value="eleve" name="stayp">
 												<span class="slider round"></span>
 											</label>
 										</td>
@@ -308,7 +337,7 @@
 									<tr>
 										<td>
 											<label class="switch">
-												<input type="radio" value="eleve" name="stay">
+												<input type="radio" value="eleve" name="stayp">
 												<span class="slider round"></span>
 											</label>
 										</td>
@@ -325,10 +354,13 @@
 							<!-- </form> -->
 				<?php
 			}
-			if ($_POST['stay'] == "entreprise") {
+			if ($_SESSION['stay'] == "entreprise") {
+        //////////SESSION
+
+
 				$ent = "test";
 				////////////// FAIRE REQUETE SI NON EXISTE /////////////////////////////////////////////////////////////////////////////////// IMPORTANT !!!!!!!!!
-				if ($_POST['surname'] == $ent) {
+				if ($_SESSION['surname'] == $ent) {               /////////////////////////////// SI IL EXISTE DEJA
 					?>
 					<div class="limiter">
 						<div class="container-login100">
@@ -351,13 +383,13 @@
 										</button>
 									</div>
 								<!-- </form> -->
-								<input type="hidden" name="stay" value="<?php echo $_POST['stay'] ?>">
-								<input type="hidden" name="surname" value="<?php echo $_POST['surname']; ?>">
+
+
 
 					<?php
 
 				}
-				else {
+				else {                                      ///////////////////////////////////// SI IL EXISTE PAS
 					?>
 					<div class="limiter">
 						<div class="container-login100">
@@ -405,8 +437,11 @@
 					<?php
 				}
 			}
-		}
-		if (isset($_POST['C1']) == 1) {
+		} ////////////////////////////////////// FIN DES PAGES JUSTE APRES LE CHOIX ELEVE OU ENTTREPRISE
+		if (isset($_POST['C1'])) {         ////////////////////////// SUITE INSC ENTREPRISE SSI EXISTE
+      /////////////////// LES SESSIONS
+
+
 			?>
 			<div class="limiter">
 				<div class="container-login100">
@@ -454,7 +489,23 @@
 			<?php
 		}
 
-	 if (isset($_POST['E6']) == 6) {
+	 if (isset($_POST['E6'])) {        ////////////////// SUITE INSC ELEV
+     /////////// LES sessions
+     $mail = $_SESSION['mail'];
+     $mdp = $_SESSION['pass'];
+     $login = $_SESSION['login'];
+     $numa = $_SESSION['numa'];
+     $rue = $_SESSION['rue'];
+     $CP = $_SESSION['CP'];
+     $ville = $_SESSION['ville'];
+     $surname = $_SESSION['surname'];
+     $numt = $_SESSION['numt'];
+     $photo = $_SESSION['photo'];
+     $user = new Utilisateur('',$surname,$login,$mdp,$mail,$numt,$numa,$CP,$ville,$photo);
+     $_SESSION['name'] = $_POST['name'];
+     $_SESSION['stayp'] = $_POST['stayp'];
+
+
 		 ?>
 		 <div class="limiter">
 			 <div class="container-login100">
