@@ -95,7 +95,7 @@
 								alert("pas égaux");
 							}
 							else {
-
+								alert("égaux");
 							}
 						}
 					</script>
