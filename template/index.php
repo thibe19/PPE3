@@ -1,3 +1,11 @@
+<?php
+    /*
+     * 14/11/18
+     * v0.0.1
+     */
+    print $_SESSION['login'];
+    print $_SESSION['mdp'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1843,7 +1851,7 @@
             </div> 
         </div>
         <div class="copy_right">
-            © 2018 <a href="#">Open List</a>. All rights reserved.
+            ï¿½ 2018 <a href="#">Open List</a>. All rights reserved.
         </div>
     </footer> 
     <!-- End Footer area --> 
