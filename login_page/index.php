@@ -1,13 +1,10 @@
 <?php
-	require('ToolBox/bdd.inc.php');
 	session_start();
 
 	//test les identifiants et mot de passes
 	if (isset($_POST['email']) && isset($_POST['pass'])) {
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['mdp'] = $_POST['pass'];
-
-		
 
 
 		// TODO: cookie pour rester connecté
