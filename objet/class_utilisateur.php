@@ -1,6 +1,6 @@
 <?php
 /**
-* Utilisateur   date modif : 14/11/2018  vertion:0.0.1
+* Utilisateur/Eleve/Entreprise   date modif : 14/11/2018  vertion:0.0.2
 */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -35,7 +35,7 @@ class Utilisateur {
     $this -> CP_addr = $CP;
     $this -> ville_addr = $ville;
     $this -> photo_user = $photo;
-    
+
   }
 
   /////////////////// LES GETS /////////////////////
@@ -81,63 +81,104 @@ class Utilisateur {
       return "Les mots de passes ne correspondent pas.";
     }
   }
-////////////////////////////// Update Entreprise /////////////////////////////
-  Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn) {
-    $requet="UPDATE Utilisateur
-						 SET nom_user = '$nom',
-                 login_user = '$login',
-                 mdp_user = '$mdp',
-                 email_user = '$email',
-                 tel_user = '$numt',
-                 num_addr = '$numa',
-                 rue_addr = '$rue',
-                 CP_addr = '$CP',
-                 ville_addr = '$ville',
-                 photo_user = '$photo',
-             WHERE id_user = '$id';";
-    $req=$conn->Query($requet);
 
-    $requet="UPDATE Entreprise
-						 SET nom_resp = '$nomresp',
-                 code_APE = '$code',
-                 site_web = '$site'
-             WHERE id_user = '$id';";
-    $req=$conn->Query($requet);
-  }
 
-/////////////////// Update Eleve ////////////////////
-  Public function modifier_eleve($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $id, $conn) {
-    $requet="UPDATE Utilisateur
-						 SET nom_user = '$nom',
-                 login_user = '$login',
-                 mdp_user = '$mdp',
-                 email_user = '$email',
-                 tel_user = '$numt',
-                 num_addr = '$numa',
-                 rue_addr = '$rue',
-                 CP_addr = '$CP',
-                 ville_addr = '$ville',
-                 photo_user = '$photo',
-                 prenom_eleve = '$prenom',lk!:
-                 choix_position = '$choix'
-             WHERE id_user = '$id';";
-    $req=$conn->Query($requet);
+}// fin class
 
-    $requet="UPDATE Eleve
-						 SET prenom_eleve = '$prenom',
-                 choix_position = '$choix'
-             WHERE id_user = '$id';";
-    $req=$conn->Query($requet);
-  }
 
-///////////////////////// Insert Amis ///////////////////////////////////////////
-  Public function ajouter_amis($id, $amis, $conn) {
-    $requet="INSERT INTO ajoute_amis
-             VALUES ('$id', '$amis');";
-    $conn->Query($requet);
+//////////////////// class Eleve //////////////////////
+class Eleve extends Utilisateur
+{
+
+  Private $prenom_eleve;
+  Private $choix_position;
+  /////////////////////
+  Private $id_amis;
+
+  function __construct($amis="",$prenom="" ,$choix="")
+  {
+    $this -> prenom_eleve = $prenom;
+    $this -> choix_position = $choix;
+
+    // variables -- [  AMIS  ]
+    $this -> id_amis = $amis;
   }
 
 
+  /////////////////// Update Eleve ////////////////////
+    Public function modifier_eleve($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $prenom, $choix, $id, $conn) {
+      $requet="UPDATE Utilisateur
+  						 SET nom_user = '$nom',
+                   login_user = '$login',
+                   mdp_user = '$mdp',
+                   email_user = '$email',
+                   tel_user = '$numt',
+                   num_addr = '$numa',
+                   rue_addr = '$rue',
+                   CP_addr = '$CP',
+                   ville_addr = '$ville',
+                   photo_user = '$photo',
+                   prenom_eleve = '$prenom',lk!:
+                   choix_position = '$choix'
+               WHERE id_user = '$id';";
+      $req=$conn->Query($requet);
 
-}
+      $requet="UPDATE Eleve
+  						 SET prenom_eleve = '$prenom',
+                   choix_position = '$choix'
+               WHERE id_user = '$id';";
+      $req=$conn->Query($requet);
+    }
+
+
+  ///////////////////////// Insert Amis ///////////////////////////////////////////
+    Public function ajouter_amis($id, $amis, $conn) {
+      $requet="INSERT INTO ajoute_amis
+               VALUES ('$id', '$amis');";
+      $conn->Query($requet);
+    }
+
+}//fin class
+
+///////////////////////// class Entreprise ////////////////////////
+class Entreprise extends Utilisateur
+{
+
+  Private $nom_resp; // déclaration des variables -- [  ENTREPRISE  ]
+  Private $cope_APE;
+  Private $site_web;
+
+  function __construct($nomresp="", $code="", $site="")
+  {
+    $this -> nom_resp = $nomresp;
+    $this -> cope_APE = $code;
+    $this -> site_web = $site;
+  }
+
+  ////////////////////////////// Update Entreprise /////////////////////////////
+    Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn) {
+      $requet="UPDATE Utilisateur
+  						 SET nom_user = '$nom',
+                   login_user = '$login',
+                   mdp_user = '$mdp',
+                   email_user = '$email',
+                   tel_user = '$numt',
+                   num_addr = '$numa',
+                   rue_addr = '$rue',
+                   CP_addr = '$CP',
+                   ville_addr = '$ville',
+                   photo_user = '$photo',
+               WHERE id_user = '$id';";
+      $req=$conn->Query($requet);
+
+      $requet="UPDATE Entreprise
+  						 SET nom_resp = '$nomresp',
+                   code_APE = '$code',
+                   site_web = '$site'
+               WHERE id_user = '$id';";
+      $req=$conn->Query($requet);
+    }
+
+}// class
+
  ?>
