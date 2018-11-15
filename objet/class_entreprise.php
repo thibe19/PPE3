@@ -12,7 +12,7 @@ class Entreprise extends Utilisateur
 {
 
     Private $nom_resp; // déclaration des variables -- [  ENTREPRISE  ]
-    Private $cope_APE;
+    Private $code_ape;
     Private $site_web;
 
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
@@ -21,13 +21,22 @@ class Entreprise extends Utilisateur
         Utilisateur::__construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
             $ville = "", $photo = "");
         $this->nom_resp = $nomresp;
-        $this->cope_APE = $code;
+        $this->code_ape = $code;
         $this->site_web = $site;
     }
 
     /*
      * GETTERS
      */
+
+    function getAllEnt(){
+        $data = $this->getAllUser();
+        $data = $data.$this->nom_resp;
+        $data = $data.$this->code_ape;
+        $data = $data.$this->site_web;
+
+        return $data;
+    }
 
     /**
      * @return string
@@ -42,7 +51,7 @@ class Entreprise extends Utilisateur
      */
     public function getCopeAPE()
     {
-        return $this->cope_APE;
+        return $this->code_ape;
     }
 
     /**
@@ -66,11 +75,11 @@ class Entreprise extends Utilisateur
     }
 
     /**
-     * @param string $cope_APE
+     * @param string $code_ape
      */
-    public function setCopeAPE($cope_APE)
+    public function setCopeAPE($code_ape)
     {
-        $this->cope_APE = $cope_APE;
+        $this->code_ape = $code_ape;
     }
 
     /**
@@ -80,6 +89,47 @@ class Entreprise extends Utilisateur
     {
         $this->site_web = $site_web;
     }
+    
+    /*
+     * AJOUTER UNE ENTREPRISE
+     */
+
+    public function inscriptionent($objet, $conn)
+    {
+        $objet->inscription($objet,$conn);
+        $login =  $objet->getLoginUser();
+        $pass = $objet->getMdpUser();
+        $email = $objet->getEmailUser();
+        $nomresp = $this->nom_resp;
+        $ape = $this->code_ape;
+        $siteweb = $this->site_web;
+
+        // RECUPERATION DE L'ID
+        $sql_getid = "SELECT id_user FROM Utilisateur
+                            WHERE login_user='$login' AND mdp_user='$pass'
+                            AND email_user='$email'";
+        $res_getid = $conn->Query($sql_getid)or die('Erreur dans le requete get id');
+        $res_getid = $res_getid->fetchAll();
+        if($res_getid){
+            $ideleve = $res_getid[0]['id_user'];
+            print $SQL = "INSERT INTO Eleve
+                    VALUES('$ideleve','$nomresp','$ape','$siteweb')";
+            $res = $conn->Query($SQL)or die('Erreur insertion entreprise');
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     ////////////////////////////// Update Entreprise /////////////////////////////
     Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn)
     {

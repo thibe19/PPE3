@@ -3,7 +3,6 @@
 require('../objet/class_utilisateur.php');
 require_once ('../objet/classes.php');
 session_start();
-
 /*
  * FONCTION ENC DEC MAIL
  */
@@ -682,6 +681,26 @@ function dec_enc($action, $string) {
                                       }
                                     }
                                   } ////////////////////////////////////// FIN DES PAGES JUSTE APRES LE CHOIX ELEVE OU ENTTREPRISE
+
+                                  if(isset($_POST['NEWENT']))
+                                  {
+                                      $mail = $_SESSION['mail'];
+                                      $mdp = $_SESSION['pass'];
+                                      $login = $_SESSION['login'];
+                                      $numa = $_SESSION['numa'];
+                                      $rue = $_SESSION['rue'];
+                                      $cp = $_SESSION['cp'];
+                                      $ville = $_SESSION['ville'];
+                                      $surname = $_SESSION['surname'];
+                                      $numt = $_SESSION['numt'];
+                                      $photo = $_SESSION['photo'];
+                                      $nomresp = $_POST['nameresp'];
+                                      $ape = $_POST['APE'];
+                                      $website = $_POST['website'];
+
+                                      $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,$nomresp,$ape,$website);
+                                      $uneentreprise->inscriptionent($uneentreprise,$conn);
+                                  }
                                   if (isset($_POST['C1'])) {         ////////////////////////// SUITE INSC ENTREPRISE SSI EXISTE
                                     /////////////////// LES SESSIONS
 
@@ -758,24 +777,7 @@ function dec_enc($action, $string) {
                                 <?php
                               }
 
-                              if(isset($_POST['NEWENT']))
-                              {
-                                  $mail = $_SESSION['mail'];
-                                  $mdp = $_SESSION['pass'];
-                                  $login = $_SESSION['login'];
-                                  $numa = $_SESSION['numa'];
-                                  $rue = $_SESSION['rue'];
-                                  $cp = $_SESSION['cp'];
-                                  $ville = $_SESSION['ville'];
-                                  $surname = $_SESSION['surname'];
-                                  $numt = $_SESSION['numt'];
-                                  $photo = $_SESSION['photo'];
-                                  $nomresp = $_POST['nameresp'];
-                                  $ape = $_POST['APE'];
-                                  $website = $_POST['website'];
 
-                                  $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,$nomresp,$ape,$website);
-                              }
 
 
                               if (isset($_POST['E6'])) {        ////////////////// SUITE INSC ELEV

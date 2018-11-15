@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac7306e1-7fa5-4720-b218-e0976294fc31" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/objet/class_eleve.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/objet/class_entreprise.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/objet/classes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_page/Register.php" beforeDir="false" afterPath="$PROJECT_DIR$/login_page/Register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objet/class_utilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/objet/class_utilisateur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objet/class_entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/objet/class_entreprise.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,14 +40,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="5529" />
-          <entry key="txt" value="94" />
+          <entry key="php" value="5771" />
+          <entry key="txt" value="142" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="5497" />
-          <entry key="PLAIN_TEXT" value="94" />
+          <entry key="PHP" value="5739" />
+          <entry key="PLAIN_TEXT" value="142" />
           <entry key="SQL" value="32" />
         </counts>
       </usages-collector>
@@ -66,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login_page/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1459">
-              <caret line="59" column="20" lean-forward="true" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+            <state relative-caret-position="180">
+              <caret line="39" column="14" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="14" />
               <folding>
                 <element signature="e#7#67#0#PHP" expanded="true" />
               </folding>
@@ -78,8 +75,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login_page/Register.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="776" column="153" selection-start-line="776" selection-start-column="153" selection-end-line="776" selection-end-column="153" />
+            <state relative-caret-position="-3677">
+              <caret line="611" column="48" selection-start-line="611" selection-start-column="48" selection-end-line="611" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -87,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objet/class_utilisateur.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="390">
+              <caret line="266" column="8" selection-start-line="266" selection-start-column="8" selection-end-line="266" selection-end-column="8" />
               <folding>
                 <element signature="e#6#86#0#PHP" expanded="true" />
               </folding>
@@ -99,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objet/class_eleve.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="236">
+              <caret line="90" column="42" lean-forward="true" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
               </folding>
@@ -111,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objet/class_entreprise.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="135">
+              <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
               </folding>
@@ -139,13 +136,17 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>stayp</find>
-      <find>insert</find>
       <find>include</find>
       <find>href=&quot;#</find>
+      <find>cope_ape</find>
       <find>&lt;/form</find>
+      <find>insert</find>
+      <find>$_SESSION['photo</find>
+      <find>passwo</find>
     </findStrings>
     <replaceStrings>
       <replace>require_once</replace>
+      <replace>code_ape</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -166,10 +167,10 @@
         <option value="$PROJECT_DIR$/template/index.php" />
         <option value="$PROJECT_DIR$/login_page/index.php" />
         <option value="$PROJECT_DIR$/objet/class_eleve.php" />
-        <option value="$PROJECT_DIR$/objet/class_entreprise.php" />
-        <option value="$PROJECT_DIR$/objet/class_utilisateur.php" />
         <option value="$PROJECT_DIR$/objet/classes.php" />
         <option value="$PROJECT_DIR$/login_page/Register.php" />
+        <option value="$PROJECT_DIR$/objet/class_utilisateur.php" />
+        <option value="$PROJECT_DIR$/objet/class_entreprise.php" />
       </list>
     </option>
   </component>
@@ -250,7 +251,7 @@
       <workItem from="1542189667838" duration="3443000" />
       <workItem from="1542197458427" duration="220000" />
       <workItem from="1542198126767" duration="2169000" />
-      <workItem from="1542265867710" duration="21085000" />
+      <workItem from="1542265867710" duration="23561000" />
     </task>
     <task id="LOCAL-00001" summary="Test Index">
       <created>1541429804529</created>
@@ -280,11 +281,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542293070414</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Modification classes et register 17h10 15/11/18">
+      <created>1542298262397</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1542298262397</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31008000" />
+    <option name="totallyTimeSpent" value="33484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="255" width="1366" height="741" extended-state="6" />
@@ -321,7 +329,8 @@
     <MESSAGE value="Test Index" />
     <MESSAGE value="Finalisation connection" />
     <MESSAGE value="Poffinage Ajout utilisateur et connexion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Poffinage Ajout utilisateur et connexion" />
+    <MESSAGE value="Modification classes et register 17h10 15/11/18" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification classes et register 17h10 15/11/18" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ToolBox/bdd.inc.php">
@@ -362,20 +371,17 @@
     <entry file="file://$PROJECT_DIR$/ToolBox/toolbox_inc.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/objet/class_eleve.php">
+    <entry file="file://$PROJECT_DIR$/objet/classes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding>
-            <element signature="e#6#88#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objet/class_entreprise.php">
+    <entry file="file://$PROJECT_DIR$/objet/class_eleve.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+        <state relative-caret-position="236">
+          <caret line="90" column="42" lean-forward="true" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
           </folding>
@@ -384,25 +390,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objet/class_utilisateur.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="390">
+          <caret line="266" column="8" selection-start-line="266" selection-start-column="8" selection-end-line="266" selection-end-column="8" />
           <folding>
             <element signature="e#6#86#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objet/classes.php">
+    <entry file="file://$PROJECT_DIR$/objet/class_entreprise.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        <state relative-caret-position="135">
+          <caret line="99" column="41" lean-forward="true" selection-start-line="99" selection-start-column="41" selection-end-line="99" selection-end-column="41" />
+          <folding>
+            <element signature="e#6#88#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login_page/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1459">
-          <caret line="59" column="20" lean-forward="true" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
+        <state relative-caret-position="180">
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="14" />
           <folding>
             <element signature="e#7#67#0#PHP" expanded="true" />
           </folding>
@@ -411,8 +420,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login_page/Register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="776" column="153" selection-start-line="776" selection-start-column="153" selection-end-line="776" selection-end-column="153" />
+        <state relative-caret-position="-3677">
+          <caret line="611" column="48" selection-start-line="611" selection-start-column="48" selection-end-line="611" selection-end-column="48" />
         </state>
       </provider>
     </entry>
