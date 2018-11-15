@@ -255,11 +255,21 @@ class Utilisateur
         $numt = $this->getNumTelUser($objet);
         $photo = $this->getPhotoUser($objet);
 
+        $SQLtest = "SELECT login_user,email_user FROM Utilisateur
+        WHERE login_user = '$login'
+        AND email_user = '$email';";
+        $req = $conn->Query($SQLtest) or die('Erreur dans la requete');
+        $res_id_email = $req->fetchAll();
 
+        if ($res_id_email) {
+          return;
+        }
+        else{
 
         $requet = "INSERT INTO Utilisateur
                VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$cp', '$ville','$photo','');";
         $sql = $conn->Query($requet)or die('Erreur dans la requete');
+      }
     }
 
     function replacebr($var){
@@ -280,7 +290,7 @@ class Eleve extends Utilisateur
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
                                 $ville = "", $photo = "",$prenom = "", $choix = "")
     {
-        Utilisateur:Utilisateur($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
+        Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
                                     $ville,$photo);
         $this->prenom_eleve = $prenom;
         $this->choix_position = $choix;
@@ -295,7 +305,13 @@ class Eleve extends Utilisateur
      * GETTERS
      */
 
+    function getAllEleve(){
+        $data = $this->getAllUser();
+        $data = $data.$this->prenom_eleve;
+        $data = $data.$this->choix_position;
 
+        return $data;
+    }
 
     /**
      * @return string
@@ -333,6 +349,20 @@ class Eleve extends Utilisateur
     public function setChoixPosition($choix_position)
     {
         $this->choix_position = $choix_position;
+    }
+
+    /*
+     * Inscription eleve
+     */
+    public function inscriptioneleve($objet, $conn)
+    {
+        $objet->inscription($objet,$conn);
+        $login =  $objet->getLoginUser();
+        $pass = $objet->getMdpUser();
+        $email = $objet->getEmailUser();
+        $sql_getid = "SELECT id_user FROM Utilisateur
+                            WHERE login_user='$login' AND mdp_user='$pass'
+                            AND email_user='$email'";
     }
 
 }//fin class

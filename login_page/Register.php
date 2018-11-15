@@ -417,12 +417,15 @@ session_start();
 									</span>
                                                                                 </div>
 
+
+
+                                                                                <!--choix position-->
                                                                                 <table>
                                                                                     <tr>
                                                                                         <td>
                                                                                             <label class="switch">
                                                                                                 <input type="radio"
-                                                                                                       value="eleve"
+                                                                                                       value="0"
                                                                                                        name="stayp">
                                                                                                 <span class="slider round"></span>
                                                                                             </label>
@@ -434,7 +437,7 @@ session_start();
                                                                                         <td>
                                                                                             <label class="switch">
                                                                                                 <input type="radio"
-                                                                                                       value="eleve"
+                                                                                                       value="1"
                                                                                                        name="stayp">
                                                                                                 <span class="slider round"></span>
                                                                                             </label>
@@ -446,7 +449,7 @@ session_start();
                                                                                         <td>
                                                                                             <label class="switch">
                                                                                                 <input type="radio"
-                                                                                                       value="eleve"
+                                                                                                       value="2"
                                                                                                        name="stayp">
                                                                                                 <span class="slider round"></span>
                                                                                             </label>
@@ -679,12 +682,14 @@ session_start();
                                                                                                                                 $photo = $_SESSION['photo'];
 
                                                                                                                                 $usereleve = new Utilisateur('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo);
-                                                                                                                                $usereleve->inscription($usereleve, $conn);
+                                                                                                                                //$usereleve->inscription($usereleve, $conn);
 
-                                                                                                                                $_SESSION['name'] = $_POST['name'];
-                                                                                                                                $_SESSION['stayp'] = $_POST['stayp'];
+                                                                                                                                $prenom = $_POST['name'];
+                                                                                                                                $choixpos = $_POST['stayp'];
 
-                                                                                                                                //$uneleve = new Eleve('');
+
+                                                                                                                                $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,$prenom,$choixpos);
+                                                                                                                                $uneleve->inscriptioneleve($uneleve,$conn);
 
                                                                                                                                 ?>
                                                                                                                                 <div class="limiter">
