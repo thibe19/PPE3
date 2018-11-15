@@ -1,7 +1,7 @@
 <?php
 // Register date modif : 15/11/2018 Version 0.0.4
 require('../objet/class_utilisateur.php');
-require('../ToolBox/bdd.inc.php');
+require_once ('../objet/classes.php');
 session_start();
 
 /*
@@ -66,7 +66,18 @@ function dec_enc($action, $string) {
 
 </head>
 <body>
-  <?php if (empty($_POST['E1']) && empty($_POST['E2']) && empty($_POST['E3']) && empty($_POST['E4']) && empty($_POST['C1']) && empty($_POST['E6'])) { ?>
+
+
+
+
+
+
+
+  <?php if (empty($_POST['E1']) && empty($_POST['E2']) && empty($_POST['E3']) && empty($_POST['E4']) && empty($_POST['C1']) && empty($_POST['E6']) && empty($_POST['NEWENT'])) { ?>
+
+
+
+
 
 
     <div class="limiter">
@@ -129,7 +140,17 @@ function dec_enc($action, $string) {
             <!-- </form> -->
 
             <?php
-          }
+
+
+
+
+
+          }// FIN TEST SI AUTRE PAGE AFFICHE
+
+
+
+
+
 
           /*
           * REQUETE DE TEST EXISTENCE DE L'USER
@@ -209,6 +230,13 @@ function dec_enc($action, $string) {
           /*
           * Fin test existance user
           */
+
+
+
+
+
+
+
           //Test des mot de passes
           if (isset($_POST['pass']) && isset($_POST['pass_verification'])) {
             if ($_POST['pass'] != $_POST['pass_verification']) {
@@ -223,6 +251,10 @@ function dec_enc($action, $string) {
             }
             else{
 
+
+
+
+              //ETAPE ADRESSE
               if (isset($_POST['E1'])) {
                 $_SESSION['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                 $_SESSION['mail'] = $_POST['email'];
@@ -289,7 +321,15 @@ function dec_enc($action, $string) {
                         <?php
                       }
                     }
-                  }
+                  }//FIN ETAPE Adresse
+
+
+
+
+
+
+
+                  //ETAPE SURNON NON DE FAMILLE ET PHOTO
                   if (isset($_POST['E2'])) {
                     $_SESSION['numa'] = $_POST['numa'] . '<br>';
                     $_SESSION['rue'] = $_POST['rue'] . '<br>';
@@ -348,7 +388,16 @@ function dec_enc($action, $string) {
                         </div>
                         <!-- </form> -->
                         <?php
-                      }
+                      }//FIN ETAPE SURNON NON DE FAMILLE ET PHOTO
+
+
+
+
+
+
+
+
+                      //ETAPE CHOIX ELEVE OU ENTREPRISE
                       if (isset($_POST['E3'])) {
                         ?>
 
@@ -416,12 +465,21 @@ function dec_enc($action, $string) {
                               </div>
                               <!-- </form> -->
                               <?php
-                            }
+                            }//FIN CHOIX ENTREPRISE OU ELEVE
+
+
+
+
+
+
+
+
+                            //ETAPE RENSEIGNEMENT ELEVE OU ENTREPRISE
                             if (isset($_POST['E4'])) {
                               //////// LES SESSIONS
                               $_SESSION['stay'] = $_POST['stay'];
 
-
+                              //RENSEIGNEMENTS SPECIFIQUE ELEVE
                               if ($_SESSION['stay'] == "eleve") {
                                 ?>
                                 <!-- DIV de spécification Eleve ( Prenom et choix position ) -->
@@ -600,7 +658,7 @@ function dec_enc($action, $string) {
                                             data-validate="Champ obligatoire">
                                             <input class="input100"
                                             type="text"
-                                            name="web"
+                                            name="website"
                                             placeholder="Site internet">
                                             <!-- Champ inscription Mot de passe  -->
                                             <span class="focus-input100"></span>
@@ -612,7 +670,7 @@ function dec_enc($action, $string) {
                                           <!-- <form action="#" method="post"> -->
                                           <div class="container-login100-form-btn">
                                             <!-- Bouton accer prochaine étape  -->
-                                            <button name="F"
+                                            <button name="NEWENT"
                                             value="0"
                                             class="login100-form-btn">
                                             Finir
@@ -700,6 +758,26 @@ function dec_enc($action, $string) {
                                 <?php
                               }
 
+                              if(isset($_POST['NEWENT']))
+                              {
+                                  $mail = $_SESSION['mail'];
+                                  $mdp = $_SESSION['pass'];
+                                  $login = $_SESSION['login'];
+                                  $numa = $_SESSION['numa'];
+                                  $rue = $_SESSION['rue'];
+                                  $cp = $_SESSION['cp'];
+                                  $ville = $_SESSION['ville'];
+                                  $surname = $_SESSION['surname'];
+                                  $numt = $_SESSION['numt'];
+                                  $photo = $_SESSION['photo'];
+                                  $nomresp = $_POST['nameresp'];
+                                  $ape = $_POST['APE'];
+                                  $website = $_POST['website'];
+
+                                  $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,$nomresp,$ape,$website);
+                              }
+
+
                               if (isset($_POST['E6'])) {        ////////////////// SUITE INSC ELEV
                                 /////////// LES sessions
                                 $mail = $_SESSION['mail'];
@@ -712,9 +790,6 @@ function dec_enc($action, $string) {
                                 $surname = $_SESSION['surname'];
                                 $numt = $_SESSION['numt'];
                                 $photo = $_SESSION['photo'];
-
-                                $usereleve = new Utilisateur('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo);
-                                //$usereleve->inscription($usereleve, $conn);
 
                                 $prenom = $_POST['name'];
                                 $choixpos = $_POST['stayp'];
