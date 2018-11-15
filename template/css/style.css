@@ -10,7 +10,7 @@ theme.
 This files contents are outlined below.
 
 	1. Variables
-	2. Prefix 
+	2. Prefix
 	3. header
     4. Banner
     5. Min-container
@@ -4023,3 +4023,31 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 /*--------------------------------------------------*/
 
 /*# sourceMappingURL=style.css.map */
+
+#updateabout {
+  background-color: #ff7043;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+#updateabout:hover {
+  opacity: 1;
+}
+
+#cancelabout {
+  background-color: #232f42;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+#cancelabout:hover {
+  opacity: 1;
+}
