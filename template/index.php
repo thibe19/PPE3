@@ -362,7 +362,7 @@
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
                         </li>
                         <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li>
-                        <li><a href="#"><i class="ion-gear-b"></i>Settings</a></li>
+                        <li><a href="./setting.php"><i class="ion-gear-b"></i>Settings</a></li>
                         <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
                         <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>
                         <li><a href="#"><i class="ion-power"></i>Log out</a></li>
