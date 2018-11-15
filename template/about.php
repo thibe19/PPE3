@@ -788,7 +788,7 @@
                           <tr>
                             <td><p>Date de naissance</p></td>
                             <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="birth_about" value="<?php echo $birth; ?>"> </p> </td>
+                            <td> <p> <input type="date" name="birth_about" value="<?php echo $birth; ?>"> </p> </td>
                           </tr>
                         </table>
                         <br>
