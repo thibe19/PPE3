@@ -90,24 +90,6 @@ session_start();
 						</div>
 					<!-- </form> -->
 
-<<<<<<< HEAD
-					<script type="text/javascript">
-						function checkPw() {
-							var pass = document.getElementById("pass_n").value;
-							var pass_v = document.getElementById("pass_v").value;
-							if (pass != pass_v) {
-								alert("pas égaux");
-							}
-							else {
-								alert("égaux");
-							}
-						}
-					</script>
-=======
-
->>>>>>> 4242e0000f6ca3c1b0795d4bf0ac308fb43977c8
-
-
 	<?php
   }
 
