@@ -1,9 +1,10 @@
+
 <?php
 /*
- *  14/11/18
+ *  15/11/18
  *  Connection au site web
  *
- *  v0.0.3
+ *  v0.0.4
  */
 
 //Connection a la base de donnée
@@ -31,21 +32,45 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
     $login = $_POST['login'];
     $mdp = $_POST['pass'];
 
-    $SQL = "SELECT * FROM Utilisateur 
-                WHERE login_user='$login' AND mdp_user='$mdp'";
+    $SQL = "SELECT mdp_user FROM Utilisateur
+                WHERE login_user='$login'";
     $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
     $req = $req->fetchAll();
 
-    //Test si l'identifiant et le mot de passe existe et corresponds
-    if ($req) {
-        $_SESSION['login'] = $_POST['login'];
-        $_SESSION['mdp'] = $_POST['pass'];
-        if (isset($_POST['stay'])) {
-            setcookie('login', $_SESSION['login'], time() + 4147200,'/');
-            setcookie('mdp', $_SESSION['mdp'], time() + 4147200,'/');
+    if (password_verify($mdp, $req[0]['mdp_user'])) {
+        $mdp = $req[0]['mdp_user'];
+        $SQL = "SELECT * FROM Utilisateur
+                WHERE login_user='$login' AND mdp_user='$mdp'";
+        $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
+        $req = $req->fetchAll();
+
+        //Test si l'identifiant et le mot de passe existe et corresponds
+        if ($req) {
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['mdp'] = $_POST['pass'];
+            if (isset($_POST['stay'])) {
+                setcookie('login', $_SESSION['login'], time()+60*60*24*30*365, '/');
+                setcookie('mdp', $_SESSION['mdp'], time()+60*60*24*30*365, '/');
+            }
+            //TODO
+            header("Location: ../");
+        } else {
+            print 'ca marche pas';
+            ?>
+            <script>
+                alert("L'identifiant et le mot de passe ne correspondes pas.");
+                window.location = "./";
+            </script>
+            <?php
         }
-        //TODO
-        header("Location: ../");
+    }else {
+
+        ?>
+        <script>
+            alert("L'identifiant et le mot de passe ne correspondes pas.");
+            window.location = "./";
+        </script>
+        <?php
     }
 }
 ?>
