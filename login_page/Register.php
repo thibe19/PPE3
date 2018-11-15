@@ -3,6 +3,38 @@
 require('../objet/class_utilisateur.php');
 require('../ToolBox/bdd.inc.php');
 session_start();
+
+/*
+ * FONCTION ENC DEC MAIL
+ */
+
+function dec_enc($action, $string) {
+    $output = false;
+
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'This is my secret key';
+    $secret_iv = 'This is my secret iv';
+
+    // hash
+    $key = hash('sha256', $secret_key);
+
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    if( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    }
+    else if( $action == 'decrypt' ){
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+
+    return $output;
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -419,14 +451,14 @@ session_start();
 
 
 
-                                                                                <!--choix position-->
+                                                                                <!--        CHOIX DES POSITIONS          -->
                                                                                 <table>
                                                                                     <tr>
                                                                                         <td>
                                                                                             <label class="switch">
                                                                                                 <input type="radio"
                                                                                                        value="0"
-                                                                                                       name="stayp">
+                                                                                                       name="stayp" data-validate="Champ obligatoire" required>
                                                                                                 <span class="slider round"></span>
                                                                                             </label>
                                                                                         </td>
@@ -681,6 +713,10 @@ session_start();
                                                                                                                                 $numt = $_SESSION['numt'];
                                                                                                                                 $photo = $_SESSION['photo'];
 
+
+
+
+
                                                                                                                                 $usereleve = new Utilisateur('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo);
                                                                                                                                 //$usereleve->inscription($usereleve, $conn);
 
@@ -753,7 +789,7 @@ session_start();
                                                                                                                                                 <div class="text-center p-t-136">
                                                                                                                                                     <!-- Page de connection -->
                                                                                                                                                     <a class="txt2"
-                                                                                                                                                       href="#">
+                                                                                                                                                       href="./">
                                                                                                                                                         Se
                                                                                                                                                         connecter
                                                                                                                                                         <i class="fa fa-long-arrow-right m-l-5"

@@ -360,9 +360,21 @@ class Eleve extends Utilisateur
         $login =  $objet->getLoginUser();
         $pass = $objet->getMdpUser();
         $email = $objet->getEmailUser();
+        $prenom = $this->prenom_eleve;
+        $choixpos = $this->choix_position;
+
+        // RECUPERATION DE L'ID
         $sql_getid = "SELECT id_user FROM Utilisateur
                             WHERE login_user='$login' AND mdp_user='$pass'
                             AND email_user='$email'";
+        $res_getid = $conn->Query($sql_getid)or die('Erreur dans le requete get id');
+        $res_getid = $res_getid->fetchAll();
+        if($res_getid){
+            $ideleve = $res_getid[0]['id_user'];
+            $SQL = "INSERT INTO Eleve
+                    VALUES('$ideleve','$prenom','$choixpos')";
+            $res = $conn->Query($SQL)or die('Erreur insertion eleve');
+        }
     }
 
 }//fin class
@@ -375,13 +387,71 @@ class Entreprise extends Utilisateur
     Private $cope_APE;
     Private $site_web;
 
-    function __construct($nomresp = "", $code = "", $site = "")
+    function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
+                         $ville = "", $photo = "", $nomresp = "", $code = "", $site = "")
     {
+        Utilisateur::__construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
+            $ville = "", $photo = "");
         $this->nom_resp = $nomresp;
         $this->cope_APE = $code;
         $this->site_web = $site;
     }
 
+    /*
+     * GETTERS
+     */
+
+    /**
+     * @return string
+     */
+    public function getNomResp()
+    {
+        return $this->nom_resp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCopeAPE()
+    {
+        return $this->cope_APE;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteWeb()
+    {
+        return $this->site_web;
+    }
+
+    /*
+     * SETTERS
+     */
+
+    /**
+     * @param string $nom_resp
+     */
+    public function setNomResp($nom_resp)
+    {
+        $this->nom_resp = $nom_resp;
+    }
+
+    /**
+     * @param string $cope_APE
+     */
+    public function setCopeAPE($cope_APE)
+    {
+        $this->cope_APE = $cope_APE;
+    }
+
+    /**
+     * @param string $site_web
+     */
+    public function setSiteWeb($site_web)
+    {
+        $this->site_web = $site_web;
+    }
     ////////////////////////////// Update Entreprise /////////////////////////////
     Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn)
     {
