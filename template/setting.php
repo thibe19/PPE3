@@ -1,3 +1,27 @@
+<?php
+/*
+ *  15/11/18
+ *  Profil
+ *  v0.0.2
+ */
+
+session_start();
+if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
+$mdp=$_SESSION['mdp'];
+$ndc=$_SESSION['login'];
+}
+require('../ToolBox/bdd.inc.php');
+require('../objet/class_utilisateur.php');
+$sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
+$res = $conn -> query($sql)or die($conn -> errorInfo());
+$data = $res -> fetch();
+$id=$data['id_user'];
+
+$sqlE="SELECT * FROM Eleve WHERE id_user = '$id'";
+$resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+$dataE = $res -> fetch();
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +31,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Open List | Html template</title>
+    <title>ViaBahuet</title>
 
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
@@ -628,156 +652,192 @@
     </section>
     <!-- End Tranding Area -->
 
+<!----------------------------------------------------------------------------------------------------------- -->
+
     <!-- Option -->
     <div class="middle_section col">
       <div class="post profile_post">
         <div class="post_content">
 
+          <div class="option-profil">
           <section class="min_container photo_pages">
             <div class="section_row row">
               <div class="col s12">
-                <h2>Option Profile </h2>
+                <h1>Option Profil</h1><br><br>
               </div>
-                <div class="profile">
-                  <div class="modif-image">
-                      <div class="modif-image-image">
-                        <img src="images/profile-pic.png" alt="">
-                      </div>
-                    <div class="modif-image-bouton">
-                        <div>
-                          <button class="btn btn-primary btn-block mt-5" type="button">
-                            <i class="fa fa-fw fa-camera"></i>
-                            <span>Change Photo</span>
-                          </button>
-                        </div>
-                    </div>
+              <div class="profil">
+                <div class="modif-image">
+                  <div class="modif-image-image">
+                    <img src="<?php $data['photo_user'] ?>" >
                   </div>
-                  <!-- fin modif image -->
-                  <br>
-                  <div class="tab-content pt-3">
-                    <div class="tab-pane active">
-                      <form class="form" novalidate="">
-
-                        <div class="col s12">
-                          <h2>Information personnelle </h2>
-                        </div>
-
-                        <div class="row">
-                          <div class="col">
-                            <!-- nom/prenom -->
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">Nom de famille </label>
-                                  <input type="text" class="form-control" name="nom" placeholder="Nom de famille">
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">Prenom</label>
-                                  <input class="form-control" type="text" name="prenom" placeholder="Prenom">
-                                </div>
-                              </div>
-                            </div>
-
-                            <!-- mail/utilisateur-->
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">Email</label>
-                                  <input class="form-control" type="text" name="mail" placeholder="user@example.com">
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">Nom d'utilisateur</label>
-                                  <input class="form-control" type="text" name="user" placeholder="Nom d'utilisateur">
-                                </div>
-                              </div>
-                            </div>
-                            <!-- A propos -->
-                            <div class="row">
-                              <div class="col mb-3">
-                                <div class="form-group">
-                                  <label class="form-label">A propos de moi</label>
-                                  <textarea class="form-control" rows="2" placeholder="My Bio"></textarea>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-12 col-sm-6 mb-3">
-
-                            <div class="col s12">
-                              <h2>Information complémentaire</h2>
-                            </div>
-
-                            <div class="row">
-                              <div class="col">
-                                <label class="form-label">Date de naissance</label>
-                                <input type="date" name="dateU" value="">
-                              </div>
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">N°Mobile</label>
-                                  <input class="form-labelt" type="text" name="tel" placeholder="N°Mobile">
-                                </div>
-                              </div>
-                            </div>
-
-                          </div>
-                          </div>
-                          <div class="col-12 col-sm-6 mb-3">
-                            <div class="col s12">
-                              <h2>Mot de passe</h2>
-                            </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group"> <label class="form-label">Current Password</label>
-                                  <input class="form-control" type="password" placeholder="••••••">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">New Password</label>
-                                  <input class="form-control" type="password" placeholder="••••••">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label class="form-label">Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                  <input class="form-control" type="password" placeholder="••••••">
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="float-right mt-0 mb-0">
-                          <button class="btn btn-secondary mr-3" type="submit">Cancel</button>
-                          <button class="btn btn-primary " type="submit">Update Profile</button>
-                        </div>
-                      </form>
+                  <div class="modif-image-bouton">
+                    <div>
+                      <input type='file' name='photo'>
+                      <button class="btn btn-primary btn-block mt-5" type="button">
+                        <i class="fa fa-fw fa-camera"></i>
+                        <span>Change Photo</span>
+                      </button>
                     </div>
                   </div>
                 </div>
+                <!-- fin modif image -->
+                <br>
+                <div class="tab-content pt-3">
+                  <div class="tab-pane active">
+                    <form class="form" method="POST" action='#'>
+
+                      <div class="col s12">
+                        <h2>Information personnelle </h2>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <!-- nom/prenom -->
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Nom de famille </label>
+                                <input type="text" class="form-control" name="nom" value="<?php echo$data['nom_user']; ?>">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Prenom</label>
+                                <input class="form-control" type="text" name="prenom" value="<?php echo$dataE['prenom_eleve']; ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- mail/utilisateur-->
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input class="form-control" type="text" name="mail" value="<?php echo$data['email_user']; ?>">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Nom d'utilisateur</label>
+                                <input class="form-control" type="text" name="user" value="<?php echo$data['login_user']; ?>">
+                              </div>
+                            </div>
+                          </div>
+                          <!-- A propos -->
+                          <div class="row">
+                            <div class="col mb-3">
+                              <div class="form-group">
+                                <label class="form-label">A propos de moi</label>
+                                <textarea class="form-control" rows="2" name="bio" value="A propos de moi"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- DTN + N°tel -->
+                      <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+
+                          <div class="col s12">
+                            <h2>Information complémentaire</h2>
+                          </div>
+
+                          <div class="row">
+                            <div class="col">
+                              <label class="form-label">Date de naissance</label>
+                              <input type="date" name="dateU" value="">
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">N°Mobile</label>
+                                <input class="form-control" type="number" name="tel" value="<?php echo$data['tel_ser']; ?>">
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <address>  -->
+
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">N°Rue</label>
+                                <input type="text" class="form-control" name="Nrue" value="<?php echo$data['num_addr_user']; ?>">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Rue</label>
+                                <input class="form-control" type="text" name="rue" value="<?php echo$data['rue_addr_user']; ?>">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">Ville</label>
+                                <input class="form-control" type="text" name="ville" value="<?php echo$data['ville_addr_user']; ?>">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label class="form-label">code postal</label>
+                                <input class="form-control" type="text" name="cp" value="<?php echo$data['CP_addr_user']; ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- MDP -->
+                      <div class="col-12 col-sm-6 mb-3">
+                        <div class="col s12">
+                          <h2>Mot de passe</h2>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="form-label">Ancien Mot de passe</label>
+                              <input class="form-control" type="password" name="mdpA" placeholder="Mot de passe">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="form-label">Nouveau Mot de passe</label>
+                              <input class="form-control" type="password" name="mdpN" placeholder="Mot de passe">
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="form-label">Confirmer <span class="d-none d-xl-inline">le Mot de passe</span></label>
+                              <input class="form-control" type="password" name="mdpNC" placeholder="Mot de passe">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="float-right mt-0 mb-0">
+                        <button class="btn btn-secondary mr-3"  type="submit">Annuler</button>
+                        <button class="btn btn-primary " name='modifier' type="submit">Mettre à jour le profil</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
               <div class="loding_img">
                 <img src="images/icons/loding.png" alt="">
               </div>
             </div>
-            </section>
-          </div>
+          </section>
+        </div>
         </div>
       </div>
-    <!-- Option -->
+    </div>
 
+    <!-- /Option -->
 
+<!-----------------------------------------------------------------------------------------------------------------------------------------------------------  -->
 
 
     <!-- Footer area -->
@@ -914,7 +974,7 @@
     <!-- End Footer area -->
 
     <!-- Add post poup area -->
-    <div id="post_modal" class="add_post modal">
+    <!-- <div id="post_modal" class="add_post modal">
         <h2>Create A New Post</h2>
         <form class="input_group">
             <div class="input-field">
@@ -972,7 +1032,7 @@
                </div>
             </div>
         </form>
-    </div>
+    </div> -->
     <!-- End Add post poup area -->
 
     <!-- jQuery JS -->
@@ -992,3 +1052,52 @@
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/photos.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:40:08 GMT -->
 </html>
+
+<?php
+
+if (isset($_POST['modifier'])) {
+
+  $nom = $_POST['nom'];
+  $prenom = $_POST['prenom'];
+  $mail = $_POST['mail'];
+  $user = $_POST['user'];
+  $bio = $_POST['bio'];
+  $tel = $_POST['tel'];
+  $Nrue = $_POST['Nrue'];
+  $rue = $_POST['rue'];
+  $ville = $_POST['ville'];
+  $cp = $_POST['cp'];
+  $photo=123456;
+
+  $mdpA = $_POST['mdpA'];
+  $mdpN = $_POST['mdpN'];
+  $mdpNC = $_POST['mdpNC'];
+
+  //eleve
+  $prenom = $_POST['prenom'];
+  //$choixpos = $_POST['stayp'];
+
+  echo "$id,$nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio,$prenom, $mdpA, $mdpN, $mdpNC";
+
+
+  //$usereleve = new Utilisateur($id,$nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
+  //$usereleve->modifier_utilisateur($usereleve, $conn);
+
+
+  //$uneleve = new Eleve($id,$prenom,$choixpos);
+  //$uneleve->modifier_eleve($uneleve,$conn);
+if (($mdpA or $mdpN) == null ) {
+
+
+  if ($mdpA==$mdp) {
+    if ($mdpN==$mdpNC) {
+
+
+    }else {
+
+    }
+  }
+}
+ }
+
+ ?>
