@@ -1,6 +1,8 @@
 <?php
 /**
- * Utilisateur/Eleve/Entreprise   date modif : 21/11/2018  vertion:0.0.5
+ * Utilisateur/Eleve/Entreprise
+ * date modif : 21/11/2018
+ * vertion:0.0.5
  */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -303,7 +305,7 @@ Public function modifier_utilisateur( $objet,$conn){
   $photo = $this->getPhotoUser($objet);
   $desc = $this->getDescUser($objet);
 
-  print $sql="UPDATE Utilisateur
+  $sql="UPDATE Utilisateur
         SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_ser='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
         WHERE id_user='$id' ";
   $res = $conn->Query($sql)or die('Erreur modification user');

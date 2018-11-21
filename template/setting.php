@@ -688,7 +688,7 @@ $dataE = $resE -> fetch();
                 <br>
                 <div class="tab-content pt-3">
                   <div class="tab-pane active">
-                    <form class="form" method="POST" action='#'>
+                    <form class="form" method="POST" action='./setting.php'>
 
                       <div class="col s12">
                         <h2>Information personnelle </h2>
@@ -1071,7 +1071,7 @@ if (isset($_POST['modifier'])) {
   $rue = $_POST['rue'];
   $ville = $_POST['ville'];
   $cp = $_POST['cp'];
-  $photo=123456;    //////////////////////////////Pas fini!
+  $photo='123456';    //////////////////////////////Pas fini!
 
   $mdpA = $_POST['mdpA'];
   $mdpN = $_POST['mdpN'];
@@ -1090,7 +1090,7 @@ if (isset($_POST['modifier'])) {
     $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
     $uneleve->modifier_eleve($uneleve,$conn);
 
-    header('Location:./setting.php');
+    header('Location : ./setting.php');
 
   } else {
 
@@ -1101,7 +1101,7 @@ if (isset($_POST['modifier'])) {
         $uneleve = new Eleve($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
         $uneleve->modifier_eleve($uneleve,$conn);
 
-        header('Location:./setting.php');
+
 
       }else {
 
