@@ -1,45 +1,45 @@
 <nav class="header_area">
     <div class="custom_container">
         <div class="nav-wrapper">
-            <a href="index-2.html" class="brand-logo"><img src="images/logo.png" alt=""></a>
+            <a href="index-2.php" class="brand-logo"><img src="images/logo.png" alt=""></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#post_modal" class="waves-effect btn post_btn sm_post_btn modal-trigger"><i class="ion-plus"></i>Add
                 Post</a>
             <ul class="left_menu hide-on-med-and-down">
-                <li><a href="index-2.html" class="active">Home</a></li>
+                <li><a href="index-2.php" class="active">Home</a></li>
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown6">All Pages</a>
                     <div id="dropdown6" class="dropdown-content submenu row">
                         <div class="col m4 menu_column">
                             <ul>
                                 <li><a href="get-started.html">Get started</a></li>
-                                <li><a href="dashboard.html">Dashboard</a></li>
-                                <li><a href="details.html">Post details</a></li>
-                                <li><a href="details-2.html">Post details 2</a></li>
-                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="dashboard.php">Dashboard</a></li>
+                                <li><a href="details.php">Post details</a></li>
+                                <li><a href="details-2.php">Post details 2</a></li>
+                                <li><a href="profile.php">Profile</a></li>
                             </ul>
                         </div>
                         <div class="col m4 menu_column">
                             <ul>
-                                <li><a href="messages.html">Messages</a></li>
-                                <li><a href="requests.html">Requests</a></li>
-                                <li><a href="read-later.html">Read-Later</a></li>
-                                <li><a href="notifications.html">Notifications</a></li>
-                                <li><a href="block-list.html">Block-list</a></li>
+                                <li><a href="messages.php">Messages</a></li>
+                                <li><a href="requests.php">Requests</a></li>
+                                <li><a href="read-later.php">Read-Later</a></li>
+                                <li><a href="notifications.php">Notifications</a></li>
+                                <li><a href="block-list.php">Block-list</a></li>
                             </ul>
                         </div>
                         <div class="col m4 menu_column">
                             <ul>
-                                <li><a href="photos.html">Photos</a></li>
-                                <li><a href="photos-2.html">Photos v2</a></li>
-                                <li><a href="video.html">Videos</a></li>
-                                <li><a href="error.html">Error (404)</a></li>
+                                <li><a href="photos.php">Photos</a></li>
+                                <li><a href="photos-2.php">Photos v2</a></li>
+                                <li><a href="video.php">Videos</a></li>
+                                <li><a href="error.php">Error (404)</a></li>
                                 <li><a href="#modal1" class="waves-effect modal-trigger">Sign in</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="dashboard.php">Dashboard</a></li>
                 <li class="notifications search_sm"><a class="dropdown-button" href="#!" data-activates="dropdown5"><i
                                 class="ion-ios-search"></i></a>
                     <!-- Dropdown Structure -->
@@ -150,7 +150,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="requests.html" class="waves-effect chack_all_btn">Check All Follow Requests</a>
+                        <li><a href="requests.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
                 </li>
@@ -228,7 +228,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="messages.html" class="waves-effect chack_all_btn">Check All Messages</a></li>
+                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Messages</a></li>
                     </ul>
                 </li>
                 <!-- Notifications -->
@@ -305,7 +305,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="notifications.html" class="waves-effect chack_all_btn">Check All Notifications</a>
+                        <li><a href="notifications.php" class="waves-effect chack_all_btn">Check All Notifications</a>
                         </li>
                     </ul>
                 </li>
@@ -314,8 +314,8 @@
                                 src="images/profile-pic.png" alt="" class="circle p_2"></a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="profile.html"><i class="ion-person"></i>My profile</a></li>
-                        <li><a href="read-later.html"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
+                        <li><a href="profile.php"><i class="ion-person"></i>My profile</a></li>
+                        <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
                         </li>
                         <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li>
@@ -333,25 +333,25 @@
                         <a href="#" class="search_icon"><i class="ion-ios-search"></i></a>
                     </div>
                 </li>
-                <li><a href="index-2.html">Home</a></li>
+                <li><a href="index-2.php">Home</a></li>
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown_s0">All
                         Pages</a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown_s0" class="dropdown-content">
                         <li><a href="get-started.html">Get started</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="details.html">Post details</a></li>
-                        <li><a href="details-2.html">Post details 2</a></li>
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="messages.html">Messages</a></li>
-                        <li><a href="requests.html">Requests</a></li>
-                        <li><a href="read-later.html">Read-Later</a></li>
-                        <li><a href="notifications.html">Notifications</a></li>
-                        <li><a href="block-list.html">Block-list</a></li>
-                        <li><a href="photos.html">Photos</a></li>
-                        <li><a href="photos-2.html">Photos v2</a></li>
-                        <li><a href="video.html">Videos</a></li>
-                        <li><a href="block-list.html">Error (404)</a></li>
+                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="details.php">Post details</a></li>
+                        <li><a href="details-2.php">Post details 2</a></li>
+                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="messages.php">Messages</a></li>
+                        <li><a href="requests.php">Requests</a></li>
+                        <li><a href="read-later.php">Read-Later</a></li>
+                        <li><a href="notifications.php">Notifications</a></li>
+                        <li><a href="block-list.php">Block-list</a></li>
+                        <li><a href="photos.php">Photos</a></li>
+                        <li><a href="photos-2.php">Photos v2</a></li>
+                        <li><a href="video.php">Videos</a></li>
+                        <li><a href="block-list.php">Error (404)</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Shortcodes</a></li>
@@ -447,7 +447,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="requests.html" class="waves-effect chack_all_btn">Check All Follow Requests</a>
+                        <li><a href="requests.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
                 </li>
@@ -525,7 +525,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="messages.html" class="waves-effect chack_all_btn">Check All Messages</a></li>
+                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Messages</a></li>
                     </ul>
                 </li>
                 <!-- Notifications -->
@@ -602,7 +602,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li><a href="notifications.html" class="waves-effect chack_all_btn">Check All Notifications</a>
+                        <li><a href="notifications.php" class="waves-effect chack_all_btn">Check All Notifications</a>
                         </li>
                     </ul>
                 </li>
@@ -611,8 +611,8 @@
                                 src="images/profile-pic.png" alt="" class="circle p_2"></a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown_s4" class="dropdown-content">
-                        <li><a href="profile.html"><i class="ion-person"></i>Mon profile</a></li>
-                        <li><a href="read-later.html"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
+                        <li><a href="profile.php"><i class="ion-person"></i>Mon profile</a></li>
+                        <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
                         </li>
                         <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li>
