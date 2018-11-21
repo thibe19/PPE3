@@ -255,7 +255,7 @@ function dec_enc($action, $string) {
 
               //ETAPE ADRESSE
               if (isset($_POST['E1'])) {
-                $_SESSION['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+                $_SESSION['pass'] = $_POST['pass'];
                 $_SESSION['mail'] = $_POST['email'];
                 $_SESSION['login'] = $_POST['login'];
                 ?>

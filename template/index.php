@@ -3,6 +3,11 @@
  * 14/11/18
  * v0.0.2
  */
+
+if (isset($_GET['logout'])){
+    setcookie('login','',time()-3600);
+    setcookie('mdp','',time()-3600);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -365,7 +370,7 @@
                         <li><a href="./setting.php"><i class="ion-gear-b"></i>Settings</a></li>
                         <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
                         <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>
-                        <li><a href="#"><i class="ion-power"></i>Log out</a></li>
+                        <li><a onclick="window.location='./?logout=1'"><i class="ion-power"></i>Log out</a></li>
                     </ul>
                 </li>
             </ul>

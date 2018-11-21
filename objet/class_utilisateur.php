@@ -28,7 +28,7 @@ class Utilisateur
         $this->id_user = $id;
         $this->nom_user = $nom;
         $this->login_user = $login;
-        $this->mdp_user = $mdp;
+        $this->mdp_user = password_hash($mdp,PASSWORD_DEFAULT);
         $this->email_user = $email;
         $this->num_tel_user = $numt;
         $this->num_addr = $this->replacebr($numa);
