@@ -1,8 +1,7 @@
-<?php require('../ToolBox/bdd.inc.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:13 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:14 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,16 +17,13 @@
     <link rel="stylesheet" href="vendors/tooltip/balloon.min.css">
     <!-- Icon CSS-->
     <link rel="stylesheet" href="vendors/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link href="../../../../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel="stylesheet">
     <!-- Calendar CSS-->
     <link rel="stylesheet" href="vendors/calendar/dcalendar.picker.css">
 
     <!--Theme Styles CSS-->
 	<link rel="stylesheet" href="css/style.css" media="all" />
-
-
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,353 +39,224 @@
     ?>
     <!-- End  Header_Area -->
 
-    <!-- Tranding-select and banner Area -->
-    <div class="banner_area banner_2">
-        <img src="images/banner-2.jpg" alt="" class="banner_img">
-        <div class="media profile_picture">
-            <a href="profile.html"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
-            <div class="media_body">
-                <a href="profile.html">Denzel Washington</a>
-                <h6>Dhaka, Bangladesh</h6>
-            </div>
-        </div>
-    </div>
-    <section class="author_profile">
-        <div class="row author_profile_row">
-            <div class="col l4 m6">
-                <ul class="profile_menu">
-                    <li><a href="profile.html">Activiter</a></li>
-                    <li><a href="about.php">A propos</a></li>
-                    <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
-                        <!-- Dropdown Structure -->
-                        <ul id="dro_pm" class="dropdown-content">
-                            <li><a href="#">Popular Post</a></li>
-                            <li><a href="#">Save Post</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="col l4 m6">
-                <ul class="post_follow">
-                    <li>Posts <b>102</b></li>
-                    <li>Followers <b>389</b></li>
-                    <li>Following <b>51</b></li>
-                </ul>
-            </div>
-            <div class="col l4 m6">
-                <ul class="follow_messages">
-                    <li><a href="#" class="waves-effect">Follow</a></li>
-                    <li><a href="#" class="waves-effect">Messages</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- End Tranding Area -->
-
     <!-- Min Container area -->
-    <section class="min_container profile_pages">
+    <section class="min_container min_container_2">
         <div class="section_row">
+            <div class="middle_section col">
+                <!-- Post -->
+                <div class="post post_details">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-7.jpg" alt="">
+                        </a>
+                        <div class="post_heding_aea">
+                            <a href="#" class="post_heding">Why Is It I Can Never Think Of Anything Good To Make For Supper</a>
+                            <h4 class="by_author"><img src="images/author-s-1.jpg" alt="" class="circle"><a href="#">Masum Rana</a>5 minutes ago</h4>
+                        </div>
+                        <div class="socail_share_area row">
+                           <ul class="socail_share">
+                               <li class="share_count">2.3K</li>
+                               <li><a href="#" class="waves-effect"><i class="fa fa-facebook-square"></i></a></li>
+                               <li><a href="#" class="waves-effect twitter"><i class="fa fa-twitter"></i></a></li>
+                               <li><a href="#" class="plus_round"><i class="ion-plus-round"></i></a></li>
+                           </ul>
+                           <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                           <p>So why are they turning to their local markets more and more? In a nutshell they want fresh, healthy produce with great flavor. </p>
+                        </div>
+                        <div class="post_c_img">
+                           <img src="images/post-details-3.jpg" alt="">
+                           <h6>colorful flower from the south</h6>
+                        </div>
+                        <div class="socail_share_area">
+                            <p class="p0">Not so many years ago businesses used to grunt at using illustrations in their marketing materials. But today, the use and influence of illustrations is growing right along. </p>
+                        </div>
+                        <div class="post_c_img post_c_2">
+                           <img src="images/post-details-4.jpg" alt="">
+                           <h6>colorful flower from the south</h6>
+                        </div>
+                        <div class="post_c_img">
+                           <img src="images/post-details-5.jpg" alt="">
+                           <h6>colorful flower from the south</h6>
+                        </div>
+                        <div class="post_c_img">
+                           <img src="images/post-details-6.jpg" alt="">
+                           <h6>colorful flower from the south</h6>
+                        </div>
+                        <div class="socail_share_area">
+                            <p class="p0">How many free autoresponders have you tried? Really how many? And how many emails did you get through using them? How do you know? How many people opened your followup message?</p>
+                            <p>My point here is that if you have no clue for the answers above you probably are not operating a followup campaign successfully. </p>
+                            <ul class="some_people">
+                                <li><b>1.</b>Some people find it hard to find the right perfume.</li>
+                                <li><b>2.</b>This may smell good when this is </li>
+                                <li><b>3.</b>Those who are tired of this problem can stop looking and </li>
+                                <li><b>4.</b>A lot of people focus on the oils and the other </li>
+                                <li><b>5.</b>People should avoid using materials made of metal or </li>
+                                <li><b>6.</b>Glass stir rods should also be used because this will allow </li>
+                                <li><b>7.</b>Since the mixture has to be stored for two days before transferring</li>
+                            </ul>
+                            <p class="para_bg">How many free autoresponders have you tried? Really how many? And how many emails did you get through using them? How do you know? How many</p>
+                            <p>How many free autoresponders have you tried? Really how many? And how many emails did you get through using them? How do you know? How many people opened your followup message?</p>
+                            <p>My point here is that if you have no clue for the answers above you probably are not operating a followup campaign successfully. </p>
+                        </div>
 
-          <!-- CENTRE PROFIL, CV, MODIFICATION -->
+                        <div class="next_btn_col next_btn_2">
+                           <a href="#" class="next_btn waves-effect">Next Page (10/22)</a>
+                        </div>
+                        <div class="socail_share_area row">
+                           <ul class="socail_share">
+                               <li class="share_count">2.3K</li>
+                               <li><a href="#" class="waves-effect"><i class="fa fa-facebook-square"></i></a></li>
+                               <li><a href="#" class="waves-effect twitter"><i class="fa fa-twitter"></i></a></li>
+                               <li><a href="#" class="plus_round"><i class="ion-plus-round"></i></a></li>
+                           </ul>
+                        </div>
+                   </div>
 
-          <?php
-          $pren = "Yann THER";
-          $skill = "Développeur Web et Application";
-          $birth = "26 Novembre 1999";
-          //
-          $desc = "In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.";
-          //
-          $domaine = "Graphic Designer";
-          $date = "2010 - 2012";
-          $place = "Graphicriver at Sydney";
-          $descs = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour which don't look even slightly believable.";
+                    <div class="like_comment_area p0">
+                        <div class="col s12 updown_btn updown_btn_2">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
 
-           ?>
-
-          <div class="middle_section col">
-              <div class="post profile_post">
-                <div class="post_content">
-
-              <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout'])) { ?>
-
-              <form action="about.php" method="post">
-
-
-              <button type="submit" id="updateabout" value="1" name="updateabout"><i class="fas fa-pen"></i></button>
-
-
-              <br><br>
-
-
-                  <!-- A PROPOS -->
-
-                  <h5>A propos</h5>
-                  <table>
-                    <tr>
-                      <td width="22%"><p>Prénom</p></td>
-                      <td width="5%"> <p> : </p> </td>
-                      <td> <p><?php echo $pren; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Compétances</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Date de naissance</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $birth; ?></p> </td>
-                    </tr>
-                  </table>
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- DESCRIPTION -->
-
-                  <h5>Description</h5>
-                  <p><?php echo $desc; ?></p>
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- EXPERIENCE -->
-
-                  <h5>Experience</h5>
-                  <br>
-                  <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i> </h5>
-
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-                    <br>
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-                    <br>
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-
-                  <br>
-                  <hr>
-                  <br>
-                  <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i> </h5>
-
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-               <br>
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-               <br>
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- CONTACT -->
-
-                  <h5>Contact</h5>
-                  <table>
-                    <tr>
-                      <td width="14%"><p>Téléphone</p></td>
-                      <td width="5%"> <p> : </p> </td>
-                      <td> <p><?php echo $pren; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>E-mail</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Localisation</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                  </table>
-                  </form>
-                <?php }
-                      else {
-
-                      ////////// MODIFICATION DU ABOUT
-                        ?>
-
-                        <h3 >Modification</h3>
-                        <h5>A propos</h5>
-                        <table>
-                          <tr>
-                            <td width="22%"><p>Prénom</p></td>
-                            <td width="5%"> <p> : </p> </td>
-                            <td> <p> <input type="text" name="surname_about" value="<?php echo $pren; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Compétances</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="skill_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Date de naissance</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="date" name="birth_about" value="<?php echo $birth; ?>"> </p> </td>
-                          </tr>
-                        </table>
-                        <br>
-                        <hr>
-                        <br>
-
-                        <!-- DESCRIPTION -->
-
-                        <h5>Description</h5>
-                        <p> <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $desc; ?></textarea> </p>
-                        <br>
-                        <hr>
-                        <br>
-
-                        <!-- EXPERIENCE -->
-
-                        <h5>Experience</h5>
-                        <br>
-                        <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i> </h5>
-
-                             <p>     Domaine : <input type="text" name="domaine_about_s" value="<?php echo $domaine; ?>">
-                                     Date :
-                                     <table>
-                                       <tr>
-                                         <td>Début</td>
-                                         <td>Fin</td>
-                                       </tr>
-                                       <tr>
-                                         <td><input type="date" name="date_about_debut_s" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                         <td><input type="date" name="date_about_fin_s" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                       </tr>
-                                     </table>
-                                     Place : <input type="text" name="place_about_s" value="<?php echo $place; ?>">  </p>
-                             <p>     Description : <textarea name="desc_about_s" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
-                             <button type="submit" id="cancelabout" value="1" name="delabout"><i class="fas fa-trash-alt"></i></button>
-
-
-                             <div style="display:none" id="id2">
-                               <form action="validtempo.php" method="post">
-                                 <p>     Domaine : <input type="text" name="domaine_about_sn" value="" placeholder="Exemple : Développeur">
-                                         Date :
-                                         <table>
-                                           <tr>
-                                             <td>Début</td>
-                                             <td>Fin</td>
-                                           </tr>
-                                           <tr>
-                                             <td><input type="date" name="date_about_debut_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                             <td><input type="date" name="date_about_fin_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                           </tr>
-                                         </table>
-                                         Place : <input type="text" name="place_about_sn" value="" placeholder="Exemple : Paris">  </p>
-                                 <p>     Description : <textarea name="desc_about_sn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
-                                 <button type="submit" id="updateabout" value="1" name="valstabout"><i class="fas fa-check"></i>  </button>
-                               </form>
-                             </div>
-
-                             <br><br>
-
-                             <button type="submit" onclick="document.getElementById('id2').style.display = 'block'" id="updateabout" value="1" name="addsabout"><i class="fas fa-plus"></i></button>
-
-
-                        <br>
-                        <hr>
-                        <br>
-                        <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i> </h5>
-
-                              <p>     Domaine : <input type="text" name="domaine_about_t" value="<?php echo $domaine; ?>">
-                                      Date :
-                                      <table>
-                                        <tr>
-                                          <td>Début</td>
-                                          <td>Fin</td>
-                                        </tr>
-                                        <tr>
-                                          <td><input type="date" name="date_about_debut_t" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                          <td><input type="date" name="date_about_fin_t" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                        </tr>
-                                      </table>
-                                      Place : <input type="text" name="place_about_t" value="<?php echo $place; ?>">  </p>
-                              <p>     Description : <textarea name="desc_about_t" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
-                              <button type="submit" id="cancelabout" value="1" name="deltabout"><i class="fas fa-trash-alt"></i></i></button>
-
-
-                              <!-- Ajout d'un pour nouveau travail fait -->
-                              <div style="display:none" id="id1">
-                                  <p>     Domaine : <input type="text" name="domaine_about_tn" value="" placeholder="Exemple : Développeur">
-                                          Date :
-                                          <table>
-                                            <tr>
-                                              <td>Début</td>
-                                              <td>Fin</td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="date" name="date_about_debut_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                              <td><input type="date" name="date_about_fin_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                            </tr>
-                                          </table>
-                                          Entreprise : <input type="text" name="place_about_tn" value="" placeholder="Exemple : InterMarché">  </p>
-                                  <p>     Description : <textarea name="desc_about_tn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
-                                  <button type="submit" id="updateabout" value="1" name="valtrabout"><i class="fas fa-check"></i></button>
-                              </div>
-
-                              <br><br>
-
-                              <button type="submit" onclick="document.getElementById('id1').style.display = 'block'" id="updateabout" value="1" name="addtabout"><i class="fas fa-plus"></i></button>
-
-                        <hr>
-                        <br>
-
-                        <!-- CONTACT -->
-
-                        <h5>Contact</h5>
-                        <table>
-                          <tr>
-                            <td width="14%"><p>Téléphone</p></td>
-                            <td width="5%"> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>E-mail</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Adresse</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td><button type="submit" id="updateabout" value="1" name="validabout"><i class="fas fa-check"></i></button></td>
-                            <form action="about.php" method="post">
-                                <td><button type="submit" id="cancelabout" value="1" name="cancelabout"><i class="fas fa-ban"></i></button></td>
-                            </form>
-                          </tr>
-                        </table>
-
-                        <?php
-                      }?>
+                <!-- Sponsored Stories -->
+                <div class="sponsored_stories row">
+                    <h2 class="sponsored_tittle sponsored_t_2">Sponsored Stories <span>Taboola ads</span></h2>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-1.jpg" alt="">
+                        <a href="#">Family Safari Vacation To The Home Of The Gods</a>
+                        <h6>viralvideo</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-2.jpg" alt="">
+                        <a href="#">How To Achieve Victory In A Cooking Contest</a>
+                        <h6>ozzy man reviews</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-3.jpg" alt="">
+                        <a href="#">Southern Cooking Brings Soul To Food</a>
+                        <h6>facebook</h6>
+                    </div>
                 </div>
-              </div>
-          </div>
-
-
-
+                <div class="sponsored_stories row">
+                    <h2 class="sponsored_tittle">Popular On Open List</h2>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-4.jpg" alt="">
+                        <a href="#">From Wetlands To Canals And Dams Amsterdam Is</a>
+                        <h6>5 days ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-5.jpg" alt="">
+                        <a href="#">Mg Shadow Computer Monitoring Software A </a>
+                        <h6>2 hours ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-6.jpg" alt="">
+                        <a href="#">The Skinny On Lcd Monitors Monitors</a>
+                        <h6>3 month ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-2.jpg" alt="">
+                        <a href="#">Online Games How To Play To Win</a>
+                        <h6>4 days ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-7.jpg" alt="">
+                        <a href="#">Are You Ready To Buy A Home Theater Audio</a>
+                        <h6>2 hours ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-8.jpg" alt="">
+                        <a href="#">Computer Forensics Finding Out What The Bad</a>
+                        <h6>6 days ago</h6>
+                    </div>
+                </div>
+                <div class="sponsored_stories row sponsored_end">
+                    <h2 class="sponsored_tittle">Featured Contents</h2>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-6.jpg" alt="">
+                        <a href="#">Como Mantener Tu Salud Mental</a>
+                        <h6>5 days ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-9.jpg" alt="">
+                        <a href="#">Helen Keller A Teller And A Seller</a>
+                        <h6>2 hours ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-10.jpg" alt="">
+                        <a href="#">Do You Think Motivational Thoughts</a>
+                        <h6>3 month ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-11.jpg" alt="">
+                        <a href="#">Hypnosis Quit Smoking Techniques</a>
+                        <h6>4 days ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-12.jpg" alt="">
+                        <a href="#">Dream Interpretation Common Symbols And</a>
+                        <h6>2 hours ago</h6>
+                    </div>
+                    <div class="col m4 s6 sponsored">
+                        <img src="images/sponsored/sponsored-4.jpg" alt="">
+                        <a href="#">Going Wireless With Your Headphones</a>
+                        <h6>6 days ago</h6>
+                    </div>
+                </div>
+                <!-- Post -->
+                <div class="post post_details">
+                    <div class="like_comment_area row">
+                        <div class="col s12 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n count_n_2">14 comments</a>
+                        </div>
+                        <div class="col s12 comment_input_box">
+                            <div class="input-field comment_input">
+                                <input placeholder="Placeholder" type="text" class="validate">
+                                <i class="ion-camera"></i>
+                                <span>Post</span>
+                            </div>
+                        </div>
+                        <div class="col p0 s12">
+                            <div class="media">
+                                <img src="images/comment-a.jpg" alt="" class="circle responsive-img">
+                                <div class="media_body">
+                                    <h4><a href="#">Masum Rana</a>5 minutes ago</h4>
+                                    <p>Care for fresher ingredients? Locally grown items are usually harvested 1 or 2 days before hitting the market making them significantly fresher then traditional store bought ingredients</p>
+                                    <span><a href="#"><i class="ion-ios-arrow-thin-up"></i></a>483<a href="#"><i class="ion-ios-arrow-thin-down"></i></a></span>
+                                    <a href="#" class="replay_btn">Reply</a>
+                                    <div class="media">
+                                        <img src="images/comment-a-2.jpg" alt="" class="circle responsive-img">
+                                        <div class="media_body">
+                                            <h4><a href="#">Emran Khan</a>5 minutes ago</h4>
+                                            <p>Locally grown items are usually harvested 1 or 2 days </p>
+                                            <span><a href="#"><i class="ion-ios-arrow-thin-up"></i></a>483<a href="#"><i class="ion-ios-arrow-thin-down"></i></a></span>
+                                            <a href="#" class="replay_btn">Reply</a>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="view_mor_r">View more replies...</a>
+                                </div>
+                            </div>
+                            <a href="#" class="load_more">Load more comments</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+            </div>
             <!-- left side bar -->
             <div class="col">
                 <div class="left_side_bar">
                     <div class="categories">
-                        <h3 class="categories_tittle me_tittle">About Me</h3>
-                        <p>I focus a lot on helping the first time or inexperienced traveler head out prepared and confident in themselves. Starting out as a old traveler can be intimidating. <br> How do you jump into the gigantic travel fray and survive? How can you learn to love delays and long lines?</p>
+                        <h3 class="categories_tittle">Post Categories</h3>
+                        <ul class="categories_icon">
+                            <li><a class="tooltip" data-balloon="Rate Post" data-balloon-pos="up"><i class="ion-ios-star"></i></a></li>
+                            <li><a href="#" class="tooltip" data-balloon="Time Post" data-balloon-pos="up"><i class="ion-android-time"></i></a></li>
+                            <li><a href="#" class="tooltip" data-balloon="Music Post" data-balloon-pos="up"><img src="images/icons/sound.png" alt=""></a></li>
+                            <li><a href="#" class="tooltip" data-balloon="Images Post" data-balloon-pos="up"><i class="ion-android-image"></i></a></li>
+                            <li><a href="#" class="tooltip" data-balloon="chart Post" data-balloon-pos="up"><i class="large material-icons">insert_chart</i></a></li>
+                        </ul>
                     </div>
                     <div class="interests">
                         <h3 class="categories_tittle">Your Interests <span>Edit</span></h3>
@@ -454,8 +321,11 @@
             <!-- Right side bar -->
             <div class="right_side_bar col">
                 <div class="right_sidebar_iner">
-                    <div class="popular_posts popular_fast">
-                        <h3 class="categories_tittle">My Submisstion</h3>
+                    <a href="#">
+                        <img src="images/advertis-2.jpg" alt="" class="responsive-img">
+                    </a>
+                    <div class="popular_posts">
+                        <h3 class="categories_tittle">Popular Posts</h3>
                         <div class="row valign-wrapper popular_item">
                             <div class="col s3 p_img">
                                <a href="#">
@@ -463,7 +333,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">You submitted a new photo  to <span>How To Talk With Girls</span></a>
+                               <a href="#">Poster can be one of the effective marketing and advertising materials.</a>
                                 <span class="black_text">2 days ago</span>
                             </div>
                         </div>
@@ -474,7 +344,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">You contributed a new paragraph to <span>10 Ways To Make Easy Suicide</span></a>
+                               <a href="#">Color is so powerful that it can persuade, motivate, inspire and touch</a>
                                 <span class="black_text">3 days ago</span>
                             </div>
                         </div>
@@ -485,7 +355,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">You submitted 10 photos  to <span>Best Photos of The Tech Giants</span></a>
+                               <a href="#">What makes one logo better than another?</a>
                                 <span class="black_text">4 days ago</span>
                             </div>
                         </div>
@@ -496,7 +366,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">You submitted a new photo  to <span>How To Talk With Girls</span></a>
+                               <a href="#">Outdoor advertising is a low budget and effective way of advertising a </a>
                                 <span class="black_text">5 days ago</span>
                             </div>
                         </div>
@@ -507,22 +377,22 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">You contributed a new paragraph to <span>10 Ways To Make Easy Suicide</span></a>
+                               <a href="#">Famous is as famous does and the famous get known through publicity. </a>
                                 <span class="black_text">10 days ago</span>
                             </div>
                         </div>
                     </div>
                     <div class="popular_gallery row">
                         <h3 class="categories_tittle">Images</h3>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-1.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-2.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-3.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-4.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-5.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-6.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-7.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-8.jpg" alt=""></a></div>
-                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-9.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-10.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-11.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-12.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-13.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-14.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-15.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-16.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-17.jpg" alt=""></a></div>
+                        <div class="col s4 p_img"><a href="#"><img src="images/gallery/gallry-s-18.jpg" alt=""></a></div>
                     </div>
                     <div class="trending_area">
                         <h3 class="categories_tittle">Trending</h3>
@@ -869,5 +739,5 @@
     <script src="js/theme.js"></script>
 </body>
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:22 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:09 GMT -->
 </html>

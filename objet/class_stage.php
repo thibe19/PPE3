@@ -130,7 +130,7 @@ class Stage
 /////////////////////// insert inscription ////////////////////////////////////////
     Public function nouveau_stage($id_user, $dsn, $ddsn, $dfsn, $psn, $descsn, $conn)
     {
-      print $requet = "INSERT INTO entreprise
+      $requet = "INSERT INTO 
                  VALUES ('', '$psn', '', '');";
       //$sql = $conn->Query($requet)or die('Erreur dans la requete');
 
