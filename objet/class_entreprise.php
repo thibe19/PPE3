@@ -18,8 +18,8 @@ class Entreprise extends Utilisateur
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
                          $ville = "", $photo = "", $nomresp = "", $code = "", $site = "")
     {
-        Utilisateur::__construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-            $ville = "", $photo = "");
+      Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
+          $ville,$photo);
         $this->nom_resp = $nomresp;
         $this->code_ape = $code;
         $this->site_web = $site;
@@ -89,7 +89,7 @@ class Entreprise extends Utilisateur
     {
         $this->site_web = $site_web;
     }
-    
+
     /*
      * AJOUTER UNE ENTREPRISE
      */
@@ -112,24 +112,24 @@ class Entreprise extends Utilisateur
         $res_getid = $res_getid->fetchAll();
         if($res_getid){
             $ideleve = $res_getid[0]['id_user'];
-            print $SQL = "INSERT INTO Eleve
+            $SQL = "INSERT INTO Entreprise
                     VALUES('$ideleve','$nomresp','$ape','$siteweb')";
             $res = $conn->Query($SQL)or die('Erreur insertion entreprise');
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
     ////////////////////////////// Update Entreprise /////////////////////////////
     Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn)
     {

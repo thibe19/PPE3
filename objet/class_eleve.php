@@ -99,8 +99,8 @@ class Eleve extends Utilisateur
         if($res_getid){
             $ideleve = $res_getid[0]['id_user'];
             $SQL = "INSERT INTO Eleve
-                    VALUES('$ideleve','$prenom','$choixpos')";
-            $res = $conn->Query($SQL)or die('Erreur insertion eleve');
+                    VALUES('$ideleve','$prenom','$choixpos','')";
+            $res = $conn->Query($SQL)or die('Erreur inscription eleve');
         }
     }
 

@@ -6,11 +6,9 @@
  *
  *  v0.0.4
  */
-
 //Connection a la base de donnée
 require('../ToolBox/bdd.inc.php');
 session_start();
-
 /*// unset cookies
 if (isset($_SERVER['HTTP_COOKIE'])) {
     $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
@@ -108,7 +106,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 <img src="images/img-01.png" alt="IMG">
             </div>
 
-            <form method="post" action="./" class="login100-form validate-form">
+            <form method="post" action="./" class="login100-form validate-form" id="form">
 					<span class="login100-form-title">
 						Member Login
 					</span>
@@ -156,9 +154,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 						<span class="txt1">
 							Forgot
 						</span>
-                    <a class="txt2" href="#">
-                        Username / Password?
-                    </a>
+                    <a class="txt2 button_reset_id" onclick="window.location='./?loginres=1'">Username</a><a style="color: rgb(230,230,230)"> / </a><a onclick="window.location='./?mdpres=1'" class="txt2 button_reset_id" href="#">Password</a>
                 </div>
 
                 <div class="text-center p-t-136">

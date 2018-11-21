@@ -26,7 +26,11 @@
   font-family: Montserrat-Bold;
   src: url('../fonts/montserrat/Montserrat-Bold.ttf');
 }
-
+/*--------------------- RESET BUTTON ----------------*/
+.button_reset_id{
+  color: rgb(230,230,230);
+  pointer: cursor;
+}
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 

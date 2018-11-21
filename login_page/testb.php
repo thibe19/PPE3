@@ -544,7 +544,7 @@ function dec_enc($action, $string) {
                  <!-- <form action="#" method="post"> -->
                  <div class="container-login100-form-btn">
                    <!-- Bouton accer prochaine étape  -->
-                   <button name="C1"
+                   <button name="C7"
                    value="1"
                    class="login100-form-btn">
                    Utiliser
@@ -634,7 +634,6 @@ function dec_enc($action, $string) {
 
        if (isset($_POST['E6'])) {
          /////////// LES sessions
-         echo "eleve finit";
          $mail = $_SESSION['mail'];
          $mdp = $_SESSION['pass'];
          $login = $_SESSION['login'];
@@ -695,26 +694,101 @@ function dec_enc($action, $string) {
 
 
        if (isset($_POST['C6'])) {
-         echo "entreprise finit";
-         $mail = $_SESSION['mail'];
-         $mdp = $_SESSION['pass'];
-         $login = $_SESSION['login'];
-         $numa = $_SESSION['numa'];
-         $rue = $_SESSION['rue'];
-         $cp = $_SESSION['cp'];
-         $ville = $_SESSION['ville'];
-         $surname = $_SESSION['surname'];
-         $numt = $_SESSION['numt'];
-         $photo = $_SESSION['photo'];
-         $nomresp = $_POST['nameresp'];
-         $ape = $_POST['APE'];
-         $website = $_POST['website'];
+          $mail = $_SESSION['mail'];
+          $mdp = $_SESSION['pass'];
+          $login = $_SESSION['login'];
+          $numa = $_SESSION['numa'];
+          $rue = $_SESSION['rue'];
+          $cp = $_SESSION['cp'];
+          $ville = $_SESSION['ville'];
+          $surname = $_SESSION['surname'];
+          $numt = $_SESSION['numt'];
+          $photo = $_SESSION['photo'];
+
+          $nomresp = $_POST['nameresp'];
+          $ape = $_POST['APE'];
+          $website = $_POST['website'];
 
          $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,$nomresp,$ape,$website);
          $uneentreprise->inscriptionent($uneentreprise,$conn);
+         ?>
+         <div class="limiter">
+           <div class="container-login100">
+             <div class="wrap-login100">
+               <div class="login100-pic js-tilt"
+               data-tilt>
+               <img src="images/img-01.png"
+               alt="IMG">
+             </div>
+
+             <form class="login100-form validate-form"
+             method="POST">
+             >
+             <span class="login100-form-title">
+               Inscription
+             </span>
+
+             <p>
+               L'INSCRIPTION EST TERMINÉ VOUS ALLEZ RECEVOIR UN MAIL DE VALIDATION
+                A L'ADRESSE QUE VOUS AVEZ RENSEIGNÉ.</p>
+
+               <!-- <form action="#" method="post"> -->
+               <div class="container-login100-form-btn">
+                 <!-- Bouton accer prochaine étape  -->
+                 <button name="FINENT"
+                 value="1"
+                 class="login100-form-btn">
+                 Finaliser
+               </button>
+             </div><?php
        }
 
 
+
+
+
+
+       //FINALISATION ENTREPRISE
+       if (isset($_POST['FINENT'])) {
+         $mail = "thibaultnesti@gmail.com";
+         $objet = "Activer votre compte : ViaBahuet.";
+         $entete = "From: yannther99@gmail.com";
+
+
+         $login_m = $_SESSION['login'];
+         $mdp_m = $_SESSION['pass'];
+
+         $SQL="SELECT * FROM Utilisateur
+               WHERE login_user='$login_m'
+               AND mdp_user='$mdp_m';";
+         $Req=$conn->Query($SQL);
+         $result=$Req->fetch();
+
+         $id = $result['id_user'];
+
+
+         $loginc = dec_enc('encrypt',"$login_m");
+         $idc = dec_enc('encrypt',"$id");
+
+         $text = "Bienvenue sur ViaBahuet,\n";
+         $text = $text."Pour activer votre compte, veuillez cliquer sur le lien ci dessous.\n";
+         $text = $text."http://localhost/BTS_SIO/2eme_annee/SLAM_Theil/PPE3/login_page/validation.php?log=".urlencode($loginc)."&id=".urlencode($idc)."\n\n\n>";
+         $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+         mail($mail, $objet, $text, $entete);
+       }
+
+
+
+
+
+
+
+
+
+
+
+       //cc
        if (isset($_POST['C7'])) {
          /////////////////// LES SESSIONS
 
