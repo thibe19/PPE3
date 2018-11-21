@@ -650,7 +650,7 @@ function dec_enc($action, $string) {
          $choixpos = $_POST['stayp'];
 
 
-         $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,$prenom,$choixpos);
+         $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$choixpos);
          $uneleve->inscriptioneleve($uneleve,$conn);
 
          ?>
@@ -710,7 +710,7 @@ function dec_enc($action, $string) {
           $ape = $_POST['APE'];
           $website = $_POST['website'];
 
-         $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,$nomresp,$ape,$website);
+         $uneentreprise = new Entreprise('',$surname,$login,$mdp,$mail,$numt,$numa,$rue,$cp,$ville,$photo,'',$nomresp,$ape,$website);
          $uneentreprise->inscriptionent($uneentreprise,$conn);
          ?>
          <div class="limiter">

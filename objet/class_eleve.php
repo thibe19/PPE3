@@ -12,14 +12,17 @@ class Eleve extends Utilisateur
 {
 
     Private $prenom_eleve;
+    Private $date;
     Private $choix_position;
 
+
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                         $ville = "", $photo = "",$prenom = "", $choix = "")
+                         $ville = "", $photo = "", $desc_user = "", $prenom = "", $date = "", $choix = "")
     {
         Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
-            $ville,$photo);
+            $ville,$photo, $desc_user);
         $this->prenom_eleve = $prenom;
+        $this->date = $date;
         $this->choix_position = $choix;
     }
 
@@ -104,4 +107,7 @@ class Eleve extends Utilisateur
         }
     }
 
+    public function modifier_eleve($objet,$conn){
+        $objet->modifier_utilisateur($objet,$conn);
+    }
 }//fin class

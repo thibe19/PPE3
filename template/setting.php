@@ -1080,19 +1080,16 @@ if (isset($_POST['modifier'])) {
   //eleve
   $prenom = $_POST['prenom'];
   $date = $_POST['dateU'];
-  //$choixpos = $_POST['stayp'];
+  $choixpos = '1';
 
 
 
 
   if (($mdpA or $mdpN) == '' ) {
 
-    $usereleve = new Utilisateur($id, $nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
-    $usereleve->modifier_utilisateur($usereleve, $conn);
-
-
-    $uneleve = new Eleve($id, $prenom, $date, $choixpos);
+    $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
     $uneleve->modifier_eleve($uneleve,$conn);
+    die();
 
   } else {
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisateur/Eleve/Entreprise   date modif : 15/11/2018  vertion:0.0.5
+ * Utilisateur/Eleve/Entreprise   date modif : 21/11/2018  vertion:0.0.5
  */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -288,26 +288,27 @@ class Utilisateur
 
 ///////////////////////////////////// upload ///////////////////////////////////////
 
-/*Public function modifier_utilisateur( ?,$conn){
-  $id = $this->getIdUser(?);
-  $nom = $this->getNomUser(?);
-  $login = $this->getLoginUser(?);
-  $mdp = $this->getMdpUser(?);
-  $email = $this->getEmailUser(?);
-  $tel = $this->getNumTelUser(?);
-  $Nrue = $this->getNumAddr(?);
-  $rue = $this->getRueAddr(?);
-  $cp = $this->getCPAddr(?);
-  $ville = $this->getVilleAddr(?);
+Public function modifier_utilisateur( $objet,$conn){
+  $id = $this->getIdUser($objet);
+  $nom = $this->getNomUser($objet);
+  $login = $this->getLoginUser($objet);
+  $mdp = $this->getMdpUser($objet);
+  $email = $this->getEmailUser($objet);
+  $tel = $this->getNumTelUser($objet);
+  $Nrue = $this->getNumAddr($objet);
+  $rue = $this->getRueAddr($objet);
+  $cp = $this->getCPAddr($objet);
+  $ville = $this->getVilleAddr($objet);
 
-  $photo = $this->getPhotoUser(?);
-  $desc = $this->getDescUser();
+  $photo = $this->getPhotoUser($objet);
+  $desc = $this->getDescUser($objet);
 
-  $sql="UPDATE Utilisateur
+  print $sql="UPDATE Utilisateur
         SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_ser='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
         WHERE id_user='$id' ";
+  $res = $conn->Query($sql)or die('Erreur modification user');
 
-}*/
+}
 
 
 }// fin class
