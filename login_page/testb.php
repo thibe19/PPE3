@@ -742,6 +742,37 @@ function dec_enc($action, $string) {
                  Finaliser
                </button>
              </div><?php
+               $mail = "yannther99@gmail.com";
+               $objet = "Activer votre compte : ViaBahuet.";
+               $entete = "From: yannther99@gmail.com";
+
+
+
+
+
+
+               $login_m = $login;
+               $mdp_m = $mdp;
+
+               $SQL="SELECT * FROM utilisateur
+                     WHERE login_user='$login_m'
+                     AND mdp_user='$mdp_m';";
+               $Req=$conn->Query($SQL);
+               $result=$Req->fetch();
+
+               $id = $result['id_user'];
+
+
+               $loginc = dec_enc('encrypt',"$login_m");
+               $idc = dec_enc('encrypt',"$id");
+
+               $text = "Bienvenue sur ViaBahuet,\n";
+               $text = $text."Pour activer votre compte, veuillez cliquer sur le lien ci dessous.\n";
+               $text = $text."http://localhost/PPE3/login_page/validation.php?log=".urlencode($loginc)."&id=".urlencode($idc)."\n\n\n>";
+               $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+               mail($mail, $objet, $text, $entete);
+
        }
 
 
