@@ -19,9 +19,10 @@ class Utilisateur
     Private $CP_addr;
     Private $ville_addr;
     Private $photo_user;
+    Private $desc_user;
 
     Public function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                                $ville = "", $photo = "")
+                                $ville = "", $photo = "", $desc_user="")
     {  //Constructeur
 
         $this->id_user = $id;
@@ -35,6 +36,7 @@ class Utilisateur
         $this->CP_addr = $this->replacebr($CP);
         $this->ville_addr = $this->replacebr($ville);
         $this->photo_user = $photo;
+        $this->desc_user = $desc_user;
 
     }
 
@@ -55,7 +57,7 @@ class Utilisateur
         $data = $data.$this->CP_addr;
         $data = $data.$this->ville_addr;
         $data = $data.$this->photo_user;
-
+        $date = $date.$this->desc_user;
         return $data;
     }
     /**
@@ -144,6 +146,11 @@ class Utilisateur
     public function getPhotoUser()
     {
         return $this->photo_user;
+    }
+
+    public function getDescUser()
+    {
+      return $this->desc_user;
     }
 
     /////////////////// LES SETS /////////////////////
@@ -238,6 +245,10 @@ class Utilisateur
         $this->photo_user = $photo_user;
     }
 
+    public function setDescUser($desc_user)
+    {
+      $this->desc_user = $desc_user;
+    }
 
 /////////////////////// insert inscription ////////////////////////////////////////
     Public function inscription($objet, $conn)
@@ -274,6 +285,30 @@ class Utilisateur
         $var = preg_replace("#\n|\t|\r|<br>#","",$var);
         return $var;
     }
+
+///////////////////////////////////// upload ///////////////////////////////////////
+
+/*Public function modifier_utilisateur( ?,$conn){
+  $id = $this->getIdUser(?);
+  $nom = $this->getNomUser(?);
+  $login = $this->getLoginUser(?);
+  $mdp = $this->getMdpUser(?);
+  $email = $this->getEmailUser(?);
+  $tel = $this->getNumTelUser(?);
+  $Nrue = $this->getNumAddr(?);
+  $rue = $this->getRueAddr(?);
+  $cp = $this->getCPAddr(?);
+  $ville = $this->getVilleAddr(?);
+
+  $photo = $this->getPhotoUser(?);
+  $desc = $this->getDescUser();
+
+  $sql="UPDATE Utilisateur
+        SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_ser='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
+        WHERE id_user='$id' ";
+
+}*/
+
 
 }// fin class
 ?>
