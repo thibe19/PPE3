@@ -3,10 +3,8 @@
  * 14/11/18
  * v0.0.2
  */
-
 if (isset($_GET['logout'])){
-    setcookie('login','',time()-3600);
-    setcookie('mdp','',time()-3600);
+    header('location: ../?logout=1');
 }
 ?>
 <!DOCTYPE html>

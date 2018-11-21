@@ -131,28 +131,20 @@ class Entreprise extends Utilisateur
 
 
     ////////////////////////////// Update Entreprise /////////////////////////////
-    Public function modififier_entreprise($mdp, $mdpc, $nom, $login, $email, $numt, $numa, $rue, $CP, $ville, $photo, $nomresp, $code, $site, $id, $conn)
-    {
-        $requet = "UPDATE Utilisateur
-  						 SET nom_user = '$nom',
-                   login_user = '$login',
-                   mdp_user = '$mdp',
-                   email_user = '$email',
-                   tel_user = '$numt',
-                   num_addr = '$numa',
-                   rue_addr = '$rue',
-                   CP_addr = '$CP',
-                   ville_addr = '$ville',
-                   photo_user = '$photo',
-               WHERE id_user = '$id';";
-        $req = $conn->Query($requet);
+    public function updateentreprise($objet,$conn){
+        $objet->modifier_utilisateur($objet,$conn);
+        $nomresp = $this->nom_resp;
+        $ape = $this->code_ape;
+        $siteweb = $this->site_web;
+        $id_user = $objet->getIdUser();
 
-        $requet = "UPDATE Entreprise
-  						 SET nom_resp = '$nomresp',
-                   code_APE = '$code',
-                   site_web = '$site'
-               WHERE id_user = '$id';";
-        $req = $conn->Query($requet);
+        $SQL = "UPDATE Entreprise
+               SET nom_resp = '$nomresp',
+               code_APE = '$ape',
+               site_web = '$siteweb'
+               WHERE id_user='$id_user'";
+        $res = $conn->Query($SQL)or die('Erreur insertion entreprise');
+
     }
 
 }// class
