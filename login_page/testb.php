@@ -425,11 +425,6 @@ function dec_enc($action, $string) {
 
 
 
-
-
-
-
-       $ent = "test";
        if (isset($_POST['E5'])) {
            $_SESSION['stay'] = $_POST['stay'];
 
@@ -513,6 +508,12 @@ function dec_enc($action, $string) {
                    <!-- </form> -->
                    <?php
          }
+
+
+
+
+
+         //TEST SI ENTREPRISE EXISTE DEJA.
          if ($_SESSION['stay'] == "entreprise") {
            if ($_SESSION['surname'] == $ent) {
              ?>
@@ -745,38 +746,6 @@ function dec_enc($action, $string) {
 
 
 
-
-
-
-       //FINALISATION ENTREPRISE
-       if (isset($_POST['FINENT'])) {
-         $mail = "thibaultnesti@gmail.com";
-         $objet = "Activer votre compte : ViaBahuet.";
-         $entete = "From: yannther99@gmail.com";
-
-
-         $login_m = $_SESSION['login'];
-         $mdp_m = $_SESSION['pass'];
-
-         $SQL="SELECT * FROM Utilisateur
-               WHERE login_user='$login_m'
-               AND mdp_user='$mdp_m';";
-         $Req=$conn->Query($SQL);
-         $result=$Req->fetch();
-
-         $id = $result['id_user'];
-
-
-         $loginc = dec_enc('encrypt',"$login_m");
-         $idc = dec_enc('encrypt',"$id");
-
-         $text = "Bienvenue sur ViaBahuet,\n";
-         $text = $text."Pour activer votre compte, veuillez cliquer sur le lien ci dessous.\n";
-         $text = $text."http://localhost/BTS_SIO/2eme_annee/SLAM_Theil/PPE3/login_page/validation.php?log=".urlencode($loginc)."&id=".urlencode($idc)."\n\n\n>";
-         $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
-
-         mail($mail, $objet, $text, $entete);
-       }
 
 
 
