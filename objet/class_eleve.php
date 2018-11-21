@@ -1,10 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: thibault
- * Date: 15/11/18
- * Time: 16:17
- * v0.0.1
+ * Date: 21/11/18
+ * Time: 14H
+ * v0.0.3
  */
 
 //////////////////// class Eleve //////////////////////
@@ -38,6 +37,7 @@ class Eleve extends Utilisateur
     function getAllEleve(){
         $data = $this->getAllUser();
         $data = $data.$this->prenom_eleve;
+        $data = $date.$this->date;
         $data = $data.$this->choix_position;
 
         return $data;
@@ -49,6 +49,11 @@ class Eleve extends Utilisateur
     public function getPrenomEleve()
     {
         return $this->prenom_eleve;
+    }
+
+    public function getdateEleve()
+    {
+        return $this->date;
     }
 
     /**
@@ -71,6 +76,14 @@ class Eleve extends Utilisateur
     public function setPrenomEleve($prenom_eleve)
     {
         $this->prenom_eleve = $prenom_eleve;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setdateEleve($date)
+    {
+        $this->date = $date;
     }
 
     /**
@@ -108,6 +121,18 @@ class Eleve extends Utilisateur
     }
 
     public function modifier_eleve($objet,$conn){
+
         $objet->modifier_utilisateur($objet,$conn);
+        $id = $objet->getIdUser();
+        $prenom = $this->getPrenomEleve($objet);
+        $date = $this->getdateEleve($objet);
+        $choixpos = $this->getChoixPosition($objet);
+
+        $sql="UPDATE Eleve
+              SET prenom_eleve='$prenom', date_naiss ='$date', choix_position='$choixpos'
+              WHERE id_user='$id' ";
+        $res = $conn->Query($sql)or die('Erreur modification user');
+
+
     }
 }//fin class

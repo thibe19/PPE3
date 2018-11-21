@@ -9,5 +9,5 @@ require('../objet/classes.php');
 $uneentreprise= new Entreprise("", $psn, "", "", "", "", "", "", "",
                      "",  "",  "", "", "");
 $uneentreprise->inscriptionent($uneentreprise,$conn);
-//$unstage->nouveau_stage('1', $dsn, $ddsn, $dfsn, $psn, $descsn, $conn);
+//$unstage->insert_offre_stage("", $descsn, "", $ddsn, "");
  ?>

@@ -1,4 +1,3 @@
-<?php require('../ToolBox/bdd.inc.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,10 +23,6 @@
 
     <!--Theme Styles CSS-->
 	<link rel="stylesheet" href="css/style.css" media="all" />
-
-
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -89,301 +84,285 @@
     <!-- Min Container area -->
     <section class="min_container profile_pages">
         <div class="section_row">
+            <div class="middle_section col">
+               <!-- Post -->
+                <div class="post profile_post">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-8.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Photography</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li><a href="#" class="single_l_1"><img src="images/like-client-1.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a></li>
+                                    <li><a href="#" class="mor_like">+8 more</a></li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!" data-activates="post_dropdown"><i class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="post_heding">Why Is It I Can Never Think Of Anything Good To Make For Supper</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                   </div>
 
-          <!-- CENTRE PROFIL, CV, MODIFICATION -->
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#" class="submit_open_list">Submit Open List</a>
+                </div><!-- End Post -->
+               <!-- Post -->
+                <div class="post">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-2.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle"></div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!" data-activates="post_dropdown_2"><i class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_2" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="post_heding">6 Powerful Tips To Creating Testimonials That Sell Your Products Fast</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                   </div>
 
-          <?php
-          $pren = "Yann THER";
-          $skill = "Développeur Web et Application";
-          $birth = "26 Novembre 1999";
-          //
-          $desc = "In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.";
-          //
-          $domaine = "Graphic Designer";
-          $date = "2010 - 2012";
-          $place = "Graphicriver at Sydney";
-          $descs = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour which don't look even slightly believable.";
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
 
-           ?>
+               <!-- Post -->
+                <div class="post">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-9.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li><a href="#" class="single_l_1"><img src="images/like-client-1.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a></li>
+                                    <li><a href="#" class="mor_like">+8 more</a></li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!" data-activates="post_dropdown_3"><i class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_3" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="post_heding">Choosing The Best Audio Player Software For Your Computer</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                   </div>
 
-          <div class="middle_section col">
-              <div class="post profile_post">
-                <div class="post_content">
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#" class="submit_open_list">Submit Open List</a>
+                </div><!-- End Post -->
+               <!-- Post -->
+                <div class="post">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-10.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle"></div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!" data-activates="post_dropdown_4"><i class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_4" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="post_heding">The Best Way To Fight Poor Health Is To Make Home Cooking Fast And Easy</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                   </div>
 
-              <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout'])) { ?>
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
 
-              <form action="about.php" method="post">
+               <!-- Post -->
+                <div class="post">
+                   <div class="post_content">
+                        <a href="#" class="post_img">
+                            <img src="images/post-5.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li><a href="#" class="single_l_1"><img src="images/like-client-1.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a></li>
+                                    <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a></li>
+                                    <li><a href="#" class="mor_like">+8 more</a></li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!" data-activates="post_dropdown_5"><i class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_5" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="#" class="post_heding">Get Around Easily With A New York Limousine Service</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason. While Americans continue to buy more fast food, they still expect perfect ingredients and they are finding them.</p>
+                   </div>
 
-
-              <button type="submit" id="updateabout" value="1" name="updateabout"><i class="fas fa-pen"></i></button>
-
-
-              <br><br>
-
-
-                  <!-- A PROPOS -->
-
-                  <h5>A propos</h5>
-                  <table>
-                    <tr>
-                      <td width="22%"><p>Prénom</p></td>
-                      <td width="5%"> <p> : </p> </td>
-                      <td> <p><?php echo $pren; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Compétances</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Date de naissance</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $birth; ?></p> </td>
-                    </tr>
-                  </table>
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- DESCRIPTION -->
-
-                  <h5>Description</h5>
-                  <p><?php echo $desc; ?></p>
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- EXPERIENCE -->
-
-                  <h5>Experience</h5>
-                  <br>
-                  <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i> </h5>
-
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-                    <br>
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-                    <br>
-                       <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                       <i> <?php echo $place."<br>"; ?> </i> </p>
-                       <p> <?php echo $descs; ?> </p>
-
-                  <br>
-                  <hr>
-                  <br>
-                  <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i> </h5>
-
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-               <br>
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-               <br>
-                  <p> <b> <?php echo $domaine." ".$date."<br>"; ?> </b>
-                  <i> <?php echo $place."<br>"; ?> </i> </p>
-                  <p> <?php echo $descs; ?> </p>
-
-                  <br>
-                  <hr>
-                  <br>
-
-                  <!-- CONTACT -->
-
-                  <h5>Contact</h5>
-                  <table>
-                    <tr>
-                      <td width="14%"><p>Téléphone</p></td>
-                      <td width="5%"> <p> : </p> </td>
-                      <td> <p><?php echo $pren; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>E-mail</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                    <tr>
-                      <td><p>Localisation</p></td>
-                      <td> <p> : </p> </td>
-                      <td> <p><?php echo $skill; ?></p> </td>
-                    </tr>
-                  </table>
-                  </form>
-                <?php }
-                      else {
-
-                      ////////// MODIFICATION DU ABOUT
-                        ?>
-
-                        <h3 >Modification</h3>
-                        <h5>A propos</h5>
-                        <table>
-                          <tr>
-                            <td width="22%"><p>Prénom</p></td>
-                            <td width="5%"> <p> : </p> </td>
-                            <td> <p> <input type="text" name="surname_about" value="<?php echo $pren; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Compétances</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="skill_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Date de naissance</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="date" name="birth_about" value="<?php echo $birth; ?>"> </p> </td>
-                          </tr>
-                        </table>
-                        <br>
-                        <hr>
-                        <br>
-
-                        <!-- DESCRIPTION -->
-
-                        <h5>Description</h5>
-                        <p> <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $desc; ?></textarea> </p>
-                        <br>
-                        <hr>
-                        <br>
-
-                        <!-- EXPERIENCE -->
-
-                        <h5>Experience</h5>
-                        <br>
-                        <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i> </h5>
-
-                             <p>     Domaine : <input type="text" name="domaine_about_s" value="<?php echo $domaine; ?>">
-                                     Date :
-                                     <table>
-                                       <tr>
-                                         <td>Début</td>
-                                         <td>Fin</td>
-                                       </tr>
-                                       <tr>
-                                         <td><input type="date" name="date_about_debut_s" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                         <td><input type="date" name="date_about_fin_s" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                       </tr>
-                                     </table>
-                                     Place : <input type="text" name="place_about_s" value="<?php echo $place; ?>">  </p>
-                             <p>     Description : <textarea name="desc_about_s" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
-                             <button type="submit" id="cancelabout" value="1" name="delabout"><i class="fas fa-trash-alt"></i></button>
-
-
-                             <div style="display:none" id="id2">
-                               <form action="validtempo.php" method="post">
-                                 <p>     Domaine : <input type="text" name="domaine_about_sn" value="" placeholder="Exemple : Développeur">
-                                         Date :
-                                         <table>
-                                           <tr>
-                                             <td>Début</td>
-                                             <td>Fin</td>
-                                           </tr>
-                                           <tr>
-                                             <td><input type="date" name="date_about_debut_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                             <td><input type="date" name="date_about_fin_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                           </tr>
-                                         </table>
-                                         Place : <input type="text" name="place_about_sn" value="" placeholder="Exemple : Paris">  </p>
-                                 <p>     Description : <textarea name="desc_about_sn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
-                                 <button type="submit" id="updateabout" value="1" name="valstabout"><i class="fas fa-check"></i>  </button>
-                               </form>
-                             </div>
-
-                             <br><br>
-
-                             <button type="submit" onclick="document.getElementById('id2').style.display = 'block'" id="updateabout" value="1" name="addsabout"><i class="fas fa-plus"></i></button>
-
-
-                        <br>
-                        <hr>
-                        <br>
-                        <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i> </h5>
-
-                              <p>     Domaine : <input type="text" name="domaine_about_t" value="<?php echo $domaine; ?>">
-                                      Date :
-                                      <table>
-                                        <tr>
-                                          <td>Début</td>
-                                          <td>Fin</td>
-                                        </tr>
-                                        <tr>
-                                          <td><input type="date" name="date_about_debut_t" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                          <td><input type="date" name="date_about_fin_t" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                        </tr>
-                                      </table>
-                                      Place : <input type="text" name="place_about_t" value="<?php echo $place; ?>">  </p>
-                              <p>     Description : <textarea name="desc_about_t" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
-                              <button type="submit" id="cancelabout" value="1" name="deltabout"><i class="fas fa-trash-alt"></i></i></button>
-
-
-                              <!-- Ajout d'un pour nouveau travail fait -->
-                              <div style="display:none" id="id1">
-                                  <p>     Domaine : <input type="text" name="domaine_about_tn" value="" placeholder="Exemple : Développeur">
-                                          Date :
-                                          <table>
-                                            <tr>
-                                              <td>Début</td>
-                                              <td>Fin</td>
-                                            </tr>
-                                            <tr>
-                                              <td><input type="date" name="date_about_debut_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                              <td><input type="date" name="date_about_fin_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
-                                            </tr>
-                                          </table>
-                                          Entreprise : <input type="text" name="place_about_tn" value="" placeholder="Exemple : InterMarché">  </p>
-                                  <p>     Description : <textarea name="desc_about_tn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
-                                  <button type="submit" id="updateabout" value="1" name="valtrabout"><i class="fas fa-check"></i></button>
-                              </div>
-
-                              <br><br>
-
-                              <button type="submit" onclick="document.getElementById('id1').style.display = 'block'" id="updateabout" value="1" name="addtabout"><i class="fas fa-plus"></i></button>
-
-                        <hr>
-                        <br>
-
-                        <!-- CONTACT -->
-
-                        <h5>Contact</h5>
-                        <table>
-                          <tr>
-                            <td width="14%"><p>Téléphone</p></td>
-                            <td width="5%"> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>E-mail</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                          <tr>
-                            <td><p>Adresse</p></td>
-                            <td> <p> : </p> </td>
-                            <td> <p> <input type="text" name="adress_about" value="<?php echo $skill; ?>"> </p> </td>
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td><button type="submit" id="updateabout" value="1" name="validabout"><i class="fas fa-check"></i></button></td>
-                            <form action="about.php" method="post">
-                                <td><button type="submit" id="cancelabout" value="1" name="cancelabout"><i class="fas fa-ban"></i></button></td>
-                            </form>
-                          </tr>
-                        </table>
-
-                        <?php
-                      }?>
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#" class="submit_open_list">Submit Open List</a>
+                </div><!-- End Post -->
+               <!-- Post -->
+                <div class="pagination_area">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="ion-chevron-left"></i></a></li>
+                        <li class="active"><a href="#!" class="waves-effect">1</a></li>
+                        <li><a href="#!" class="waves-effect">2</a></li>
+                        <li><a href="#!" class="waves-effect">3</a></li>
+                        <li><a href="#!" class="waves-effect">4</a></li>
+                        <li><a href="#!" class="waves-effect">...</a></li>
+                        <li><a href="#!" class="waves-effect">20</a></li>
+                        <li><a href="#!" class="waves-effect"><i class="ion-chevron-right"></i></a></li>
+                    </ul>
                 </div>
-              </div>
-          </div>
-
-
-
+            </div>
             <!-- left side bar -->
             <div class="col">
                 <div class="left_side_bar">
