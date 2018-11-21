@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 14 nov. 2018 à 10:42
+-- Généré le :  mer. 21 nov. 2018 à 09:27
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -81,6 +81,15 @@ CREATE TABLE `Eleve` (
   `prenom_eleve` varchar(30) COLLATE latin1_bin NOT NULL,
   `choix_position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Eleve`
+--
+
+INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `choix_position`) VALUES
+(14, 'Thibault', 0),
+(15, 'Yann', 1),
+(20, 'Test', 0);
 
 -- --------------------------------------------------------
 
@@ -269,16 +278,27 @@ CREATE TABLE `Utilisateur` (
   `id_user` int(11) NOT NULL,
   `nom_user` varchar(30) COLLATE latin1_bin NOT NULL,
   `login_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `mdp_user` varchar(30) COLLATE latin1_bin NOT NULL,
+  `mdp_user` varchar(255) COLLATE latin1_bin NOT NULL,
   `email_user` varchar(30) COLLATE latin1_bin NOT NULL,
   `tel_ser` int(11) NOT NULL,
   `num_addr_user` varchar(6) COLLATE latin1_bin NOT NULL,
   `rue_addr_user` varchar(100) COLLATE latin1_bin NOT NULL,
   `CP_addr_user` int(11) NOT NULL,
   `ville_addr_user` varchar(40) COLLATE latin1_bin NOT NULL,
-  `photo_user` varchar(6) COLLATE latin1_bin DEFAULT NULL,
-  `desc_user` longtext COLLATE latin1_bin
+  `photo_user` longtext COLLATE latin1_bin,
+  `desc_user` longtext COLLATE latin1_bin,
+  `date_naiss` date NOT NULL,
+  `mail_check` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Utilisateur`
+--
+
+INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `date_naiss`, `mail_check`) VALUES
+(14, 'Nesti', 'thibe19', '$2y$10$OXZY/NBZO1i0yCkZKg9wtOLHh/Ca2H2kSRkO0YdFBJrQw3aYDynUm', 'thibaultnesti@gmail.com', 2147483647, '18 Bis', 'rue Blanche Selva', 19100, 'Brive-La-Gaillarde', 'purple_color_burst-wallpaper-3840x2160.jpg', '', '0000-00-00', 0),
+(15, 'Ther', 'Runcan', '$2y$10$.J6N64Bfg3znSElKGqhhFO9M92eCd7Xc/5QUsfUzuWQufCrzIpZkO', 'yannther99@gmail.com', 553558473, '21', 'Route des abeuils', 24570, 'Le lardin saint lazare', '', '', '0000-00-00', 0),
+(20, 'Dupont', 'test', '$2y$10$NPJ5MuW0ycD422k8qh0yT.0CQ.TA2x3ohQ9FrSsH7NK1ikybQRSXK', 'tes@test.fr', 0, '123', 'rue de la paix', 67000, 'Saint etienne', 'purple_color_burst-wallpaper-3840x2160.jpg', '', '0000-00-00', 0);
 
 --
 -- Index pour les tables déchargées
@@ -471,7 +491,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Contraintes pour les tables déchargées
