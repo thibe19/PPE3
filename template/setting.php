@@ -1,8 +1,8 @@
 <?php
 /*
- *  15/11/18
+ *  21/11/18
  *  Profil
- *  v0.0.2
+ *  v0.0.3
  */
 
 session_start();
@@ -12,6 +12,9 @@ $ndc=$_SESSION['login'];
 }
 require('../ToolBox/bdd.inc.php');
 require('../objet/class_utilisateur.php');
+require('../objet/class_eleve.php');
+require('../objet/class_entreprise.php');
+
 $sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
 $res = $conn -> query($sql)or die($conn -> errorInfo());
 $data = $res -> fetch();
@@ -19,11 +22,12 @@ $id=$data['id_user'];
 
 $sqlE="SELECT * FROM Eleve WHERE id_user = '$id'";
 $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
-$dataE = $res -> fetch();
+$dataE = $resE -> fetch();
+
 
  ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/photos.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:36 GMT -->
 <head>
@@ -728,7 +732,7 @@ $dataE = $res -> fetch();
                             <div class="col mb-3">
                               <div class="form-group">
                                 <label class="form-label">A propos de moi</label>
-                                <textarea class="form-control" rows="2" name="bio" value="A propos de moi"></textarea>
+                                <textarea class="form-control" rows="2" name="bio" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
                               </div>
                             </div>
                           </div>
@@ -745,7 +749,7 @@ $dataE = $res -> fetch();
                           <div class="row">
                             <div class="col">
                               <label class="form-label">Date de naissance</label>
-                              <input type="date" name="dateU" value="">
+                              <input type="date" name="dateU" value="<?php echo$dataE['date_naiss']; ?>">
                             </div>
                             <div class="col">
                               <div class="form-group">
@@ -1067,7 +1071,7 @@ if (isset($_POST['modifier'])) {
   $rue = $_POST['rue'];
   $ville = $_POST['ville'];
   $cp = $_POST['cp'];
-  $photo=123456;
+  $photo=123456;    //////////////////////////////Pas fini!
 
   $mdpA = $_POST['mdpA'];
   $mdpN = $_POST['mdpN'];
@@ -1075,29 +1079,54 @@ if (isset($_POST['modifier'])) {
 
   //eleve
   $prenom = $_POST['prenom'];
+  $date = $_POST['dateU'];
   //$choixpos = $_POST['stayp'];
 
-  echo "$id,$nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio,$prenom, $mdpA, $mdpN, $mdpNC";
 
 
-  //$usereleve = new Utilisateur($id,$nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
-  //$usereleve->modifier_utilisateur($usereleve, $conn);
+
+  if (($mdpA or $mdpN) == '' ) {
+
+    $usereleve = new Utilisateur($id, $nom, $user, $mdp, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
+    $usereleve->modifier_utilisateur($usereleve, $conn);
 
 
-  //$uneleve = new Eleve($id,$prenom,$choixpos);
-  //$uneleve->modifier_eleve($uneleve,$conn);
-if (($mdpA or $mdpN) == null ) {
+    $uneleve = new Eleve($id, $prenom, $date, $choixpos);
+    $uneleve->modifier_eleve($uneleve,$conn);
+
+  } else {
+
+    if ($mdpA==$mdp) {
+
+      if ($mdpN==$mdpNC) {
+
+        $usereleve = new Utilisateur($id, $nom, $user, $mdpN, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
+        $usereleve->modifier_utilisateur($usereleve, $conn);
 
 
-  if ($mdpA==$mdp) {
-    if ($mdpN==$mdpNC) {
+        $uneleve = new Eleve($id, $prenom, $date, $choixpos);
+        $uneleve->modifier_eleve($uneleve,$conn);
 
+
+      }else {
+
+        echo "<script> alert('Les mots de passe ne sont pas les mêmes.');
+                        window.location.href='./setting.php';
+              </script>";
+
+      }
 
     }else {
 
+      echo "<script> alert('L\'ancien mot de passe est incorrect.');
+                      window.location.href='./setting.php';
+            </script>";
     }
+
   }
-}
+
+
+
  }
 
  ?>
