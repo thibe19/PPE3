@@ -1,3 +1,4 @@
+<?php require('../ToolBox/bdd.inc.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -809,19 +810,39 @@
                         <br>
                         <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i> </h5>
 
-                             <p>     Domaine : <input type="text" name="domaine_about" value="<?php echo $domaine; ?>">
-                                     Date : <input type="text" name="date_about" value="<?php echo $date; ?>">
-                                     Place : <input type="text" name="place_about" value="<?php echo $place; ?>">  </p>
-                             <p>     Description : <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
+                             <p>     Domaine : <input type="text" name="domaine_about_s" value="<?php echo $domaine; ?>">
+                                     Date :
+                                     <table>
+                                       <tr>
+                                         <td>Début</td>
+                                         <td>Fin</td>
+                                       </tr>
+                                       <tr>
+                                         <td><input type="date" name="date_about_debut_s" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                         <td><input type="date" name="date_about_fin_s" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                       </tr>
+                                     </table>
+                                     Place : <input type="text" name="place_about_s" value="<?php echo $place; ?>">  </p>
+                             <p>     Description : <textarea name="desc_about_s" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
                              <button type="submit" id="cancelabout" value="1" name="delabout"><i class="fas fa-trash-alt"></i></button>
 
 
                              <div style="display:none" id="id2">
-                               <form action="about.php" method="post">
-                                 <p>     Domaine : <input type="text" name="domaine_about" value="" placeholder="Exemple : Développeur">
-                                         Date : <input type="text" name="date_about" value="" placeholder="Exemple : 2015 - 2017">
-                                         Place : <input type="text" name="place_about" value="" placeholder="Exemple : Paris">  </p>
-                                 <p>     Description : <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
+                               <form action="validtempo.php" method="post">
+                                 <p>     Domaine : <input type="text" name="domaine_about_sn" value="" placeholder="Exemple : Développeur">
+                                         Date :
+                                         <table>
+                                           <tr>
+                                             <td>Début</td>
+                                             <td>Fin</td>
+                                           </tr>
+                                           <tr>
+                                             <td><input type="date" name="date_about_debut_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                             <td><input type="date" name="date_about_fin_sn" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                           </tr>
+                                         </table>
+                                         Place : <input type="text" name="place_about_sn" value="" placeholder="Exemple : Paris">  </p>
+                                 <p>     Description : <textarea name="desc_about_sn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
                                  <button type="submit" id="updateabout" value="1" name="valstabout"><i class="fas fa-check"></i>  </button>
                                </form>
                              </div>
@@ -836,19 +857,39 @@
                         <br>
                         <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i> </h5>
 
-                              <p>     Domaine : <input type="text" name="domaine_about" value="<?php echo $domaine; ?>">
-                                      Date : <input type="text" name="date_about" value="<?php echo $date; ?>">
-                                      Place : <input type="text" name="place_about" value="<?php echo $place; ?>">  </p>
-                              <p>     Description : <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
+                              <p>     Domaine : <input type="text" name="domaine_about_t" value="<?php echo $domaine; ?>">
+                                      Date :
+                                      <table>
+                                        <tr>
+                                          <td>Début</td>
+                                          <td>Fin</td>
+                                        </tr>
+                                        <tr>
+                                          <td><input type="date" name="date_about_debut_t" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                          <td><input type="date" name="date_about_fin_t" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                        </tr>
+                                      </table>
+                                      Place : <input type="text" name="place_about_t" value="<?php echo $place; ?>">  </p>
+                              <p>     Description : <textarea name="desc_about_t" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"><?php echo $descs; ?></textarea> </p>
                               <button type="submit" id="cancelabout" value="1" name="deltabout"><i class="fas fa-trash-alt"></i></i></button>
 
 
                               <!-- Ajout d'un pour nouveau travail fait -->
                               <div style="display:none" id="id1">
-                                  <p>     Domaine : <input type="text" name="domaine_about" value="" placeholder="Exemple : Développeur">
-                                          Date : <input type="text" name="date_about" value="" placeholder="Exemple : 2015 - 2017">
-                                          Entreprise : <input type="text" name="place_about" value="" placeholder="Exemple : InterMarché">  </p>
-                                  <p>     Description : <textarea name="desc_about" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
+                                  <p>     Domaine : <input type="text" name="domaine_about_tn" value="" placeholder="Exemple : Développeur">
+                                          Date :
+                                          <table>
+                                            <tr>
+                                              <td>Début</td>
+                                              <td>Fin</td>
+                                            </tr>
+                                            <tr>
+                                              <td><input type="date" name="date_about_debut_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                              <td><input type="date" name="date_about_fin_tn" value="" placeholder="Exemple : 2015 - 2017"></td>
+                                            </tr>
+                                          </table>
+                                          Entreprise : <input type="text" name="place_about_tn" value="" placeholder="Exemple : InterMarché">  </p>
+                                  <p>     Description : <textarea name="desc_about_tn" rows="8" cols="80" style="margin: 0px; height: 86px; width: 619px;"></textarea> </p>
                                   <button type="submit" id="updateabout" value="1" name="valtrabout"><i class="fas fa-check"></i></button>
                               </div>
 

@@ -1089,7 +1089,8 @@ if (isset($_POST['modifier'])) {
 
     $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
     $uneleve->modifier_eleve($uneleve,$conn);
-    die();
+
+    header('Location:./setting.php');
 
   } else {
 
@@ -1097,13 +1098,10 @@ if (isset($_POST['modifier'])) {
 
       if ($mdpN==$mdpNC) {
 
-        $usereleve = new Utilisateur($id, $nom, $user, $mdpN, $mail, $tel, $Nrue, $rue, $cp, $ville, $photo, $bio);
-        $usereleve->modifier_utilisateur($usereleve, $conn);
-
-
-        $uneleve = new Eleve($id, $prenom, $date, $choixpos);
+        $uneleve = new Eleve($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
         $uneleve->modifier_eleve($uneleve,$conn);
 
+        header('Location:./setting.php');
 
       }else {
 
@@ -1121,7 +1119,6 @@ if (isset($_POST['modifier'])) {
     }
 
   }
-
 
 
  }
