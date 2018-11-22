@@ -1,9 +1,9 @@
 ;(function ($) {
-    "use strict";
-
+    "use strict";     
+    
     //* SearchFrom
     function searchFrom(){
-        if ( $('.search_here').length ){
+        if ( $('.search_here').length ){  
              $('.search_icon').on('click',function(){
                 $('.search_from').toggleClass('show');
                 return false
@@ -13,28 +13,24 @@
             });
         };
     };
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
-    // Code Here
+    // Code Here 
     function calendar() {
         if ($('.calendar').length) {
             $('.calendar').dcalendar();
         }
     }
-
+    
     //* modal_popup
     function modal_popup() {
         if ($('body').length) {
               $('.modal').modal({
-                  dismissible: true,
-                  opacity: 1,
+                  dismissible: true, 
+                  opacity: 1,  
               });
         }
     }
-
+    
     //* Tags
     function tagPlaceholder() {
         if ($('body').length) {
@@ -43,35 +39,31 @@
                     secondaryPlaceholder: '+Tag',
                 });
         }
-    }
-
+    } 
+    
     // Loding next
-<<<<<<< HEAD
     function infiniteScroll() {
         if ($('.middle_section, .notifications_area').length) {
            $('.middle_section').jscroll({
                 loadingHtml: '<img src="images/preloader.svg" alt="Loading" />',
-                padding: 0,
-                autoTriggerUntil: 2,
+                padding: 0, 
+                autoTriggerUntil: 2, 
                 nextSelector: 'a.load-mor:last',
-                contentSelector: '.post',
-                callback: false,
+                contentSelector: '.post', 
+                callback: false,  
            });
-
-=======
-    
->>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
+            
            $('.notifications_content').jscroll({
                 loadingHtml: '<img src="images/preloader.svg" alt="Loading" />',
-                padding: 0,
-                autoTriggerUntil: 3,
-                contentSelector: '.notifications_content li',
-                callback: false,
-           });
+                padding: 0, 
+                autoTriggerUntil: 3,  
+                contentSelector: '.notifications_content li', 
+                callback: false, 
+           }); 
         }
     }
-
-    //* Check button
+    
+    //* Check button  
     function flipswitch() {
         if ($('.flipswitch').length) {
             $(".flipswitch").flipswitch({
@@ -81,28 +73,29 @@
                 }
             });
         };
-    };
-
-    //* Graph Chart
+    }; 
+    
+    //* Graph Chart  
     function graphChart() {
-        if ($('#bars').length) {
+        if ($('#bars').length) { 
               $("#bars li .bar").each(function (key, bar) {
-                  var percentage = $(this).data('percentage');
+                  var percentage = $(this).data('percentage'); 
                   $(this).css('height', percentage + '%');
               });
         };
     };
-
-
+    
+    
     /*Function Calls*/
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav(); 
     $('select').material_select();
-    searchFrom();
+    searchFrom(); 
     calendar();
     infiniteScroll();
     modal_popup ();
     tagPlaceholder ();
     flipswitch ();
     graphChart ();
-
+    
 })(jQuery);
+ 

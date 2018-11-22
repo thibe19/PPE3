@@ -3,7 +3,7 @@
 /*
  *  22/11/18
  *  Profil
- *  v0.0.4
+ *  v0.0.5
  */
 
 session_start();
@@ -183,7 +183,7 @@ if ($id==$dataE['id_user']) {
                               <div class="col mb-3">
                                 <div class="form-group">
                                   <label class="form-label">A propos de moi</label>
-                                  <textarea class="form-control" rows="2" name="bio" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                                  <textarea class="form-control" rows="2" name="desc" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
                                 </div>
                               </div>
                             </div>
@@ -454,7 +454,7 @@ if ($id==$dataE['id_user']) {
     $prenom = $_POST['prenom'];
     $mail = $_POST['mail'];
     $user = $_POST['user'];
-    $bio = $_POST['bio'];
+    $desc = $_POST['desc'];
     $tel = $_POST['tel'];
     $Nrue = $_POST['Nrue'];
     $rue = $_POST['rue'];
@@ -476,7 +476,7 @@ if ($id==$dataE['id_user']) {
 
     if (($mdpA or $mdpN) == '' ) {
 
-      $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
+      $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
       $uneleve->modifier_eleve($uneleve,$conn);
 
 
@@ -487,7 +487,7 @@ if ($id==$dataE['id_user']) {
 
         if ($mdpN==$mdpNC) {
 
-          $uneleve = new Eleve($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$prenom,$date,$choixpos);
+          $uneleve = new Eleve($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
           $uneleve->modifier_eleve($uneleve,$conn);
 
       echo "<script>window.location='./setting.php'</script>";
@@ -514,6 +514,9 @@ if ($id==$dataE['id_user']) {
   }// fin de modifier
 
 }// fin du profile eleve
+
+
+
 
 ///////////
 ///////////
@@ -676,7 +679,7 @@ elseif ($id==$dataEn['id_user']) {
                                 <div class="col mb-3">
                                   <div class="form-group">
                                     <label class="form-label">Code APE</label>
-                                    <textarea class="form-control" rows="2" name="ape" value="<?php echo$data['code_APE']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                                    <input class="form-control" type="text" name="ape" value="<?php echo$dataEn['code_APE']; ?>">
                                   </div>
                                 </div>
                               </div>
@@ -685,8 +688,8 @@ elseif ($id==$dataEn['id_user']) {
                               <div class="row">
                                 <div class="col mb-3">
                                   <div class="form-group">
-                                    <label class="form-label">A propos de l'entreprise</label>
-                                    <textarea class="form-control" rows="2" name="bio" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                                    <label class="form-label">A propos de moi</label>
+                                    <textarea class="form-control" rows="2" name="desc" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -954,15 +957,14 @@ elseif ($id==$dataEn['id_user']) {
     if (isset($_POST['modifierEn'])) {
 
       $nom = $_POST['nom'];
-      $prenom = $_POST['prenom'];
       $mail = $_POST['mail'];
       $user = $_POST['user'];
-      $bio = $_POST['bio'];
       $tel = $_POST['tel'];
       $Nrue = $_POST['Nrue'];
       $rue = $_POST['rue'];
       $ville = $_POST['ville'];
       $cp = $_POST['cp'];
+      $desc = $_POST['desc'];
       $photo='123456';    //////////////////////////////Pas fini!
 
       $mdpA = $_POST['mdpA'];
@@ -970,25 +972,25 @@ elseif ($id==$dataEn['id_user']) {
       $mdpNC = $_POST['mdpNC'];
 
       //entreprise
-      $responsable = $_POST['nom_resp'];
+      $nomresp = $_POST['nom_resp'];
       $ape = $_POST['ape'];
-      $site = $_POST['site'];
+      $siteweb = $_POST['site'];
+
 
 
       if (($mdpA or $mdpN) == '' ) {
 
-        $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$nomresp,$ape,$siteweb);
+        $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
         $unentreprise->updateentreprise($unentreprise,$conn);
 
-
-        echo "<script>window.location='./setting.php'</script>";
+        //echo "<script>window.location='./setting.php'</script>";
       } else {
 
         if ($mdpA==$mdp) {
 
           if ($mdpN==$mdpNC) {
 
-            $unentreprise = new Entreprise($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$bio,$nomresp,$ape,$siteweb);
+            $unentreprise = new Entreprise($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
             $unentreprise->updateentreprise($unentreprise,$conn);
 
 

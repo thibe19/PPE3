@@ -96,27 +96,8 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 </head>
 <body>
 
-<<<<<<< HEAD
-<?php
 
 
-
-//Test reset de mot de pass
-
-
-if (isset($_GET['loginres'])){
-    if (isset($_POST['mailob'])){
-        mail_reset_mdp($_POST['mailob']);
-        ?> <center> <p>Mail envoyé.</p> </center> <?php
-    }
-    print 'hi';
-}
-?>
-
-=======
-
-
->>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
