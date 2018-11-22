@@ -129,4 +129,10 @@ function mail_forgot_login($mail,$conn){
 
     mail($mail, $objet, $text, $entete);
 }
+
+function testsql($sql,$conn){
+    $req = $conn->Query($sql) or die("Erreur requete");
+    $req = $req->fetchAll();
+    return $req;
+}
 ?>

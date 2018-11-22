@@ -308,7 +308,7 @@ Public function modifier_utilisateur( $objet,$conn){
   $desc = $this->getDescUser($objet);
 
   $sql="UPDATE Utilisateur
-        SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_ser='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
+        SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_user='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
         WHERE id_user='$id' ";
   $res = $conn->Query($sql)or die('Erreur modification user');
 
