@@ -9,12 +9,13 @@
 //Connection a la base de donnée
 require('../ToolBox/bdd.inc.php');
 session_start();
-print $_COOKIE['login'].'<br>'.$_COOKIE['mdp'];
+//
+//print $_COOKIE['login'].'<br>'.$_COOKIE['mdp'];
 
 if(isset($_COOKIE['login']) && isset($_COOKIE['mdp'])){
     $_SESSION['login'] = $_COOKIE['login'];
     $_SESSION['mdp'] = $_COOKIE['mdp'];
-    //header("Location: ../");
+    header("Location: ../");
 }
 //test les identifiants et mot de passes
 elseif (isset($_POST['login']) && isset($_POST['pass'])) {
@@ -42,7 +43,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 setcookie('mdp', $_SESSION['mdp'], time()+60*60*24*30*365, '/');
             }
             //TODO
-            //header("Location: ../");
+            header("Location: ../");
         } else {
             print 'ca marche pas';
             ?>
