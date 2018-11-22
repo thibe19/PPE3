@@ -28,7 +28,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
     $login = $_POST['login'];
     $mdp = $_POST['pass'];
 
-    $SQL = "SELECT mdp_user, FROM Utilisateur
+    print $SQL = "SELECT mdp_user FROM Utilisateur
                 WHERE login_user='$login'";
     $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
     $req = $req->fetchAll();
