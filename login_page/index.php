@@ -132,7 +132,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                         </div>
 
                         <div class="container-login100-form-btn">
-                            <button type="submit" name="mailobp" value="" class="login100-form-btn">
+                            <button type="submit" name="mailobp" value="test" class="login100-form-btn">
                                 Envoyer
                             </button>
                         </div>
@@ -147,7 +147,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 
                 if (isset($_POST['mailobp'])){
                     mail_reset_mdp($_POST['mailo'], $conn);
-                    ?> <center> <p>Mail envoyé. pass</p> </center>
+                    ?> <center> <p>Mail envoyé.</p> </center>
                     <div class="text-center p-t-136">
                         <a class="txt2" href="./">
                             Retour
