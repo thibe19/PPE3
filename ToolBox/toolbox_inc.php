@@ -39,7 +39,7 @@ function data_base_in_object($tbname,$conn){
     $SQL = "SELECT * FROM $tbname";
     $req = $conn->Query($SQL)or die("La requete n'a pas aboutie");
     $req = $req->fetchAll(PDO::FETCH_OBJ);
-    return $req;
+    return $req; //ok
 }
 
   /***************REcuperation ID user (uniquement pour le PPE3 **********/
