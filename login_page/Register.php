@@ -60,6 +60,8 @@ function dec_enc($action, $string) {
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
   <!--===============================================================================================-->
 
 
@@ -69,7 +71,7 @@ function dec_enc($action, $string) {
 
     <?php
        if (empty($_POST['E1']) && empty($_POST['E2']) && empty($_POST['E3']) && empty($_POST['E4']) && empty($_POST['E5']) && empty($_POST['E6']) && empty($_POST['C6'])
-       && empty($_POST['C7']) && empty($_POST['C8'])) {
+       && empty($_POST['C7']) && empty($_POST['C8']) && empty($_POST['C1'])) {
          ?>
          <div class="limiter">
            <div class="container-login100">
@@ -693,6 +695,8 @@ function dec_enc($action, $string) {
              <span class="login100-form-title">
                Inscription
              </span>
+                 <div style="background-color: rgb(230,230,230)">
+                 <table>
             <?php
             $SQL = "SELECT * FROM Preferences";
             $req = $conn->Query($SQL)or die('Erreur selection preferences');
@@ -700,13 +704,20 @@ function dec_enc($action, $string) {
             if($req){
                 foreach ($req as $r){
                     ?>
-                    <label for="checkbox-nested-1"><?php print $r->lib_pref; ?>
-                        <input type="checkbox" name="pref[]" value="<?php print $r->id_pref ?>">
-                    </label>
+                    <tr>
+                        <td>
+                            <label for="checkbox"><?php print $r->lib_pref; ?></label>
+                        </td>
+                        <td>
+                            <input class="prefbox" type="checkbox" name="pref[]" value="<?php print $r->id_pref ?>">
+                        </td>
+                    </tr>
                     <?php
                 }
             }
             ?>
+                 </table>
+                 </div>
 
 
                <!-- <form action="#" method="post"> -->
@@ -722,6 +733,11 @@ function dec_enc($action, $string) {
              <?php
        }
 
+        if (isset($_POST['C1'])){
+            var_dump($_POST['pref']);
+            $prefs = $_POST['pref'];
+            $uneleve->getIDBDD($conn);
+        }
 
        if (isset($_POST['C6'])) {
           $mail = $_SESSION['mail'];
@@ -990,10 +1006,6 @@ function dec_enc($action, $string) {
    </div>
 
 
-
-
-                 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-                 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <!--===============================================================================================-->
    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
    <!--===============================================================================================-->

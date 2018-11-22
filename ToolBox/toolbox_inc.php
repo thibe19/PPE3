@@ -36,4 +36,18 @@
     $arrayRes = $res->fetchAll();
     return $arrayRes;
   }
+
+  /***************REcuperation ID user (uniquement pour le PPE3 **********/
+  /*function getIDBDD($login,$mdp,$email){
+    $SQL = "SELECT id_user,mdp_user FROM Utilisateur
+            WHERE login_user = '$login'
+            AND email_user = $email";
+
+  }*/
+
+  /*********************** Fetch en objet ******************/
+  function reqtoobj($req){
+      $req = $req->fetchAll(PDO::FETCH_OBJ);
+      return $req;
+  }
 ?>

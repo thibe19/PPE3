@@ -252,6 +252,8 @@ class Utilisateur
       $this->desc_user = $desc_user;
     }
 
+
+
 /////////////////////// insert inscription ////////////////////////////////////////
     Public function inscription($objet, $conn)
     {
