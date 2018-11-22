@@ -45,7 +45,6 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
             //TODO
             header("Location: ../");
         } else {
-            print 'ca marche pas';
             ?>
             <script>
                 alert("L'identifiant et le mot de passe ne correspondes pas.");
