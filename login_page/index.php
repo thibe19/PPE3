@@ -28,7 +28,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
     $login = $_POST['login'];
     $mdp = $_POST['pass'];
 
-    $SQL = "SELECT mdp_user FROM Utilisateur
+    $SQL = "SELECT id_user,mdp_user FROM Utilisateur
                 WHERE login_user='$login'";
     $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
     $req = $req->fetchAll();
@@ -42,6 +42,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 
         //Test si l'identifiant et le mot de passe existe et corresponds
         if ($req) {
+            $_SESSION['id']=dec_enc('encrypt',$req[0]['id_user']);
             $_SESSION['login'] = $_POST['login'];
             $_SESSION['mdp'] = $_POST['pass'];
             if (isset($_POST['stay'])) {
