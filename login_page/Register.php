@@ -418,7 +418,7 @@ session_start();
                    Inscription
                  </span>
 
-                 <div class="wrap-input100 validate-input"
+                <div class="wrap-input100 validate-input"
                  data-validate="Champ obligatoire">
                  <input class="input100" type="text"
                  name="name"
@@ -429,7 +429,17 @@ session_start();
                  </span>
                </div>
 
+                <!-- ajout date de naissance -->
 
+                     <div class="wrap-input100 validate-input"
+                          data-validate="Champ obligatoire">
+                         <input class="input100" type="date"
+                                name="datenaisse">
+                         <span class="focus-input100"></span>
+                         <span class="symbol-input100">
+                   <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                 </span>
+                     </div>
 
                <!--choix position-->
                <table>
@@ -643,11 +653,12 @@ session_start();
          $numt = $_SESSION['numt'];
          $photo = $_SESSION['photo'];
 
+         $date = $_POST['datenaisse'];
          $prenom = $_POST['name'];
          $choixpos = $_POST['stayp'];
 
 
-         $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$choixpos);
+         $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$date,$choixpos);;
          $uneleve->inscriptioneleve($uneleve,$conn);
 
          ?>

@@ -37,7 +37,7 @@ class Eleve extends Utilisateur
     function getAllEleve(){
         $data = $this->getAllUser();
         $data = $data.$this->prenom_eleve;
-        $data = $date.$this->date;
+        $data = $data.$this->date;
         $data = $data.$this->choix_position;
 
         return $data;
@@ -105,6 +105,7 @@ class Eleve extends Utilisateur
         $email = $objet->getEmailUser();
         $prenom = $this->prenom_eleve;
         $choixpos = $this->choix_position;
+        $date = $this->date;
 
         // RECUPERATION DE L'ID
         $sql_getid = "SELECT id_user FROM Utilisateur
@@ -115,7 +116,7 @@ class Eleve extends Utilisateur
         if($res_getid){
             $ideleve = $res_getid[0]['id_user'];
             $SQL = "INSERT INTO Eleve
-                    VALUES('$ideleve','$prenom','$choixpos','')";
+                    VALUES('$ideleve','$prenom','$date','$choixpos')";
             $res = $conn->Query($SQL)or die('Erreur inscription eleve');
         }
     }
