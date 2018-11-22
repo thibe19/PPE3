@@ -94,7 +94,7 @@ function dec_enc($action, $string) {
  * Mail password
  *
  */
-function mail_reset_mdp($mail){
+function mail_reset_mdp($mail,$conn){
     $mail = $mail;
     $objet = "Mot de passe compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
@@ -112,7 +112,7 @@ function mail_reset_mdp($mail){
     mail($mail, $objet, $text, $entete);
 }
 
-function mail_forgot_login($mail){
+function mail_forgot_login($mail,$conn){
     $mail = $mail;
     $objet = "Login compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
