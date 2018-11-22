@@ -2299,6 +2299,14 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   background: #eff3f5;
 }
 
+.liste_user {
+  display: block;
+  overflow: hidden;
+  padding-top: 30px;
+  padding-bottom: 100px;
+  background: #eff3f5;
+}
+
 .notifications {
   max-width: 680px;
   margin: 0 auto;

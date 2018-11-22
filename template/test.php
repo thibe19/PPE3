@@ -1,30 +1,11 @@
 <?php
-
-/*
- *  22/11/18
- *  index-2
- *  v0.0.1
- */
- session_start();
-
- if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
- $mdp=$_SESSION['mdp'];
- $ndc=$_SESSION['login'];
- }
-
- require('../ToolBox/bdd.inc.php');
-
- $sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
- $res = $conn -> query($sql)or die($conn -> errorInfo());
- $data = $res -> fetch();
- $id=$data['id_user'];
-
- ?>
-
+    require('../ToolBox/bdd.inc.php');
+    require('../ToolBox/toolbox_inc.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:13 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,15 +21,16 @@
     <link rel="stylesheet" href="vendors/tooltip/balloon.min.css">
     <!-- Icon CSS-->
     <link rel="stylesheet" href="vendors/ionicons/css/ionicons.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link href="../../../../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel="stylesheet">
-    <!-- Check-button CSS-->
-    <link rel="stylesheet" href="vendors/calendar/dcalendar.picker.css">
     <!-- Calendar CSS-->
-    <link rel="stylesheet" href="vendors/check-button/jqflipswitch.default.style.css">
+    <link rel="stylesheet" href="vendors/calendar/dcalendar.picker.css">
 
     <!--Theme Styles CSS-->
 	<link rel="stylesheet" href="css/style.css" media="all" />
+
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,95 +41,239 @@
 <body>
     <!-- Header_Area -->
     <?php
+    require('../ToolBox/bdd.inc.php');
     require('part/header.php');
     ?>
     <!-- End  Header_Area -->
 
     <!-- Tranding-select and banner Area -->
-    <ul class="tranding_select tabs">
-        <li class="tab"><a href="#latest" class="waves-effect btn active">Latest</a></li>
-        <li class="tab"><a href="#trending" class="waves-effect btn">Trending</a></li>
-        <li class="tab"><a href="#featured" class="waves-effect btn">Featured</a></li>
-    </ul>
-    <div class="banner_area">
-        <img src="images/banner.jpg" alt="" class="banner_img">
+    <div class="banner_area banner_2">
+        <img src="images/banner-2.jpg" alt="" class="banner_img">
+        <div class="media profile_picture">
+            <a href="profile.html"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
+            <div class="media_body">
+                <a href="profile.html">Denzel Washington</a>
+                <h6>Dhaka, Bangladesh</h6>
+            </div>
+        </div>
     </div>
+    <section class="author_profile">
+        <div class="row author_profile_row">
+            <div class="col l4 m6">
+                <ul class="profile_menu">
+                    <li><a href="profile.html">Activiter</a></li>
+                    <li><a href="about.php">A propos</a></li>
+                    <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
+                        <!-- Dropdown Structure -->
+                        <ul id="dro_pm" class="dropdown-content">
+                            <li><a href="#">Popular Post</a></li>
+                            <li><a href="#">Save Post</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col l4 m6">
+                <ul class="post_follow">
+                    <li>Posts <b>102</b></li>
+                    <li>Followers <b>389</b></li>
+                    <li>Following <b>51</b></li>
+                </ul>
+            </div>
+            <div class="col l4 m6">
+                <ul class="follow_messages">
+                    <li><a href="#" class="waves-effect">Follow</a></li>
+                    <li><a href="#" class="waves-effect">Messages</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
     <!-- End Tranding Area -->
 
     <!-- Min Container area -->
-    <section class="min_container min_pages">
-        <div class="section_row">
-            <div class="middle_section col" id="infinite_scroll">
-            <div id="latest">
-              <div class="fast_post">
-
-              <?php
-
-               $sqlP="SELECT * FROM Post ";
-               $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
-
-               while ($dataP=$resP->fetch())
-               {
-                 $cat = $dataP['id_cat'];
-                 $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                 $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                 $dataC=$resC->fetch();
-
-                 $id_user= $dataP['id_user'];
-                 $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                 $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                 $dataU = $resU -> fetch();
-
-               ?>
-                <!-- Post -->
-
-                    <div class="post">
-                       <div class="post_content">
-                            <a href="details.html" class="post_img">
-                                <img src="images/post.jpg" alt="">
-                                <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                            </a>
-                            <div class="row author_area">
-                                <div class="col s4 author">
-                                    <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                    <div class="col s8 media_body">
-
-                                        <a href="#"><?php echo$data['nom_user']; ?></a>
-                                        <span><?php echo$dataP['date_post']; ?>,<?php echo$dataP['heure_post']; ?></span>
-                                    </div>
-                                </div>
-                                <div class="col s4 btn_floating">
-
-                                </div>
-
-                            </div>
-                            <a href="#" class="post_heding"><?php echo$dataP['titre_post']; ?></a>
-                            <p><?php echo$dataP['contenu_post']; ?></p>
-                        </div>
-                        <center><a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                        <br>
-                    </div>
-                    <!-- End Post -->
-                <br>
-                <?php } ?>
+    <section class="min_container photo_pages">
+      <div class="section_row row">
+        <div class="col s12">
+          <h1>Option Profil</h1><br><br>
+        </div>
+        <div class="profil">
+          <div class="modif-image">
+            <div class="modif-image-image">
+              <img src="<?php $data['photo_user'] ?>" >
+            </div>
+            <div class="modif-image-bouton">
+              <div>
+                <input type='file' name='photo'>
+                <button class="btn btn-primary btn-block mt-5" type="button">
+                  <i class="fa fa-fw fa-camera"></i>
+                  <span>Change la Photo</span>
+                </button>
               </div>
+            </div>
+          </div>
+          <!-- fin modif image -->
+          <br>
+          <div class="tab-content pt-3">
+            <div class="tab-pane active">
+              <form class="form" method="POST" action='./setting.php'>
 
-              
+                <div class="col s12">
+                  <h2>Information personnelle </h2>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <!-- nom/prenom -->
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Nom de l'entreprise </label>
+                          <input type="text" class="form-control" name="nom" value="<?php echo$data['nom_user']; ?>">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Nom du responsable</label>
+                          <input class="form-control" type="text" name="nom_resp" value="<?php echo$dataEn['nom_resp']; ?>">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- mail/utilisateur-->
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Email</label>
+                          <input class="form-control" type="text" name="mail" value="<?php echo$data['email_user']; ?>">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Nom d'utilisateur</label>
+                          <input class="form-control" type="text" name="user" value="<?php echo$data['login_user']; ?>">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- code APE -->
+                    <div class="row">
+                      <div class="col mb-3">
+                        <div class="form-group">
+                          <label class="form-label">Code APE</label>
+                          <input class="form-control" type="text" name="ape" value="<?php echo$dataEn['code_APE']; ?>">
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- A propos -->
+                    <div class="row">
+                      <div class="col mb-3">
+                        <div class="form-group">
+                          <label class="form-label">A propos de moi</label>
+                          <textarea class="form-control" rows="2" name="desc" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- DTN + N°tel -->
+                <div class="row">
+                  <div class="col-12 col-sm-6 mb-3">
+
+                    <div class="col s12">
+                      <h2>Information complémentaire</h2>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <label class="form-label">Site web</label>
+                        <input type="text" name="site" value="<?php echo$dataEn['site_web']; ?>">
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">N°Mobile</label>
+                          <input class="form-control" type="number" name="tel" value="<?php echo$data['tel_ser']; ?>">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <address>  -->
+
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">N°Rue</label>
+                          <input type="text" class="form-control" name="Nrue" value="<?php echo$data['num_addr_user']; ?>">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Rue</label>
+                          <input class="form-control" type="text" name="rue" value="<?php echo$data['rue_addr_user']; ?>">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Ville</label>
+                          <input class="form-control" type="text" name="ville" value="<?php echo$data['ville_addr_user']; ?>">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-label">Code postal</label>
+                          <input class="form-control" type="text" name="cp" value="<?php echo$data['CP_addr_user']; ?>">
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- MDP -->
+                <div class="col-12 col-sm-6 mb-3">
+                  <div class="col s12">
+                    <h2>Mot de passe</h2>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="form-label">Ancien Mot de passe</label>
+                        <input class="form-control" type="password" name="mdpA" placeholder="Mot de passe">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="form-label">Nouveau Mot de passe</label>
+                        <input class="form-control" type="password" name="mdpN" placeholder="Mot de passe">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="form-label">Confirmer <span class="d-none d-xl-inline">le Mot de passe</span></label>
+                        <input class="form-control" type="password" name="mdpNC" placeholder="Mot de passe">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="float-right mt-0 mb-0">
+                  <button class="btn btn-secondary mr-3"  type="submit">Annuler</button>
+                  <button class="btn btn-primary " name='modifierEn' type="submit">Mettre à jour le profil</button>
+                </div>
+              </form>
             </div>
-            </div>
+          </div>
+        </div>
+
+
+
             <!-- left side bar -->
             <div class="col">
                 <div class="left_side_bar">
                     <div class="categories">
-                        <h3 class="categories_tittle">Post Categories</h3>
-                        <ul class="categories_icon">
-                            <li><a class="tooltip" data-balloon="Rate Post" data-balloon-pos="up"><i class="ion-ios-star"></i></a></li>
-                            <li><a href="#" class="tooltip" data-balloon="Time Post" data-balloon-pos="up"><i class="ion-android-time"></i></a></li>
-                            <li><a href="#" class="tooltip" data-balloon="Music Post" data-balloon-pos="up"><img src="images/icons/sound.png" alt=""></a></li>
-                            <li><a href="#" class="tooltip" data-balloon="Images Post" data-balloon-pos="up"><i class="ion-android-image"></i></a></li>
-                            <li><a href="#" class="tooltip" data-balloon="chart Post" data-balloon-pos="up"><i class="large material-icons">insert_chart</i></a></li>
-                        </ul>
+                        <h3 class="categories_tittle me_tittle">About Me</h3>
+                        <p>I focus a lot on helping the first time or inexperienced traveler head out prepared and confident in themselves. Starting out as a old traveler can be intimidating. <br> How do you jump into the gigantic travel fray and survive? How can you learn to love delays and long lines?</p>
                     </div>
                     <div class="interests">
                         <h3 class="categories_tittle">Your Interests <span>Edit</span></h3>
@@ -212,11 +338,8 @@
             <!-- Right side bar -->
             <div class="right_side_bar col">
                 <div class="right_sidebar_iner">
-                    <a href="#">
-                        <img src="images/advertis-2.jpg" alt="" class="responsive-img">
-                    </a>
-                    <div class="popular_posts">
-                        <h3 class="categories_tittle">Popular Posts</h3>
+                    <div class="popular_posts popular_fast">
+                        <h3 class="categories_tittle">My Submisstion</h3>
                         <div class="row valign-wrapper popular_item">
                             <div class="col s3 p_img">
                                <a href="#">
@@ -224,7 +347,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">Poster can be one of the effective marketing and advertising materials.</a>
+                               <a href="#">You submitted a new photo  to <span>How To Talk With Girls</span></a>
                                 <span class="black_text">2 days ago</span>
                             </div>
                         </div>
@@ -235,7 +358,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">Color is so powerful that it can persuade, motivate, inspire and touch</a>
+                               <a href="#">You contributed a new paragraph to <span>10 Ways To Make Easy Suicide</span></a>
                                 <span class="black_text">3 days ago</span>
                             </div>
                         </div>
@@ -246,7 +369,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">What makes one logo better than another?</a>
+                               <a href="#">You submitted 10 photos  to <span>Best Photos of The Tech Giants</span></a>
                                 <span class="black_text">4 days ago</span>
                             </div>
                         </div>
@@ -257,7 +380,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">Outdoor advertising is a low budget and effective way of advertising a </a>
+                               <a href="#">You submitted a new photo  to <span>How To Talk With Girls</span></a>
                                 <span class="black_text">5 days ago</span>
                             </div>
                         </div>
@@ -268,7 +391,7 @@
                                </a>
                             </div>
                             <div class="col s9 p_content">
-                               <a href="#">Famous is as famous does and the famous get known through publicity. </a>
+                               <a href="#">You contributed a new paragraph to <span>10 Ways To Make Easy Suicide</span></a>
                                 <span class="black_text">10 days ago</span>
                             </div>
                         </div>
@@ -548,7 +671,7 @@
             </div>
         </div>
         <div class="copy_right">
-            � 2018 <a href="#">Open List</a>. All rights reserved.
+            © 2018 <a href="#">Open List</a>. All rights reserved.
         </div>
     </footer>
     <!-- End Footer area -->
@@ -556,56 +679,11 @@
     <!-- Add post poup area -->
     <?php
     require('part/post.php');
+
+
+
     ?>
     <!-- End Add post poup area -->
-
-    <!-- Popup area -->
-    <div id="modal2" class="login_popup_aera modal">
-        <div class="login_popup_row">
-            <img src="images/login-logo.png" alt="">
-            <h4>Create a new account to Open List or <a href="#modal1" class="modal-trigger modal-close">Sign in</a></h4>
-            <form class="input_group">
-                <div class="input-field">
-                    <input  type="text" class="validate" placeholder="Full Name">
-                    <input  type="email" class="validate" placeholder="Email">
-                    <input type="password" class="validate" placeholder="Password">
-                </div>
-                <p>
-                    <input type="checkbox" id="test" />
-                    <label for="test">I accept the <a href="#">Terms and Services</a></label>
-                </p>
-                <button class="waves-effect">SIgn in</button>
-            </form>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="ion-close-round"></i></a>
-        </div>
-    </div>
-    <!-- Log In Popup -->
-    <div id="modal1" class="login_popup_aera modal">
-        <div class="login_popup_row">
-            <img src="images/login-logo.png" alt="">
-            <h4>Log in to Open List or <a href="#modal2" class="modal-trigger modal-close">create an account</a></h4>
-            <h6>Sign in using social media</h6>
-            <ul class="with_social">
-                <li><a href="#" class="waves-effect"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" class="waves-effect facebook"><i class="fa fa-facebook-square"></i></a></li>
-                <li><a href="#" class="waves-effect google-plus"><i class="fa fa-google-plus"></i></a></li>
-            </ul>
-            <h6>or Sign in using email address</h6>
-            <form class="input_group">
-                <div class="input-field">
-                    <input  type="email" class="validate" placeholder="Email">
-                    <input type="password" class="validate" placeholder="Password">
-                </div>
-                <p>
-                    <input type="checkbox" id="test2" />
-                    <label for="test2">Remember me <a href="#">Forget password?</a></label>
-                </p>
-                <button class="waves-effect">SIgn in</button>
-            </form>
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="ion-close-round"></i></a>
-        </div>
-    </div>
-    <!-- End Popup area -->
 
     <!-- jQuery JS -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -622,5 +700,5 @@
     <script src="js/theme.js"></script>
 </body>
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:22 GMT -->
 </html>

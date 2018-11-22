@@ -161,7 +161,9 @@
                 </li>
                 <!-- Messages -->
                 <li class="notifications messages"><a class="dropdown-button" href="#!" data-activates="dropdown3"><i
-                                class="ion-ios-chatboxes-outline"></i><b class="n-number">3</b></a>
+                                class="ion-ios-chatboxes-outline"></i>
+                                <!--NOTIFICATION DYNAMIQUE  -->
+                                <!-- <b class="n-number"></b></a> -->
                     <!-- Dropdown Structure -->
                     <ul id="dropdown3" class="dropdown-content">
                         <li class="hed_notic">Messages <span>Mark all as read <i

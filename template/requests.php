@@ -1,5 +1,10 @@
 <?php
 // YANN THER - 10h20 - 22/11/2018
+session_start();
+
+require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
+$id_user_session = dec_enc('decrypt',$_SESSION['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +44,6 @@
 <body>
     <!-- Header_Area -->
     <?php
-    require('../ToolBox/bdd.inc.php');
-    require('../ToolBox/toolbox_inc.php');
     require('part/header.php');
     ?>
     <!-- End  Header_Area -->
@@ -49,7 +52,7 @@
         <li class="tab"><a href="requests.php?groupe=entr" class="waves-effect btn <?php if ($_GET['groupe'] == "entr") { echo "active"; } ?>">Entreprises</a></li>
     </ul>
     <!-- Notifications area -->
-    <section class="notifications_area">
+    <section class="liste_user">
         <div class="notifications">
             <!-- Dropdown Structure -->
 
@@ -72,7 +75,8 @@
                 $id_user = $res['id_user'];
 
                   $SQL2 = "SELECT * FROM utilisateur
-                          WHERE id_user = $id_user";
+                           WHERE id_user = $id_user
+                           AND id_user != $id_user_session";
                   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
                   while ($res2 = $req2->fetch()) {
 
@@ -83,6 +87,7 @@
                       $photo = $res2['photo_user'];
                     }
 
+                    $id_user_amis = $res2['id_user']
 
                ?>
 
@@ -96,14 +101,58 @@
                                 <h6> <?php echo $res2['num_addr_user'].", ".$res2['rue_addr_user'].", ".$res2['CP_addr_user']." ".$res2['ville_addr_user']; ?> </h6>
 
                                 <div class="btn_group">
-                                    <span class="waves-effect follow_b">Contacter</span>
-                                    <span class="waves-effect">Ajouter amis</span>
+
+                                     <table>
+                                       <tr>
+                                         <td><span onClick="window.location='requests.php?groupe=elve&ctc';" class="waves-effect follow_b">Contacter</span></td>
+                                         <td>
+                                         <?php
+                                         $SQL3 = "SELECT * FROM ajoute_amis
+                                                  WHERE id_user_Eleve = $id_user_amis";
+                                         $req3 = $conn->Query($SQL3) or die("L'utilisateur n'existe pas");
+                                         if ($res3 = $req3->fetch()) {
+                                           ?> <span onClick="window.location='requests.php?groupe=elve&dela=<?php echo $res2['id_user']; ?>';" class="waves-effect">Supprimer amis</span> <?php
+                                         }
+                                         else {
+                                           ?> <span onClick="window.location='requests.php?groupe=elve&adda=<?php echo $res2['id_user']; ?>';" class="waves-effect">Ajouter amis</span> <?php
+                                         }
+                                          ?>
+                                        </td>
+                                       </tr>
+                                     </table>
                                 </div>
                             </div>
                        </div>
                    </a>
                 </li>
               <?php }}}
+
+
+              if (isset($_GET['adda'])) {
+                $id_user_amis = $_GET['adda'];
+
+                $SQL = "INSERT INTO ajoute_amis
+                        VALUES('$id_user_session', '$id_user_amis');";
+                $res = $conn->Query($SQL)or die('');
+                ?>
+                  <script type="text/javascript">
+                    window.location='requests.php?groupe=elve';
+                  </script>
+                <?php
+              }
+
+              if (isset($_GET['dela'])) {
+                $id_user_amis = $_GET['dela'];
+
+                $SQL = "DELETE FROM ajoute_amis
+                        WHERE id_user_Eleve = $id_user_amis;";
+                $res = $conn->Query($SQL)or die('');
+                ?>
+                  <script type="text/javascript">
+                    window.location='requests.php?groupe=elve';
+                  </script>
+                <?php
+              }
 
 
               ///////////////// entreprise affichage
@@ -123,8 +172,9 @@
 
                   $id_user = $res['id_user'];
 
-                    $SQL2 = "SELECT id_user, nom_user, photo_user FROM utilisateur
-                            WHERE id_user = $id_user";
+                    $SQL2 = "SELECT * FROM utilisateur
+                            WHERE id_user = $id_user
+                            AND id_user != $id_user_session";
                     $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
                     while ($res2 = $req2->fetch()) {
 
@@ -135,7 +185,7 @@
                         $photo = $res2['photo_user'];
                       }
 
-
+                      $id_user_amis = $res2['id_user']
                  ?>
 
 
@@ -145,16 +195,58 @@
                               <img src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle responsive-img">
                               <div class="media_body">
                                   <p><b><?php echo $res2['nom_user']; ?></b> </p>
-                                  <h6> </h6>
+                                  <h6> <?php echo $res2['num_addr_user'].", ".$res2['rue_addr_user'].", ".$res2['CP_addr_user']." ".$res2['ville_addr_user']; ?> </h6>
                                   <div class="btn_group">
-                                      <span class="waves-effect follow_b">Contacter</span>
-                                      <span class="waves-effect">Ajouter amis</span>
+                                    <table>
+                                      <tr>
+                                        <td><span onClick="window.location='messages.php?ctc=<?php echo $res2['id_user']; ?>';" class="waves-effect follow_b">Contacter</span></td>
+                                        <td>
+                                        <?php
+                                        $SQL3 = "SELECT * FROM ajoute_amis
+                                                 WHERE id_user_Eleve = $id_user_amis";
+                                        $req3 = $conn->Query($SQL3) or die("L'utilisateur n'existe pas");
+                                        if ($res3 = $req3->fetch()) {
+                                          ?> <span onClick="window.location='requests.php?groupe=entr&dele=<?php echo $res2['id_user']; ?>';" class="waves-effect">Arrêter de suivre</span> <?php
+                                        }
+                                        else {
+                                          ?> <span onClick="window.location='requests.php?groupe=entr&adde=<?php echo $res2['id_user']; ?>';" class="waves-effect">Suivre </span> <?php
+                                        }
+                                         ?>
+                                       </td>
+                                      </tr>
+                                    </table>
                                   </div>
                               </div>
                          </div>
                      </a>
                   </li>
-                <?php }}} ?>
+                <?php }}}
+                if (isset($_GET['adde'])) {
+                  $id_user_amis = $_GET['adde'];
+
+                  $SQL = "INSERT INTO ajoute_amis
+                          VALUES('$id_user_session', '$id_user_amis');";
+                  $res = $conn->Query($SQL)or die('');
+                  ?>
+                    <script type="text/javascript">
+                      window.location='requests.php?groupe=elve';
+                    </script>
+                  <?php
+                }
+
+                if (isset($_GET['dele'])) {
+                  $id_user_amis = $_GET['dele'];
+
+                  $SQL = "DELETE FROM ajoute_amis
+                          WHERE id_user_Eleve = $id_user_amis;";
+                  $res = $conn->Query($SQL)or die('');
+                  ?>
+                    <script type="text/javascript">
+                      window.location='requests.php?groupe=elve';
+                    </script>
+                  <?php
+                }
+                ?>
             </ul>
         </div>
     </section>
