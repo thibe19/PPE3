@@ -987,11 +987,7 @@ elseif ($id==$dataEn['id_user']) {
         $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
         $unentreprise->updateentreprise($unentreprise,$conn);
 
-<<<<<<< HEAD
         echo "<script>window.location='./setting.php'</script>";
-=======
-        //echo "<script>window.location='./setting.php'</script>";
->>>>>>> 1cb978f0d6d6cd53e48e7a1144c2a5188de0d8f9
       } else {
 
         if ($mdpA==$mdp) {
