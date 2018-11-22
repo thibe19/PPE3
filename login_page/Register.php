@@ -1,6 +1,7 @@
 <?php
 // Register date modif : 15/11/2018 Version 0.0.4
 require('../objet/class_utilisateur.php');
+require ('../ToolBox/toolbox_inc.php');
 require_once ('../objet/classes.php');
 session_start();
 /*
@@ -60,6 +61,8 @@ function dec_enc($action, $string) {
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <!--===============================================================================================-->
   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
   <!--===============================================================================================-->
 
 
@@ -69,7 +72,7 @@ function dec_enc($action, $string) {
 
     <?php
        if (empty($_POST['E1']) && empty($_POST['E2']) && empty($_POST['E3']) && empty($_POST['E4']) && empty($_POST['E5']) && empty($_POST['E6']) && empty($_POST['C6'])
-       && empty($_POST['C7']) && empty($_POST['C8'])) {
+       && empty($_POST['C7']) && empty($_POST['C8']) && empty($_POST['C1'])) {
          ?>
          <div class="limiter">
            <div class="container-login100">
@@ -226,7 +229,7 @@ function dec_enc($action, $string) {
          else{
            if (isset($_POST['E1'])) {
 
-             $_SESSION['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+             $_SESSION['pass'] = $_POST['pass'];
              $_SESSION['mail'] = $_POST['email'];
              $_SESSION['login'] = $_POST['login'];
              ?>
@@ -317,7 +320,7 @@ function dec_enc($action, $string) {
                  <div class="wrap-input100 validate-input"
                  data-validate="Champ obligatoire">
                  <input class="input100" type="text" name="surname"
-                 placeholder="Nom">
+                 placeholder="Nom/nom entreprise">
                  <!-- Champ inscription Mot de passe  -->
                  <span class="focus-input100"></span>
                  <span class="symbol-input100">
@@ -673,6 +676,7 @@ function dec_enc($action, $string) {
          $prenom = $_POST['name'];
          $choixpos = $_POST['stayp'];
 
+         die();
 
          $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$choixpos);
          $uneleve->inscriptioneleve($uneleve,$conn);
@@ -693,6 +697,8 @@ function dec_enc($action, $string) {
              <span class="login100-form-title">
                Inscription
              </span>
+                 <div style="background-color: rgb(230,230,230)">
+                 <table>
             <?php
             $SQL = "SELECT * FROM Preferences";
             $req = $conn->Query($SQL)or die('Erreur selection preferences');
@@ -700,13 +706,20 @@ function dec_enc($action, $string) {
             if($req){
                 foreach ($req as $r){
                     ?>
-                    <label for="checkbox-nested-1"><?php print $r->lib_pref; ?>
-                        <input type="checkbox" name="pref[]" value="<?php print $r->id_pref ?>">
-                    </label>
+                    <tr>
+                        <td>
+                            <label for="checkbox"><?php print $r->lib_pref; ?></label>
+                        </td>
+                        <td>
+                            <input class="prefbox" type="checkbox" name="pref[]" value="<?php print $r->id_pref ?>">
+                        </td>
+                    </tr>
                     <?php
                 }
             }
             ?>
+                 </table>
+                 </div>
 
 
                <!-- <form action="#" method="post"> -->
@@ -722,7 +735,87 @@ function dec_enc($action, $string) {
              <?php
        }
 
+        if (isset($_POST['C1'])){
+            $login = $_SESSION['login'];
+            $mail = $_SESSION['mail'];
+            $mdp = $_SESSION['pass'];
+            $prefs = $_POST['pref'];
+            $id = getIDBDD($login,$mdp,$mail,$conn);
 
+            foreach ($prefs as $pref){
+                $SQL = "INSERT INTO eleve_pref
+                        VALUES ('$pref','$id');";
+                $req = $conn->Query($SQL) or die('Erreur dans la selection des preferences');
+            }
+
+             ?>
+                 <div class="limiter">
+                     <div class="container-login100">
+                         <div class="wrap-login100">
+                             <div class="login100-pic js-tilt"
+                                  data-tilt>
+                                 <img src="images/img-01.png"
+                                      alt="IMG">
+                             </div>
+
+                             <form class="login100-form validate-form"
+                                   method="POST">
+                                 >
+                                 <span class="login100-form-title">
+               Inscription
+             </span>
+
+                                 <p>
+                                     L'INSCRIPTION EST TERMINÉ VOUS ALLEZ RECEVOIR UN MAIL DE VALIDATION
+                                     A L'ADRESSE QUE VOUS AVEZ RENSEIGNÉ.</p>
+
+                                 <!-- <form action="#" method="post"> -->
+                                 <div class="container-login100-form-btn">
+                                     <!-- Bouton accer prochaine étape  -->
+                                     <button name="FINENT"
+                                             value="1"
+                                             class="login100-form-btn">
+                                         Finaliser
+                                     </button>
+                                 </div><?php
+                                 $mail = "yannther99@gmail.com";
+                                 $objet = "Activer votre compte : ViaBahuet.";
+                                 $entete = "From: yannther99@gmail.com";
+
+
+
+
+
+
+                                 $login_m = $login;
+                                 $mdp_m = $mdp;
+
+
+
+                                 $loginc = dec_enc('encrypt',"$login_m");
+                                 $idc = dec_enc('encrypt',"$id");
+
+                                 $text = "Bienvenue sur ViaBahuet,\n";
+                                 $text = $text."Pour activer votre compte, veuillez cliquer sur le lien ci dessous.\n";
+                                 $text = $text."http://localhost/PPE3/login_page/validation.php?log=".urlencode($loginc)."&id=".urlencode($idc)."\n\n\n>";
+                                 $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+                                 mail($mail, $objet, $text, $entete);
+
+
+                                 }
+
+
+
+
+
+
+
+
+
+
+
+        //Fin inscription entreprise
        if (isset($_POST['C6'])) {
           $mail = $_SESSION['mail'];
           $mdp = $_SESSION['pass'];
@@ -782,14 +875,9 @@ function dec_enc($action, $string) {
 
                $login_m = $login;
                $mdp_m = $mdp;
+               $mailuser = $_SESSION['mail'];
 
-               $SQL="SELECT * FROM utilisateur
-                     WHERE login_user='$login_m'
-                     AND mdp_user='$mdp_m';";
-               $Req=$conn->Query($SQL);
-               $result=$Req->fetch();
-
-               $id = $result['id_user'];
+               $id = getIDBDD($login,$mdp,$mailuser,$conn);
 
 
                $loginc = dec_enc('encrypt',"$login_m");
@@ -990,10 +1078,6 @@ function dec_enc($action, $string) {
    </div>
 
 
-
-
-                 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-                 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <!--===============================================================================================-->
    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
    <!--===============================================================================================-->
