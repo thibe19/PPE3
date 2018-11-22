@@ -253,65 +253,9 @@
     <!-- End Footer area -->
 
     <!-- Add post poup area -->
-    <div id="post_modal" class="add_post modal">
-        <h2>Create A New Post</h2>
-        <form class="input_group">
-            <div class="input-field">
-                <input  type="text" class="validate" placeholder="Add a tittle">
-                <textarea class="textarea" placeholder="Add some description"></textarea>
-            </div>
-            <div class="upload_photo row">
-                <ul class="tabs tab_nav">
-                    <li class="tab col s6"><a href="#photo"><i class="ion-ios-camera"></i>Add Photo</a></li>
-                    <li class="tab col s6"><a class="" href="#video"><i class="ion-ios-videocam"></i>Add video</a></li>
-                </ul>
-                <div id="photo" class="col s12 tabs_content">
-                    <div class="photo_u">
-                        <img src="images/upload.png" alt="">
-                        <h4>Select files to upload <small>or drag &amp; drop files</small></h4>
-                    </div>
-                </div>
-                <div id="video" class="col s12 tabs_content">
-                    <div class="photo_u">
-                        <img src="images/upload.png" alt="">
-                        <h4>Select files to upload <small>or drag &amp; drop files</small></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="input-field col s12 select_option">
-                <select>
-                    <option value="" disabled selected>Choose a category</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="2">Option 2</option>
-                    <option value="2">Option 2</option>
-                </select>
-
-                <div class="chips chips-placeholder" data-index="0" data-initialized="true">
-                    <input class="input" placeholder="Enter a tag">
-                </div>
-            </div>
-            <div class="input-field add_link">
-                <input  type="text" class="validate" placeholder="Add a link">
-                <span>optional</span>
-            </div>
-            <div class="yes_no">
-                <h4>Anyone can submit?</h4>
-                <div class="flipswitch"></div>
-            </div>
-            <div class="row submit_btn_area">
-               <div class="col s6">
-                    <button class="waves-effect"><i class="ion-folder"></i>Save draft</button>
-               </div>
-               <div class="col s6">
-                    <button class="waves-effect col s6"><i class="ion-eye"></i>Preview post</button>
-               </div>
-               <div class="col s12">
-                    <button class="waves-effect publish">Publish</button>
-               </div>
-            </div>
-        </form>
-    </div>
+    <?php
+    require('part/post.php');
+    ?>
     <!-- End Add post poup area -->
 
     <!-- jQuery JS -->

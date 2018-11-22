@@ -427,7 +427,9 @@ if ($id==$dataE['id_user']) {
           </div>
       </footer>
       <!-- End Footer area -->
-
+      <?php
+      require('part/post.php');
+      ?>
       <!-- jQuery JS -->
       <script src="js/jquery-3.3.1.min.js"></script>
       <!-- Materialize JS -->
@@ -933,7 +935,9 @@ elseif ($id==$dataEn['id_user']) {
             </div>
         </footer>
         <!-- End Footer area -->
-
+        <?php
+        require('part/post.php');
+        ?>
         <!-- jQuery JS -->
         <script src="js/jquery-3.3.1.min.js"></script>
         <!-- Materialize JS -->
@@ -983,7 +987,7 @@ elseif ($id==$dataEn['id_user']) {
         $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
         $unentreprise->updateentreprise($unentreprise,$conn);
 
-        //echo "<script>window.location='./setting.php'</script>";
+        echo "<script>window.location='./setting.php'</script>";
       } else {
 
         if ($mdpA==$mdp) {
