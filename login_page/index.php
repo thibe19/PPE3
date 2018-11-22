@@ -118,12 +118,8 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 //Test reset de mot de pass
 
 
-                if (isset($_GET['mdpres'])){
-                    if (isset($_POST['mailob'])){
-                        mail_reset_mdp($_POST['mailob']);
-                        ?> <center> <p>Mail envoyé.</p> </center> <?php
-                    }
-                    else{?>
+                if (isset($_GET['mdpres'])) {
+                  ?>
                         <center> <p>Entrer l'adresse mail du compte.</p> </center>
                         <br>
                         <div class="wrap-input100 validate-input" data-validate="Vous devez entrer votre mot de passe">
@@ -135,25 +131,34 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                         </div>
 
                         <div class="container-login100-form-btn">
-                            <button type="submit" name="mailob" value="" class="login100-form-btn">
+                            <button type="submit" name="mailobp" value="" class="login100-form-btn">
                                 Envoyer
                             </button>
                         </div>
                         <div class="text-center p-t-136">
+                          <br><br><br>
                             <a class="txt2" href="./">
                                 Retour
                                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                             </a>
                         </div><?php
-                    }
                 }
-                else{
+
+                if (isset($_POST['mailobp'])){
+                    mail_reset_mdp($_POST['mailo'], $conn);
+                    ?> <center> <p>Mail envoyé. pass</p> </center>
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="./">
+                            Retour
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div><?php
+                }
+
+
+
+
                 if (isset($_GET['loginres'])){
-                    if (isset($_POST['mailob'])) {
-                        mail_forgot_login($_POST['mailob']);
-                        ?>
-                        <center><p>Mail envoyé.</p></center> <?php
-                    } else {
                         ?>
                         <center><p>Entrer l'adresse mail du compte.</p></center>
                         <br>
@@ -167,7 +172,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                         </div>
 
                         <div class="container-login100-form-btn">
-                            <button type="submit" name="mailob" value="" class="login100-form-btn">
+                            <button type="submit" name="mailobl" value="test" class="login100-form-btn">
                                 Envoyer
                             </button>
                         </div>
@@ -178,10 +183,25 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                             </a>
                         </div><?php
                     }
-                }
-                else{
-                ?>
 
+                if (isset($_POST['mailobl'])) {
+                    mail_forgot_login($_POST['mailo'], $conn);
+                    ?>
+                    <center><p>Mail envoyé.</p></center>
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="./">
+                            Retour
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div><?php
+                }
+
+
+
+
+
+            if (empty($_GET['mdpres']) && empty($_GET['loginres']) && empty($_POST['mailobl']) && empty($_POST['mailobp'])) {
+                ?>
 
                 <div class="wrap-input100 validate-input"
                      data-validate="Vous devez entrer votre identifiant de connexion">
@@ -224,10 +244,10 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 
                 <div class="text-center p-t-12">
 						<span class="txt1">
-							Forgot
+							Oublier
 						</span>
-                    <a class="txt2" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a
-                            href="./?mdpres='" class="txt2"">Password</a>
+                    <a class="txt2" href="./?loginres=1">Login</a><a style="color: rgb(230,230,230)"> / </a><a
+                            href="./?mdpres='" class="txt2">Mot de passe</a>
                 </div>
 
                 <div class="text-center p-t-136">
@@ -236,11 +256,12 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>
                 </div>
+              <?php }  ?>
+
             </form>
         </div>
     </div>
-    <?php }
-    }?>
+
 </div>
 
 
