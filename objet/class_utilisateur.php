@@ -59,7 +59,7 @@ class Utilisateur
         $data = $data.$this->CP_addr;
         $data = $data.$this->ville_addr;
         $data = $data.$this->photo_user;
-        $date = $date.$this->desc_user;
+        $date = $data.$this->desc_user;
         return $data;
     }
     /**
