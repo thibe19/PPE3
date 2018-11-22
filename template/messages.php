@@ -1,3 +1,17 @@
+<?php
+// YANN THER - 16h57 - 22/11/2018 - V0.0.1
+session_start();
+
+require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
+$id_user_session = dec_enc('decrypt',$_SESSION['id']);
+
+if (isset($_GET['ctc'])) {
+  $id_user_chat = $_POST['ctc'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +42,7 @@
 	<link rel="stylesheet" href="css/style.css" media="all" />
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]> 
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
@@ -42,11 +56,7 @@
     <!-- End  Header_Area -->
 
     <!-- Tranding-select and banner Area -->
-    <ul class="tranding_select">
-        <li><a href="#" class="waves-effect btn">Latest</a></li>
-        <li><a href="#" class="waves-effect btn">Trending</a></li>
-        <li><a href="#" class="waves-effect btn">Featured</a></li>
-    </ul>
+
     <div class="banner_area">
         <img src="images/banner.jpg" alt="" class="banner_img">
     </div>
@@ -56,21 +66,32 @@
     <section class="messages_area">
         <div class="messages_row row">
             <div class="messages_heder">
-                <h2>All Messages</h2>
+                <h2>Tout les messages</h2>
                 <ul class="mg_btn">
-                    <li><a href="#" class="waves-effect btn active"><i class="ion-ios-chatboxes"></i>New Message</a></li>
-                    <li><a href="#" class="waves-effect btn">Mark all as read</a></li>
+                    <li><a href="#" class="waves-effect btn active"><i class="ion-ios-chatboxes"></i>Nouveau Message</a></li>
+                    <li><a href="#" class="waves-effect btn">Marquer tout les messages comme lue</a></li>
                     <li><a href="#" class="waves-effect btn setting_i"><i class="ion-ios-gear-outline"></i></a></li>
                 </ul>
             </div>
            <div class="col s4 tab_panel">
                 <div class="search_area">
                     <div class="input-field">
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Chercher">
                         <i class="ion-ios-search-strong"></i>
                     </div>
                 </div>
                 <ul class="tabs tab_list">
+                  <li class="tab">
+                     <a href="#messages-4" class="active">
+                         <div class="media">
+                              <img src="images/profile-5-2.jpg" alt="" class="circle responsive-img">
+                              <div class="media_body">
+                                  <h4>Denzel Washington<small>2 days ago</small></h4>
+                                  <p>Hey Masum, I’m looking for you as a new <br>actor for my upcoming “Equalizer 2” movie...</p>
+                              </div>
+                         </div>
+                     </a>
+                 </li>
                     <li class="tab">
                        <a href="#messages-1">
                             <div class="media">
@@ -100,17 +121,6 @@
                                 <div class="media_body">
                                     <h4>Samuel L.<small>3 hours ago</small></h4>
                                     <p>Hi,</p>
-                                </div>
-                           </div>
-                       </a>
-                   </li>
-                    <li class="tab">
-                       <a href="#messages-4" class="active">
-                           <div class="media">
-                                <img src="images/profile-5-2.jpg" alt="" class="circle responsive-img">
-                                <div class="media_body">
-                                    <h4>Denzel Washington<small>2 days ago</small></h4>
-                                    <p>Hey Masum, I’m looking for you as a new <br>actor for my upcoming “Equalizer 2” movie...</p>
                                 </div>
                            </div>
                        </a>
@@ -151,12 +161,61 @@
                 </ul>
            </div>
             <div class="col s8 tab_content">
+              <div id="messages-4" class="col s12 all_messages">
+                  <div class="media profile">
+                      <img src="images/profile-5-2.jpg" alt="" class="circle responsive-img">
+                      <div class="media_body">
+                          <a href="#">Denzel Washington</a>
+                          <p>Acting is just a way of making a living, the family is life.</p>
+                      </div>
+                  </div>
+                  <div class="messages_date">
+                      <h4>July 13, 2018</h4>
+                  </div>
+                  <div class="sms">
+                      <p>Hey Masum, How about you?</p>
+                      <h6>5:27 pm</h6>
+                  </div>
+                  <div class="sms_right">
+                      <p>Hey Masum, How about you?</p>
+                      <h6>5:27 pm</h6>
+                  </div>
+                  <div class="sms">
+                      <p>Yeah what’s the matter? You know I’m kinda busy with my new  <br>upcoming Equalizer 2, spending all the time in Hollywood.</p>
+                      <p> So tell me what’s exciting? What’s going on?</p>
+                      <h6>5:28 pm</h6>
+                  </div>
+                  <div class="messages_date md_2">
+                      <h4>July 15, 2018</h4>
+                  </div>
+
+                  <div class="sms_right">
+                      <p>Ah got it...</p>
+                      <h6>5:29 pm</h6>
+                  </div>
+                  <div class="sms_right">
+                      <p>Actually nothing so important.. OK it’s important. I heard you were <br>looking for a new villain for Equalizer 2. May be I’m a good fit for this.</p>
+                      <p>You know what? I can give good dialogue delivery like Samuel L. Jackson <br>and, and nice expressions like Di Caprio.</p>
+                      <h6>5:30 pm</h6>
+                  </div>
+
+                  <div class="type_messages">
+                      <div class="input-field">
+                          <textarea placeholder="Type something & press enter"></textarea>
+                          <ul class="imoji">
+                              <li><a href="#"><i class="fa fa-smile-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-picture-o"></i></a></li>
+                              <li><a href="#"><i class="fa fa-paperclip"></i></a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
                 <div id="messages-1" class="col s12 all_messages">
                     <div class="media profile">
                         <img src="images/profile-7.jpg" alt="" class="circle responsive-img">
                         <div class="media_body">
-                            <a href="#">Dan Fisher</a>
-                            <p>Acting is just a way of making a living, the family is life.</p>
+                            <a href="#"></a>
+                            <p>test.</p>
                         </div>
                     </div>
                     <div class="messages_date">
@@ -254,55 +313,6 @@
                         <img src="images/profile-10.jpg" alt="" class="circle responsive-img">
                         <div class="media_body">
                             <a href="#">Samuel L.</a>
-                            <p>Acting is just a way of making a living, the family is life.</p>
-                        </div>
-                    </div>
-                    <div class="messages_date">
-                        <h4>July 13, 2018</h4>
-                    </div>
-                    <div class="sms">
-                        <p>Hey Masum, How about you?</p>
-                        <h6>5:27 pm</h6>
-                    </div>
-                    <div class="sms_right">
-                        <p>Hey Masum, How about you?</p>
-                        <h6>5:27 pm</h6>
-                    </div>
-                    <div class="sms">
-                        <p>Yeah what’s the matter? You know I’m kinda busy with my new  <br>upcoming Equalizer 2, spending all the time in Hollywood.</p>
-                        <p> So tell me what’s exciting? What’s going on?</p>
-                        <h6>5:28 pm</h6>
-                    </div>
-                    <div class="messages_date md_2">
-                        <h4>July 15, 2018</h4>
-                    </div>
-
-                    <div class="sms_right">
-                        <p>Ah got it...</p>
-                        <h6>5:29 pm</h6>
-                    </div>
-                    <div class="sms_right">
-                        <p>Actually nothing so important.. OK it’s important. I heard you were <br>looking for a new villain for Equalizer 2. May be I’m a good fit for this.</p>
-                        <p>You know what? I can give good dialogue delivery like Samuel L. Jackson <br>and, and nice expressions like Di Caprio.</p>
-                        <h6>5:30 pm</h6>
-                    </div>
-
-                    <div class="type_messages">
-                        <div class="input-field">
-                            <textarea placeholder="Type something & press enter"></textarea>
-                            <ul class="imoji">
-                                <li><a href="#"><i class="fa fa-smile-o"></i></a></li>
-                                <li><a href="#"><i class="fa fa-picture-o"></i></a></li>
-                                <li><a href="#"><i class="fa fa-paperclip"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="messages-4" class="col s12 all_messages">
-                    <div class="media profile">
-                        <img src="images/profile-5-2.jpg" alt="" class="circle responsive-img">
-                        <div class="media_body">
-                            <a href="#">Denzel Washington</a>
                             <p>Acting is just a way of making a living, the family is life.</p>
                         </div>
                     </div>
