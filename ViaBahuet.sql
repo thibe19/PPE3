@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 21 nov. 2018 à 10:58
+-- Généré le :  jeu. 22 nov. 2018 à 10:28
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -89,7 +89,10 @@ CREATE TABLE `Eleve` (
 
 INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `date_naiss`, `choix_position`) VALUES
 (14, 'Thibault', '0000-00-00', 0),
-(15, 'Yann', '0000-00-00', 1);
+(15, 'Yann', '0000-00-00', 1),
+(31, 'test', '2018-11-22', 0),
+(34, 'Thibault', '0000-00-00', 0),
+(38, 'Eleve', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -116,6 +119,16 @@ CREATE TABLE `eleve_pref` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Déchargement des données de la table `eleve_pref`
+--
+
+INSERT INTO `eleve_pref` (`id_pref`, `id_user`) VALUES
+(1, 38),
+(3, 38),
+(5, 38),
+(6, 38);
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +141,14 @@ CREATE TABLE `Entreprise` (
   `code_APE` varchar(5) COLLATE latin1_bin NOT NULL,
   `site_web` varchar(255) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Entreprise`
+--
+
+INSERT INTO `Entreprise` (`id_user`, `nom_resp`, `code_APE`, `site_web`) VALUES
+(32, 'DUPONDV2', '11009', 'google.fr'),
+(39, 'Dupond', '11009', 'http://uxart.io/downloads/openlist-html/all-template/index.html');
 
 -- --------------------------------------------------------
 
@@ -235,6 +256,29 @@ CREATE TABLE `Preferences` (
   `lib_pref` varchar(255) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Déchargement des données de la table `Preferences`
+--
+
+INSERT INTO `Preferences` (`id_pref`, `lib_pref`) VALUES
+(1, 'Voyages'),
+(2, 'Musique'),
+(3, 'Entrepreneuriat'),
+(4, 'Réseaux Sociaux'),
+(5, 'Sport'),
+(6, 'Informatique'),
+(7, 'Graphisme'),
+(8, 'Artisanat'),
+(9, 'Cinéma'),
+(10, 'Nourriture'),
+(11, 'Séries TV'),
+(12, 'Livre'),
+(13, 'Mode'),
+(14, 'Aide Social'),
+(15, 'Jeux'),
+(16, 'Jardinage'),
+(17, 'Animaux');
+
 -- --------------------------------------------------------
 
 --
@@ -296,7 +340,12 @@ CREATE TABLE `Utilisateur` (
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `mail_check`) VALUES
 (14, 'Nesti', 'thibe19', '$2y$10$OXZY/NBZO1i0yCkZKg9wtOLHh/Ca2H2kSRkO0YdFBJrQw3aYDynUm', 'thibaultnesti@gmail.com', 2147483647, '18 Bis', 'rue Blanche Selva', 19100, 'Brive-La-Gaillarde', 'purple_color_burst-wallpaper-3840x2160.jpg', '', 0),
-(15, 'Ther', 'Runcan', '$2y$10$.J6N64Bfg3znSElKGqhhFO9M92eCd7Xc/5QUsfUzuWQufCrzIpZkO', 'yannther99@gmail.com', 553558473, '21', 'Route des abeuils', 24570, 'Le lardin saint lazare', '', '', 0);
+(15, 'Ther', 'Runcan', '$2y$10$.J6N64Bfg3znSElKGqhhFO9M92eCd7Xc/5QUsfUzuWQufCrzIpZkO', 'yannther99@gmail.com', 553558473, '21', 'Route des abeuils', 24570, 'Le lardin saint lazare', '', '', 0),
+(31, 'test', 'test', 'test', 'test@test.fr', 0, 'Rue du', 'test', 75000, 'Paris', '123456', 'salut', 0),
+(32, 'Nesti', 'ent2', '$2y$10$Jtr1vyYYQPRdunZ1E1Uh0.1dWbH.BPUHs6KbaSM0HWr6I.bBYWx66', 'ent_test2@ent.fr', 0, 'rue de', 'azeaze', 67000, 'Saint etienne', '', '', 0),
+(34, 'CASINO', 'adminCasino', '$2y$10$MrxDDRvPfzzjQlNhysxIKe6fVmZZD7dmZqlwJV5YgGEOD8bf1iVtG', 'nestifamily@yahoo.fr', 0, 'avenue', 'azeaze', 33000, 'BORDEAUX', '', '', 0),
+(38, 'eleve', 'eleve', '$2y$10$HfEEvkWkEeW2F5O/ovw5DO0CCu7ZfYzb7CbhcK3EpU/HpyAH1oztu', 'eleve@eleve.fr', 0, '123', 'rue des eleves', 0, 'eleve', '', '', 0),
+(39, 'ent', 'ent', '$2y$10$tTraSuKc4kR7Ny44GXwtcebnavkqjmNe7pVnP3xGbouazLsgdx08W', 'ent@ent.fr', 0, '21', 'rue de la paix', 67000, 'Saint etienne', '', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -477,7 +526,7 @@ ALTER TABLE `Post`
 -- AUTO_INCREMENT pour la table `Preferences`
 --
 ALTER TABLE `Preferences`
-  MODIFY `id_pref` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pref` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `type_event`
@@ -489,7 +538,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Contraintes pour les tables déchargées
