@@ -111,6 +111,8 @@ function mail_reset_mdp($mail){
 
     mail($mail, $objet, $text, $entete);
 }
+<<<<<<< HEAD
+=======
 
 function mail_forgot_login($mail){
     $mail = $mail;
@@ -129,4 +131,5 @@ function mail_forgot_login($mail){
 
     mail($mail, $objet, $text, $entete);
 }
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
 ?>
