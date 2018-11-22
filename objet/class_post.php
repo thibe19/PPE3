@@ -10,8 +10,9 @@ class Post
   Private $date_post;
   Private $heure_post;
   Private $id_cat; //categorie
+  Private $id_user;
 
-  function __construct($id_post='',$titre_post='',$contenu_post='',$contenu_post='',$date_post='',$date_post='',$heure_post='',$id_cat='')
+  function __construct($id_post='',$titre_post='',$contenu_post='',$contenu_post='',$date_post='',$date_post='',$heure_post='',$id_cat='', $id_user='')
   {
     $this -> id_post = $id_post;
     $this -> titre_post = $titre_post;
@@ -19,6 +20,7 @@ class Post
     $this -> date_post = $date_post;
     $this -> heure_post = $heure_post;
     $this -> id_cat = $id_cat;
+    $this -> ud_user = $is_user;
   }
 
   ///////////////////////////////////////// Get ///////////////////////////////////////////
@@ -46,6 +48,10 @@ class Post
   {
     return $this-> id_cat;
   }
+  public function getid_user()
+  {
+    return $this-> id_user;
+  }
 
   //////////////////////////////////////////// SET  /////////////////////////////////////////////
   public function setid_post($id_post)
@@ -72,21 +78,26 @@ class Post
   {
     $this-> id_cat = $id_cat;
   }
+  public function setid_user($id_user)
+  {
+    $this-> id_user = $id_user;
+  }
 
 
 
 
   ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
-  public function insert_post($titre_post ,$contenu_post ,$date_post ,$heure_post ,$id_cat ,$conn )
+  public function insert_post($titre_post ,$contenu_post ,$date_post ,$heure_post ,$id_cat ,$conn, $id_user)
   {
     $titre_post = $this-> titre_post;
     $contenu_post = $this-> contenu_post;
     $date_post = $this-> date_post;
     $heure_post = $this-> heure_post;
     $id_cat = $this-> id_cat;
+    $id_user = $this-> id_user;
 
 
-    $SQL = "INSERT INTO post VALUES('','$titre_post','$contenu_post','$date_post','$heure_post','$id_cat')";
+    $SQL = "INSERT INTO post VALUES('','$titre_post','$contenu_post','$date_post','$heure_post','$id_cat','$id_user')";
     $res = $conn->Query($SQL);
 
   }

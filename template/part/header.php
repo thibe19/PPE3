@@ -11,7 +11,7 @@
                     <div id="dropdown6" class="dropdown-content submenu row">
                         <div class="col m4 menu_column">
                             <ul>
-                                <li><a href="get-started.html">Get started</a></li>
+
                                 <li><a href="dashboard.php">Dashboard</a></li>
                                 <li><a href="details.php">Post details</a></li>
                                 <li><a href="details-2.php">Post details 2</a></li>
@@ -315,11 +315,11 @@
                     <!-- Dropdown Structure -->
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="profile.php"><i class="ion-person"></i>My profile</a></li>
-                        <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
+                        <!-- <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
-                        </li>
-                        <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li>
-                        <li><a href="./setting.php"><i class="ion-gear-b"></i>Settings</a></li>
+                        </li> -->
+                        <!-- <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li> -->
+                        <li><a href="setting.php"><i class="ion-gear-b"></i>Settings</a></li>
                         <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
                         <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>
                         <li><a href="#"><i class="ion-power"></i>Log out</a></li>
@@ -338,7 +338,7 @@
                         Pages</a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown_s0" class="dropdown-content">
-                        <li><a href="get-started.html">Get started</a></li>
+
                         <li><a href="dashboard.php">Dashboard</a></li>
                         <li><a href="details.php">Post details</a></li>
                         <li><a href="details-2.php">Post details 2</a></li>
@@ -612,10 +612,10 @@
                     <!-- Dropdown Structure -->
                     <ul id="dropdown_s4" class="dropdown-content">
                         <li><a href="profile.php"><i class="ion-person"></i>Mon profile</a></li>
-                        <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
-                        <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
-                        </li>
-                        <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li>
+                        <!-- <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li> -->
+                        <!-- <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
+                        </li> -->
+                        <!-- <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li> -->
                         <li><a href="setting.php"><i class="ion-gear-b"></i>Settings</a></li>
                         <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
                         <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>

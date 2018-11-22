@@ -5,7 +5,7 @@
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
-class Stage extends offre
+class Stage 
 {
 
     Private $id_user; // déclaration des variables -- [  USER  ]
