@@ -1403,7 +1403,9 @@
         </div>
     </div>
     <!-- End Popup area -->
-
+    <?php
+    require('part/post.php');
+    ?>
     <!-- jQuery JS -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Materialize JS -->
