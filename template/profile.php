@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,20 +37,32 @@
     <!-- Header_Area -->
     <?php
     require('../ToolBox/bdd.inc.php');
+    require('../ToolBox/toolbox_inc.php');
     require('part/header.php');
     ?>
     <!-- End  Header_Area -->
 
     <!-- Tranding-select and banner Area -->
     <div class="banner_area banner_2">
+        <?php
+            $id = dec_enc('decrypt',$_SESSION['id']);
+            $SQL = "SELECT * FROM Utilisateur
+                    WHERE id_user='$id'";
+            $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
+            foreach (reqtoobj($req) as $r){ ?>
+
+
         <img src="images/banner-2.jpg" alt="" class="banner_img">
         <div class="media profile_picture">
-            <a href="profile.html"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
+            <a href="profile.html"><img style='width: 170px;height: 165px;'src="<?php (!empty($r->photo_user))? print $r->photo_user : print './images/profil/avatar.png'; ?>" alt="" class="circle"></a>
             <div class="media_body">
-                <a href="profile.html">Denzel Washington</a>
+                <a href="profile.html"><?php print $r->nom_user ?></a>
                 <h6>Dhaka, Bangladesh</h6>
             </div>
         </div>
+                <?php
+            }
+        ?>
     </div>
     <section class="author_profile">
         <div class="row author_profile_row">
