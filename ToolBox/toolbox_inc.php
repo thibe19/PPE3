@@ -2,7 +2,6 @@
 
 include 'bdd.inc.php';
 
-
 /******************
 / 1.DATA BASES
 /******************/
@@ -112,4 +111,25 @@ function mail_reset_mdp($mail){
 
     mail($mail, $objet, $text, $entete);
 }
+<<<<<<< HEAD
+=======
+
+function mail_forgot_login($mail){
+    $mail = $mail;
+    $objet = "Login compte : ViaBahuet.";
+    $entete = "From: yannther99@gmail.com";
+
+    $SQL="SELECT * FROM utilisateur
+                  WHERE email_user='$mail';";
+    $Req=$conn->Query($SQL);
+    $result=$Req->fetch();
+
+    $text = "Bonjour ".$result['nom_user']."\n";
+    $text = $text."Votre login est : \n";
+    $text = $text.$result['login_user']."\n\n\n";
+    $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+    mail($mail, $objet, $text, $entete);
+}
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
 ?>

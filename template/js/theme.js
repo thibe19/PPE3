@@ -13,7 +13,11 @@
             });
         };
     };
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
     // Code Here
     function calendar() {
         if ($('.calendar').length) {
@@ -42,6 +46,7 @@
     }
 
     // Loding next
+<<<<<<< HEAD
     function infiniteScroll() {
         if ($('.middle_section, .notifications_area').length) {
            $('.middle_section').jscroll({
@@ -53,6 +58,9 @@
                 callback: false,
            });
 
+=======
+    
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
            $('.notifications_content').jscroll({
                 loadingHtml: '<img src="images/preloader.svg" alt="Loading" />',
                 padding: 0,

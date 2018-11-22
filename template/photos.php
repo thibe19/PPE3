@@ -36,7 +36,7 @@
     require('../ToolBox/bdd.inc.php');
     require('part/header.php');
     ?>
-    <!-- End  Header_Area --> 
+    <!-- End  Header_Area -->
 
     <!-- Tranding-select and banner Area -->
     <div class="banner_area banner_2">
@@ -337,7 +337,9 @@
         </form>
     </div>
     <!-- End Add post poup area -->
-
+    <?php
+    require('part/post.php');
+    ?>
     <!-- jQuery JS -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- Materialize JS -->

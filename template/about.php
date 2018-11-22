@@ -795,9 +795,6 @@
     <!-- Add post poup area -->
     <?php
     require('part/post.php');
-
-    
-
     ?>
     <!-- End Add post poup area -->
 

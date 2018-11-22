@@ -96,6 +96,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 </head>
 <body>
 
+<<<<<<< HEAD
 <?php
 
 
@@ -112,6 +113,10 @@ if (isset($_GET['loginres'])){
 }
 ?>
 
+=======
+
+
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -123,6 +128,79 @@ if (isset($_GET['loginres'])){
 					<span class="login100-form-title">
 						Member Login
 					</span>
+
+
+                <?php
+
+
+
+                //Test reset de mot de pass
+
+
+                if (isset($_GET['mdpres'])){
+                    if (isset($_POST['mailob'])){
+                        mail_reset_mdp($_POST['mailob']);
+                        ?> <center> <p>Mail envoyé.</p> </center> <?php
+                    }
+                    else{?>
+                        <center> <p>Entrer l'adresse mail du compte.</p> </center>
+                        <br>
+                        <div class="wrap-input100 validate-input" data-validate="Vous devez entrer votre mot de passe">
+                            <input class="input100" type="mail" name="mailo" placeholder="Mail">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button type="submit" name="mailob" value="" class="login100-form-btn">
+                                Envoyer
+                            </button>
+                        </div>
+                        <div class="text-center p-t-136">
+                            <a class="txt2" href="./">
+                                Retour
+                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div><?php
+                    }
+                }
+                else{
+                if (isset($_GET['loginres'])){
+                    if (isset($_POST['mailob'])) {
+                        mail_forgot_login($_POST['mailob']);
+                        ?>
+                        <center><p>Mail envoyé.</p></center> <?php
+                    } else {
+                        ?>
+                        <center><p>Entrer l'adresse mail du compte.</p></center>
+                        <br>
+                        <div class="wrap-input100 validate-input"
+                             data-validate="Vous devez entrer votre mot de passe">
+                            <input class="input100" type="mail" name="mailo" placeholder="Mail">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                          <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button type="submit" name="mailob" value="" class="login100-form-btn">
+                                Envoyer
+                            </button>
+                        </div>
+                        <div class="text-center p-t-136">
+                            <a class="txt2" href="./">
+                                Retour
+                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div><?php
+                    }
+                }
+                else{
+                ?>
+
 
                 <div class="wrap-input100 validate-input"
                      data-validate="Vous devez entrer votre identifiant de connexion">
@@ -167,7 +245,12 @@ if (isset($_GET['loginres'])){
 						<span class="txt1">
 							Forgot
 						</span>
+<<<<<<< HEAD
                     <a class="txt2 button_reset_id" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a href="./?mdpres='" class="txt2 button_reset_id"">Password</a>
+=======
+                    <a class="txt2" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a
+                            href="./?mdpres='" class="txt2"">Password</a>
+>>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
                 </div>
 
                 <div class="text-center p-t-136">
@@ -179,6 +262,8 @@ if (isset($_GET['loginres'])){
             </form>
         </div>
     </div>
+    <?php }
+    }?>
 </div>
 
 
