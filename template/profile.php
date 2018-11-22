@@ -48,12 +48,11 @@ require('../objet/classes.php');
 
 
     <!-- TEST ELEVE -->
-    <?php if ($_SESSION['Eleve']){ ?>
+    <?php if (isset($_SESSION['Eleve'])){ ?>
     <div class="banner_area banner_2">
         <?php
             $id = dec_enc('decrypt',$_SESSION['id']);
             $uneleve = unserialize($_SESSION['Eleve']);
-            var_dump($uneleve->getAllEleve());
             ?>
         <img src="images/banner-2.jpg" alt="" class="banner_img">
         <div class="media profile_picture">
@@ -664,28 +663,21 @@ require('../objet/classes.php');
     /*
      * TODO
      */
-    elseif($_SESSION['Entreprise']){?>
+    elseif(isset($_SESSION['Entreprise'])){?>
 
         <div class="banner_area banner_2">
             <?php
             $id = dec_enc('decrypt',$_SESSION['id']);
-            $SQL = "SELECT * FROM Utilisateur
-                    WHERE id_user='$id'";
-            $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
-            foreach (reqtoobj($req) as $r){ ?>
-
-
+            $uneent= unserialize($_SESSION['Entreprise']);
+            ?>
                 <img src="images/banner-2.jpg" alt="" class="banner_img">
                 <div class="media profile_picture">
-                    <a href="profile.html"><img style='width: 170px;height: 165px;'src="<?php (!empty($r->photo_user))? print $r->photo_user : print './images/profil/avatar.png'; ?>" alt="" class="circle"></a>
+                    <a href="profile.html"><img style='width: 170px;height: 165px;'src="<?php (!empty($uneent->getPhotoUser()))? print $uneent->getPhotoUser() : print './images/profil/avatar.png'; ?>" alt="" class="circle"></a>
                     <div class="media_body">
-                        <a href="profile.html"><?php print $r->nom_user ?></a>
-                        <h6>Dhaka, Bangladesh</h6>
+                        <a href="profile.html"><?php print $uneent->getNomUser() ?></a>
+                        <h6><?php print $uneent->getVilleAddr() ?></h6>
                     </div>
                 </div>
-                <?php
-            }
-            ?>
         </div>
         <section class="author_profile">
             <div class="row author_profile_row">

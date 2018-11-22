@@ -1,3 +1,9 @@
+<?php
+    require ('../../ToolBox/bdd.inc.php');
+    require ('../../ToolBox/toolbox_inc.php');
+    $SQL = "SELECT * FROM Preferences";
+    $req =
+?>
 <div class="col">
     <div class="left_side_bar">
         <div class="categories">
