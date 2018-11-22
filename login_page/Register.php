@@ -1,6 +1,7 @@
 <?php
 // Register date modif : 15/11/2018 Version 0.0.4
 require('../objet/class_utilisateur.php');
+require ('../ToolBox/toolbox_inc.php');
 require_once ('../objet/classes.php');
 session_start();
 /*
@@ -228,7 +229,7 @@ function dec_enc($action, $string) {
          else{
            if (isset($_POST['E1'])) {
 
-             $_SESSION['pass'] = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+             $_SESSION['pass'] = $_POST['pass'];
              $_SESSION['mail'] = $_POST['email'];
              $_SESSION['login'] = $_POST['login'];
              ?>
@@ -319,7 +320,7 @@ function dec_enc($action, $string) {
                  <div class="wrap-input100 validate-input"
                  data-validate="Champ obligatoire">
                  <input class="input100" type="text" name="surname"
-                 placeholder="Nom">
+                 placeholder="Nom/nom entreprise">
                  <!-- Champ inscription Mot de passe  -->
                  <span class="focus-input100"></span>
                  <span class="symbol-input100">
@@ -675,6 +676,7 @@ function dec_enc($action, $string) {
          $prenom = $_POST['name'];
          $choixpos = $_POST['stayp'];
 
+         die();
 
          $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$choixpos);
          $uneleve->inscriptioneleve($uneleve,$conn);
@@ -734,11 +736,86 @@ function dec_enc($action, $string) {
        }
 
         if (isset($_POST['C1'])){
-            var_dump($_POST['pref']);
+            $login = $_SESSION['login'];
+            $mail = $_SESSION['mail'];
+            $mdp = $_SESSION['pass'];
             $prefs = $_POST['pref'];
-            $uneleve->getIDBDD($conn);
-        }
+            $id = getIDBDD($login,$mdp,$mail,$conn);
 
+            foreach ($prefs as $pref){
+                $SQL = "INSERT INTO eleve_pref
+                        VALUES ('$pref','$id');";
+                $req = $conn->Query($SQL) or die('Erreur dans la selection des preferences');
+            }
+
+             ?>
+                 <div class="limiter">
+                     <div class="container-login100">
+                         <div class="wrap-login100">
+                             <div class="login100-pic js-tilt"
+                                  data-tilt>
+                                 <img src="images/img-01.png"
+                                      alt="IMG">
+                             </div>
+
+                             <form class="login100-form validate-form"
+                                   method="POST">
+                                 >
+                                 <span class="login100-form-title">
+               Inscription
+             </span>
+
+                                 <p>
+                                     L'INSCRIPTION EST TERMINÉ VOUS ALLEZ RECEVOIR UN MAIL DE VALIDATION
+                                     A L'ADRESSE QUE VOUS AVEZ RENSEIGNÉ.</p>
+
+                                 <!-- <form action="#" method="post"> -->
+                                 <div class="container-login100-form-btn">
+                                     <!-- Bouton accer prochaine étape  -->
+                                     <button name="FINENT"
+                                             value="1"
+                                             class="login100-form-btn">
+                                         Finaliser
+                                     </button>
+                                 </div><?php
+                                 $mail = "yannther99@gmail.com";
+                                 $objet = "Activer votre compte : ViaBahuet.";
+                                 $entete = "From: yannther99@gmail.com";
+
+
+
+
+
+
+                                 $login_m = $login;
+                                 $mdp_m = $mdp;
+
+
+
+                                 $loginc = dec_enc('encrypt',"$login_m");
+                                 $idc = dec_enc('encrypt',"$id");
+
+                                 $text = "Bienvenue sur ViaBahuet,\n";
+                                 $text = $text."Pour activer votre compte, veuillez cliquer sur le lien ci dessous.\n";
+                                 $text = $text."http://localhost/PPE3/login_page/validation.php?log=".urlencode($loginc)."&id=".urlencode($idc)."\n\n\n>";
+                                 $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+                                 mail($mail, $objet, $text, $entete);
+
+
+                                 }
+
+
+
+
+
+
+
+
+
+
+
+        //Fin inscription entreprise
        if (isset($_POST['C6'])) {
           $mail = $_SESSION['mail'];
           $mdp = $_SESSION['pass'];
@@ -798,14 +875,9 @@ function dec_enc($action, $string) {
 
                $login_m = $login;
                $mdp_m = $mdp;
+               $mailuser = $_SESSION['mail'];
 
-               $SQL="SELECT * FROM utilisateur
-                     WHERE login_user='$login_m'
-                     AND mdp_user='$mdp_m';";
-               $Req=$conn->Query($SQL);
-               $result=$Req->fetch();
-
-               $id = $result['id_user'];
+               $id = getIDBDD($login,$mdp,$mailuser,$conn);
 
 
                $loginc = dec_enc('encrypt',"$login_m");
