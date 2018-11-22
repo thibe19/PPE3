@@ -1,27 +1,39 @@
 <?php
-  require('../objet/classes.php');
-  require('../ToolBox/bdd.inc.php');
-  //echo $titre_post = $_POST['post_titre'];
-  //echo $titre_post = $_POST['post_desc'];
+/*
+*  22/11/18
+*  post traitement
+*  v0.0.1
+*/
+session_start();
 
-  /////////////////////////////////////////////////:pour le select c'est juste un test, il faut css, utiliser mes favori
- ?>
+if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
+  $mdp=$_SESSION['mdp'];
+  $ndc=$_SESSION['login'];
+}
 
- <!-- <!DOCTYPE html>
- <html lang="en" dir="ltr">
-   <head>
-     <meta charset="utf-8">
-     <title></title>
-     <script src="js/dropzone.js"></script>
-   </head>
-   <body>
-     <div id="dropzone">
-       <form class="dropzone needsclick dz-clickable" action="/upload" id="demo-upload">
+require('../ToolBox/bdd.inc.php');
 
-       </form>
+if (isset($_POST['post'])) {
 
+  $sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
+  $res = $conn -> query($sql)or die($conn -> errorInfo());
+  $data = $res -> fetch();
+  $id=$data['id_user'];
 
+  $titre = $_POST['post_titre'];
+  $desc = $_POST['post_desc'];
+  $photo= '123456';
+  $cat = $_POST['cat'];
+  $date = date("Y-m-d");
+  $heur = date("H:i:s");
 
-     </div>
-   </body>
- </html> -->
+  $sqlI="INSERT INTO Post VALUES (NULL,'$titre','$desc','$photo','$date','$heur','$cat','$id') ";
+  $resI = $conn->Query($sqlI)or die('Erreur modification user');
+
+  echo "<script> alert('Le Post a été crée.');
+                  window.location.href='./index-2.php';
+        </script>";
+
+}
+
+?>
