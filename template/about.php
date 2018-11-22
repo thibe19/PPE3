@@ -1,4 +1,7 @@
-<?php require('../ToolBox/bdd.inc.php'); ?>
+<?php
+    require('../ToolBox/bdd.inc.php');
+    require('../ToolBox/toolbox_inc.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
