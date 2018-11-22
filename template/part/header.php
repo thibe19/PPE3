@@ -1,3 +1,5 @@
+
+<?php ///////:YANN THER 10h22 - 22/11/2018 - ?>
 <nav class="header_area">
     <div class="custom_container">
         <div class="nav-wrapper">
@@ -57,11 +59,14 @@
                         <li><a href="#" class="search_icon"><i class="ion-ios-search"></i></a></li>
                     </ul>
                 </li>
-                <li><a href="#post_modal" class="waves-effect btn post_btn modal-trigger"><i class="ion-plus"></i><span>Add Post</span></a>
+                <li><a href="#post_modal" class="waves-effect btn post_btn modal-trigger"><i class="ion-plus"></i><span>Ajouter Post</span></a>
                 </li>
                 <!-- Follow feed -->
-                <li class="notifications follow"><a class="dropdown-button" href="#!" data-activates="dropdown4"><i
-                                class="ion-ios-person-outline"></i><b class="n-number">7</b></a>
+                <!-- POUR les menu déroulant dans le li mettre class="notifications follow" -->
+                <li><a href="requests.php?groupe=elve">
+                  <i class="ion-ios-person-outline"> </i>
+                  <!-- <b class="n-number"></b>    Notification          -->
+                  </a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown4" class="dropdown-content">
                         <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
