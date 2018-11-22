@@ -28,7 +28,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
     $login = $_POST['login'];
     $mdp = $_POST['pass'];
 
-    print $SQL = "SELECT mdp_user FROM Utilisateur
+    $SQL = "SELECT mdp_user FROM Utilisateur
                 WHERE login_user='$login'";
     $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
     $req = $req->fetchAll();
@@ -226,12 +226,8 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 						<span class="txt1">
 							Forgot
 						</span>
-<<<<<<< HEAD
-                    <a class="txt2 button_reset_id" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a href="./?mdpres='" class="txt2 button_reset_id"">Password</a>
-=======
                     <a class="txt2" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a
                             href="./?mdpres='" class="txt2"">Password</a>
->>>>>>> 2678929e6aaa4741fdbf8bc605a9a5c7885bf09a
                 </div>
 
                 <div class="text-center p-t-136">
