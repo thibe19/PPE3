@@ -1,3 +1,6 @@
+<?php
+// YANN THER - 10h20 - 22/11/2018
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,101 +40,121 @@
     <!-- Header_Area -->
     <?php
     require('../ToolBox/bdd.inc.php');
+    require('../ToolBox/toolbox_inc.php');
     require('part/header.php');
     ?>
     <!-- End  Header_Area -->
-
+    <ul class="tranding_select ">
+        <li class="tab"><a href="requests.php?groupe=elve" class="waves-effect btn <?php if ($_GET['groupe'] == "elve") { echo "active"; } ?>">élèves</a></li>
+        <li class="tab"><a href="requests.php?groupe=entr" class="waves-effect btn <?php if ($_GET['groupe'] == "entr") { echo "active"; } ?>">Entreprises</a></li>
+    </ul>
     <!-- Notifications area -->
     <section class="notifications_area">
         <div class="notifications">
             <!-- Dropdown Structure -->
-            <div class="hed_notic">All Requests <span><i class="ion-ios-gear-outline"></i></span></div>
-            <ul class="notifications_content follow">
+
+              <?php
+
+            //////////// eleves affichage
+
+            if ($_GET['groupe'] == "elve") {
+
+              ?>
+              <div class="hed_notic">Tout les élèves <span><i class="ion-ios-gear-outline"></i></span></div>
+              <ul class="notifications_content follow">
+              <?php
+
+              $SQL = "SELECT * FROM eleve";
+              $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
+              while ($res = $req->fetch()) {
+
+
+                $id_user = $res['id_user'];
+
+                  $SQL2 = "SELECT * FROM utilisateur
+                          WHERE id_user = $id_user";
+                  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+                  while ($res2 = $req2->fetch()) {
+
+                    if ($res2['photo_user'] == "") {
+                      $photo = "avatar.png";
+                    }
+                    else {
+                      $photo = $res2['photo_user'];
+                    }
+
+
+               ?>
+
+
                 <li>
                    <a href="#">
                        <div class="media first_child">
-                            <img src="images/profile-9.jpg" alt="" class="circle responsive-img">
+                            <img src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle responsive-img">
                             <div class="media_body">
-                                <p><b>Dan Fisher</b> started following you.</p>
-                                <h6>544 mutual</h6>
+                                <p><b><?php echo $res2['nom_user']; ?></b></p>
+                                <h6> <?php echo $res2['num_addr_user'].", ".$res2['rue_addr_user'].", ".$res2['CP_addr_user']." ".$res2['ville_addr_user']; ?> </h6>
+
                                 <div class="btn_group">
-                                    <span class="waves-effect follow_b">Follow back</span>
-                                    <span class="waves-effect">Block</span>
+                                    <span class="waves-effect follow_b">Contacter</span>
+                                    <span class="waves-effect">Ajouter amis</span>
                                 </div>
                             </div>
                        </div>
                    </a>
                 </li>
-                <li>
-                   <a href="#">
-                       <div class="media">
-                            <img src="images/profile-1.jpg" alt="" class="circle responsive-img">
-                            <div class="media_body">
-                                <p><b>James Richardman </b>started following you.</p>
-                                <h6>32 mutual</h6>
-                                <div class="btn_group">
-                                    <span class="waves-effect confirm"><i class="ion-android-done"></i></span>
-                                    <span class="waves-effect">Block</span>
-                                </div>
-                            </div>
-                       </div>
-                   </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <div class="media">
-                            <img src="images/profile-12.jpg" alt="" class="circle responsive-img w_img">
-                            <div class="media_body">
-                                <p>You are now following <b>Meryl Streep</b></p>
-                                <h6>Check out her most recent updates.</h6>
-                            </div>
-                       </div>
-                   </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <div class="media">
-                            <img src="images/profile-2.jpg" alt="" class="circle responsive-img">
-                            <div class="media_body">
-                                <p><b>James Richardman </b>started following you.</p>
-                                <h6>90 mutual</h6>
-                                <div class="btn_group">
-                                    <span class="waves-effect close_b"><i class="ion-android-close"></i></span>
-                                    <span class="waves-effect">Block</span>
-                                </div>
-                            </div>
-                       </div>
-                   </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <div class="media">
-                            <img src="images/profile-10.jpg" alt="" class="circle responsive-img">
-                            <div class="media_body">
-                                <p><b>Dan Fisher</b> started following you.</p>
-                                <h6>544 mutual</h6>
-                                <div class="btn_group">
-                                    <span class="waves-effect follow_b">Follow back</span>
-                                    <span class="waves-effect"><i class="ion-android-done"></i></span>
-                                </div>
-                            </div>
-                       </div>
-                   </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <div class="media">
-                            <img src="images/profile-11.jpg" alt="" class="circle responsive-img">
-                            <div class="media_body">
-                                <p><b>Edgar Hoover</b> started following you.</p>
-                                <div class="btn_group left">
-                                    <span class="waves-effect follow_b">Follow back</span>
-                                    <span class="waves-effect">Block</span>
-                                </div>
-                            </div>
-                       </div>
-                   </a>
-                </li>
+              <?php }}}
+
+
+              ///////////////// entreprise affichage
+
+
+              if ($_GET['groupe'] == "entr") {
+
+                ?>
+                <div class="hed_notic">Toutes les entreprises <span><i class="ion-ios-gear-outline"></i></span></div>
+                <ul class="notifications_content follow">
+                <?php
+
+                $SQL = "SELECT * FROM entreprise";
+                $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
+                while ($res = $req->fetch()) {
+
+
+                  $id_user = $res['id_user'];
+
+                    $SQL2 = "SELECT id_user, nom_user, photo_user FROM utilisateur
+                            WHERE id_user = $id_user";
+                    $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+                    while ($res2 = $req2->fetch()) {
+
+                      if ($res2['photo_user'] == "") {
+                        $photo = "avatar2.png";
+                      }
+                      else {
+                        $photo = $res2['photo_user'];
+                      }
+
+
+                 ?>
+
+
+                  <li>
+                     <a href="#">
+                         <div class="media first_child">
+                              <img src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle responsive-img">
+                              <div class="media_body">
+                                  <p><b><?php echo $res2['nom_user']; ?></b> </p>
+                                  <h6> </h6>
+                                  <div class="btn_group">
+                                      <span class="waves-effect follow_b">Contacter</span>
+                                      <span class="waves-effect">Ajouter amis</span>
+                                  </div>
+                              </div>
+                         </div>
+                     </a>
+                  </li>
+                <?php }}} ?>
             </ul>
         </div>
     </section>

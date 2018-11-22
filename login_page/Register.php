@@ -1044,27 +1044,12 @@ function dec_enc($action, $string) {
          <?php
        }
      ?>
-     <!-- FIN DE LA CASE BOUTON FOOTER -->
-     <div class="text-center p-t-12">
-       <!-- Bouton si mot de passe ou login utilisé -->
-       <span class="txt1">
-         Oublier
-       </span>
-       <a class="txt2"
-       href="#">
-       Login
-       /
-       Mot
-       de
-       Passe?
-     </a>
-   </div>
 
 
    <div class="text-center p-t-136">
      <!-- Page de connection -->
      <a class="txt2"
-     href="#">
+     href="./">
      Se
      connecter
      <i class="fa fa-long-arrow-right m-l-5"

@@ -62,4 +62,54 @@ include 'bdd.inc.php';
       $req = $req->fetchAll(PDO::FETCH_OBJ);
       return $req;
   }
+
+
+  /***********************Encryptage *************************/
+function dec_enc($action, $string) {
+    $output = false;
+
+    $encrypt_method = "AES-256-CBC";
+    $secret_key = 'This is my secret key';
+    $secret_iv = 'This is my secret iv';
+
+    // hash
+    $key = hash('sha256', $secret_key);
+
+    // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    if( $action == 'encrypt' ) {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+        $output = base64_encode($output);
+    }
+    else if( $action == 'decrypt' ){
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+    }
+
+    return $output;
+}
+
+
+/*
+ *
+ * Mail password
+ *
+ */
+function mail_reset_mdp($mail){
+    $mail = $mail;
+    $objet = "Mot de passe compte : ViaBahuet.";
+    $entete = "From: yannther99@gmail.com";
+
+    $SQL="SELECT * FROM utilisateur
+                  WHERE email_user='$mail';";
+    $Req=$conn->Query($SQL);
+    $result=$Req->fetch();
+
+    $text = "Bonjour ".$result['nom_user']."\n";
+    $text = $text."Pour changer votre mot de passe utiliser le lien ci-dessous : \n";
+    $text = $text."http://localhost/PPE3/login_page/pass_reset.php?id=".urlencode($result['id_user'])."\n\n\n";
+    $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+
+    mail($mail, $objet, $text, $entete);
+}
 ?>

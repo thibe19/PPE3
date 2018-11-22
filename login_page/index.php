@@ -6,8 +6,14 @@
  *
  *  v0.0.4
  */
+/*
+ *
+ *
+ * TODO : PEnser a la vérification mail
+ */
 //Connection a la base de donnée
 require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
 session_start();
 //
 //print $_COOKIE['login'].'<br>'.$_COOKIE['mdp'];
@@ -22,7 +28,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
     $login = $_POST['login'];
     $mdp = $_POST['pass'];
 
-    $SQL = "SELECT mdp_user FROM Utilisateur
+    $SQL = "SELECT mdp_user, FROM Utilisateur
                 WHERE login_user='$login'";
     $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
     $req = $req->fetchAll();
@@ -90,6 +96,22 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 </head>
 <body>
 
+<?php
+
+
+
+//Test reset de mot de pass
+
+
+if (isset($_GET['loginres'])){
+    if (isset($_POST['mailob'])){
+        mail_reset_mdp($_POST['mailob']);
+        ?> <center> <p>Mail envoyé.</p> </center> <?php
+    }
+    print 'hi';
+}
+?>
+
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -145,12 +167,12 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
 						<span class="txt1">
 							Forgot
 						</span>
-                    <a class="txt2 button_reset_id" onclick="window.location='./?loginres=1'">Username</a><a style="color: rgb(230,230,230)"> / </a><a onclick="window.location='./?mdpres=1'" class="txt2 button_reset_id" href="#">Password</a>
+                    <a class="txt2 button_reset_id" href="./?loginres=1">Username</a><a style="color: rgb(230,230,230)"> / </a><a href="./?mdpres='" class="txt2 button_reset_id"">Password</a>
                 </div>
 
                 <div class="text-center p-t-136">
                     <a class="txt2" href="./Register.php">
-                        Create your Account
+                        S'inscire
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>
                 </div>
