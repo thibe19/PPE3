@@ -14,6 +14,7 @@
 //Connection a la base de donnée
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
+require('../objet/classes.php');
 session_start();
 //
 //print $_COOKIE['login'].'<br>'.$_COOKIE['mdp'];
@@ -37,12 +38,64 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
         $mdp = $req[0]['mdp_user'];
         $SQL = "SELECT * FROM Utilisateur
                 WHERE login_user='$login' AND mdp_user='$mdp'";
-        $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
-        $req = $req->fetchAll();
+        $req = testsql($SQL,$conn);
 
         //Test si l'identifiant et le mot de passe existe et corresponds
         if ($req) {
             $_SESSION['id']=dec_enc('encrypt',$req[0]['id_user']);
+            $id = $req[0]['id_user'];
+            if (testsql("SELECT id_user FROM Eleve WHERE id_user='$id'",$conn)){
+                $SQL = "SELECT * FROM Utilisateur
+                    WHERE id_user='$id'";
+                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
+                foreach (reqtoobj($req) as $r){
+                    $nom = $r->nom_user;
+                    $email = $r->email_user;
+                    $tel = $r->tel_user;
+                    $numadd = $r->num_addr_user;
+                    $rue = $r->rue_addr_user;
+                    $cp = $r->CP_addr_user;
+                    $ville = $r->ville_addr_user;
+                    $photo = $r->photo_user;
+                    $desc = $r->desc_user;
+                }
+                $SQL = "SELECT * FROM Eleve
+                        WHERE id_user='$id'";
+                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
+                foreach (reqtoobj($req) as $r){
+                    $prenom = $r->prenom_eleve;
+                    $date = $r->date_naiss;
+                    $choix = $r->choix_position;
+                }
+                $uneleve = new Eleve('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choix);
+                $_SESSION['Eleve']= serialize($uneleve);
+            }
+            elseif(testsql("SELECT id_user FROM Entreprise WHERE id_user='$id'",$conn)){
+                $SQL = "SELECT * FROM Utilisateur
+                    WHERE id_user='$id'";
+                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
+                foreach (reqtoobj($req) as $r){
+                    $nom = $r->nom_user;
+                    $email = $r->email_user;
+                    $tel = $r->tel_user;
+                    $numadd = $r->num_addr_user;
+                    $rue = $r->rue_addr_user;
+                    $cp = $r->CP_addr_user;
+                    $ville = $r->ville_addr_user;
+                    $photo = $r->photo_user;
+                    $desc = $r->desc_user;
+                }
+                $SQL = "SELECT * FROM Entreprise
+                        WHERE id_user='$id'";
+                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
+                foreach (reqtoobj($req) as $r){
+                    $nomrep = $r->nom_resp;
+                    $ape = $r->code_APE;
+                    $site = $r->site_web;
+                }
+                $unent = new Entreprise('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$nomrep,$ape,$site);
+                $_SESSION['Entreprise']=serialize($unent);
+            }
             $_SESSION['login'] = $_POST['login'];
             $_SESSION['mdp'] = $_POST['pass'];
             if (isset($_POST['stay'])) {
