@@ -676,7 +676,6 @@ function dec_enc($action, $string) {
          $prenom = $_POST['name'];
          $choixpos = $_POST['stayp'];
 
-         die();
 
          $uneleve = new Eleve('', $surname, $login, $mdp, $mail, $numt, $numa, $rue, $cp, $ville, $photo,'',$prenom,$choixpos);
          $uneleve->inscriptioneleve($uneleve,$conn);
