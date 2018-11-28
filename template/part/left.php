@@ -4,8 +4,12 @@
         $iduser = unserialize($_SESSION['Eleve'])->getIdUser();;
         $pref = data_base_in_object('Preferences',$conn);
         $SQL = "SELECT id_pref FROM eleve_pref WHERE id_user='$iduser';";
-        $prefuser = reqtoobj($SQL,$conn);
-        display_data_base('eleve_pref',$conn);
+        $res = $conn->Query($SQL)or die('Erreur');
+        $i = 0;
+        while($data=$res->fetch()){
+          $prefuser[$i] = $data['id_pref'];
+          $i++;
+        }
     }
     if(isset($_SESSION['Profilon'])){
 
@@ -29,15 +33,15 @@
             <ul class="interests_list">
                 <?php if (isset($pref)) {
                     foreach ($pref as $p) {
-                        if(testsql("SELECT * FROM eleve_pref WHERE id_pref='$p->id_pref'",$conn)){
+                        if(in_array($p->id_pref,$prefuser)){
                         ?>
                         <li>
-                            <a href="#"><i class="ion-android-radio-button-on" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
+                            <a><i class="ion-android-radio-button-on" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
                         </li>
                     <?php }
                     else{ ?>
                         <li>
-                            <a href="#"><i class="ion-android-radio-button-off" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
+                            <a><i class="ion-android-radio-button-off" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
                         </li>
                     <?php }
                     }
