@@ -1,6 +1,6 @@
 <?php
-    require ('../../ToolBox/bdd.inc.php');
-    require ('../../ToolBox/toolbox_inc.php');
+    require ('./../ToolBox/bdd.inc.php');
+    require ('./../ToolBox/toolbox_inc.php');
     $SQL = "SELECT * FROM Preferences";
 ?>
 <div class="col">
