@@ -58,6 +58,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $ville = $r->ville_addr_user;
                     $photo = $r->photo_user;
                     $desc = $r->desc_user;
+                    $dom_acti = $r->dom_acti;
                 }
                 $SQL = "SELECT * FROM Eleve
                         WHERE id_user='$id'";
@@ -67,7 +68,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $date = $r->date_naiss;
                     $choix = $r->choix_position;
                 }
-                $uneleve = new Eleve('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choix);
+                $uneleve = new Eleve('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choix);
                 $_SESSION['Eleve']= serialize($uneleve);
             }
             elseif(testsql("SELECT id_user FROM Entreprise WHERE id_user='$id'",$conn)){
@@ -84,6 +85,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $ville = $r->ville_addr_user;
                     $photo = $r->photo_user;
                     $desc = $r->desc_user;
+                    $dom_acti = $r->dom_acti;
                 }
                 $SQL = "SELECT * FROM Entreprise
                         WHERE id_user='$id'";
@@ -93,7 +95,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $ape = $r->code_APE;
                     $site = $r->site_web;
                 }
-                $unent = new Entreprise('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$nomrep,$ape,$site);
+                $unent = new Entreprise('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomrep,$ape,$site);
                 $_SESSION['Entreprise']=serialize($unent);
             }
             $_SESSION['login'] = $_POST['login'];

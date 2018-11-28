@@ -16,10 +16,10 @@ class Entreprise extends Utilisateur
     Private $site_web;
 
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                         $ville = "", $photo = "", $desc_user="", $nomresp = "", $code = "", $site = "")
+                         $ville = "", $photo = "", $desc_user="", $dom_acti="", $nomresp = "", $code = "", $site = "")
     {
       Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
-          $ville,$photo);
+          $ville,$photo,$desc_user,$dom_acti);
         $this->nom_resp = $nomresp;
         $this->code_ape = $code;
         $this->site_web = $site;
