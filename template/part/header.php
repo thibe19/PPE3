@@ -666,6 +666,44 @@ function displayul() {
 </script>
 <div style='display:none;' id='invisible'>
   <nav class="header_area2">
-
+  <center>
+    <table>
+      <tr>
+        <td width="10%" height="0%">Mots clé</td>
+        <td width="10%" height="0%"></td>
+        <td width="10%" height="0%">Date Minimum</td>
+        <td width="10%" height="0%">Date Maximum</td>
+      </tr>
+      <tr>
+        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
+        <td width="10%" height="0%"></td>
+        <td> <input type="date" name="test" value=""> </td>
+        <td> <input type="date" name="test" value=""> </td>
+      </tr>
+      <tr>
+        <td width="10%" height="0%">Domaine</td>
+        <td width="10%" height="0%">Catégorie</td>
+        <td width="10%" height="0%">Membre</td>
+        <td width="10%" height="0%">Type</td>
+      </tr>
+      <tr>
+        <td width="10%" height="0%">
+          <select class="" name="">
+            <option value="">test1</option>
+            <option value="">test2</option>
+          </select>
+        </td>
+        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
+        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
+        <td width="10%" height="0%">
+          <select class="" name="">
+            <option value="">Post</option>
+            <option value="">Stage</option>
+            <option value="">Travail</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+  </center>
   </nav>
 </div>
