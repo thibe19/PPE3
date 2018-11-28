@@ -43,7 +43,7 @@
             </ul>
             <?php } ?>
         <div class="interests">
-          <form method="post" name="checkboxform" action="<?php print $_SERVER['SCRIPT_NAME']."#intersets"; ?>">
+          <form method="post" name="checkboxform" action="<?php print $_SERVER['SCRIPT_NAME']; ?>">
             <h3 id="intersets" class="categories_tittle">Vos préférences <span onclick="checkboxform.submit()">Modifier</span></h3>
             <ul class="interests_list">
                 <?php if (isset($pref)) {
