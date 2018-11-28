@@ -274,7 +274,7 @@ require('part/header.php');
 
                         <h5>Description</h5>
                         <p><textarea name="desc_about" class="textareabout" rows="8"
-                                     cols="80"><?php echo $desc; ?></textarea></p>
+                                     cols="80"><?php echo $desc=="Vous n'avez pas encore entré de description."?'':$desc; ?></textarea></p>
                         <br>
                         <hr>
                         <br>

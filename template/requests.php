@@ -67,14 +67,14 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
               <ul class="notifications_content follow">
               <?php
 
-              $SQL = "SELECT * FROM eleve";
-              $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
+              $SQL = "SELECT * FROM Eleve";
+              $req = $conn->Query($SQL) or die("Erreur selection des eleves");
               while ($res = $req->fetch()) {
 
 
                 $id_user = $res['id_user'];
 
-                  $SQL2 = "SELECT * FROM utilisateur
+                  $SQL2 = "SELECT * FROM Utilisateur
                            WHERE id_user = $id_user
                            AND id_user != $id_user_session";
                   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
@@ -165,14 +165,14 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
                 <ul class="notifications_content follow">
                 <?php
 
-                $SQL = "SELECT * FROM entreprise";
+                $SQL = "SELECT * FROM Entreprise";
                 $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
                 while ($res = $req->fetch()) {
 
 
                   $id_user = $res['id_user'];
 
-                    $SQL2 = "SELECT * FROM utilisateur
+                    $SQL2 = "SELECT * FROM Utilisateur
                             WHERE id_user = $id_user
                             AND id_user != $id_user_session";
                     $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");

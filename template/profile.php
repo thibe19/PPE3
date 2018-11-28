@@ -4,6 +4,7 @@ session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
+$_SESSION['Profilon']=1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +60,7 @@ require('../objet/classes.php');
             <a href="profile.html"><img style='width: 170px;height: 165px;'src="<?php (!empty($uneleve->getPhotoUser()))? print $uneleve->getPhotoUser() : print './images/profil/avatar.png'; ?>" alt="" class="circle"></a>
             <div class="media_body">
                 <a href="profile.html"><?php print $uneleve->getNomUser().' '.$uneleve->getPrenomEleve() ?></a>
+                <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
                 <h6><?php print $uneleve->getVilleAddr(); ?></h6>
             </div>
         </div>
@@ -384,66 +386,7 @@ require('../objet/classes.php');
                         <h3 class="categories_tittle me_tittle">About Me</h3>
                         <p><?php (!empty($uneleve->getDescUser()))? print $uneleve->getDescUser() : print 'Encore aucune description' ?></p>
                     </div>
-                    <div class="interests">
-                        <h3 class="categories_tittle">Your Interests <span>Edit</span></h3>
-                        <ul class="interests_list">
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Arts</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Beauty</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Entertainment</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Travel</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Personal</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Politics</a></li>
-                            <li><a href="#"><i class="ion-android-radio-button-off"></i>Space Science</a></li>
-                        </ul>
-                    </div>
-                    <div class="profile">
-                        <h3 class="categories_tittle">Profile <span>Edit</span></h3>
-                        <ul class="profile_pic">
-                            <li><a href="#"><img src="images/profile-1.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-2.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-3.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-4.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-5.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-6.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-7.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-8.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-9.jpg" alt="" class="circle"></a></li>
-                            <li><a href="#"><img src="images/profile-10.jpg" alt="" class="circle"></a></li>
-                        </ul>
-                    </div>
-                    <div class="badges">
-                        <h3 class="categories_tittle">Badges</h3>
-                        <ul class="badges_list">
-                            <li><a href="#"><i class="ion-bonfire"></i><span>6</span></a></li>
-                            <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                            <li><a href="#"><i class="ion-coffee"></i></a></li>
-                            <li><a href="#"><i class="ion-clock"></i> <span>3</span></a></li>
-                            <li><a href="#"><i class="ion-camera"></i></a></li>
-                            <li><a href="#"><i class="ion-ios-bell-outline"></i><span>2</span></a></li>
-                            <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                            <li><a href="#"><i class="ion-coffee"></i></a></li>
-                            <li><a href="#"><i class="ion-clock"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="calendar_widget">
-                        <h3 class="categories_tittle">Calendar</h3>
-                        <table class="calendar"></table>
-                    </div>
-                    <div class="social_Sharing">
-                        <h3 class="categories_tittle">Social Sharing</h3>
-                        <ul class="social_icon">
-                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                            <li><a href="#" class="tumblr"><i class="ion-social-tumblr"></i></a></li>
-                            <li><a href="#" class="googleplus"><i class="ion-social-googleplus"></i></a></li>
-                            <li><a href="#" class="pinterest"><i class="ion-social-pinterest"></i></a></li>
-                            <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="advertis">
-                        <a href="#"><img src="images/advertis.jpg" alt=""></a>
-                    </div>
-                </div>
-            </div>
+                    <?php require ('./part/left.php')?>
             <!-- Right side bar -->
             <div class="right_side_bar col">
                 <div class="right_sidebar_iner">

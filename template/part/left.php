@@ -1,7 +1,16 @@
 <?php
     require ('./../ToolBox/bdd.inc.php');
-    require ('./../ToolBox/toolbox_inc.php');
-    $SQL = "SELECT * FROM Preferences";
+    if (isset($_SESSION['Eleve'])){
+        $iduser = unserialize($_SESSION['Eleve'])->getIdUser();;
+        $pref = data_base_in_object('Preferences',$conn);
+        $SQL = "SELECT id_pref FROM eleve_pref WHERE id_user='$iduser';";
+        $prefuser = reqtoobj($SQL,$conn);
+        display_data_base('eleve_pref',$conn);
+    }
+    if(isset($_SESSION['Profilon'])){
+
+    }
+    else{
 ?>
 <div class="col">
     <div class="left_side_bar">
@@ -14,17 +23,26 @@
                 <li><a href="#" class="tooltip" data-balloon="Images Post" data-balloon-pos="up"><i class="ion-android-image"></i></a></li>
                 <li><a href="#" class="tooltip" data-balloon="chart Post" data-balloon-pos="up"><i class="large material-icons">insert_chart</i></a></li>
             </ul>
-        </div>
+            <?php } ?>
         <div class="interests">
             <h3 class="categories_tittle">Your Interests <span>Edit</span></h3>
             <ul class="interests_list">
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Arts</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Beauty</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Entertainment</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Travel</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Personal</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Politics</a></li>
-                <li><a href="#"><i class="ion-android-radio-button-off"></i>Space Science</a></li>
+                <?php if (isset($pref)) {
+                    foreach ($pref as $p) {
+                        if(testsql("SELECT * FROM eleve_pref WHERE id_pref='$p->id_pref'",$conn)){
+                        ?>
+                        <li>
+                            <a href="#"><i class="ion-android-radio-button-on" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
+                        </li>
+                    <?php }
+                    else{ ?>
+                        <li>
+                            <a href="#"><i class="ion-android-radio-button-off" id="<?php print $p->id_pref ?>"></i><?php print $p->lib_pref ?></a>
+                        </li>
+                    <?php }
+                    }
+                }
+                ?>
             </ul>
         </div>
         <div class="profile">
