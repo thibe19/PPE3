@@ -28,7 +28,6 @@ $_SESSION['Profilon']=1;
     <link href="../../../../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel="stylesheet">
     <!-- Calendar CSS-->
     <link rel="stylesheet" href="vendors/calendar/dcalendar.picker.css">
-
     <!--Theme Styles CSS-->
 	<link rel="stylesheet" href="css/style.css" media="all" />
 
