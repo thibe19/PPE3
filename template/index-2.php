@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  22/11/18
+ *  28/11/18
  *  index-2
- *  v0.0.1
+ *  v0.0.2
  */
  session_start();
 
@@ -19,7 +19,7 @@
  $data = $res -> fetch();
  $id=$data['id_user'];
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="vendors/check-button/jqflipswitch.default.style.css">
 
     <!--Theme Styles CSS-->
-	<link rel="stylesheet" href="css/style.css" media="all" />
+    <link rel="stylesheet" href="css/style.css" media="all" />
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,9 +65,9 @@
 
     <!-- Tranding-select and banner Area -->
     <ul class="tranding_select tabs">
-        <li class="tab"><a href="#latest" class="waves-effect btn active">Latest</a></li>
-        <li class="tab"><a href="#trending" class="waves-effect btn">Trending</a></li>
-        <li class="tab"><a href="#featured" class="waves-effect btn">Featured</a></li>
+        <li class="tab"><a href="#post" class="waves-effect btn active">Post</a></li>
+        <li class="tab"><a href="#stage" class="waves-effect btn">Stage</a></li>
+        <li class="tab"><a href="#emploi" class="waves-effect btn">Emploi</a></li>
     </ul>
     <div class="banner_area">
         <img src="images/banner.jpg" alt="" class="banner_img">
@@ -77,28 +77,29 @@
     <!-- Min Container area -->
     <section class="min_container min_pages">
         <div class="section_row">
+
             <div class="middle_section col" id="infinite_scroll">
-            <div id="latest">
+              <!-- début de l'affichage des Post -->
+            <div id="post">
               <div class="fast_post">
 
-              <?php
+                <?php
 
-               $sqlP="SELECT * FROM Post ";
-               $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+                 $sqlP="SELECT * FROM Post order by date_post desc";
+                 $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
-               while ($dataP=$resP->fetch())
-               {
-                 $cat = $dataP['id_cat'];
-                 $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                 $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                 $dataC=$resC->fetch();
+                 while ($dataP=$resP->fetch())
+                 {
+                   $cat = $dataP['id_cat'];
+                   $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
+                   $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                   $dataC=$resC->fetch();
 
-                 $id_user= $dataP['id_user'];
-                 $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                 $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                 $dataU = $resU -> fetch();
-
-               ?>
+                   $id_user= $dataP['id_user'];
+                   $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
+                   $dataU = $resU -> fetch();
+                 ?>
                 <!-- Post -->
 
                     <div class="post">
@@ -113,7 +114,7 @@
 
                                     <div class="col s8 media_body">
 
-                                        <a href="#"><?php echo$data['nom_user']; ?></a>
+                                        <a href="#"><?php echo$dataU['nom_user']; ?></a>
                                         <span><?php echo$dataP['date_post']; ?>,<?php echo$dataP['heure_post']; ?></span>
                                     </div>
                                 </div>
@@ -122,20 +123,158 @@
                                 </div>
 
                             </div>
-                            <a href="#" class="post_heding"><?php echo$dataP['titre_post']; ?></a>
+                            <a  class="post_heding"><?php echo$dataP['titre_post']; ?></a>
                             <p><?php echo$dataP['contenu_post']; ?></p>
                         </div>
-                        <center><a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
+                        <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
                         <br>
                     </div>
                     <!-- End Post -->
                 <br>
-                <?php } ?>
-              </div>
 
-              
+
+                <?php
+              }
+
+                 ?>
+              </div>
             </div>
+
+            <!-- Stage  -->
+            <div id="stage">
+              <div class="fast_post">
+
+
+                <?php
+
+                 $sqlS="SELECT * FROM OStage ";
+                 $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
+
+                 while ($dataS=$resS->fetch())
+                 {
+                   $offre = $dataS['id_offre'];
+                   $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
+                   $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+                   $dataO=$resO->fetch();
+
+                   $cat = $dataS['id_cat'];
+                   $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
+                   $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                   $dataC=$resC->fetch();
+
+                   $id_user= $dataS['id_user'];
+                   $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
+                   $dataU = $resU -> fetch();
+                 ?>
+                <!-- Post -->
+
+                    <div class="post">
+                       <div class="post_content">
+                            <a href="details.html" class="post_img">
+                                <img src="images/post.jpg" alt="">
+                                <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
+                            </a>
+                            <div class="row author_area">
+                                <div class="col s4 author">
+                                    <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+
+                                    <div class="col s8 media_body">
+
+                                        <a href="#"><?php echo$dataU['nom_user']; ?></a>
+                                        <span><?php echo$dataO['date_post_offre']; ?></span>
+                                    </div>
+                                </div>
+                                <div class="col s4 btn_floating">
+
+                                </div>
+                            </div>
+                            <a class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
+                            <p><?php echo$dataS['desc_user_stage']; ?></p>
+                        </div>
+                        <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
+                        <br>
+                    </div>
+                    <!-- End Post -->
+                <br>
+
+
+                <?php
+              }
+
+                 ?>
+              </div>
             </div>
+
+            <!-- Emploi  -->
+            <div id="emploi">
+              <div class="fast_post">
+
+
+                <?php
+
+                 $sqlE="SELECT * FROM OEmploi ";
+                 $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+
+                 while ($dataE=$resE->fetch())
+                 {
+                   $cat = $dataE['id_cat'];
+                   $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
+                   $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                   $dataC=$resC->fetch();
+
+                   $id_user= $dataE['id_user'];
+                   $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
+                   $dataU = $resU -> fetch();
+
+                   $offre = $dataE['id_offre'];
+                   $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
+                   $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+                   $dataO=$resO->fetch();
+                 ?>
+                <!-- Post -->
+
+                    <div class="post">
+                       <div class="post_content">
+                            <a href="details.html" class="post_img">
+                                <img src="images/post.jpg" alt="">
+                                <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
+                            </a>
+                            <div class="row author_area">
+                                <div class="col s4 author">
+                                    <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+
+                                    <div class="col s8 media_body">
+
+                                        <a href="#"><?php echo$dataU['nom_user']; ?></a>
+                                        <span><?php echo$dataO['date_post_offre']; ?></span>
+                                    </div>
+                                </div>
+                                <div class="col s4 btn_floating">
+
+                                </div>
+
+                            </div>
+                            <a  class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
+                            <p><?php echo$dataE['desc_emp']; ?></p>
+                        </div>
+                        <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
+                        <br>
+                    </div>
+                    <!-- End Post -->
+                <br>
+
+
+                <?php
+              }
+
+                 ?>
+              </div>
+            </div>
+
+            </div>   <!-- Fin des post/stage/emploi -->
+
             <!-- left side bar -->
             <div class="col">
                 <div class="left_side_bar">
