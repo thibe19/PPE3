@@ -1,5 +1,5 @@
 
-<?php ///////:YANN THER 10h22 - 22/11/2018 - ?>
+<?php ///////:YANN THER 10h22 - 22/11/2018 - V0.0.5 ?>
 <nav class="header_area">
     <div class="custom_container">
         <div class="nav-wrapper">
@@ -55,9 +55,26 @@
             <ul class="right right_menu hide-on-med-and-down">
                 <li class="search_min">
                     <ul class="search_from">
-                        <li><input placeholder="Search Here" type="text"></li>
-                        <li><a href="#" class="search_icon"><i class="ion-ios-search"></i></a></li>
+                      <form action="index-2.php?search=<?php echo $_POST['search']; ?>" method="get" id="myform">
+                        <li><input type="text" placeholder="Rechercher" id="searchjs" name="search" value="" type="text"></li>
+                        <li><a href="#" onclick="document.getElementById('myform').submit()" name="abut" class="search_icon"><i class="ion-ios-search"></i></a></li>
+                      </form>
+
+
+
+
+
+
                     </ul>
+                </li>
+                <li>
+                  <a href="javascript: displayul()" class="waves-effect btn post_btn modal-trigger"><i class="ion-plus"></i><span>Trier</span></a>
+
+                  <!-- <li>
+                    <a href="requests.php?groupe=elve">
+                      <i class="ion-ios-person-outline"> </i>
+                    </a>
+                  </li> -->
                 </li>
                 <li><a href="#post_modal" class="waves-effect btn post_btn modal-trigger"><i class="ion-plus"></i><span>Ajouter Post</span></a>
                 </li>
@@ -68,6 +85,7 @@
                   <!-- <b class="n-number"></b>    Notification          -->
                   </a>
                     <!-- Dropdown Structure -->
+
                     <ul id="dropdown4" class="dropdown-content">
                         <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
                         <li>
@@ -158,6 +176,7 @@
                         <li><a href="requests.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
+
                 </li>
                 <!-- Messages -->
                 <li class="notifications messages"><a class="dropdown-button" href="#!" data-activates="dropdown3"><i
@@ -316,6 +335,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <!-- Profile -->
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown1"><img
                                 src="images/profile-pic.png" alt="" class="circle p_2"></a>
@@ -633,3 +653,19 @@
         </div>
     </div>
 </nav>
+
+<script type="text/javascript">
+function displayul() {
+  if(document.getElementById('invisible').style.display == 'none'){
+    	document.getElementById('invisible').style.display = 'block';
+  		}
+  		else {
+    	document.getElementById('invisible').style.display = 'none';
+		}
+}
+</script>
+<div style='display:none;' id='invisible'>
+  <nav class="header_area2">
+
+  </nav>
+</div>
