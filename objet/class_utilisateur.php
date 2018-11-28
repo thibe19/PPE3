@@ -22,9 +22,10 @@ class Utilisateur
     Private $ville_addr;
     Private $photo_user;
     Private $desc_user;
+    private $dom_acti;
 
     Public function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                                $ville = "", $photo = "", $desc_user="")
+                                $ville = "", $photo = "", $desc_user="", $dom_acti="")
     {  //Constructeur
 
         $this->id_user = $id;
@@ -39,6 +40,7 @@ class Utilisateur
         $this->ville_addr = $this->replacebr($ville);
         $this->photo_user = $photo;
         $this->desc_user = $desc_user;
+        $this->dom_acti=$dom_acti;
 
     }
 
@@ -59,7 +61,8 @@ class Utilisateur
         $data = $data.$this->CP_addr;
         $data = $data.$this->ville_addr;
         $data = $data.$this->photo_user;
-        $date = $data.$this->desc_user;
+        $data = $data.$this->desc_user;
+        $data = $data.$this->dom_acti;
         return $data;
     }
     /**
@@ -153,6 +156,14 @@ class Utilisateur
     public function getDescUser()
     {
       return $this->desc_user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDomActi()
+    {
+        return $this->dom_acti;
     }
 
     /////////////////// LES SETS /////////////////////
@@ -252,6 +263,14 @@ class Utilisateur
       $this->desc_user = $desc_user;
     }
 
+    /**
+     * @param string $dom_acti
+     */
+    public function setDomActi($dom_acti)
+    {
+        $this->dom_acti = $dom_acti;
+    }
+
 
 
 /////////////////////// insert inscription ////////////////////////////////////////
@@ -280,7 +299,7 @@ class Utilisateur
         else{
 
         $requet = "INSERT INTO Utilisateur
-               VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$cp', '$ville','$photo','',0);";
+               VALUES (NULL, '$nom', '$login', '$mdp', '$email', '$numt', '$numa', '$rue', '$cp', '$ville','$photo','','',0);";
         $sql = $conn->Query($requet)or die('Erreur dans la requete');
       }
     }
@@ -306,9 +325,10 @@ Public function modifier_utilisateur( $objet,$conn){
 
   $photo = $this->getPhotoUser($objet);
   $desc = $this->getDescUser($objet);
+  $domacti = $this->getDomActi($objet);
 
   $sql="UPDATE Utilisateur
-        SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_user='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc'
+        SET nom_user='$nom', login_user='$login', mdp_user='$mdp', email_user='$email', tel_user='$tel',num_addr_user='$Nrue' , rue_addr_user='$rue', CP_addr_user='$cp', ville_addr_user='$ville', photo_user='$photo', desc_user='$desc',dom_acti='$domacti'
         WHERE id_user='$id' ";
   $res = $conn->Query($sql)or die('Erreur modification user');
 

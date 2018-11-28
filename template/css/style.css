@@ -768,6 +768,13 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 }
 
 /*--------------------------------------------------*/
+
+.textareabout{
+  margin: 0px;
+  height: 86px;
+  width: 100%;
+  resize : none;
+}
 .min_container {
   background: #eff3f5;
 }

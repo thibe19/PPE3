@@ -3,75 +3,88 @@
 include 'bdd.inc.php';
 
 /******************
-/ 1.DATA BASES
-/******************/
-  function browse_data_base($tbname){
+ * / 1.DATA BASES
+ * /******************/
+function browse_data_base($tbname)
+{
     $SQL = "SELECT * FROM $tbname";
-    $res = $conn->Query($SQL)or die("La requete n'a pas aboutie");
+    $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
 
     return $res;
-  }
+}
 
-  function browse_by_id($tbname,$columid,$id){
+function browse_by_id($tbname, $columid, $id)
+{
     $SQL = "SELECT * FROM $tbname WHERE $columid=$id";
-    $res = $conn->Query($SQL)or die("La requete n'a pas aboutie");
+    $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
     $res = $res->fetchAll();
     return $res;
-  }
+}
 
-  function display_data_base($tbname){
+function display_data_base($tbname)
+{
     $SQL = "SELECT * FROM $tbname";
-    $res = $conn->Query($SQL)or die("La requete n'a pas aboutie");
+    $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
     $arrayRes = $res->fetchAll();
     print "<pre>";
     print_r($arrayRes);
     print"</pre>";
-  }
+}
 
-  function data_base_in_array($tbname){
+function data_base_in_array($tbname)
+{
     $SQL = "SELECT * FROM $tbname";
-    $res = $conn->Query($SQL)or die("La requete n'a pas aboutie");
+    $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
     $arrayRes = $res->fetchAll();
     return $arrayRes;
-  }
+}
 
-function data_base_in_object($tbname,$conn){
+function data_base_in_object($tbname, $conn)
+{
     $SQL = "SELECT * FROM $tbname";
-    $req = $conn->Query($SQL)or die("La requete n'a pas aboutie");
+    $req = $conn->Query($SQL) or die("La requete n'a pas aboutie");
     $req = $req->fetchAll(PDO::FETCH_OBJ);
     return $req; //ok
 }
 
-  /***************REcuperation ID user (uniquement pour le PPE3 **********/
-  function getIDBDD($login,$mdp,$email,$conn){
+
+/*
+ * !!!!! Uniquement pour le PPE3 !!!!!
+ */
+
+
+/***************REcuperation ID user (uniquement pour le PPE3 **********/
+function getIDBDD($login, $mdp, $email, $conn)
+{
     $SQL = "SELECT id_user,mdp_user FROM Utilisateur
             WHERE login_user = '$login'
             AND email_user = '$email'";
-    $req = $conn->Query($SQL)or die('Erreur');
+    $req = $conn->Query($SQL) or die('Erreur');
     $req = reqtoobj($req);
-    if($req){
-      foreach ($req as $r){
-        $t_pass = password_verify($mdp,$r->mdp_user);
+    if ($req) {
+        foreach ($req as $r) {
+            $t_pass = password_verify($mdp, $r->mdp_user);
 
-          if($t_pass){
-            return $r->id_user;
-          }
-      }
+            if ($t_pass) {
+                return $r->id_user;
+            }
+        }
+    } else {
+        return 0;
     }
-    else{
-      return 0;
-    }
-  }
+}
 
-  /*********************** Fetch en objet ******************/
-  function reqtoobj($req){
-      $req = $req->fetchAll(PDO::FETCH_OBJ);
-      return $req;
-  }
+/*********************** Fetch en objet ******************/
+function reqtoobj($req)
+{
+    $req = $req->fetchAll(PDO::FETCH_OBJ);
+    return $req;
+}
 
 
-  /***********************Encryptage *************************/
-function dec_enc($action, $string) {
+/***********************Encryptage *************************/
+function dec_enc($action, $string)
+{
     $output = false;
 
     $encrypt_method = "AES-256-CBC";
@@ -84,11 +97,10 @@ function dec_enc($action, $string) {
     // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
     $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
-    if( $action == 'encrypt' ) {
+    if ($action == 'encrypt') {
         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
         $output = base64_encode($output);
-    }
-    else if( $action == 'decrypt' ){
+    } else if ($action == 'decrypt') {
         $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
     }
 
@@ -101,45 +113,49 @@ function dec_enc($action, $string) {
  * Mail password
  *
  */
-function mail_reset_mdp($mail,$conn){
+function mail_reset_mdp($mail, $conn)
+{
     $mail = $mail;
     $objet = "Mot de passe compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
 
-    $SQL="SELECT * FROM utilisateur
+    $SQL = "SELECT * FROM utilisateur
                   WHERE email_user='$mail';";
-    $Req=$conn->Query($SQL);
-    $result=$Req->fetch();
+    $Req = $conn->Query($SQL);
+    $result = $Req->fetch();
 
-    $text = "Bonjour ".$result['nom_user']."\n";
-    $text = $text."Pour changer votre mot de passe utiliser le lien ci-dessous : \n";
-    $text = $text."http://localhost/PPE3/login_page/pass_reset.php?id=".urlencode($result['id_user'])."\n\n\n";
-    $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+    $text = "Bonjour " . $result['nom_user'] . "\n";
+    $text = $text . "Pour changer votre mot de passe utiliser le lien ci-dessous : \n";
+    $text = $text . "http://localhost/PPE3/login_page/pass_reset.php?id=" . urlencode($result['id_user']) . "\n\n\n";
+    $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.";
 
     mail($mail, $objet, $text, $entete);
 }
 
-function mail_forgot_login($mail,$conn){
+function mail_forgot_login($mail, $conn)
+{
     $mail = $mail;
     $objet = "Login compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
 
-    $SQL="SELECT * FROM utilisateur
+    $SQL = "SELECT * FROM utilisateur
                   WHERE email_user='$mail';";
-    $Req=$conn->Query($SQL);
-    $result=$Req->fetch();
+    $Req = $conn->Query($SQL);
+    $result = $Req->fetch();
 
-    $text = "Bonjour ".$result['nom_user']."\n";
-    $text = $text."Votre login est : \n";
-    $text = $text.$result['login_user']."\n\n\n";
-    $text = $text."Ceci est un mail automatique, merci de ne pas y répondre.";
+    $text = "Bonjour " . $result['nom_user'] . "\n";
+    $text = $text . "Votre login est : \n";
+    $text = $text . $result['login_user'] . "\n\n\n";
+    $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.";
 
     mail($mail, $objet, $text, $entete);
 }
 
-function testsql($sql,$conn){
+function testsql($sql, $conn)
+{
     $req = $conn->Query($sql) or die("Erreur requete");
     $req = $req->fetchAll();
     return $req;
 }
+
 ?>

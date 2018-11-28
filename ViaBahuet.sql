@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 28 nov. 2018 à 11:10
+-- Généré le :  mer. 28 nov. 2018 à 11:45
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -121,7 +121,8 @@ CREATE TABLE `Eleve` (
 --
 
 INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `date_naiss`, `choix_position`) VALUES
-(40, 'outest', '2018-11-14', 1);
+(40, 'outest', '2018-11-14', 1),
+(42, 'Eleve2', '1998-06-02', 2);
 
 -- --------------------------------------------------------
 
@@ -147,6 +148,16 @@ CREATE TABLE `eleve_pref` (
   `id_pref` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `eleve_pref`
+--
+
+INSERT INTO `eleve_pref` (`id_pref`, `id_user`) VALUES
+(1, 42),
+(2, 42),
+(3, 42),
+(4, 42);
 
 -- --------------------------------------------------------
 
@@ -217,7 +228,10 @@ CREATE TABLE `Offre` (
   `lib_offre` varchar(255) COLLATE latin1_bin NOT NULL,
   `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
   `date_debut_offre` date NOT NULL,
+  `date_post_offre` date NOT NULL,
   `id_user` int(11) NOT NULL,
+  `id_cat` int(11) NOT NULL,
+  `id_ent` int(11) NOT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -359,6 +373,7 @@ CREATE TABLE `Utilisateur` (
   `ville_addr_user` varchar(40) COLLATE latin1_bin NOT NULL,
   `photo_user` longtext COLLATE latin1_bin,
   `desc_user` longtext COLLATE latin1_bin,
+  `dom_acti` varchar(255) COLLATE latin1_bin NOT NULL,
   `mail_check` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -366,9 +381,10 @@ CREATE TABLE `Utilisateur` (
 -- Déchargement des données de la table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `mail_check`) VALUES
-(40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', 0),
-(41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', 0);
+INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
+(40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', '', 0),
+(41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
+(42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -454,7 +470,9 @@ ALTER TABLE `OEmploi`
 ALTER TABLE `Offre`
   ADD PRIMARY KEY (`id_offre`),
   ADD KEY `Offre_Eleve_FK` (`id_user`),
-  ADD KEY `Offre_Eleve0_FK` (`id_user_Eleve`);
+  ADD KEY `Offre_Eleve0_FK` (`id_user_Eleve`),
+  ADD KEY `id_cat` (`id_cat`),
+  ADD KEY `id_ent` (`id_ent`);
 
 --
 -- Index pour la table `OStage`
@@ -561,7 +579,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Contraintes pour les tables déchargées
@@ -634,7 +652,9 @@ ALTER TABLE `OEmploi`
 --
 ALTER TABLE `Offre`
   ADD CONSTRAINT `Offre_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `Offre_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`);
+  ADD CONSTRAINT `Offre_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
+  ADD CONSTRAINT `Offre_ibfk_1` FOREIGN KEY (`id_cat`) REFERENCES `Categorie` (`id_cat`),
+  ADD CONSTRAINT `Offre_ibfk_2` FOREIGN KEY (`id_ent`) REFERENCES `Entreprise` (`id_user`);
 
 --
 -- Contraintes pour la table `OStage`
