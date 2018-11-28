@@ -1,6 +1,5 @@
 <?php
     require ('./../ToolBox/bdd.inc.php');
-
     if (isset($_SESSION['Eleve'])){
         $iduser = unserialize($_SESSION['Eleve'])->getIdUser();
 
@@ -45,7 +44,7 @@
             <?php } ?>
         <div class="interests">
           <form method="post" name="checkboxform" action="<?php print $_SERVER['SCRIPT_NAME']."#intersets"; ?>">
-            <h3 id="intersets" class="categories_tittle">Your Interests <span onclick="checkboxform.submit()">Modifier</span></h3>
+            <h3 id="intersets" class="categories_tittle">Vos préférences <span onclick="checkboxform.submit()">Modifier</span></h3>
             <ul class="interests_list">
                 <?php if (isset($pref)) {
                     foreach ($pref as $p) {

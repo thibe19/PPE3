@@ -5,6 +5,7 @@ require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 $_SESSION['Profilon']=1;
+//TODO PENSER A DESCTIVER LA SESSION Profilon quand navigation en dehors d'une page profil
 ?>
 <!DOCTYPE html>
 <html lang="en">

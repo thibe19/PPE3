@@ -276,6 +276,7 @@
             </div>   <!-- Fin des post/stage/emploi -->
 
             <!-- left side bar -->
+            <?php require('./part/left.php') ?>
             <div class="col">
                 <div class="left_side_bar">
                     <div class="categories">
