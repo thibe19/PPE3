@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 22 nov. 2018 à 10:28
+-- Généré le :  mer. 28 nov. 2018 à 11:10
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -45,6 +45,39 @@ CREATE TABLE `Categorie` (
   `id_cat` int(11) NOT NULL,
   `lib_cat` varchar(255) COLLATE latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Categorie`
+--
+
+INSERT INTO `Categorie` (`id_cat`, `lib_cat`) VALUES
+(1, 'Actualités'),
+(2, 'Annonces'),
+(3, 'Mode'),
+(4, 'Droits'),
+(5, 'Divers'),
+(6, 'Économie, Finance'),
+(7, 'Emplois'),
+(8, 'Politique'),
+(9, 'Jeux vidéo'),
+(15, 'Enseignement'),
+(16, 'Médecine, Santé'),
+(21, 'Bandes dessinés'),
+(22, 'Collections'),
+(23, 'Créations'),
+(28, 'Littérature'),
+(30, 'Spectacles'),
+(31, 'Musique'),
+(33, 'Art'),
+(34, 'Sports'),
+(37, 'Informatique'),
+(38, 'Photographie'),
+(39, 'Audio-visuel'),
+(42, 'Programmation'),
+(43, 'Matériel'),
+(44, 'Sécurité'),
+(45, 'Animaux'),
+(50, 'Voyages');
 
 -- --------------------------------------------------------
 
@@ -88,11 +121,7 @@ CREATE TABLE `Eleve` (
 --
 
 INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `date_naiss`, `choix_position`) VALUES
-(14, 'Thibault', '0000-00-00', 0),
-(15, 'Yann', '0000-00-00', 1),
-(31, 'test', '2018-11-22', 0),
-(34, 'Thibault', '0000-00-00', 0),
-(38, 'Eleve', '0000-00-00', 0);
+(40, 'outest', '2018-11-14', 1);
 
 -- --------------------------------------------------------
 
@@ -119,16 +148,6 @@ CREATE TABLE `eleve_pref` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
---
--- Déchargement des données de la table `eleve_pref`
---
-
-INSERT INTO `eleve_pref` (`id_pref`, `id_user`) VALUES
-(1, 38),
-(3, 38),
-(5, 38),
-(6, 38);
-
 -- --------------------------------------------------------
 
 --
@@ -147,8 +166,7 @@ CREATE TABLE `Entreprise` (
 --
 
 INSERT INTO `Entreprise` (`id_user`, `nom_resp`, `code_APE`, `site_web`) VALUES
-(32, 'DUPONDV2', '11009', 'google.fr'),
-(39, 'Dupond', '11009', 'http://uxart.io/downloads/openlist-html/all-template/index.html');
+(41, 'roge', '2910X', 'google.fr');
 
 -- --------------------------------------------------------
 
@@ -239,11 +257,21 @@ CREATE TABLE `Post` (
   `id_post` int(11) NOT NULL,
   `titre_post` varchar(255) COLLATE latin1_bin NOT NULL,
   `contenu_post` longtext COLLATE latin1_bin NOT NULL,
+  `photo_post` longtext COLLATE latin1_bin NOT NULL,
   `date_post` date NOT NULL,
   `heure_post` time NOT NULL,
   `id_cat` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Post`
+--
+
+INSERT INTO `Post` (`id_post`, `titre_post`, `contenu_post`, `photo_post`, `date_post`, `heure_post`, `id_cat`, `id_user`) VALUES
+(1, 'Bonjour', 'Je test ou un petit /.', '123456', '2018-11-22', '16:24:18', 9, 40),
+(2, 'je suis un tug', 'oui ', '123456', '2018-11-22', '16:58:00', 3, 40),
+(12, 'toujours', 'un test pour un test', '123456', '2018-11-28', '09:41:38', 15, 40);
 
 -- --------------------------------------------------------
 
@@ -339,13 +367,8 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `mail_check`) VALUES
-(14, 'Nesti', 'thibe19', '$2y$10$OXZY/NBZO1i0yCkZKg9wtOLHh/Ca2H2kSRkO0YdFBJrQw3aYDynUm', 'thibaultnesti@gmail.com', 2147483647, '18 Bis', 'rue Blanche Selva', 19100, 'Brive-La-Gaillarde', 'purple_color_burst-wallpaper-3840x2160.jpg', '', 0),
-(15, 'Ther', 'Runcan', '$2y$10$.J6N64Bfg3znSElKGqhhFO9M92eCd7Xc/5QUsfUzuWQufCrzIpZkO', 'yannther99@gmail.com', 553558473, '21', 'Route des abeuils', 24570, 'Le lardin saint lazare', '', '', 0),
-(31, 'test', 'test', 'test', 'test@test.fr', 0, 'Rue du', 'test', 75000, 'Paris', '123456', 'salut', 0),
-(32, 'Nesti', 'ent2', '$2y$10$Jtr1vyYYQPRdunZ1E1Uh0.1dWbH.BPUHs6KbaSM0HWr6I.bBYWx66', 'ent_test2@ent.fr', 0, 'rue de', 'azeaze', 67000, 'Saint etienne', '', '', 0),
-(34, 'CASINO', 'adminCasino', '$2y$10$MrxDDRvPfzzjQlNhysxIKe6fVmZZD7dmZqlwJV5YgGEOD8bf1iVtG', 'nestifamily@yahoo.fr', 0, 'avenue', 'azeaze', 33000, 'BORDEAUX', '', '', 0),
-(38, 'eleve', 'eleve', '$2y$10$HfEEvkWkEeW2F5O/ovw5DO0CCu7ZfYzb7CbhcK3EpU/HpyAH1oztu', 'eleve@eleve.fr', 0, '123', 'rue des eleves', 0, 'eleve', '', '', 0),
-(39, 'ent', 'ent', '$2y$10$tTraSuKc4kR7Ny44GXwtcebnavkqjmNe7pVnP3xGbouazLsgdx08W', 'ent@ent.fr', 0, '21', 'rue de la paix', 67000, 'Saint etienne', '', '', 0);
+(40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', 0),
+(41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -496,7 +519,7 @@ ALTER TABLE `Utilisateur`
 -- AUTO_INCREMENT pour la table `Categorie`
 --
 ALTER TABLE `Categorie`
-  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT pour la table `Diplome`
@@ -520,7 +543,7 @@ ALTER TABLE `Offre`
 -- AUTO_INCREMENT pour la table `Post`
 --
 ALTER TABLE `Post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `Preferences`
@@ -538,7 +561,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Contraintes pour les tables déchargées
