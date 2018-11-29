@@ -55,8 +55,11 @@
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
+
+
     <!-- Header_Area -->
     <?php
     require('part/header.php');
@@ -747,7 +750,7 @@
     <!-- End Popup area -->
 
     <!-- jQuery JS -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- <script src="js/jquery-3.3.1.min.js"></script> -->
     <!-- Materialize JS -->
     <script src="js/materialize.min.js"></script>
     <!-- Calendar JS -->
