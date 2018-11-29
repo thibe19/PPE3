@@ -99,7 +99,7 @@ else{
                 </form>
             </div>
             <div class="profile">
-                <h3 class="categories_tittle">Profile <span>Edit</span></h3>
+                <h3 class="categories_tittle">Amis <span onclick="window.location='requests.php?groupe=elve'">Modifier</span></h3>
                 <ul class="profile_pic">
                     <li><a href="#"><img src="images/profile-1.jpg" alt="" class="circle"></a></li>
                     <li><a href="#"><img src="images/profile-2.jpg" alt="" class="circle"></a></li>
@@ -113,22 +113,9 @@ else{
                     <li><a href="#"><img src="images/profile-10.jpg" alt="" class="circle"></a></li>
                 </ul>
             </div>
-            <div class="badges">
-                <h3 class="categories_tittle">Badges</h3>
-                <ul class="badges_list">
-                    <li><a href="#"><i class="ion-bonfire"></i><span>6</span></a></li>
-                    <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                    <li><a href="#"><i class="ion-coffee"></i></a></li>
-                    <li><a href="#"><i class="ion-clock"></i> <span>3</span></a></li>
-                    <li><a href="#"><i class="ion-camera"></i></a></li>
-                    <li><a href="#"><i class="ion-ios-bell-outline"></i><span>2</span></a></li>
-                    <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                    <li><a href="#"><i class="ion-coffee"></i></a></li>
-                    <li><a href="#"><i class="ion-clock"></i></a></li>
-                </ul>
-            </div>
+
             <div class="calendar_widget">
-                <h3 class="categories_tittle">Calendar</h3>
+                <h3 class="categories_tittle">Calendrier</h3>
                 <table class="calendar"></table>
             </div>
             <div class="social_Sharing">
