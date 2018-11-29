@@ -11,10 +11,9 @@ function supr_pref($iduser,$conn){
 
 if (isset($_SESSION['Eleve'])) {
     $iduser = unserialize($_SESSION['Eleve'])->getIdUser();
-    supr_pref($iduser,$conn);
 
     if (isset($_POST['prefusermodif'])) {
-
+        supr_pref($iduser,$conn);
 
         foreach ($_POST['prefusermodif'] as $p) {
             $addpref = "INSERT INTO eleve_pref
@@ -23,7 +22,7 @@ if (isset($_SESSION['Eleve'])) {
         }
 
     }
-    else{
+    elseif(isset($_POST['suprisok'])){
         supr_pref($iduser,$conn);
     }
 
@@ -94,6 +93,7 @@ else{
                         }
                         ?>
                     </ul>
+                    <input type="hidden" name="suprisok" value="1">
                 </form>
             </div>
             <div class="profile">
