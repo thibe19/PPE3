@@ -1,10 +1,10 @@
 
 <?php
 /*
- *  15/11/18
+ *  29/11/18
  *  Connection au site web
  *
- *  v0.0.4
+ *  v0.0.5
  */
 /*
  *
@@ -70,8 +70,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
             elseif(testsql("SELECT id_user FROM Entreprise WHERE id_user='$id'",$conn)){
                 $SQL = "SELECT * FROM Utilisateur
                     WHERE id_user='$id'";
-                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
-                foreach (reqtoobj($req) as $r){
+                foreach (reqtoobj($SQL,$conn) as $r){
                     $nom = $r->nom_user;
                     $email = $r->email_user;
                     $tel = $r->tel_user;
@@ -85,8 +84,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 }
                 $SQL = "SELECT * FROM Entreprise
                         WHERE id_user='$id'";
-                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
-                foreach (reqtoobj($req) as $r){
+                foreach (reqtoobj($SQL,$conn) as $r){
                     $nomrep = $r->nom_resp;
                     $ape = $r->code_APE;
                     $site = $r->site_web;

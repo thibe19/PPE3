@@ -1,39 +1,25 @@
 <?php
-
 /*
- *  28/11/18
- *  index-2
- *  v0.0.2
+ * 14/11/18
+ * v0.0.2
  */
-session_start();
-
-if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
-    $mdp=$_SESSION['mdp'];
-    $ndc=$_SESSION['login'];
+if (isset($_GET['logout'])){
+    header('location: ../?logout=1');
 }
-
-require('../ToolBox/bdd.inc.php');
-
-$sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
-$res = $conn -> query($sql)or die($conn -> errorInfo());
-$data = $res -> fetch();
-$id=$data['id_user'];
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:36:35 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Open List | Html template</title>
+    <title>Accueil</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="css/materialize.min.css">
     <!-- Tooltip CSS -->
@@ -48,7 +34,7 @@ $id=$data['id_user'];
     <link rel="stylesheet" href="vendors/check-button/jqflipswitch.default.style.css">
 
     <!--Theme Styles CSS-->
-    <link rel="stylesheet" href="css/style.css" media="all" />
+    <link rel="stylesheet" href="css/style.css" media="all"/>
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,16 +45,16 @@ $id=$data['id_user'];
 <body>
 <!-- Header_Area -->
 <?php
-require('../ToolBox/toolbox_inc.php');
+require('../ToolBox/bdd.inc.php');
 require('part/header.php');
 ?>
 <!-- End  Header_Area -->
 
 <!-- Tranding-select and banner Area -->
 <ul class="tranding_select tabs">
-    <li class="tab"><a href="#post" class="waves-effect btn active">Post</a></li>
-    <li class="tab"><a href="#stage" class="waves-effect btn">Stage</a></li>
-    <li class="tab"><a href="#emploi" class="waves-effect btn">Emploi</a></li>
+    <li class="tab"><a href="#latest" class="waves-effect btn active">Latest</a></li>
+    <li class="tab"><a href="#trending" class="waves-effect btn">Trending</a></li>
+    <li class="tab"><a href="#featured" class="waves-effect btn">Featured</a></li>
 </ul>
 <div class="banner_area">
     <img src="images/banner.jpg" alt="" class="banner_img">
@@ -78,347 +64,948 @@ require('part/header.php');
 <!-- Min Container area -->
 <section class="min_container min_pages">
     <div class="section_row">
-
         <div class="middle_section col" id="infinite_scroll">
-            <!-- début de l'affichage des Post -->
-
-
-
-
-            <!-- TRIE PART -->
-            <?php
-            if (isset($_POST['type_post'])) {
-
-                //TODO
-               $mot_post = $_POST['mot_post'];
-
-               $member_name = $_POST['member_name'];
-
-               $date_debut = $_POST['date_debut'];
-
-               $date_fin = $_POST['date_fin'];
-
-               $cat_post = $_POST['cat_post'];
-
-               $type_post = $_POST['type_post'];
-
-               $data_trie = data_base_in_array("Post", $conn);
-               foreach($data_trie as $d){
-                   if (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && isset($cat_post) && !empty($type_post)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d) && in_array($type_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && !empty($cat_post)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post)){
-                       if(in_array($mot_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   else {
-                     print 'Pas de resultat';
-                   }
-
-               }
-            }
-             ?>
-
-
-
-
-
-
-
-
-            <?php if (empty($_POST['type_post'])) {
-             ?>
-            <div id="post">
+            <div id="latest">
+                <!-- Post -->
                 <div class="fast_post">
-
-                    <?php
-
-                    $sqlP="SELECT * FROM Post order by date_post desc";
-                    $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
-
-                    while ($dataP=$resP->fetch())
-                    {
-                        $cat = $dataP['id_cat'];
-                        $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                        $dataC=$resC->fetch();
-
-                        $id_user= $dataP['id_user'];
-                        $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                        $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                        $dataU = $resU -> fetch();
-                        ?>
-                        <!-- Post -->
-
-                        <div class="post">
-                            <div class="post_content">
-                                <a href="details.html" class="post_img">
-                                    <img src="images/post.jpg" alt="">
-                                    <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                                </a>
-                                <div class="row author_area">
-                                    <div class="col s4 author">
-                                        <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                        <div class="col s8 media_body">
-
-                                            <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                            <span><?php echo$dataP['date_post']; ?>,<?php echo$dataP['heure_post']; ?></span>
-                                        </div>
+                    <div class="post">
+                        <div class="post_content">
+                            <a href="details.html" class="post_img">
+                                <img src="images/post.jpg" alt="">
+                                <span><i class="ion-android-radio-button-off"></i>Photography</span>
+                            </a>
+                            <div class="row author_area">
+                                <div class="col s4 author">
+                                    <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
                                     </div>
-                                    <div class="col s4 btn_floating">
-
-                                    </div>
-
-                                </div>
-                                <a  class="post_heding"><?php echo$dataP['titre_post']; ?></a>
-                                <p><?php echo$dataP['contenu_post']; ?></p>
-                            </div>
-                            <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                            <br>
-                        </div>
-                        <!-- End Post -->
-                        <br>
-
-
-                        <?php
-                    }
-
-                    ?>
-                </div>
-            </div>
-          <?php } ?>
-            <!-- Stage  -->
-            <div id="stage">
-                <div class="fast_post">
-
-
-                    <?php
-
-                    $sqlS="SELECT * FROM OStage ";
-                    $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
-
-                    while ($dataS=$resS->fetch())
-                    {
-                        $offre = $dataS['id_offre'];
-                        $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
-                        $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-                        $dataO=$resO->fetch();
-
-                        $cat = $dataS['id_cat'];
-                        $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                        $dataC=$resC->fetch();
-
-                        $id_user= $dataS['id_user'];
-                        $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                        $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                        $dataU = $resU -> fetch();
-                        ?>
-                        <!-- Post -->
-
-                        <div class="post">
-                            <div class="post_content">
-                                <a href="details.html" class="post_img">
-                                    <img src="images/post.jpg" alt="">
-                                    <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                                </a>
-                                <div class="row author_area">
-                                    <div class="col s4 author">
-                                        <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                        <div class="col s8 media_body">
-
-                                            <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                            <span><?php echo$dataO['date_post_offre']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="col s4 btn_floating">
-
+                                    <div class="col s8 media_body">
+                                        <a href="#">Masum Rana</a>
+                                        <span>5 Minute ago</span>
                                     </div>
                                 </div>
-                                <a class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
-                                <p><?php echo$dataS['desc_user_stage']; ?></p>
-                            </div>
-                            <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                            <br>
-                        </div>
-                        <!-- End Post -->
-                        <br>
-
-
-                        <?php
-                    }
-
-                    ?>
-                </div>
-            </div>
-
-            <!-- Emploi  -->
-            <div id="emploi">
-                <div class="fast_post">
-
-
-                    <?php
-
-                    $sqlE="SELECT * FROM OEmploi ";
-                    $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
-
-                    while ($dataE=$resE->fetch())
-                    {
-                        $cat = $dataE['id_cat'];
-                        $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                        $dataC=$resC->fetch();
-
-                        $id_user= $dataE['id_user'];
-                        $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                        $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                        $dataU = $resU -> fetch();
-
-                        $offre = $dataE['id_offre'];
-                        $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
-                        $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-                        $dataO=$resO->fetch();
-                        ?>
-                        <!-- Post -->
-
-                        <div class="post">
-                            <div class="post_content">
-                                <a href="details.html" class="post_img">
-                                    <img src="images/post.jpg" alt="">
-                                    <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                                </a>
-                                <div class="row author_area">
-                                    <div class="col s4 author">
-                                        <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                        <div class="col s8 media_body">
-
-                                            <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                            <span><?php echo$dataO['date_post_offre']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="col s4 btn_floating">
-
-                                    </div>
-
+                                <div class="col s4 btn_floating">
+                                    <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
                                 </div>
-                                <a  class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
-                                <p><?php echo$dataE['desc_emp']; ?></p>
+                                <div class="col s4 like_user">
+                                    <ul class="like_img">
+                                        <li>
+                                            <ul class="hide_sm">
+                                                <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                        alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-2.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-3.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-4.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="mor_like">+8 more</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                              data-activates="post_dropdown"><i
+                                                        class="ion-android-more-vertical"></i></a>
+                                            <!-- Dropdown Structure -->
+                                            <ul id="post_dropdown" class="dropdown-content">
+                                                <li><a href="#">Report as spam</a></li>
+                                                <li><a href="#">Read later</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                            <br>
+                            <a href="details.html" class="post_heding">Why Is It I Can Never Think Of Anything Good To
+                                Make For Supper</a>
+                            <p>In the last 10 years Americans have seen a boom in local food markets and for good
+                                reason. While Americans continue to buy more fast food, they still expect perfect
+                                ingredients and they are finding them.</p>
                         </div>
-                        <!-- End Post -->
-                        <br>
 
-
-                        <?php
-                    }
-
-                    ?>
+                        <div class="like_comment_area row">
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                                <h6>128k</h6>
+                            </div>
+                            <div class="col s4 updown_btn">
+                                <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                                <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                                <a href="#" class="count_n">483</a>
+                            </div>
+                            <div class="col s4 updown_btn comment_c">
+                                <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                                <a href="#" class="count_n">14</a>
+                            </div>
+                        </div>
+                        <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                    </div><!-- End Post -->
                 </div>
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details-2.html" class="post_img">
+                            <img src="images/post-2.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_2"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_2" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details-2.html" class="post_heding">6 Powerful Tips To Creating Testimonials That Sell
+                            Your Products Fast</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-3.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li>
+                                        <ul class="hide_sm">
+                                            <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                    alt=""></a></li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="mor_like">+8 more</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_3"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_3" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Choosing The Best Audio Player Software For Your
+                            Computer</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                </div><!-- End Post -->
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-4.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_4"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_4" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">The Best Way To Fight Poor Health Is To Make Home
+                            Cooking Fast And Easy</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-5.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li>
+                                        <ul class="hide_sm">
+                                            <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                    alt=""></a></li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="mor_like">+8 more</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_5"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_5" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Get Around Easily With A New York Limousine
+                            Service</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                </div><!-- End Post -->
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-6.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_6"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_6" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Skin Cancer Prevention 5 Ways To Protect Yourself
+                            From Uv Rays</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+                <a href="load-mor.html" class="load-mor"></a>
             </div>
 
-        </div>   <!-- Fin des post/stage/emploi -->
+            <div id="trending">
+                <!-- Post -->
+                <div class="fast_post">
+                    <div class="post">
+                        <div class="post_content">
+                            <a href="details-2.html" class="post_img">
+                                <img src="images/post-2.jpg" alt="">
+                                <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                            </a>
+                            <div class="row author_area">
+                                <div class="col s4 author">
+                                    <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                    </div>
+                                    <div class="col s8 media_body">
+                                        <a href="#">Jason Borne</a>
+                                        <span>5 Minute ago</span>
+                                    </div>
+                                </div>
+                                <div class="col s4 like_user offset-s4">
+                                    <ul class="like_img">
+                                        <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                              data-activates="post_dropdown_2"><i
+                                                        class="ion-android-more-vertical"></i></a>
+                                            <!-- Dropdown Structure -->
+                                            <ul id="post_dropdown_2" class="dropdown-content">
+                                                <li><a href="#">Report as spam</a></li>
+                                                <li><a href="#">Read later</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="details-2.html" class="post_heding">6 Powerful Tips To Creating Testimonials That
+                                Sell Your Products Fast</a>
+                            <p>In the last 10 years Americans have seen a boom in local food markets and for good
+                                reason. While Americans continue to buy more fast food, they still expect perfect
+                                ingredients and they are finding them.</p>
+                        </div>
 
-        <!-- left side bar -->
-        <div class="col">
-            <div class="left_side_bar">
-                <div class="categories">
-                    <h3 class="categories_tittle">Post Categories</h3>
-                    <ul class="categories_icon">
-                        <li><a class="tooltip" data-balloon="Rate Post" data-balloon-pos="up"><i class="ion-ios-star"></i></a></li>
-                        <li><a href="#" class="tooltip" data-balloon="Time Post" data-balloon-pos="up"><i class="ion-android-time"></i></a></li>
-                        <li><a href="#" class="tooltip" data-balloon="Music Post" data-balloon-pos="up"><img src="images/icons/sound.png" alt=""></a></li>
-                        <li><a href="#" class="tooltip" data-balloon="Images Post" data-balloon-pos="up"><i class="ion-android-image"></i></a></li>
-                        <li><a href="#" class="tooltip" data-balloon="chart Post" data-balloon-pos="up"><i class="large material-icons">insert_chart</i></a></li>
-                    </ul>
+                        <div class="like_comment_area row">
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                                <h6>128k</h6>
+                            </div>
+                            <div class="col s4 updown_btn">
+                                <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                                <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                                <a href="#" class="count_n">483</a>
+                            </div>
+                            <div class="col s4 updown_btn comment_c">
+                                <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                                <a href="#" class="count_n">14</a>
+                            </div>
+                        </div>
+                    </div><!-- End Post -->
                 </div>
-                <div class="interests">
-                    <h3 class="categories_tittle">Your Interests <span>Edit</span></h3>
-                    <ul class="interests_list">
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Arts</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Beauty</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Entertainment</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Travel</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Personal</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Politics</a></li>
-                        <li><a href="#"><i class="ion-android-radio-button-off"></i>Space Science</a></li>
-                    </ul>
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-3.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li>
+                                        <ul class="hide_sm">
+                                            <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                    alt=""></a></li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="mor_like">+8 more</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_3"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_3" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Choosing The Best Audio Player Software For Your
+                            Computer</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                </div><!-- End Post -->
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-4.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_4"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_4" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">The Best Way To Fight Poor Health Is To Make Home
+                            Cooking Fast And Easy</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-5.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li>
+                                        <ul class="hide_sm">
+                                            <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                    alt=""></a></li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="mor_like">+8 more</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_5"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_5" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Get Around Easily With A New York Limousine
+                            Service</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                </div><!-- End Post -->
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-6.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_6"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_6" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Skin Cancer Prevention 5 Ways To Protect Yourself
+                            From Uv Rays</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+                <a href="load-mor.html" class="load-mor"></a>
+            </div>
+
+            <div id="featured">
+                <!-- Post -->
+                <div class="fast_post">
+                    <!-- Post -->
+                    <div class="post">
+                        <div class="post_content">
+                            <a href="details.html" class="post_img">
+                                <img src="images/post-3.jpg" alt="">
+                                <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                            </a>
+                            <div class="row author_area">
+                                <div class="col s4 author">
+                                    <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                    </div>
+                                    <div class="col s8 media_body">
+                                        <a href="#">Masum Rana</a>
+                                        <span>5 Minute ago</span>
+                                    </div>
+                                </div>
+                                <div class="col s4 btn_floating">
+                                    <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                                </div>
+                                <div class="col s4 like_user">
+                                    <ul class="like_img">
+                                        <li>
+                                            <ul class="hide_sm">
+                                                <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                        alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-2.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-3.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="single_l"><img src="images/like-client-4.png"
+                                                                                      alt=""></a></li>
+                                                <li><a href="#" class="mor_like">+8 more</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                              data-activates="post_dropdown_3"><i
+                                                        class="ion-android-more-vertical"></i></a>
+                                            <!-- Dropdown Structure -->
+                                            <ul id="post_dropdown_3" class="dropdown-content">
+                                                <li><a href="#">Report as spam</a></li>
+                                                <li><a href="#">Read later</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="details.html" class="post_heding">Choosing The Best Audio Player Software For Your
+                                Computer</a>
+                            <p>In the last 10 years Americans have seen a boom in local food markets and for good
+                                reason. While Americans continue to buy more fast food, they still expect perfect
+                                ingredients and they are finding them.</p>
+                        </div>
+
+                        <div class="like_comment_area row">
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                                <h6>128k</h6>
+                            </div>
+                            <div class="col s4 updown_btn">
+                                <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                                <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                                <a href="#" class="count_n">483</a>
+                            </div>
+                            <div class="col s4 updown_btn comment_c">
+                                <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                                <a href="#" class="count_n">14</a>
+                            </div>
+                        </div>
+                        <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                    </div><!-- End Post -->
                 </div>
-                <div class="profile">
-                    <h3 class="categories_tittle">Profile <span>Edit</span></h3>
-                    <ul class="profile_pic">
-                        <li><a href="#"><img src="images/profile-1.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-2.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-3.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-4.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-5.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-6.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-7.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-8.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-9.jpg" alt="" class="circle"></a></li>
-                        <li><a href="#"><img src="images/profile-10.jpg" alt="" class="circle"></a></li>
-                    </ul>
-                </div>
-                <div class="badges">
-                    <h3 class="categories_tittle">Badges</h3>
-                    <ul class="badges_list">
-                        <li><a href="#"><i class="ion-bonfire"></i><span>6</span></a></li>
-                        <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                        <li><a href="#"><i class="ion-coffee"></i></a></li>
-                        <li><a href="#"><i class="ion-clock"></i> <span>3</span></a></li>
-                        <li><a href="#"><i class="ion-camera"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-bell-outline"></i><span>2</span></a></li>
-                        <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                        <li><a href="#"><i class="ion-coffee"></i></a></li>
-                        <li><a href="#"><i class="ion-clock"></i></a></li>
-                    </ul>
-                </div>
-                <div class="calendar_widget">
-                    <h3 class="categories_tittle">Calendar</h3>
-                    <table class="calendar"></table>
-                </div>
-                <div class="social_Sharing">
-                    <h3 class="categories_tittle">Social Sharing</h3>
-                    <ul class="social_icon">
-                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                        <li><a href="#" class="tumblr"><i class="ion-social-tumblr"></i></a></li>
-                        <li><a href="#" class="googleplus"><i class="ion-social-googleplus"></i></a></li>
-                        <li><a href="#" class="pinterest"><i class="ion-social-pinterest"></i></a></li>
-                        <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
-                    </ul>
-                </div>
-                <div class="advertis">
-                    <a href="#"><img src="images/advertis.jpg" alt=""></a>
-                </div>
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-4.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_4"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_4" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">The Best Way To Fight Poor Health Is To Make Home
+                            Cooking Fast And Easy</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-5.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Technology</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Masum Rana</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 btn_floating">
+                                <a class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a>
+                            </div>
+                            <div class="col s4 like_user">
+                                <ul class="like_img">
+                                    <li>
+                                        <ul class="hide_sm">
+                                            <li><a href="#" class="single_l_1"><img src="images/like-client-1.png"
+                                                                                    alt=""></a></li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-2.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-3.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="single_l"><img src="images/like-client-4.png" alt=""></a>
+                                            </li>
+                                            <li><a href="#" class="mor_like">+8 more</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_5"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_5" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Get Around Easily With A New York Limousine
+                            Service</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                    <a href="#post_modal" class="submit_open_list modal-trigger">Submit Open List</a>
+                </div><!-- End Post -->
+                <!-- Post -->
+                <div class="post">
+                    <div class="post_content">
+                        <a href="details.html" class="post_img">
+                            <img src="images/post-6.jpg" alt="">
+                            <span><i class="ion-android-radio-button-off"></i>Advertising</span>
+                        </a>
+                        <div class="row author_area">
+                            <div class="col s4 author">
+                                <div class="col s4 media_left"><img src="images/author-2.jpg" alt="" class="circle">
+                                </div>
+                                <div class="col s8 media_body">
+                                    <a href="#">Jason Borne</a>
+                                    <span>5 Minute ago</span>
+                                </div>
+                            </div>
+                            <div class="col s4 like_user offset-s4">
+                                <ul class="like_img">
+                                    <li class="post_d"><a class="dropdown-button waves-effect" href="#!"
+                                                          data-activates="post_dropdown_6"><i
+                                                    class="ion-android-more-vertical"></i></a>
+                                        <!-- Dropdown Structure -->
+                                        <ul id="post_dropdown_6" class="dropdown-content">
+                                            <li><a href="#">Report as spam</a></li>
+                                            <li><a href="#">Read later</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a href="details.html" class="post_heding">Skin Cancer Prevention 5 Ways To Protect Yourself
+                            From Uv Rays</a>
+                        <p>In the last 10 years Americans have seen a boom in local food markets and for good reason.
+                            While Americans continue to buy more fast food, they still expect perfect ingredients and
+                            they are finding them.</p>
+                    </div>
+
+                    <div class="like_comment_area row">
+                        <div class="col s4 btn_floating">
+                            <a class="btn-floating waves-effect"><i class="ion-android-share-alt"></i></a>
+                            <h6>128k</h6>
+                        </div>
+                        <div class="col s4 updown_btn">
+                            <a href="#"><i class="ion-android-arrow-dropdown-circle"></i></a>
+                            <a href="#"><i class="ion-android-arrow-dropup-circle"></i></a>
+                            <a href="#" class="count_n">483</a>
+                        </div>
+                        <div class="col s4 updown_btn comment_c">
+                            <a href="#"><i class="ion-ios-chatboxes-outline"></i></a>
+                            <a href="#" class="count_n">14</a>
+                        </div>
+                    </div>
+                </div><!-- End Post -->
+                <a href="load-mor.html" class="load-mor"></a>
             </div>
         </div>
+        <!-- left side bar -->
+        <?php include'./part/left.php' ?>
         <!-- Right side bar -->
         <div class="right_side_bar col">
             <div class="right_sidebar_iner">
@@ -499,7 +1086,9 @@ require('part/header.php');
                     <h3 class="categories_tittle">Trending</h3>
                     <ul class="collapsible trending_collaps" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For Self Esteem</div>
+                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For
+                                Self Esteem
+                            </div>
                             <div class="collapsible-body">
                                 <div class="row collaps_wrpper">
                                     <div class="col s1 media_l">
@@ -508,7 +1097,9 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem knowing what to pack, but instead have</p>
+                                        <p>If you will be traveling for a ski vacation, it is often difficult to know
+                                            what to pack. You may not even have a problem knowing what to pack, but
+                                            instead have</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -519,7 +1110,8 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the palladium</p>
+                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the
+                                            palladium</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -535,7 +1127,9 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem knowing what to pack, but instead have</p>
+                                        <p>If you will be traveling for a ski vacation, it is often difficult to know
+                                            what to pack. You may not even have a problem knowing what to pack, but
+                                            instead have</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -546,14 +1140,17 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the palladium</p>
+                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the
+                                            palladium</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of Your Dreams</div>
+                            <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of
+                                Your Dreams
+                            </div>
                             <div class="collapsible-body">
                                 <div class="row collaps_wrpper">
                                     <div class="col s1 media_l">
@@ -562,7 +1159,9 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem knowing what to pack, but instead have</p>
+                                        <p>If you will be traveling for a ski vacation, it is often difficult to know
+                                            what to pack. You may not even have a problem knowing what to pack, but
+                                            instead have</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -573,14 +1172,17 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the palladium</p>
+                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the
+                                            palladium</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Don T Let The Outtakes Take You Out</div>
+                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Don T Let The Outtakes Take
+                                You Out
+                            </div>
                             <div class="collapsible-body">
                                 <div class="row collaps_wrpper">
                                     <div class="col s1 media_l">
@@ -589,7 +1191,9 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem knowing what to pack, but instead have</p>
+                                        <p>If you will be traveling for a ski vacation, it is often difficult to know
+                                            what to pack. You may not even have a problem knowing what to pack, but
+                                            instead have</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -600,14 +1204,17 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the palladium</p>
+                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the
+                                            palladium</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Helen Keller A Teller And A Seller</div>
+                            <div class="collapsible-header"><i class="ion-chevron-right"></i>Helen Keller A Teller And A
+                                Seller
+                            </div>
                             <div class="collapsible-body">
                                 <div class="row collaps_wrpper collaps_2">
                                     <div class="col s1 media_l">
@@ -616,7 +1223,8 @@ require('part/header.php');
                                     </div>
                                     <div class="col s11 media_b">
                                         <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the palladium</p>
+                                        <p>The Emerald Buddha is a figurine of a sitting Budha, that is the is the
+                                            palladium</p>
                                         <h6>By <a href="#">Thomas Omalley</a></h6>
                                     </div>
                                 </div>
@@ -676,7 +1284,9 @@ require('part/header.php');
             <div class="trending_area">
                 <ul class="collapsible trending_collaps" data-collapsible="accordion">
                     <li>
-                        <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For Self Esteem</div>
+                        <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For Self
+                            Esteem
+                        </div>
                         <div class="collapsible-body">
                             <div class="row collaps_wrpper">
                                 <div class="col s1 media_l">
@@ -685,7 +1295,8 @@ require('part/header.php');
                                 </div>
                                 <div class="col s11 media_b">
                                     <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
+                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
+                                        to pack. You may not even have a problem</p>
                                     <h6>By <a href="#">Thomas Omalley</a></h6>
                                 </div>
                             </div>
@@ -701,14 +1312,17 @@ require('part/header.php');
                                 </div>
                                 <div class="col s11 media_b">
                                     <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
+                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
+                                        to pack. You may not even have a problem</p>
                                     <h6>By <a href="#">Thomas Omalley</a></h6>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of Your Dreams</div>
+                        <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of
+                            Your Dreams
+                        </div>
                         <div class="collapsible-body">
                             <div class="row collaps_wrpper">
                                 <div class="col s1 media_l">
@@ -717,7 +1331,8 @@ require('part/header.php');
                                 </div>
                                 <div class="col s11 media_b">
                                     <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
+                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
+                                        to pack. You may not even have a problem</p>
                                     <h6>By <a href="#">Thomas Omalley</a></h6>
                                 </div>
                             </div>
@@ -776,12 +1391,12 @@ require('part/post.php');
         <h4>Create a new account to Open List or <a href="#modal1" class="modal-trigger modal-close">Sign in</a></h4>
         <form class="input_group">
             <div class="input-field">
-                <input  type="text" class="validate" placeholder="Full Name">
-                <input  type="email" class="validate" placeholder="Email">
+                <input type="text" class="validate" placeholder="Full Name">
+                <input type="email" class="validate" placeholder="Email">
                 <input type="password" class="validate" placeholder="Password">
             </div>
             <p>
-                <input type="checkbox" id="test" />
+                <input type="checkbox" id="test"/>
                 <label for="test">I accept the <a href="#">Terms and Services</a></label>
             </p>
             <button class="waves-effect">SIgn in</button>
@@ -803,11 +1418,11 @@ require('part/post.php');
         <h6>or Sign in using email address</h6>
         <form class="input_group">
             <div class="input-field">
-                <input  type="email" class="validate" placeholder="Email">
+                <input type="email" class="validate" placeholder="Email">
                 <input type="password" class="validate" placeholder="Password">
             </div>
             <p>
-                <input type="checkbox" id="test2" />
+                <input type="checkbox" id="test2"/>
                 <label for="test2">Remember me <a href="#">Forget password?</a></label>
             </p>
             <button class="waves-effect">SIgn in</button>
@@ -832,5 +1447,5 @@ require('part/post.php');
 <script src="js/theme.js"></script>
 </body>
 
-<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
+<!-- Mirrored from uxart.io/downloads/openlist-html/all-template/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:02 GMT -->
 </html>
