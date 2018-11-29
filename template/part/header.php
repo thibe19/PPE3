@@ -1,5 +1,19 @@
 
 <?php ///////:YANN THER 10h22 - 22/11/2018 - V0.0.5
+///
+///
+///
+/*
+ * TEST pour la deconnexion
+ */
+if (isset($_GET['logout'])){
+    unset($_SESSION['login']);
+    unset($_SESSION['mdp']);
+    header('Location:../');
+}
+
+
+
 $auto_compl = "";
 $sql = "SELECT id_user, nom_user FROM Utilisateur";
 $req = $conn->Query($sql)or die('Erreur dans le requete select user');
@@ -196,7 +210,7 @@ $( function() {
                         <li><a href="setting.php"><i class="ion-gear-b"></i>Settings</a></li>
                         <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
                         <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>
-                        <li><a onclick="window.location=''"><i class="ion-power"></i>Log out</a></li>
+                        <li><a onclick="window.location='./?logout=1'"><i class="ion-power"></i>Log out</a></li>
                     </ul>
                 </li>
             </ul>
