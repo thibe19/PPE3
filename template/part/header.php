@@ -58,12 +58,12 @@ $( function() {
 <nav class="header_area">
     <div class="custom_container">
         <div class="nav-wrapper">
-            <a href="index-2.php" class="brand-logo"><img src="images/logo.png" alt=""></a>
+            <a href="index.php" class="brand-logo"><img src="images/logo.png" alt=""></a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <a href="#post_modal" class="waves-effect btn post_btn sm_post_btn modal-trigger"><i class="ion-plus"></i>Add
                 Post</a>
             <ul class="left_menu hide-on-med-and-down">
-                <li><a href="index-2.php" class="active">Acueil</a></li>
+                <li><a href="index.php" class="active">Acueil</a></li>
                 <!-- <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown6">All Pages</a> -->
                     <!-- <div id="dropdown6" class="dropdown-content submenu row">
                         <div class="col m4 menu_column">
@@ -96,6 +96,7 @@ $( function() {
                     </div> -->
                 </li>
                 <li><a href="profile.php">Profile</a></li>
+                <li><a href="ostage.php">Nouvelle offre</a></li>
                 <!-- <li><a href="dashboard.php">Dashboard</a></li> -->
                 <li class="notifications search_sm"><a class="dropdown-button" href="#!" data-activates="dropdown5"><i
                                 class="ion-ios-search"></i></a>
@@ -110,7 +111,7 @@ $( function() {
             <ul class="right right_menu hide-on-med-and-down">
                 <li class="search_min">
                     <ul class="search_from">
-                      <form action="index-2.php?search=<?php echo isset($_POST['search'])?$_POST['search']:''; ?>" method="get" id="myform">
+                      <form action="index.php?search=<?php echo isset($_POST['search'])?$_POST['search']:''; ?>" method="get" id="myform">
                         <li><input type="text" placeholder="Rechercher" id="searchjs" name="search" value="" type="text"></li>
                         <li><a href="#" onclick="document.getElementById('myform').submit()" name="abut" class="search_icon"><i class="ion-ios-search"></i></a></li>
                       </form>
@@ -165,20 +166,22 @@ $( function() {
 
                 </li>
                 <!-- Notifications -->
-                <li><a href="messages.php">
-                  <i class="ion-ios-bell-outline"> </i>
+                <!-- <li><a href="messages.php">
+                  <i class="ion-ios-bell-outline"> </i> -->
                   <!-- <b class="n-number"></b>    Notification          -->
-                  </a>
+                  <!-- </a> -->
                     <!-- Dropdown Structure -->
 
-                    <ul id="dropdown4" class="dropdown-content">
+                    <!-- <ul id="dropdown4" class="dropdown-content">
                         <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
 
                         <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
 
-                </li>
+                </li> -->
+
+                <!-- NOTIF  -->
 
                 <!-- Profile -->
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown1"><img
@@ -204,7 +207,7 @@ $( function() {
                         <a href="#" class="search_icon"><i class="ion-ios-search"></i></a>
                     </div>
                 </li>
-                <li><a href="index-2.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown_s0">All
                         Pages</a>
                     <!-- Dropdown Structure -->
@@ -511,7 +514,7 @@ function displayul() {
 <div style='display:none;' id='invisible'>
   <nav class="header_area2">
   <center>
-    <form class="" action="index-2.php" id="search_more" method="post">
+    <form class="" action="index.php" id="search_more" method="post">
     <table>
       <tr>
         <td width="10%" height="0%">Mots clé</td>
