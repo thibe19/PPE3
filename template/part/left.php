@@ -38,6 +38,8 @@ if (isset($_SESSION['Eleve'])) {
         $prefuser[0] = '';
     }
 }
+
+//left bar de la page profil est differents des autres sur le site un test est necessaire
 if (isset($_SESSION['Profilon'])){
 
 }

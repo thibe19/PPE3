@@ -59,8 +59,7 @@ function getIDBDD($login, $mdp, $email, $conn)
     $SQL = "SELECT id_user,mdp_user FROM Utilisateur
             WHERE login_user = '$login'
             AND email_user = '$email'";
-    $req = $conn->Query($SQL) or die('Erreur');
-    $req = reqtoobj($req);
+    $req = reqtoobj($SQL,$conn);
     if ($req) {
         foreach ($req as $r) {
             $t_pass = password_verify($mdp, $r->mdp_user);
