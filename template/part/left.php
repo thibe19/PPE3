@@ -1,12 +1,20 @@
 <?php
 require('./../ToolBox/bdd.inc.php');
+//Function de suppression de preferences
+function supr_pref($iduser,$conn){
+    $suprprefsql = "DELETE FROM eleve_pref
+                          WHERE id_user='$iduser';";
+    $ressuprsql = $conn->Query($suprprefsql) or die('Erreur suppresion pref');
+}
+
+
+
 if (isset($_SESSION['Eleve'])) {
     $iduser = unserialize($_SESSION['Eleve'])->getIdUser();
+    supr_pref($iduser,$conn);
 
     if (isset($_POST['prefusermodif'])) {
-        $suprprefsql = "DELETE FROM eleve_pref
-                          WHERE id_user='$iduser';";
-        $ressuprsql = $conn->Query($suprprefsql) or die('Erreur suppresion pref');
+
 
         foreach ($_POST['prefusermodif'] as $p) {
             $addpref = "INSERT INTO eleve_pref
@@ -14,6 +22,9 @@ if (isset($_SESSION['Eleve'])) {
             $resaddpref = $conn->Query($addpref) or dirname('Erreur ajout des preferences');
         }
 
+    }
+    else{
+        supr_pref($iduser,$conn);
     }
 
     $pref = data_base_in_object('Preferences', $conn);
