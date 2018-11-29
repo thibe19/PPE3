@@ -45,10 +45,8 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
             $_SESSION['id']=dec_enc('encrypt',$req[0]['id_user']);
             $id = $req[0]['id_user'];
             if (testsql("SELECT id_user FROM Eleve WHERE id_user='$id'",$conn)){
-                $SQL = "SELECT * FROM Utilisateur
-                    WHERE id_user='$id'";
-                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
-                foreach (reqtoobj($req) as $r){
+                foreach (reqtoobj("SELECT * FROM Utilisateur
+                    WHERE id_user='$id'",$conn) as $r){
                     $nom = $r->nom_user;
                     $email = $r->email_user;
                     $tel = $r->tel_user;
@@ -60,15 +58,13 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $desc = $r->desc_user;
                     $dom_acti = $r->dom_acti;
                 }
-                $SQL = "SELECT * FROM Eleve
-                        WHERE id_user='$id'";
-                $req = $conn->Query($SQL)or die("Erreur selection de l'utilisateur");
-                foreach (reqtoobj($req) as $r){
+                foreach (reqtoobj("SELECT * FROM Eleve
+                        WHERE id_user='$id'",$conn) as $r){
                     $prenom = $r->prenom_eleve;
                     $date = $r->date_naiss;
                     $choix = $r->choix_position;
                 }
-                $uneleve = new Eleve('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choix);
+                $uneleve = new Eleve($id,$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choix);
                 $_SESSION['Eleve']= serialize($uneleve);
             }
             elseif(testsql("SELECT id_user FROM Entreprise WHERE id_user='$id'",$conn)){
@@ -95,7 +91,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $ape = $r->code_APE;
                     $site = $r->site_web;
                 }
-                $unent = new Entreprise('',$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomrep,$ape,$site);
+                $unent = new Entreprise($id,$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomrep,$ape,$site);
                 $_SESSION['Entreprise']=serialize($unent);
             }
             $_SESSION['login'] = $_POST['login'];

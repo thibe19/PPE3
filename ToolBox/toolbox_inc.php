@@ -17,11 +17,11 @@ function browse_by_id($tbname, $columid, $id)
 {
     $SQL = "SELECT * FROM $tbname WHERE $columid=$id";
     $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
-    $res = $res->fetchAll();
+    $res = $res->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
 
-function display_data_base($tbname)
+function display_data_base($tbname,$conn)
 {
     $SQL = "SELECT * FROM $tbname";
     $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
@@ -31,7 +31,7 @@ function display_data_base($tbname)
     print"</pre>";
 }
 
-function data_base_in_array($tbname)
+function data_base_in_array($tbname,$conn)
 {
     $SQL = "SELECT * FROM $tbname";
     $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
@@ -75,8 +75,9 @@ function getIDBDD($login, $mdp, $email, $conn)
 }
 
 /*********************** Fetch en objet ******************/
-function reqtoobj($req)
+function reqtoobj($SQL,$conn)
 {
+    $req = $conn->Query($SQL) or die('Erreur');
     $req = $req->fetchAll(PDO::FETCH_OBJ);
     return $req;
 }
