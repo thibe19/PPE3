@@ -59,6 +59,7 @@ $id=$data['id_user'];
 <body>
 <!-- Header_Area -->
 <?php
+require('../ToolBox/toolbox_inc.php');
 require('part/header.php');
 ?>
 <!-- End  Header_Area -->
@@ -80,6 +81,49 @@ require('part/header.php');
 
         <div class="middle_section col" id="infinite_scroll">
             <!-- début de l'affichage des Post -->
+
+
+
+
+            <!-- TRIE PART -->
+            <?php
+            if (isset($_POST['type_post'])) {
+               $mot_post = $_POST['mot_post'];
+
+               $member_name = $_POST['member_name'];
+
+               $date_debut = $_POST['date_debut'];
+
+               $date_fin = $_POST['date_fin'];
+
+               $cat_post = $_POST['cat_post'];
+
+               $type_post = $_POST['type_post'];
+              $data_trie = data_base_in_object("Post", $conn);
+              foreach ($data_trie as $d) {
+                if ($d->titre_post==$mot_post) {
+                  print $d->id_post."<- titre <br>";
+                }
+                if (($d->date_post>$date_debut) && ($d->date_post<$date_fin)) {
+                  print $d->id_post."<- date <br>";
+                }
+                if ($d->id_cat==$cat_post) {
+                  print $d->id_post."<- cat <br>";
+                }
+
+              }
+            }
+             ?>
+
+
+
+
+
+
+
+
+            <?php if (empty($_POST['type_post'])) {
+             ?>
             <div id="post">
                 <div class="fast_post">
 
@@ -139,7 +183,7 @@ require('part/header.php');
                     ?>
                 </div>
             </div>
-
+          <?php } ?>
             <!-- Stage  -->
             <div id="stage">
                 <div class="fast_post">

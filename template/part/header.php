@@ -1,5 +1,60 @@
 
-<?php ///////:YANN THER 10h22 - 22/11/2018 - V0.0.5 ?>
+<?php ///////:YANN THER 10h22 - 22/11/2018 - V0.0.5
+$auto_compl = "";
+$sql = "SELECT id_user, nom_user FROM Utilisateur";
+$req = $conn->Query($sql)or die('Erreur dans le requete pref');
+while ($res = $req->fetch()) {
+  $id_auto = $res['id_user'];
+  $sql2 = "SELECT prenom_eleve FROM eleve
+          WHERE id_user = $id_auto";
+  $req2 = $conn->Query($sql2)or die('Erreur dans le requete pref');
+  if ($res2 = $req2->fetch()) {
+    $auto_compl = $auto_compl."'".$res2['prenom_eleve']." ".$res['nom_user']."',";
+  }
+  else {
+    $auto_compl = $auto_compl."'".$res['nom_user']."',";
+  }
+}
+
+$auto_compl2 = "";
+$sql = "SELECT titre_post FROM Post ";
+$req = $conn->Query($sql)or die('Erreur dans le requete pref');
+while ($res = $req->fetch()) {
+  $auto_compl2 = $auto_compl2."'".$res['titre_post']."',";
+}
+
+$auto_compl2_aff = substr($auto_compl2, 0, -1);
+$auto_compl_aff = substr($auto_compl, 0, -1);
+
+
+?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+  var availableTags = [
+    <?php echo $auto_compl_aff; ?>
+  ];
+  $( "#tags" ).autocomplete({
+    source: availableTags
+  });
+} );
+</script>
+<script>
+$( function() {
+  var availableTags = [
+    <?php echo $auto_compl2_aff; ?>
+  ];
+  $( "#titre" ).autocomplete({
+    source: availableTags
+  });
+} );
+</script>
+
+
+
 <nav class="header_area">
     <div class="custom_container">
         <div class="nav-wrapper">
@@ -8,9 +63,9 @@
             <a href="#post_modal" class="waves-effect btn post_btn sm_post_btn modal-trigger"><i class="ion-plus"></i>Add
                 Post</a>
             <ul class="left_menu hide-on-med-and-down">
-                <li><a href="index-2.php" class="active">Home</a></li>
-                <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown6">All Pages</a>
-                    <div id="dropdown6" class="dropdown-content submenu row">
+                <li><a href="index-2.php" class="active">Acueil</a></li>
+                <!-- <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown6">All Pages</a> -->
+                    <!-- <div id="dropdown6" class="dropdown-content submenu row">
                         <div class="col m4 menu_column">
                             <ul>
 
@@ -38,7 +93,7 @@
                                 <li><a href="#modal1" class="waves-effect modal-trigger">Sign in</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="dashboard.php">Dashboard</a></li>
@@ -667,43 +722,64 @@ function displayul() {
 <div style='display:none;' id='invisible'>
   <nav class="header_area2">
   <center>
+    <form class="" action="index-2.php" id="search_more" method="post">
     <table>
       <tr>
         <td width="10%" height="0%">Mots clé</td>
-        <td width="10%" height="0%"></td>
+        <td width="10%" height="0%">Membre</td>
         <td width="10%" height="0%">Date Minimum</td>
         <td width="10%" height="0%">Date Maximum</td>
       </tr>
       <tr>
-        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
-        <td width="10%" height="0%"></td>
-        <td> <input type="date" name="test" value=""> </td>
-        <td> <input type="date" name="test" value=""> </td>
+        <td width="10%" height="0%">
+          <div class="ui-widget">
+            <input name="mot_post" id="titre">
+          </div>
+        </td>
+        <td width="10%" height="0%">
+          <div class="ui-widget">
+            <input name="member_name" id="tags">
+          </div>
+        </td>
+        <td> <input type="date" name="date_debut" value=""> </td>
+        <td> <input type="date" name="date_fin" value=""> </td>
       </tr>
       <tr>
-        <td width="10%" height="0%">Domaine</td>
+        <td width="10%" height="0%"></td>
         <td width="10%" height="0%">Catégorie</td>
-        <td width="10%" height="0%">Membre</td>
         <td width="10%" height="0%">Type</td>
+        <td width="10%" height="0%"></td>
       </tr>
       <tr>
         <td width="10%" height="0%">
-          <select class="" name="">
-            <option value="">test1</option>
-            <option value="">test2</option>
+
+        </td>
+        <td width="10%" height="0%">
+          <select class="" name="cat_post">
+            <option value="0"></option>
+            <?php
+            $sql = "SELECT * FROM Categorie";
+            $req = $conn->Query($sql)or die('Erreur dans le requete cat');
+            while ($res = $req->fetch()) {
+             ?>
+            <option value="<?php echo $res['id_cat']; ?>"><?php echo $res['lib_cat']; ?></option>
+          <?php } ?>
           </select>
         </td>
-        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
-        <td width="10%" height="0%"> <input type="text" name="" value=""> </td>
         <td width="10%" height="0%">
-          <select class="" name="">
-            <option value="">Post</option>
-            <option value="">Stage</option>
-            <option value="">Travail</option>
+          <select class="" name="type_post">
+            <option value="1">Post</option>
+            <option value="2">Stage</option>
+            <option value="3">Travail</option>
           </select>
+        </td>
+        <td width="10%" height="0%">
+          <center> <a href="#" onclick="document.getElementById('search_more').submit()" class="waves-effect btn post_btn modal-trigger" name="search_trie" value="0"><i class="ion-plus"><span> Rechercher</span></i></a> </center>
+          <!-- onclick="document.getElementById('myform').submit()"  -->
         </td>
       </tr>
     </table>
+  </form>
   </center>
   </nav>
 </div>
