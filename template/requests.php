@@ -74,11 +74,7 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
 
                 $id_user = $res['id_user'];
 
-<<<<<<< HEAD
                 $SQL2 = "SELECT * FROM utilisateur
-=======
-                  $SQL2 = "SELECT * FROM Utilisateur
->>>>>>> 4ad26ed45af6992cd51a76a4971b9a93eb01a7f5
                            WHERE id_user = $id_user
                            AND id_user != $id_user_session";
                   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
