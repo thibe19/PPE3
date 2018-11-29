@@ -89,7 +89,8 @@ require('part/header.php');
             <?php
             if (isset($_POST['type_post'])) {
 
-                //TODO
+                //TODO Elasticsearch ??????? moteur de recherche
+                
                $mot_post = $_POST['mot_post'];
 
                $member_name = $_POST['member_name'];
@@ -104,6 +105,9 @@ require('part/header.php');
 
                $data_trie = data_base_in_array("Post", $conn);
                foreach($data_trie as $d){
+                   if(strpos($d['contenu_post'],$mot_post)){
+                       print $d['titre_post'].'<br>'.$d['contenu_post'];
+                   }
                    if (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && isset($cat_post) && !empty($type_post)){
                        if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d) && in_array($type_post,$d)){
                            var_dump($d);
