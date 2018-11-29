@@ -96,7 +96,7 @@ $( function() {
                     </div> -->
                 </li>
                 <li><a href="profile.php">Profile</a></li>
-                <li><a href="dashboard.php">Dashboard</a></li>
+                <!-- <li><a href="dashboard.php">Dashboard</a></li> -->
                 <li class="notifications search_sm"><a class="dropdown-button" href="#!" data-activates="dropdown5"><i
                                 class="ion-ios-search"></i></a>
                     <!-- Dropdown Structure -->
@@ -143,252 +143,41 @@ $( function() {
 
                     <ul id="dropdown4" class="dropdown-content">
                         <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-9.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Dan Fisher</b> started following you.</p>
-                                        <h6>544 mutual</h6>
-                                        <div class="btn_group">
-                                            <span class="waves-effect follow_b">Follow back</span>
-                                            <span class="waves-effect">Block</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-1.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>James Richardman </b>started following you.</p>
-                                        <h6>32 mutual</h6>
-                                        <div class="btn_group">
-                                            <span class="waves-effect confirm"><i class="ion-android-done"></i></span>
-                                            <span class="waves-effect">Block</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-12.jpg" alt="" class="circle responsive-img w_img">
-                                    <div class="media_body">
-                                        <p>You are now following <b>Meryl Streep</b></p>
-                                        <h6>Check out her most recent updates.</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-2.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>James Richardman </b>started following you.</p>
-                                        <h6>90 mutual</h6>
-                                        <div class="btn_group">
-                                            <span class="waves-effect close_b"><i class="ion-android-close"></i></span>
-                                            <span class="waves-effect">Block</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-10.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Dan Fisher</b> started following you.</p>
-                                        <h6>544 mutual</h6>
-                                        <div class="btn_group">
-                                            <span class="waves-effect follow_b">Follow back</span>
-                                            <span class="waves-effect"><i class="ion-android-done"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-11.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Edgar Hoover</b> started following you.</p>
-                                        <div class="btn_group left">
-                                            <span class="waves-effect follow_b">Follow back</span>
-                                            <span class="waves-effect">Block</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+
                         <li><a href="requests.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
 
                 </li>
                 <!-- Messages -->
-                <li class="notifications messages"><a class="dropdown-button" href="#!" data-activates="dropdown3"><i
-                                class="ion-ios-chatboxes-outline"></i>
-                                <!--NOTIFICATION DYNAMIQUE  -->
-                                <!-- <b class="n-number"></b></a> -->
+                <li><a href="messages.php">
+                  <i class="ion-ios-chatboxes-outline"> </i>
+                  <!-- <b class="n-number"></b>    Notification          -->
+                  </a>
                     <!-- Dropdown Structure -->
-                    <ul id="dropdown3" class="dropdown-content">
-                        <li class="hed_notic">Messages <span>Mark all as read <i
-                                        class="ion-ios-gear-outline"></i></span></li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-1.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <h4>Emran Khan
-                                            <small>12:40pm</small>
-                                        </h4>
-                                        <p>Listen, I need to talk to you about this!</p>
-                                    </div>
-                                </div>
-                            </a>
+
+                    <ul id="dropdown4" class="dropdown-content">
+                        <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
+
+                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-3.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <h4>Masum Rana
-                                            <small>2 hours ago</small>
-                                        </h4>
-                                        <p>One of the best ways to make a great vacation quickly horrible is to choose
-                                            the...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media seen">
-                                    <img src="images/profile-8.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <h4>Jakaria Khan
-                                            <small>3 hours ago</small>
-                                        </h4>
-                                        <p>Hi</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-5.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <h4>Papia Sultana
-                                            <small>2 days ago</small>
-                                        </h4>
-                                        <p>Hey Masum, I am looking for you as a new actor for upcoming Equalizer 2
-                                            movie...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media seen">
-                                    <img src="images/profile-7.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <h4>Samuel L.
-                                            <small>5 days ago</small>
-                                        </h4>
-                                        <p>Hello</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Messages</a></li>
                     </ul>
+
                 </li>
                 <!-- Notifications -->
-                <li class="notifications"><a class="dropdown-button" href="#!" data-activates="dropdown2"><i
-                                class="ion-ios-bell-outline"></i><b class="n-number">5</b></a>
+                <li><a href="messages.php">
+                  <i class="ion-ios-bell-outline"> </i>
+                  <!-- <b class="n-number"></b>    Notification          -->
+                  </a>
                     <!-- Dropdown Structure -->
-                    <ul id="dropdown2" class="dropdown-content">
-                        <li class="hed_notic">Notifications <span>Mark all as read <i class="ion-ios-gear-outline"></i></span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-6.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Dan Fisher</b> submitted a new photo to a
-                                            <small>post</small>
-                                            post you are following.
-                                        </p>
-                                        <h6>5 Minute ago</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-7.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>James Richardman </b>downvoted your
-                                            <small>answer</small>
-                                            in a post.
-                                        </p>
-                                        <h6>5 Minute ago</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media seen">
-                                    <img src="images/profile-8.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Margot Robbie</b> commented on your
-                                            <small>photo</small>
-                                            .
-                                        </p>
-                                        <h6>5 Minute ago</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media">
-                                    <img src="images/profile-9.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Peter Parker</b> is now following you.</p>
-                                        <h6>5 Minute ago</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="media seen">
-                                    <img src="images/profile-10.jpg" alt="" class="circle responsive-img">
-                                    <div class="media_body">
-                                        <p><b>Dan Fisher </b> submitted a new photo to a
-                                            <small>post</small>
-                                            you are following.
-                                        </p>
-                                        <h6>5 Minute ago</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><a href="notifications.php" class="waves-effect chack_all_btn">Check All Notifications</a>
+
+                    <ul id="dropdown4" class="dropdown-content">
+                        <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
+
+                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
                         </li>
                     </ul>
+
                 </li>
 
                 <!-- Profile -->
