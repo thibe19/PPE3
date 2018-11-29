@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  22/11/18
+ *  29/11/18
  *  Profil
- *  v0.0.5
+ *  v0.0.6
  */
 
 session_start();
@@ -110,9 +110,9 @@ if ($id==$dataE['id_user']) {
   <!----------------------------------------------------------------------------------------------------------- -->
 
       <!-- Option -->
-      <div class="middle_section col">
-        <div class="post profile_post">
-          <div class="post_content">
+      <section class="messages_area">
+        <div class="messages_row row">
+          <div class="section_row row">
 
             <div class="option-profil">
             <section class="min_container photo_pages">
@@ -288,7 +288,7 @@ if ($id==$dataE['id_user']) {
           </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- /Option -->
 
