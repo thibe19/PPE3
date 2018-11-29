@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  28/11/18
+ *  29/11/18
  *  index-2
- *  v0.0.2
+ *  v0.0.3
  */
  session_start();
 
@@ -22,7 +22,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
 <head>
@@ -30,7 +30,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Open List | Html template</title>
+    <title>ViaBahuet</title>
 
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
