@@ -399,31 +399,42 @@ if (isset($_POST['validSE'])) {
   $enp = $_POST['ent'];
   $date = date("Y-m-d");
 
+  if ( ($nreq && $lib_offre && $descstage) != NULL) {
 
-  $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
-  //$unstage->insert_stage($unstage,$conn);
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
+    //$unstage->insert_stage($unstage,$conn);
 
-  echo $unstage -> getAllStage();
+    echo $unstage -> getAllStage();
 
-  $nomEnt = $_POST['nomEnt'];
-  $telEnt = $_POST['telEnt'];
+    $nomEnt = $_POST['nomEnt'];
+    $telEnt = $_POST['telEnt'];
 
-  if (($nomEnt && $telEnt) != NULL) {
-    $NrueEnt = $_POST['NrueEnt'];
-    $rueEnt = $_POST['rueEnt'];
-    $villeEnt = $_POST['villeEnt'];
-    $cpEnt = $_POST['cpEnt'];
+    if (($nomEnt && $telEnt) != NULL) {
+      $NrueEnt = $_POST['NrueEnt'];
+      $rueEnt = $_POST['rueEnt'];
+      $villeEnt = $_POST['villeEnt'];
+      $cpEnt = $_POST['cpEnt'];
 
-    $unentreprise = new Entreprise($nomEnt,$telEnt,$NrueEnt,$rueEnt,$cpEnt,$villeEnt);
-    $unentreprise->inscriptionent($unentreprise,$conn);
+      $unentreprise = new Entreprise($nomEnt,$telEnt,$NrueEnt,$rueEnt,$cpEnt,$villeEnt);
+      $unentreprise->inscriptionent($unentreprise,$conn);
 
+      echo "<script> alert('Le stage a été crée.');
+                      window.location.href='./index.php';
+            </script>";
+    }
+
+    echo "<script> alert('Le stage a été crée.');
+                    window.location.href='./index.php';
+          </script>";
+
+
+  }else {
+    echo "<script> alert('Erreur zone non remplie.');
+                    window.location.href='./ostage.php';
+          </script>";
 
   }
-
 } //fin valider eleve
-
-
-
 
 }// fin eleve
 
@@ -756,7 +767,9 @@ if (isset($_SESSION['Entreprise'])) {
 
     echo $unstage -> getAllStage();
 
-
+    echo "<script> alert('Le stage a été crée.');
+                    window.location.href='./index-2.php';
+          </script>";
   } //fin valider entreprise
 
 
