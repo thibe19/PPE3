@@ -26,7 +26,7 @@ if (isset($_SESSION['Eleve'])) {
     $uneoffre = new Stage(1, 'test doffre', 'bac +5', date('Y-m-d'), date('Y-m-d'), $id_user, '2', 1, date('Y-m-d'), '3', 'pas mal');
 
 
-    $list_ent = reqtoobj("SELECT nom_user FROM Utilisateur U,Entreprise E
+    $list_ent = reqtoobj("SELECT E.id_user,nom_user FROM Utilisateur U,Entreprise E
                               WHERE U.id_user=E.id_user", $conn);
     $domaine = data_base_in_object('Categorie', $conn);
 
@@ -34,9 +34,6 @@ if (isset($_SESSION['Eleve'])) {
 
 
 
-    if(isset($_POST['valstabout'])){
-        print $_POST['selectdomaine'];
-    }
 
 
 
@@ -197,8 +194,18 @@ require('part/header.php');
 
                                 <h5>Experience</h5>
                                 <br>
+                                <?php
+
+                                $sql_aff_stg = "SELECT * FROM OStage
+                                                WHERE id_user = $id_user";
+                                $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                                while ($res_aff_stg = $req_aff_stg->fetch()) {
+
+                                 ?>
                                 <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
 
+
+                                 <p>TEST</p>
                                 <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
                                     <i> <?php echo $placephrase . "<br>"; ?> </i></p>
                                 <p> <?php echo $descs; ?> </p>
@@ -210,10 +217,20 @@ require('part/header.php');
                                 <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
                                     <i> <?php echo $placephrase . "<br>"; ?> </i></p>
                                 <p> <?php echo $descs; ?> </p>
+
+                              <?php } ?>
 
                                 <br>
                                 <hr>
                                 <br>
+                                <?php
+
+                                $sql_aff_stg = "SELECT * FROM OEmploi
+                                                WHERE id_user = $id_user";
+                                $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                                while ($res_aff_stg = $req_aff_stg->fetch()) {
+
+                                 ?>
                                 <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
 
                                 <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
@@ -228,9 +245,12 @@ require('part/header.php');
                                     <i> <?php echo $placephrase . "<br>"; ?> </i></p>
                                 <p> <?php echo $descs; ?> </p>
 
+
                                 <br>
                                 <hr>
                                 <br>
+
+                                <?php } ?>
 
                                 <!-- CONTACT -->
 
@@ -303,9 +323,18 @@ require('part/header.php');
 
                             <h5>Experience</h5>
                             <br>
+
+
                             <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
+
+                            <?php
+                            $sql_aff_stg = "SELECT * FROM OStage
+                                            WHERE id_user = $id_user";
+                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                            while ($res_aff_stg = $req_aff_stg->fetch()) {
+                             ?>
                             <div class="select_option">
-                                <p> Domaine :
+                                <p> Domaine :</p>
                                     <select name="selectdomaine">
                                         <?php foreach ($domaine as $d) { ?>
                                             <option value="<?php $d->id_cat ?>">
@@ -315,10 +344,10 @@ require('part/header.php');
                                     </select>
                             </div>
                             <div class="select_option">
-                                <p> Entreprise :
+                                <p> Entreprise :</p>
                                     <select name="selectent">
                                         <?php foreach ($list_ent as $le) { ?>
-                                            <option value="<?php $le->nom_user ?>">
+                                            <option value="<?php $le->id_user ?>">
                                                 <?php print $le->nom_user ?>
                                             </option>
                                         <?php } ?>
@@ -342,16 +371,19 @@ require('part/header.php');
                                                         cols="80"><?php echo $descs; ?></textarea></p>
                             <button type="submit" id="cancelabout" value="1" name="delabout"><i
                                         class="fas fa-trash-alt"></i></button>
+                            <?php } ?>
 
 
                             <!-- AJOUT DE STAGE -->
+
                             <div style="display:none" id="id2">
                                 <form action="about.php" method="post">
+                                  Titre : <input type="text" name="titresn" value="">
                                     <div class="select_option">
                                         <p> Domaine :
-                                            <select name="selectdomaine">
+                                            <select name="selectdomainesn">
                                                 <?php foreach ($domaine as $d) { ?>
-                                                    <option value="<?php $d->id_cat ?>">
+                                                    <option value="<?php print $d->id_cat ?>">
                                                         <?php print $d->lib_cat ?>
                                                     </option>
                                                 <?php } ?>
@@ -359,14 +391,15 @@ require('part/header.php');
                                     </div>
                                     <div class="select_option">
                                         <p> Entreprise :
-                                            <select name="selectent">
+                                            <select name="selectentsn">
                                                 <?php foreach ($list_ent as $le) { ?>
-                                                    <option value="<?php $le->nom_user ?>">
+                                                    <option value="<?php print $le->id_user ?>">
                                                         <?php print $le->nom_user ?>
                                                     </option>
                                                 <?php } ?>
                                             </select>
                                     </div>
+
                                     Date :
                                     <table>
                                         <tr>
@@ -382,8 +415,11 @@ require('part/header.php');
                                     </table>
                                     Place : <input type="text" name="place_about_sn" value=""
                                                    placeholder="Exemple : Paris">  </p>
-                                    <p> Description : <textarea name="desc_about_sn" class="textareabout" rows="8"
-                                                                cols="80"><?php echo $descs; ?></textarea></p>
+                                    <p> Description : <textarea name="desc_about_sn" class="textareabout" rows="8" placeholder="Description du stage"
+                                                                cols="80"></textarea></p>
+
+                                   <input type="number" name="quantitysn" min="1" max="5" placeholder="Note">
+
                                     <button type="submit" id="updateabout" value="1" name="valstabout"><i
                                                 class="fas fa-check"></i></button>
                                 </form>
@@ -398,7 +434,20 @@ require('part/header.php');
                             <br>
                             <hr>
                             <br>
+
+
+
+
                             <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
+
+                            <?php
+
+                            $sql_aff_stg = "SELECT * FROM OEmploi
+                                            WHERE id_user = $id_user";
+                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                            while ($res_aff_stg = $req_aff_stg->fetch()) {
+
+                             ?>
 
                             <div class="select_option">
                                 <p> Domaine :
@@ -429,7 +478,7 @@ require('part/header.php');
                             <button type="submit" id="cancelabout" value="1" name="deltabout"><i
                                         class="fas fa-trash-alt"></i></i></button>
 
-
+                            <?php } ?>
 
 
 
@@ -1562,6 +1611,40 @@ require('part/header.php');
         © 2018 <a href="#">Open List</a>. All rights reserved.
     </div>
 </footer>
+
+
+<?php
+/// TRAITEMENT
+
+if (isset($_POST['valstabout'])) {
+   $id_catsn = $_POST['selectdomainesn'];
+   $id_entsn = $_POST['selectentsn'];
+   $dated = $_POST['date_about_debut_sn'];
+   $datef = $_POST['date_about_fin_sn'];
+   $addsn = $_POST['place_about_sn'];
+   $descsn = $_POST['desc_about_sn'];
+   $libo = $_POST['titresn'];
+   $notesn = $_POST['quantitysn'];
+
+  $unstage=NEW Stage('', $libo, '', $dated, '', $id_user, $id_catsn, $id_entsn, $datef, $descsn);
+
+  $unstage->insert_offre($conn);
+
+}
+
+ ?>
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- End Footer area -->
 
 <!-- Add post poup area -->

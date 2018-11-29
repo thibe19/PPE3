@@ -10,12 +10,13 @@ class Offre
     Private $niveau_req;
     Private $date_debut_offre;
     private $date_post_offre;
+    private $desc_offre;
     private $id_user;
     private $id_cat;
     private $id_ent;
 
 
-    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $id_user = '',$id_cat = '', $id_ent = '')
+    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '',$id_cat = '', $id_ent = '')
     {
         $this->id_offre = $id_offre;
         $this->lib_offre = $lib_offre;
@@ -205,10 +206,10 @@ class Offre
         $id_cat = $this->id_cat;
         $id_ent = $this->id_ent;
 
-        print $SQL = "INSERT INTO Offre
-                VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$id_user','$id_cat','$id_ent','')";
+        $SQL = "INSERT INTO Offre
+                VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','','$id_user','$id_cat','$id_ent','')";
 
-        //$res = $conn->Query($SQL)or die("Erreur insertion de l'offre");
+        $res = $conn->Query($SQL)or die("Erreur insertion de l'offre");
     }
     public function insert_offre_stage($lib_offre, $niveau_req, $date_debut_offre, $Date_fin_stage, $note_stage, $desc_utilisateur_stage, $conn)
     {

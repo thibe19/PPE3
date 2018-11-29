@@ -15,7 +15,7 @@ class Stage extends Offre{
     private $desc_user;
 
 
-    public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $id_user = '', $id_cat = '', $id_ent = '',
+    public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '',
      $date_fin_stage = '', $note_user = '', $desc_user = '')
     {
         parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $id_user, $id_cat, $id_ent);
@@ -98,14 +98,11 @@ class Stage extends Offre{
         $desc_user = $this->desc_user;
 
         $sql_getid = "SELECT id_offre FROM Offre
-                            WHERE id_offre=LAST_INSERT_ID()";
+                      WHERE id_offre=LAST_INSERT_ID()";
         $res_getid = $conn->Query($sql_getid)or die('Erreur dans le requete get id');
         $res_getid = $res_getid->fetchAll();
 
         if($res_getid){
-            var_dump($res_getid);
-            $SQL = "INSERT INTO OStage
-                VALUES('')";
         }
     }
 }
