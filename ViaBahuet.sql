@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 29 nov. 2018 à 16:25
+-- Généré le :  jeu. 29 nov. 2018 à 16:48
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -223,6 +223,7 @@ CREATE TABLE `Offre` (
   `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
   `date_debut_offre` date NOT NULL,
   `date_post_offre` date NOT NULL,
+  `desc_offre` longtext COLLATE latin1_bin NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_cat` int(11) NOT NULL,
   `id_ent` int(11) NOT NULL,
@@ -233,8 +234,8 @@ CREATE TABLE `Offre` (
 -- Déchargement des données de la table `Offre`
 --
 
-INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
-(13, 'test doffre', 'bac +5', '2018-11-29', '2018-11-29', 42, 37, 41, 0);
+INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `desc_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
+(13, 'test doffre', 'bac +5', '2018-11-29', '2018-11-29', '', 42, 37, 41, 0);
 
 -- --------------------------------------------------------
 
@@ -644,15 +645,6 @@ ALTER TABLE `OEmploi`
   ADD CONSTRAINT `OEmploi_Eleve0_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Eleve1_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`);
-
---
--- Contraintes pour la table `Offre`
---
-ALTER TABLE `Offre`
-  ADD CONSTRAINT `Offre_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `Offre_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `Offre_ibfk_1` FOREIGN KEY (`id_cat`) REFERENCES `Categorie` (`id_cat`),
-  ADD CONSTRAINT `Offre_ibfk_2` FOREIGN KEY (`id_ent`) REFERENCES `Entreprise` (`id_user`);
 
 --
 -- Contraintes pour la table `OStage`
