@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 28 nov. 2018 à 11:45
+-- Généré le :  jeu. 29 nov. 2018 à 11:14
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -154,10 +154,10 @@ CREATE TABLE `eleve_pref` (
 --
 
 INSERT INTO `eleve_pref` (`id_pref`, `id_user`) VALUES
-(1, 42),
 (2, 42),
-(3, 42),
-(4, 42);
+(5, 42),
+(6, 42),
+(11, 42);
 
 -- --------------------------------------------------------
 
@@ -470,7 +470,6 @@ ALTER TABLE `OEmploi`
 ALTER TABLE `Offre`
   ADD PRIMARY KEY (`id_offre`),
   ADD KEY `Offre_Eleve_FK` (`id_user`),
-  ADD KEY `Offre_Eleve0_FK` (`id_user_Eleve`),
   ADD KEY `id_cat` (`id_cat`),
   ADD KEY `id_ent` (`id_ent`);
 
@@ -555,7 +554,7 @@ ALTER TABLE `Evenement`
 -- AUTO_INCREMENT pour la table `Offre`
 --
 ALTER TABLE `Offre`
-  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `Post`

@@ -11,10 +11,11 @@ class Offre
     Private $date_debut_offre;
     private $date_post_offre;
     private $id_user;
+    private $id_cat;
     private $id_ent;
 
 
-    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $id_user = '', $id_ent = '')
+    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $id_user = '',$id_cat = '', $id_ent = '')
     {
         $this->id_offre = $id_offre;
         $this->lib_offre = $lib_offre;
@@ -22,18 +23,26 @@ class Offre
         $this->date_debut_offre = $date_offre;
         $this->date_post_offre = $date_post;
         $this->id_user = $id_user;
+        $this->id_cat = $id_cat;
         $this->id_ent = $id_ent;
-        //Stage
-        /*$this -> Date_fin_stage = $Date_fin_stage;
-        $this -> note_user_stage = $note_stage;
-        $this -> desc_user_stage = $desc_utilisateur_stage;
-        //Emploi
-        $this -> salaire_emp = $salaire_emp;
-        $this -> desc_emp = $desc_emp;*/
 
     }
 
     ///////////////////////////////////////// Get ///////////////////////////////////////////
+
+
+    public function getAllOffre(){
+        $data = $this->id_offre.' ';
+        $data = $data.$this->lib_offre.' ';
+        $data = $data.$this->niveau_req.' ';
+        $data = $data.$this->date_debut_offre.' ';
+        $data = $data.$this->date_post_offre.' ';
+        $data = $data.$this->id_user.' ';
+        $data = $data.$this->id_cat.' ';
+        $data = $data.$this->id_ent.' ';
+
+        return $data;
+    }
     public function getid_offre()
     {
         return $this->id_offre;
@@ -70,6 +79,13 @@ class Offre
         return $this->date_post_offre;
     }
 
+    /**
+     * @return string
+     */
+    public function getIdCat()
+    {
+        return $this->id_cat;
+    }
     /**
      * @return string
      */
@@ -116,6 +132,13 @@ class Offre
         $this->niveau_req = $niveau_req;
     }
 
+    /**
+     * @param string $id_cat
+     */
+    public function setIdCat($id_cat)
+    {
+        $this->id_cat = $id_cat;
+    }
     public function setdate_debut_offre($date_debut_offre)
     {
         $this->date_debut_offre = $date_debut_offre;
@@ -173,8 +196,19 @@ class Offre
 
     ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
 
-    public function insert_offre($objet,$conn){
-        $id = $this->getIdUser();
+    public function insert_offre($conn){
+        $lib_offre = $this->lib_offre;
+        $niveau_req = $this->niveau_req;
+        $date_debut_offre = $this->date_debut_offre;
+        $date_post_offre = $this->date_post_offre;
+        $id_user = $this->id_user;
+        $id_cat = $this->id_cat;
+        $id_ent = $this->id_ent;
+
+        print $SQL = "INSERT INTO Offre
+                VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$id_user','$id_cat','$id_ent','')";
+
+        //$res = $conn->Query($SQL)or die("Erreur insertion de l'offre");
     }
     public function insert_offre_stage($lib_offre, $niveau_req, $date_debut_offre, $Date_fin_stage, $note_stage, $desc_utilisateur_stage, $conn)
     {

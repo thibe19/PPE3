@@ -5,6 +5,7 @@ require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 if (isset($_SESSION['Eleve'])){
     $uneleve = unserialize($_SESSION['Eleve']);
+    $id_user = $uneleve->getIdUser();
     $nom = $uneleve->getNomUser();
     $prenom = $uneleve->getPrenomEleve();
     $pren = $uneleve->getPrenomEleve()." ".$uneleve->getNomUser();
@@ -23,6 +24,10 @@ if (isset($_SESSION['Eleve'])){
     $ville = $uneleve->getVilleAddr();
     $placephrase = $Nrue." ".$rue." ".$ville." ".$cp;
     $descs = "A remplir avec la desc user de l'offre de stage";
+
+
+    $uneoffre = new Stage(1,'test doffre','bac +5',date('Y-m-d'),date('Y-m-d'),$id_user,'2',1,date('Y-m-d'),'3','pas mal');
+    var_dump($uneoffre->insert_stage($conn));
 
 
 }

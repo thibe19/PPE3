@@ -5,135 +5,108 @@
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
 
-class Stage 
-{
+class Stage extends Offre{
+    /*
+     * DEclaration
+     */
 
-    Private $id_user; // déclaration des variables -- [  USER  ]
-    Private $domaine_about_sn;
-    Private $date_about_debut_sn;
-    Private $date_about_fin_sn;
-    Private $place_about_sn;
-    Private $desc_about_sn;
+    private $date_fin_stage;
+    private $note_user;
+    private $desc_user;
 
 
-    Public function __construct($id = "", $dsn="", $ddsn="", $dfsn="", $psn="", $descsn="")
-    {  //Constructeur
-
-        $this->id_user = $id;
-        $this->domaine_about_sn = $dsn;
-        $this->date_about_debut_sn = $ddsn;
-        $this->date_about_fin_sn = $dfsn;
-        $this->place_about_sn = $psn;
-        $this->desc_about_sn = $descsn;
-
+    public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $id_user = '', $id_cat = '', $id_ent = '',
+     $date_fin_stage = '', $note_user = '', $desc_user = '')
+    {
+        parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $id_user, $id_cat, $id_ent);
+        $this->date_fin_stage = $date_fin_stage;
+        $this->note_user = $note_user;
+        $this->desc_user = $desc_user;
     }
 
-    /////////////////// LES GETS /////////////////////
-    /// .
-    /// .
-    /// .
-    ///
+
+    /*
+     * Getters
+     */
+    public function getAllStage(){
+        $data = $this->getAllOffre().' ';
+        $data = $data.$this->date_fin_stage.' ';
+        $data = $data.$this->note_user.' ';
+        $data = $data.$this->desc_user.' ';
+
+        return $data;
+    }
 
     /**
      * @return string
      */
-    public function getIdUser()
+    public function getDateFinStage()
     {
-        return $this->id_user;
+        return $this->date_fin_stage;
     }
+
     /**
      * @return string
      */
-    public function getDomaineSn()
+    public function getNoteUser()
     {
-        return $this->domaine_about_sn;
+        return $this->note_user;
     }
+
     /**
      * @return string
      */
-    public function getDateDebutSn()
+    public function getDescUser()
     {
-        return $this->date_about_debut_sn;
-    }
-    /**
-     * @return string
-     */
-    public function getDateFinSn()
-    {
-        return $this->date_about_fin_sn;
-    }
-    /**
-     * @return string
-     */
-    public function getPlaceSn()
-    {
-        return $this->place_about_sn;
-    }
-    /**
-     * @return string
-     */
-    public function getDescSn()
-    {
-        return $this->desc_about_sn;
+        return $this->desc_user;
     }
 
-
-    /////////////////// LES SETS /////////////////////
-    /// .
-    /// .
-    /// .
-    /**
-     * @param string $id_user
+    /*
+     * Setters
      */
-    public function setIdUser($id_user)
-    {
-        $this->id_user = $id_user;
-    }
     /**
-     * @param string $id_user
+     * @param string $date_fin_stage
      */
-    public function setDomaineSn($dsn)
+    public function setDateFinStage($date_fin_stage)
     {
-        $this->DomaineSn = $dsn;
-    }
-    /**
-     * @param string $id_user
-     */
-    public function setDateDebutSn($ddsn)
-    {
-        $this->DateDebutSn = $ddsn;
-    }
-    /**
-     * @param string $id_user
-     */
-    public function setDateFinSn($dfsn)
-    {
-        $this->DateFinSn = $dfsn;
-    }
-    /**
-     * @param string $id_user
-     */
-    public function setPlaceSn($psn)
-    {
-        $this->PlaceSn = $psn;
-    }
-    /**
-     * @param string $id_user
-     */
-    public function setDescSn($descsn)
-    {
-        $this->DescSn = $descsn;
+        $this->date_fin_stage = $date_fin_stage;
     }
 
-
-
-/////////////////////// insert inscription ////////////////////////////////////////
-    Public function nouveau_stage($id_user, $dsn, $ddsn, $dfsn, $psn, $descsn, $conn)
+    /**
+     * @param string $note_user
+     */
+    public function setNoteUser($note_user)
     {
-      $requet = "INSERT INTO
-                 VALUES ('', '$psn', '', '');";
-      //$sql = $conn->Query($requet)or die('Erreur dans la requete');
+        $this->note_user = $note_user;
+    }
 
-    }// fin class
-  }
+    /**
+     * @param string $desc_user
+     */
+    public function setDescUser($desc_user)
+    {
+        $this->desc_user = $desc_user;
+    }
+
+    public function insert_stage($conn){
+        $this->insert_offre($conn);
+        $id = $this->getid_offre();
+        $id_user = $this->getIdUser();
+        $id_ent = $this->getIdEnt();
+        $date_fin_stage = $this->date_fin_stage;
+        $note_user = $this->note_user;
+        $desc_user = $this->desc_user;
+
+        $sql_getid = "SELECT id_offre FROM Offre
+                            WHERE id_offre=LAST_INSERT_ID()";
+        $res_getid = $conn->Query($sql_getid)or die('Erreur dans le requete get id');
+        $res_getid = $res_getid->fetchAll();
+
+        if($res_getid){
+            var_dump($res_getid);
+            $SQL = "INSERT INTO OStage
+                VALUES('')";
+        }
+    }
+}
 ?>
