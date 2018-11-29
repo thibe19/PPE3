@@ -17,12 +17,14 @@
         }
 
         $pref = data_base_in_object('Preferences',$conn);
-        $SQL = "SELECT id_pref FROM eleve_pref WHERE id_user='$iduser';";
-        $res = $conn->Query($SQL)or die('Erreur');
-        $i = 0;
-        while($data=$res->fetch()){
-          $prefuser[$i] = $data['id_pref'];
-          $i++;
+        if(testsql("SELECT id_pref FROM eleve_pref WHERE id_user='$iduser';",$conn)) {
+            $SQL = "SELECT id_pref FROM eleve_pref WHERE id_user='$iduser';";
+            $res = $conn->Query($SQL) or die('Erreur');
+            $i = 0;
+            while ($data = $res->fetch()) {
+                $prefuser[$i] = $data['id_pref'];
+                $i++;
+            }
         }
     }
     if(isset($_SESSION['Profilon'])){
