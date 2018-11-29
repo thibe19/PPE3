@@ -38,6 +38,7 @@ class Offre
         $data = $data.$this->niveau_req.' ';
         $data = $data.$this->date_debut_offre.' ';
         $data = $data.$this->date_post_offre.' ';
+        $data = $data.$this->desc_offre.' ';
         $data = $data.$this->id_user.' ';
         $data = $data.$this->id_cat.' ';
         $data = $data.$this->id_ent.' ';
@@ -93,6 +94,14 @@ class Offre
     public function getIdEnt()
     {
         return $this->id_ent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescOffre()
+    {
+        return $this->desc_offre;
     }
 
     /*
@@ -159,6 +168,14 @@ class Offre
     public function setDatePostOffre($date_post_offre)
     {
         $this->date_post_offre = $date_post_offre;
+    }
+
+    /**
+     * @param mixed $desc_offre
+     */
+    public function setDescOffre($desc_offre)
+    {
+        $this->desc_offre = $desc_offre;
     }
 
     /**

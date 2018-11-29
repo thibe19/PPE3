@@ -88,6 +88,8 @@ require('part/header.php');
             <!-- TRIE PART -->
             <?php
             if (isset($_POST['type_post'])) {
+
+                //TODO
                $mot_post = $_POST['mot_post'];
 
                $member_name = $_POST['member_name'];
