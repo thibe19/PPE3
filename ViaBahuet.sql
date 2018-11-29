@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 29 nov. 2018 à 11:14
+-- Généré le :  jeu. 29 nov. 2018 à 16:25
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -62,20 +62,14 @@ INSERT INTO `Categorie` (`id_cat`, `lib_cat`) VALUES
 (9, 'Jeux vidéo'),
 (15, 'Enseignement'),
 (16, 'Médecine, Santé'),
-(21, 'Bandes dessinés'),
-(22, 'Collections'),
-(23, 'Créations'),
 (28, 'Littérature'),
 (30, 'Spectacles'),
 (31, 'Musique'),
 (33, 'Art'),
 (34, 'Sports'),
 (37, 'Informatique'),
-(38, 'Photographie'),
 (39, 'Audio-visuel'),
-(42, 'Programmation'),
 (43, 'Matériel'),
-(44, 'Sécurité'),
 (45, 'Animaux'),
 (50, 'Voyages');
 
@@ -235,6 +229,13 @@ CREATE TABLE `Offre` (
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Déchargement des données de la table `Offre`
+--
+
+INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
+(13, 'test doffre', 'bac +5', '2018-11-29', '2018-11-29', 42, 37, 41, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -383,7 +384,7 @@ CREATE TABLE `Utilisateur` (
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
 (40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', '', 0),
-(41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
+(41, 'Google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
 (42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0);
 
 --
@@ -461,8 +462,7 @@ ALTER TABLE `Evenement`
 --
 ALTER TABLE `OEmploi`
   ADD PRIMARY KEY (`id_offre`),
-  ADD KEY `OEmploi_Eleve0_FK` (`id_user`),
-  ADD KEY `OEmploi_Eleve1_FK` (`id_user_Eleve`);
+  ADD KEY `OEmploi_Eleve0_FK` (`id_user`);
 
 --
 -- Index pour la table `Offre`
@@ -478,8 +478,7 @@ ALTER TABLE `Offre`
 --
 ALTER TABLE `OStage`
   ADD PRIMARY KEY (`id_offre`),
-  ADD KEY `OStage_Eleve0_FK` (`id_user`),
-  ADD KEY `OStage_Eleve1_FK` (`id_user_Eleve`);
+  ADD KEY `OStage_Eleve0_FK` (`id_user`);
 
 --
 -- Index pour la table `participe_event`
@@ -554,7 +553,7 @@ ALTER TABLE `Evenement`
 -- AUTO_INCREMENT pour la table `Offre`
 --
 ALTER TABLE `Offre`
-  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `Post`
@@ -578,7 +577,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Contraintes pour les tables déchargées

@@ -99,19 +99,44 @@ require('part/header.php');
                $cat_post = $_POST['cat_post'];
 
                $type_post = $_POST['type_post'];
-              $data_trie = data_base_in_object("Post", $conn);
-              foreach ($data_trie as $d) {
-                if ($d->titre_post==$mot_post) {
-                  print $d->id_post."<- titre <br>";
-                }
-                if (($d->date_post>$date_debut) && ($d->date_post<$date_fin)) {
-                  print $d->id_post."<- date <br>";
-                }
-                if ($d->id_cat==$cat_post) {
-                  print $d->id_post."<- cat <br>";
-                }
 
-              }
+               $data_trie = data_base_in_array("Post", $conn);
+               foreach($data_trie as $d){
+                   if (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && isset($cat_post) && !empty($type_post)){
+                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d) && in_array($type_post,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && !empty($cat_post)){
+                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin)){
+                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut)){
+                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   elseif (!empty($mot_post) && !empty($member_name)){
+                       if(in_array($mot_post,$d) && in_array($member_name,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   elseif (!empty($mot_post)){
+                       if(in_array($mot_post,$d)){
+                           var_dump($d);
+                       }
+                   }
+                   else {
+                     print 'Pas de resultat';
+                   }
+
+               }
             }
              ?>
 

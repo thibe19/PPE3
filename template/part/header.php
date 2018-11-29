@@ -2,12 +2,12 @@
 <?php ///////:YANN THER 10h22 - 22/11/2018 - V0.0.5
 $auto_compl = "";
 $sql = "SELECT id_user, nom_user FROM Utilisateur";
-$req = $conn->Query($sql)or die('Erreur dans le requete pref');
+$req = $conn->Query($sql)or die('Erreur dans le requete select user');
 while ($res = $req->fetch()) {
   $id_auto = $res['id_user'];
-  $sql2 = "SELECT prenom_eleve FROM eleve
+  $sql2 = "SELECT prenom_eleve FROM Eleve
           WHERE id_user = $id_auto";
-  $req2 = $conn->Query($sql2)or die('Erreur dans le requete pref');
+  $req2 = $conn->Query($sql2)or die('Erreur dans le requete eleve');
   if ($res2 = $req2->fetch()) {
     $auto_compl = $auto_compl."'".$res2['prenom_eleve']." ".$res['nom_user']."',";
   }
