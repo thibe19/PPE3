@@ -11,23 +11,25 @@ if (isset($_SESSION['Eleve'])){
     $pren = $uneleve->getPrenomEleve()." ".$uneleve->getNomUser();
     $skill = $uneleve->getDomActi();
     setlocale(LC_TIME, 'fr_FR.utf8','fra');
-
     $birth = $uneleve->getdateEleve();
     $births = explode('-',$uneleve->getdateEleve());
     $birthphrase = strftime("%d %B %Y.",mktime(0,0,0,$births[1],$births[2],$births[0])); //Affichera par exemple "date du jour en français : samedi 24 juin 2006."
     $desc = empty($uneleve->getDescUser()) ? "Vous n'avez pas encore entré de description." : false;
-    $domaine = "A remplir avec lib_offre de 'Offre'";
     $date = "A remplir avec date de 'Offre'";
     $Nrue = $uneleve->getNumAddr();
     $rue = $uneleve->getRueAddr();
     $cp = $uneleve->getCPAddr();
     $ville = $uneleve->getVilleAddr();
     $placephrase = $Nrue." ".$rue." ".$ville." ".$cp;
-    $descs = "A remplir avec la desc user de l'offre de stage";
 
 
     $uneoffre = new Stage(1,'test doffre','bac +5',date('Y-m-d'),date('Y-m-d'),$id_user,'2',1,date('Y-m-d'),'3','pas mal');
     var_dump($uneoffre->insert_stage($conn));
+
+
+    $domaine = data_base_in_object('Categorie',$conn);
+
+    $descs = "A remplir avec la desc user de l'offre de stage";
 
 
 }
@@ -278,8 +280,9 @@ require('part/header.php');
                         <!-- DESCRIPTION -->
 
                         <h5>Description</h5>
-                        <p><textarea name="desc_about" class="textareabout" rows="8"
-                                     cols="80"><?php echo $desc=="Vous n'avez pas encore entré de description."?'':$desc; ?></textarea></p>
+                        <?php  ?>
+                            <p><textarea name="desc_about" class="textareabout" rows="8"
+                                         cols="80"><?php echo $desc=="Vous n'avez pas encore entré de description."?'':$desc; ?></textarea></p>
                         <br>
                         <hr>
                         <br>
@@ -289,8 +292,17 @@ require('part/header.php');
                         <h5>Experience</h5>
                         <br>
                         <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
+                        <div class="select_option">
+                            <p> Domaine :
+                                <select>
+                                    <?php foreach($domaine as $d){ ?>
+                                        <option name="domaine_about_s" value="<?php $d->id_cat ?>">
+                                            <?php print $d->lib_cat ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                        </div>
 
-                        <p> Domaine : <input type="text" name="domaine_about_s" value="<?php echo $domaine; ?>">
                             Date :
                         <table>
                             <tr>
