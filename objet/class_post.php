@@ -87,7 +87,7 @@ class Post
 
 
   ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
-  public function insert_post($titre_post ,$contenu_post ,$date_post ,$heure_post ,$id_cat ,$conn, $id_user)
+  public function insert_post($conn)
   {
     $titre_post = $this-> titre_post;
     $contenu_post = $this-> contenu_post;

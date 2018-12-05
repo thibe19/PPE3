@@ -1,12 +1,13 @@
 <?php
 
 /*
- *  29/11/18
+ *  05/12/18
  *  Stage
  *  v0.0.2
  */
  session_start();
   require('../ToolBox/bdd.inc.php');
+  require('../ToolBox/toolbox_inc.php');
   require('../objet/classes.php');
 
  if (isset($_SESSION['Eleve'])) {
@@ -61,11 +62,15 @@
         <img src="images/banner.jpg" alt="" class="banner_img">
     </div>
     <!-- End Tranding Area -->
-
+    <ul class="tranding_select tabs">
+        <li class="tab"><a href="./ostage.php" class="waves-effect btn">Offre Stage</a></li>
+        <li class="tab"><a href="./oemploi.php" class="waves-effect btn">Offre Emploi</a></li>
+    </ul>
     <!-- crée un stage -->
     <section class="messages_area">
       <div class="messages_row row">
         <div class="section_row row">
+          <br>
           <div class="col s12">
             <h2>Crée un stage</h2><br><br>
           </div>
@@ -396,27 +401,36 @@ if (isset($_POST['validSE'])) {
   $lib_offre = $_POST['lib_offre'];
   $descstage = $_POST['descstage'];
   $cat = $_POST['cat'];
-  $enp = $_POST['ent'];
+  $ent = $_POST['ent'];
   $date = date("Y-m-d");
 
   if ( ($nreq && $lib_offre && $descstage) != NULL) {
+      if (!empty($nomEnt = $_POST['nomEnt']) && !empty($telEnt = $_POST['telEnt'])){
+          $NrueEnt = $_POST['NrueEnt'];
+          $rueEnt = $_POST['rueEnt'];
+          $villeEnt = $_POST['villeEnt'];
+          $cpEnt = $_POST['cpEnt'];
+          $nomEnt = $_POST['nomEnt'];
+          $telEnt = $_POST['telEnt'];
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
-    //$unstage->insert_stage($unstage,$conn);
+          $unentreprise = new Entreprise('',$nomEnt,'','','',$telEnt,$NrueEnt,$rueEnt,$cpEnt,$villeEnt,'','','','','','');
+          $unentreprise->inscriptionent($unentreprise,$conn);
+          $SQL = "SELECT id_user FROM Entreprise WHERE id_user=LAST_INSERT_ID()";
+          foreach (reqtoobj($SQL,$conn) as $id){
+              $id_ent = $id->id_user;
+          }
+      }
 
-    echo $unstage -> getAllStage();
+      $id_ent = isset($id_ent)?$id_ent:$ent;
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$id_ent,
+      $dateFS,'','');
+    $unstage->insert_stage($conn);
 
-    $nomEnt = $_POST['nomEnt'];
-    $telEnt = $_POST['telEnt'];
+
+
+
 
     if (($nomEnt && $telEnt) != NULL) {
-      $NrueEnt = $_POST['NrueEnt'];
-      $rueEnt = $_POST['rueEnt'];
-      $villeEnt = $_POST['villeEnt'];
-      $cpEnt = $_POST['cpEnt'];
-
-      $unentreprise = new Entreprise($nomEnt,$telEnt,$NrueEnt,$rueEnt,$cpEnt,$villeEnt);
-      $unentreprise->inscriptionent($unentreprise,$conn);
 
       echo "<script> alert('Le stage a été crée.');
                       window.location.href='./index.php';
@@ -759,13 +773,11 @@ if (isset($_SESSION['Entreprise'])) {
     $lib_offre = $_POST['lib_offre'];
     $descstage = $_POST['descstage'];
     $cat = $_POST['cat'];
-    $enp = unserialize($_SESSION['Entreprise'])->getIdUser();
+    $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
-    //$unstage->insert_stage($unstage,$conn);
-
-    echo $unstage -> getAllStage();
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
+    $unstage->insert_stage($unstage,$conn);
 
     echo "<script> alert('Le stage a été crée.');
                     window.location.href='./index-2.php';

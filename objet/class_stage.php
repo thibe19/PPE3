@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisateur/Eleve/Stage   date modif : 21/11/2018  vertion:0.0.1
+ * Utilisateur/Eleve/Stage   date modif : 05/12/18  vertion:0.0.2
  */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -18,7 +18,7 @@ class Stage extends Offre{
     public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '',
      $date_fin_stage = '', $note_user = '', $desc_user = '')
     {
-        parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $id_user, $id_cat, $id_ent);
+        parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $desc_offre, $id_user, $id_cat, $id_ent);
         $this->date_fin_stage = $date_fin_stage;
         $this->note_user = $note_user;
         $this->desc_user = $desc_user;
@@ -88,22 +88,40 @@ class Stage extends Offre{
         $this->desc_user = $desc_user;
     }
 
+
+  ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
+
     public function insert_stage($conn){
         $this->insert_offre($conn);
         $id = $this->getid_offre();
-        $id_user = $this->getIdUser();
         $id_ent = $this->getIdEnt();
         $date_fin_stage = $this->date_fin_stage;
         $note_user = $this->note_user;
         $desc_user = $this->desc_user;
 
-        $sql_getid = "SELECT id_offre FROM Offre
+        $sql_getido = "SELECT id_offre FROM Offre
                       WHERE id_offre=LAST_INSERT_ID()";
-        $res_getid = $conn->Query($sql_getid)or die('Erreur dans le requete get id');
-        $res_getid = $res_getid->fetchAll();
+        $res_getido = $conn->Query($sql_getido)or die('Erreur dans le requete get id');
+        $res_getido = $res_getido->fetchAll();
 
-        if($res_getid){
+        $sql_getidus = "SELECT id_user FROM Offre
+                      WHERE id_offre=LAST_INSERT_ID()";
+        $res_getidus = $conn->Query($sql_getidus)or die('Erreur dans le requete get id');
+        $res_getidus = $res_getidus->fetchAll();
+
+        if($res_getido && $res_getidus){
+
+          $id_user = $res_getidus[0]['id_user'];
+          $id_offre = $res_getido[0]['id_offre'];
+          $SQL = "INSERT INTO OStage
+                  VALUES('$id_offre','$date_fin_stage','$note_user','$desc_user','$id_user','')";
+          $res = $conn->Query($SQL)or die($SQL);
         }
+
+
     }
-}
+
+
+
+}//fin class
 ?>

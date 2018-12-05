@@ -94,6 +94,8 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
             }
             $_SESSION['login'] = $_POST['login'];
             $_SESSION['mdp'] = $_POST['pass'];
+
+            //Sii cocher rester connecté
             if (isset($_POST['stay'])) {
                 setcookie('login', $_SESSION['login'], time()+60*60*24*30*365, '/');
                 setcookie('mdp', $_SESSION['mdp'], time()+60*60*24*30*365, '/');
