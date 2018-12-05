@@ -2,8 +2,8 @@
 
 /*
  *  05/12/18
- *  Stage
- *  v0.0.2
+ *  Emploi
+ *  v0.0.1
  */
  session_start();
   require('../ToolBox/bdd.inc.php');
@@ -68,14 +68,13 @@
         <li class="tab"><a  onclick="window.location.href='./ostage.php'" class="waves-effect btn">Offre Stage</a></li>
         <li class="tab"><a  onclick="window.location.href='./oemploi.php'" class="waves-effect btn">Offre Emploi</a></li>
     </ul>
-
     <!-- crée un stage -->
     <section class="messages_area">
       <div class="messages_row row">
         <div class="section_row row">
           <br>
           <div class="col s12">
-            <h2>Crée un stage</h2><br><br>
+            <h2>Crée une offre d'emploi</h2><br><br>
           </div>
 
             <?php
@@ -90,7 +89,7 @@
                 </div>
 
                 <!-- entreprise -->
-                <form class="form" method="POST" action='./ostage.php'>
+                <form class="form" method="POST" action='./oemploi.php'>
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
@@ -158,7 +157,7 @@
               </div>  <!-- Fin création entreprise -->
 
               <div class="col s12">
-                <h5>Information sur le stage </h5>
+                <h5>Information sur l'emploi </h5>
                 <br>
               </div>
               <div class="row">
@@ -189,14 +188,24 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label class="form-label">Date de debut du stage</label>
-                    <input type="date" class="form-control" name="dateDstage" value="">
+                    <label class="form-label">Date de debut d'emploi</label>
+                    <input type="date" class="form-control" name="dateDemp" value="">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label class="form-label">Date de Fin du stage</label>
-                    <input type="date" class="form-control"  name="dateFstage" value="">
+                    <label class="form-label">Salaire </label>
+                    <input type="text" class="form-control" name="salaire" value="" placeholder="Exemple : 5000">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label">Type contrat</label>
+                    <input type="text" class="form-control" name="typeC" value="" placeholder="Exemple : CDI">
                   </div>
                 </div>
               </div>
@@ -214,7 +223,7 @@
                   <div class="form-group">
                     <label class="form-label">Description de l'annonce :</label>
                     <br><br>
-                    <textarea name="descstage" rows="8" cols="80"
+                    <textarea name="descemp" rows="8" cols="80"
                               style="margin: 0px; height: 86px; width: 619px;"></textarea>
                   </div>
                 </div>
@@ -223,7 +232,7 @@
               <div class="float-right mt-0 mb-0">
 
                 <button class="btn btn-secondary mr-3"  type="submit">Annuler</button>
-                <button class="btn btn-primary " name='validSE' type="submit">Valider</button>
+                <button class="btn btn-primary " name='validOE' type="submit">Valider</button>
 
               </div>
               <br><br>
@@ -235,6 +244,7 @@
 
       </section>
     <!-- Fin crée un stage -->
+
 
     <!-- Footer area -->
     <footer class="footer_area">
@@ -286,6 +296,7 @@
     </footer>
     <!-- End Footer area -->
 
+
     <!-- Add post poup area -->
     <?php
     require('part/post.php');
@@ -313,18 +324,20 @@
 
 <?php
 
-if (isset($_POST['validSE'])) {
+if (isset($_POST['validOE'])) {
 
   $nreq = $_POST['Nivreq'];
-  $dateDS = $_POST['dateDstage'];
-  $dateFS = $_POST['dateFstage'];
+  $dateDemp = $_POST['dateDemp'];
+  $salaire = $_POST['salaire'];
+  $typeC = $_POST['typeC'];
   $lib_offre = $_POST['lib_offre'];
-  $descstage = $_POST['descstage'];
+  $descemp = $_POST['descemp'];
   $cat = $_POST['cat'];
   $ent = $_POST['ent'];
   $date = date("Y-m-d");
 
-  if ( ($nreq && $lib_offre && $descstage) != NULL) {
+  if ( ($nreq && $lib_offre && $descemp) != NULL) {
+
       if (!empty($nomEnt = $_POST['nomEnt']) && !empty($telEnt = $_POST['telEnt'])){
           $NrueEnt = $_POST['NrueEnt'];
           $rueEnt = $_POST['rueEnt'];
@@ -342,31 +355,30 @@ if (isset($_POST['validSE'])) {
       }
 
       $id_ent = isset($id_ent)?$id_ent:$ent;
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$id_ent,$dateFS,'','');
-    $unstage->insert_stage($conn);
+      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC,'','');
+      $unemploi->insert_emploi($unemploi,$conn);
 
 
 
+      if (($nomEnt && $telEnt) != NULL) {
 
-
-    if (($nomEnt && $telEnt) != NULL) {
+        echo "<script> alert('Le stage a été crée.');
+                        window.location.href='./index.php';
+              </script>";
+      }
 
       echo "<script> alert('Le stage a été crée.');
                       window.location.href='./index.php';
             </script>";
+
+
+    }else {
+      echo "<script> alert('Erreur zone non remplie.');
+                      window.location.href='./oemploi.php';
+            </script>";
+
     }
 
-    echo "<script> alert('Le stage a été crée.');
-                    window.location.href='./index.php';
-          </script>";
-
-
-  }else {
-    echo "<script> alert('Erreur zone non remplie.');
-                    window.location.href='./ostage.php';
-          </script>";
-
-  }
 } //fin valider eleve
 
 }// fin eleve
@@ -447,9 +459,9 @@ if (isset($_SESSION['Entreprise'])) {
               ?>
               <div class="row">
                 <div class="col">
-                <form class="form" method="POST" action='./ostage.php'>
+                <form class="form" method="POST" action='./oemploi.php'>
                   <div class="col s12">
-                    <h5>Information sur le stage </h5>
+                    <h5>Information sur l'emploi </h5>
                     <br>
                   </div>
                   <div class="row">
@@ -480,14 +492,24 @@ if (isset($_SESSION['Entreprise'])) {
                   <div class="row">
                     <div class="col">
                       <div class="form-group">
-                        <label class="form-label">Date de debut du stage</label>
+                        <label class="form-label">Date de debut d'emploi</label>
                         <input type="date" class="form-control" name="dateDstage" value="">
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-group">
-                        <label class="form-label">Date de Fin du stage</label>
-                        <input type="date" class="form-control"  name="dateFstage" value="">
+                        <label class="form-label">Salaire </label>
+                        <input type="text" class="form-control" name="Nivreq" value="" placeholder="Exemple : 5000">
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label class="form-label">Type contrat</label>
+                        <input type="text" class="form-control" name="lib_offre" value="" placeholder="Exemple : CDI">
                       </div>
                     </div>
                   </div>
@@ -555,90 +577,10 @@ if (isset($_SESSION['Entreprise'])) {
                               <span class="black_text">3 days ago</span>
                           </div>
                       </div>
-                      <div class="row valign-wrapper popular_item">
-                          <div class="col s3 p_img">
-                             <a href="#">
-                                  <img src="images/recent-post-3.jpg" alt="" class="circle responsive-img">
-                             </a>
-                          </div>
-                          <div class="col s9 p_content">
-                             <a href="#">What makes one logo better than another?</a>
-                              <span class="black_text">4 days ago</span>
-                          </div>
-                      </div>
                   </div>
               </div>
-              <div class="col l3 m6 footer_col footer_trending">
-                  <h3 class="categories_tittle">Trending</h3>
-                  <div class="trending_area">
-                      <ul class="collapsible trending_collaps" data-collapsible="accordion">
-                          <li>
-                              <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For Self Esteem</div>
-                              <div class="collapsible-body">
-                                  <div class="row collaps_wrpper">
-                                      <div class="col s1 media_l">
-                                          <b>1</b>
-                                          <i class="ion-android-arrow-dropup-circle"></i>
-                                      </div>
-                                      <div class="col s11 media_b">
-                                          <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                          <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
-                                          <h6>By <a href="#">Thomas Omalley</a></h6>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li>
-                          <li>
-                              <div class="collapsible-header"><i class="ion-chevron-right"></i>Burn The Ships</div>
-                              <div class="collapsible-body">
-                                  <div class="row collaps_wrpper">
-                                      <div class="col s1 media_l">
-                                          <b>1</b>
-                                          <i class="ion-android-arrow-dropup-circle"></i>
-                                      </div>
-                                      <div class="col s11 media_b">
-                                          <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                          <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
-                                          <h6>By <a href="#">Thomas Omalley</a></h6>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li>
-                          <li>
-                              <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of Your Dreams</div>
-                              <div class="collapsible-body">
-                                  <div class="row collaps_wrpper">
-                                      <div class="col s1 media_l">
-                                          <b>1</b>
-                                          <i class="ion-android-arrow-dropup-circle"></i>
-                                      </div>
-                                      <div class="col s11 media_b">
-                                          <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                          <p>If you will be traveling for a ski vacation, it is often difficult to know what to pack. You may not even have a problem</p>
-                                          <h6>By <a href="#">Thomas Omalley</a></h6>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="col l3 m6 footer_col">
-                  <div class="badges">
-                      <h3 class="categories_tittle">Badges</h3>
-                      <ul class="badges_list">
-                          <li><a href="#"><i class="ion-bonfire"></i><span>6</span></a></li>
-                          <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                          <li><a href="#"><i class="ion-coffee"></i></a></li>
-                          <li><a href="#"><i class="ion-clock"></i> <span>3</span></a></li>
-                          <li><a href="#"><i class="ion-camera"></i></a></li>
-                          <li><a href="#"><i class="ion-ios-bell-outline"></i><span>2</span></a></li>
-                          <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                          <li><a href="#"><i class="ion-coffee"></i></a></li>
-                          <li><a href="#"><i class="ion-clock"></i></a></li>
-                      </ul>
-                  </div>
 
+              <div class="col l3 m6 footer_col">
                   <div class="social_Sharing">
                       <h3 class="categories_tittle">Social Sharing</h3>
                       <ul class="social_icon">
@@ -649,9 +591,6 @@ if (isset($_SESSION['Entreprise'])) {
                           <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
                       </ul>
                   </div>
-              </div>
-              <div class="col l3 m6 footer_col">
-                  <img src="images/advertis-3.jpg" alt="" class="responsive-img">
               </div>
           </div>
           <div class="copy_right">
@@ -687,22 +626,25 @@ if (isset($_SESSION['Entreprise'])) {
 
   <?php
 
-  if (isset($_POST['validSEn'])) {
+  if (isset($_POST['validOEn'])) {
 
     $nreq = $_POST['Nivreq'];
-    $dateDS = $_POST['dateDstage'];
-    $dateFS = $_POST['dateFstage'];
+    $dateDemp = $_POST['dateDemp'];
+    $salaire = $_POST['salaire'];
+    $typeC = $_POST['typeC'];
     $lib_offre = $_POST['lib_offre'];
-    $descstage = $_POST['descstage'];
+    $descemp = $_POST['descemp'];
     $cat = $_POST['cat'];
     $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
-    $unstage->insert_stage($unstage,$conn);
+
+    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC,'','');
+    $unemploi->insert_stage($unemploi,$conn);
+
 
     echo "<script> alert('Le stage a été crée.');
-                    window.location.href='./index.php';
+                    window.location.href='./index-2.php';
           </script>";
   } //fin valider entreprise
 

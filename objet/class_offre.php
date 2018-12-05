@@ -108,6 +108,8 @@ class Offre
 
 
     //////////////////////////////////////////// SET  /////////////////////////////////////////////
+
+
     public function setid_offre($id_offre)
     {
         $this->id_offre = $id_offre;
@@ -168,9 +170,14 @@ class Offre
     }
 
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Insert                                    ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
 
-
-    ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
 
     public function insert_offre($conn){
         $lib_offre = urlencode($this->lib_offre);
@@ -185,6 +192,7 @@ class Offre
 
         $SQL = "INSERT INTO Offre
                 VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','','$id_cat','$id_ent','')";
+                
         $res = $conn->Query($SQL)or die($SQL);
     }
 
