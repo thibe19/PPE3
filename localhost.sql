@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 05 déc. 2018 à 08:18
+-- Généré le :  mer. 05 déc. 2018 à 11:16
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -107,7 +107,7 @@ CREATE TABLE `Eleve` (
 --
 
 INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `date_naiss`, `choix_position`) VALUES
-(40, 'outest', '2018-11-14', 1),
+(40, '', '0000-00-00', 0),
 (42, 'Eleve2', '1998-06-02', 2);
 
 -- --------------------------------------------------------
@@ -199,8 +199,8 @@ CREATE TABLE `Evenement` (
 CREATE TABLE `OEmploi` (
   `id_offre` int(11) NOT NULL,
   `salaire_emp` double NOT NULL,
-  `desc_emp` longtext COLLATE latin1_bin NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `type_emp` longtext COLLATE latin1_bin NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -216,7 +216,8 @@ CREATE TABLE `Offre` (
   `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
   `date_debut_offre` date NOT NULL,
   `date_post_offre` date NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `desc_offre` varchar(255) COLLATE latin1_bin NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `id_cat` int(11) NOT NULL,
   `id_ent` int(11) NOT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
@@ -233,7 +234,7 @@ CREATE TABLE `OStage` (
   `date_fin_stage` date NOT NULL,
   `note_user_stage` int(11) NOT NULL,
   `desc_user_stage` longtext COLLATE latin1_bin NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
@@ -264,6 +265,13 @@ CREATE TABLE `Post` (
   `id_cat` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Post`
+--
+
+INSERT INTO `Post` (`id_post`, `titre_post`, `contenu_post`, `photo_post`, `date_post`, `heure_post`, `id_cat`, `id_user`) VALUES
+(1, 'je test un porst ', 'test ou test 2', '123456', '2018-12-05', '09:10:59', 44, 40);
 
 -- --------------------------------------------------------
 
@@ -360,7 +368,7 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_user`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
-(40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', '', 0),
+(40, 'jesuistest', 'test', '$2y$10$UIGsQAf/ze/FZL4fVBik0u6RLsilB..NXxRserhM3vPt3ZFXA7wwy', 'test@test.fr', 0, '25', 'rue du test', 19100, 'villetest', '123456', 'test', '', 0),
 (41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
 (42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0),
 (44, 'Facebook', 'fb', '$2y$10$JXjKOOFtK0VBDAhtZd8m1eeFAaLuBh6pSDJ7qjDfWmKYzcWXGBLq2', 'fb@gmail.com', 494839494, '19', 'rue du test entfb', 19100, 'villetestent', '', '', '', 0),
@@ -541,7 +549,7 @@ ALTER TABLE `Offre`
 -- AUTO_INCREMENT pour la table `Post`
 --
 ALTER TABLE `Post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `Preferences`
