@@ -90,7 +90,7 @@ require('part/header.php');
             if (isset($_POST['type_post'])) {
 
                 //TODO Elasticsearch ??????? moteur de recherche
-                
+
                $mot_post = $_POST['mot_post'];
 
                $member_name = $_POST['member_name'];

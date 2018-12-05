@@ -185,8 +185,7 @@ class Offre
 
         $SQL = "INSERT INTO Offre
                 VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','','$id_cat','$id_ent','')";
-
-        $res = $conn->Query($SQL)or die("Erreur insertion de l'offre");
+        $res = $conn->Query($SQL)or die($SQL);
     }
 
 

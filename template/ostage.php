@@ -406,8 +406,7 @@ if (isset($_POST['validSE'])) {
   if ( ($nreq && $lib_offre && $descstage) != NULL) {
 
     $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
-    var_dump($unstage->getAllStage());
-    $unstage->insert_stage($unstage,$conn);
+    $unstage->insert_stage($conn);
 
 
 
@@ -768,9 +767,7 @@ if (isset($_SESSION['Entreprise'])) {
     $date = date("Y-m-d");
 
     $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
-    //$unstage->insert_stage($unstage,$conn);
-
-    echo $unstage -> getAllStage();
+    $unstage->insert_stage($unstage,$conn);
 
     echo "<script> alert('Le stage a été crée.');
                     window.location.href='./index-2.php';
