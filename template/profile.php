@@ -1,4 +1,7 @@
 <?php
+// V0.0.0.5
+//05/12/2018
+
 session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
@@ -110,10 +113,11 @@ if (isset($_SESSION['Eleve'])) {
 
               <?php
 
-              $sqlP="SELECT * FROM Post
-                     WHERE id_user = (SELECT id_user_Eleve FROM Ajoute_amis
+              print $sqlP="SELECT * FROM Post
+                     WHERE id_user = (SELECT id_user_Eleve FROM ajoute_amis
                                       WHERE id_user = $id_user)
                      order by date_post desc";
+                     die();
               $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
               while ($dataP=$resP->fetch())
