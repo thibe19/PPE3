@@ -66,9 +66,9 @@ if (isset($_SESSION['Eleve'])) {
             ?>
         <img src="images/banner-2.jpg" alt="" class="banner_img">
         <div class="media profile_picture">
-            <a href="profile.html"><img style='width: 170px;height: 165px;'src="<?php (!empty($uneleve->getPhotoUser()))? print $uneleve->getPhotoUser() : print './images/profil/avatar.png'; ?>" alt="" class="circle"></a>
+            <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
             <div class="media_body">
-                <a href="profile.html"><?php print $uneleve->getNomUser().' '.$uneleve->getPrenomEleve() ?></a>
+                <a href="profile.php"><?php print $uneleve->getNomUser().' '.$uneleve->getPrenomEleve() ?></a>
                 <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
                 <h6><?php print $uneleve->getVilleAddr(); ?></h6>
             </div>
@@ -113,22 +113,28 @@ if (isset($_SESSION['Eleve'])) {
 
               <?php
 
-               $sqlP="SELECT * FROM Post
-                     WHERE id_user = (SELECT id_user_Eleve FROM ajoute_amis
-                                      WHERE id_user = $id_user)
-                     order by date_post desc";
-                  
-              $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+              //   $sqlP="SELECT * FROM Post
+              //        WHERE id_user = (SELECT id_user_Eleve FROM ajoute_amis
+              //                         WHERE id_user = $id_user)
+              //        order by date_post desc";
+              //
+              // $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
-              while ($dataP=$resP->fetch())
-              {
-                  $cat = $dataP['id_cat'];
+
+
+
+              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
+              $req = $conn->Query($SQL) or die("La requete n'a pas aboutie");
+              while ($res=$req->fetch()) {
+
+
+                $cat = $res['id_cat'];
                   $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
                   $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
                   $dataC=$resC->fetch();
 
-                  $id_user= $dataP['id_user'];
-                  $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                  $id_user_util = $res['id_user'];
+                  $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user_util'";
                   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
                   $dataU = $resU -> fetch();
                   ?>
@@ -138,7 +144,7 @@ if (isset($_SESSION['Eleve'])) {
                    <div class="post_content">
                        <a href="details.html" class="post_img">
                            <img src="images/post.jpg" alt="">
-                           <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
+                           <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
                        </a>
                        <div class="row author_area">
                            <div class="col s4 author">
@@ -146,8 +152,8 @@ if (isset($_SESSION['Eleve'])) {
 
                                <div class="col s8 media_body">
 
-                                   <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                   <span><?php echo$dataP['date_post']; ?>,<?php echo$dataP['heure_post']; ?></span>
+                                   <a href="#"><?php echo $dataU['nom_user']; ?></a>
+                                   <span><?php echo $res['date_post'].", ".$res['heure_post']; ?></span>
                                </div>
                            </div>
                            <div class="col s4 btn_floating">
@@ -155,14 +161,23 @@ if (isset($_SESSION['Eleve'])) {
                            </div>
 
                        </div>
-                       <a  class="post_heding"><?php echo$dataP['titre_post']; ?></a>
-                       <p><?php echo$dataP['contenu_post']; ?></p>
+                       <a  class="post_heding"><?php echo $res['titre_post']; ?></a>
+                       <p><?php echo $res['contenu_post']; ?></p>
                    </div>
                    <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
                    <br>
                </div>
                <!-- End Post -->
-             <?php } ?>
+             <?php
+
+
+              }
+
+
+
+
+
+               ?>
 
 
                <!-- Post -->

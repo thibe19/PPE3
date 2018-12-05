@@ -14,7 +14,12 @@ $ndc=$_SESSION['login'];
 }
 
 require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
+if (isset($_SESSION['Eleve'])) {
+      $uneleve = unserialize($_SESSION['Eleve']);
+      $id_user = $uneleve->getIdUser();
+}
 
 $sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
 $res = $conn -> query($sql)or die($conn -> errorInfo());

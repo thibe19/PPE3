@@ -198,19 +198,24 @@ $( function() {
                 <!-- NOTIF  -->
 
                 <!-- Profile -->
-                <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown1"><img
-                                src="images/profile-pic.png" alt="" class="circle p_2"></a>
+                <?php
+
+                 ?>
+
+                <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown1"><img width="55px" height="55px"
+                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle p_2"></a>
+                                <!-- Image de profil /\ -->
                     <!-- Dropdown Structure -->
                     <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="profile.php"><i class="ion-person"></i>My profile</a></li>
+                        <li><a href="profile.php"><i class="ion-person"></i>Mon profile</a></li>
                         <!-- <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
                         </li> -->
                         <!-- <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li> -->
-                        <li><a href="setting.php"><i class="ion-gear-b"></i>Settings</a></li>
-                        <li><a href="#"><i class="ion-ios-flag"></i>Privacy Policy</a></li>
-                        <li><a href="#"><i class="ion-podium"></i>FAQ</a></li>
-                        <li><a onclick="window.location='./?logout=1'"><i class="ion-power"></i>Log out</a></li>
+                        <li><a href="setting.php"><i class="ion-gear-b"></i>Paramètres</a></li>
+                        <li><a href="#"><i class="ion-ios-flag"></i>Règles</a></li>
+                        <!-- <li><a href="#"><i class="ion-podium"></i>FAQ</a></li> -->
+                        <li><a onclick="window.location='./?logout=1'"><i class="ion-power"></i>Se déconnecter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -496,7 +501,7 @@ $( function() {
                 </li>
                 <!-- Profile -->
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown_s4"><img
-                                src="images/profile-pic.png" alt="" class="circle p_2"></a>
+                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle p_2"></a>
                     <!-- Dropdown Structure -->
                     <ul id="dropdown_s4" class="dropdown-content">
                         <li><a href="profile.php"><i class="ion-person"></i>Mon profile</a></li>

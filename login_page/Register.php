@@ -282,7 +282,7 @@ session_start();
                  <img src="images/img-01.png" alt="IMG">
                </div>
 
-               <form class="login100-form validate-form" method="POST">>
+               <form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
                  <span class="login100-form-title">
                    Inscription
                  </span>
@@ -334,10 +334,17 @@ session_start();
          <!-- LES INPUTS POUR LE TRANSFERT -->
 
          <?php
-
+//IMAGE
          $_SESSION['surname'] = $_POST['surname'];
          $_SESSION['numt'] = $_POST['numt'];
-         $_SESSION['photo'] = $_POST['photo'];
+
+
+
+         $namepho = $_FILES['photo']['name'];
+         $login = $_SESSION['login'];
+         $photo2 = $_FILES['photo']['tmp_name'];
+
+         image_profil($namepho, $login, $photo2)
 
 
          ?>
@@ -651,7 +658,9 @@ session_start();
          $ville = $_SESSION['ville'];
          $surname = $_SESSION['surname'];
          $numt = $_SESSION['numt'];
-         $photo = $_SESSION['photo'];
+
+         $photo = $_SESSION['login'].".jpg";
+
 
          $date = $_POST['datenaisse'];
          $prenom = $_POST['name'];
@@ -806,7 +815,7 @@ session_start();
           $ville = $_SESSION['ville'];
           $surname = $_SESSION['surname'];
           $numt = $_SESSION['numt'];
-          $photo = $_SESSION['photo'];
+          $photo = $_SESSION['login'].".jpg";
 
           $nomresp = $_POST['nameresp'];
           $ape = $_POST['APE'];
@@ -974,7 +983,7 @@ session_start();
            $ville = $_SESSION['ville'];
            $surname = $_SESSION['surname'];
            $numt = $_SESSION['numt'];
-           $photo = $_SESSION['photo'];
+           $photo = $_SESSION['login'].".jpg";
 
            $nomresp = $_POST['nameresp'];
            $ape = $_POST['APE'];

@@ -39,6 +39,14 @@ function data_base_in_array($tbname,$conn)
     return $arrayRes;
 }
 
+function data_base_in_array_desc($tbname,$coltrie,$conn)
+{
+    $SQL = "SELECT * FROM $tbname ORDER BY $coltrie DESC";
+    $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
+    $arrayRes = $res->fetchAll();
+    return $arrayRes;
+}
+
 function data_base_in_object($tbname, $conn)
 {
     $SQL = "SELECT * FROM $tbname";
@@ -157,5 +165,44 @@ function testsql($sql, $conn)
     $req = $req->fetchAll();
     return $req;
 }
+
+
+/*
+ *
+ * Ajout images
+ *
+ */
+
+ function image_profil($namepho, $login, $photo2)  // Nom de la photo - login pour rename la photo - Nom photo en ram
+ {
+   $chemin = "C:/xampp/htdocs/PPE3/template/images/profil/";
+
+   move_uploaded_file($photo2,$chemin.$namepho);
+   rename ("C:/xampp/htdocs/PPE3/template/images/profil/$namepho", "C:/xampp/htdocs/PPE3/template/images/profil/$login.jpg");
+ }
+
+function select_image_profil($id_user, $conn) {
+  $SQL2 = "SELECT * FROM Utilisateur
+           WHERE id_user = $id_user";
+  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+  $res2 = $req2->fetch();
+
+    if ($res2['photo_user'] == NULL) {
+      print "avatar.png";
+    }
+    else {
+      print $res2['photo_user'];
+    }
+}
+
+function update_image($id_user, $conn) {
+  $SQL2 = "SELECT photo_user FROM Utilisateur
+           WHERE id_user = $id_user";
+  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+  $res2 = $req2->fetch();
+  unlink("C:/xampp/htdocs/PPE3/template/images/profil/");
+}
+
+
 
 ?>

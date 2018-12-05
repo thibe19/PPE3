@@ -1,3 +1,9 @@
+<?php
+  // V0.0.1
+  // 05/12/2018
+  //Right.php
+ ?>
+
 <div class="right_side_bar col">
     <div class="right_sidebar_iner">
         <div class="popular_posts popular_fast">

@@ -40,9 +40,7 @@ if (isset($_SESSION['Eleve'])) {
 }
 
 //left bar de la page profil est differents des autres sur le site un test est necessaire
-if (isset($_SESSION['Profilon'])){
 
-}
 else{
 ?>
 <div class="col">
@@ -98,27 +96,29 @@ else{
                     <input type="hidden" name="suprisok" value="1">
                 </form>
             </div>
+            <?php
+
+
+             ?>
             <div class="profile">
                 <h3 class="categories_tittle">Amis <span onclick="window.location='requests.php?groupe=elve'">Modifier</span></h3>
                 <ul class="profile_pic">
-                    <li><a href="#"><img src="images/profile-1.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-2.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-3.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-4.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-5.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-6.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-7.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-8.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-9.jpg" alt="" class="circle"></a></li>
-                    <li><a href="#"><img src="images/profile-10.jpg" alt="" class="circle"></a></li>
+
+                  <?php
+                  $sql = "SELECT * FROM ajoute_amis";
+                  $req = $conn->Query($sql)or die('Erreur dans le requete cat');
+                  while ($res = $req->fetch()) {
+                      ?> <li><a href="#"><img width="40px" height="40px" src="images/profil/avatar.png" alt="" class="circle"></a></li> <?php
+                   } ?>
                 </ul>
             </div>
+          <?php  ?>
 
             <div class="calendar_widget">
                 <h3 class="categories_tittle">Calendrier</h3>
                 <table class="calendar"></table>
             </div>
-            <div class="social_Sharing">
+            <!-- <div class="social_Sharing">
                 <h3 class="categories_tittle">Social Sharing</h3>
                 <ul class="social_icon">
                     <li><a href="#"><i class="ion-social-twitter"></i></a></li>
@@ -130,6 +130,6 @@ else{
             </div>
             <div class="advertis">
                 <a href="#"><img src="images/advertis.jpg" alt=""></a>
-            </div>
+            </div> -->
         </div>
     </div>
