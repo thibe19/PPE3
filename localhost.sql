@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 29 nov. 2018 à 16:48
+-- Généré le :  mer. 05 déc. 2018 à 08:18
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -51,25 +51,17 @@ CREATE TABLE `Categorie` (
 --
 
 INSERT INTO `Categorie` (`id_cat`, `lib_cat`) VALUES
-(1, 'Actualités'),
-(2, 'Annonces'),
 (3, 'Mode'),
 (4, 'Droits'),
 (5, 'Divers'),
 (6, 'Économie, Finance'),
-(7, 'Emplois'),
-(8, 'Politique'),
-(9, 'Jeux vidéo'),
 (15, 'Enseignement'),
 (16, 'Médecine, Santé'),
-(28, 'Littérature'),
-(30, 'Spectacles'),
 (31, 'Musique'),
 (33, 'Art'),
 (34, 'Sports'),
 (37, 'Informatique'),
-(39, 'Audio-visuel'),
-(43, 'Matériel'),
+(44, 'Sécurité'),
 (45, 'Animaux'),
 (50, 'Voyages');
 
@@ -148,10 +140,9 @@ CREATE TABLE `eleve_pref` (
 --
 
 INSERT INTO `eleve_pref` (`id_pref`, `id_user`) VALUES
-(2, 42),
-(5, 42),
-(6, 42),
-(11, 42);
+(2, 40),
+(3, 40),
+(4, 40);
 
 -- --------------------------------------------------------
 
@@ -171,7 +162,9 @@ CREATE TABLE `Entreprise` (
 --
 
 INSERT INTO `Entreprise` (`id_user`, `nom_resp`, `code_APE`, `site_web`) VALUES
-(41, 'roge', '2910X', 'google.fr');
+(41, 'roge', '2910X', 'google.fr'),
+(44, 'rogerfb', '8299Z', 'facebook.com'),
+(45, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -223,19 +216,11 @@ CREATE TABLE `Offre` (
   `niveau_req` varchar(255) COLLATE latin1_bin NOT NULL,
   `date_debut_offre` date NOT NULL,
   `date_post_offre` date NOT NULL,
-  `desc_offre` longtext COLLATE latin1_bin NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_cat` int(11) NOT NULL,
   `id_ent` int(11) NOT NULL,
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
-
---
--- Déchargement des données de la table `Offre`
---
-
-INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `desc_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
-(13, 'test doffre', 'bac +5', '2018-11-29', '2018-11-29', '', 42, 37, 41, 0);
 
 -- --------------------------------------------------------
 
@@ -279,15 +264,6 @@ CREATE TABLE `Post` (
   `id_cat` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
-
---
--- Déchargement des données de la table `Post`
---
-
-INSERT INTO `Post` (`id_post`, `titre_post`, `contenu_post`, `photo_post`, `date_post`, `heure_post`, `id_cat`, `id_user`) VALUES
-(1, 'Bonjour', 'Je test ou un petit /.', '123456', '2018-11-22', '16:24:18', 9, 40),
-(2, 'je suis un tug', 'oui ', '123456', '2018-11-22', '16:58:00', 3, 40),
-(12, 'toujours', 'un test pour un test', '123456', '2018-11-28', '09:41:38', 15, 40);
 
 -- --------------------------------------------------------
 
@@ -368,7 +344,7 @@ CREATE TABLE `Utilisateur` (
   `login_user` varchar(30) COLLATE latin1_bin NOT NULL,
   `mdp_user` varchar(255) COLLATE latin1_bin NOT NULL,
   `email_user` varchar(30) COLLATE latin1_bin NOT NULL,
-  `tel_ser` int(11) NOT NULL,
+  `tel_user` int(11) NOT NULL,
   `num_addr_user` varchar(6) COLLATE latin1_bin NOT NULL,
   `rue_addr_user` varchar(100) COLLATE latin1_bin NOT NULL,
   `CP_addr_user` int(11) NOT NULL,
@@ -383,10 +359,12 @@ CREATE TABLE `Utilisateur` (
 -- Déchargement des données de la table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_ser`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
+INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_user`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
 (40, 'jesuistest', 'test', '$2y$10$exqhD9VwO/xkqhO4l2RWde3pGP8.kVUgRfhtQtzr9I5rHU78Ugrwi', 'test@test.fr', 494839494, '25', 'rue du test', 19100, 'villetest', '123456', 'oui mais non', '', 0),
-(41, 'Google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
-(42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0);
+(41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
+(42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0),
+(44, 'Facebook', 'fb', '$2y$10$JXjKOOFtK0VBDAhtZd8m1eeFAaLuBh6pSDJ7qjDfWmKYzcWXGBLq2', 'fb@gmail.com', 494839494, '19', 'rue du test entfb', 19100, 'villetestent', '', '', '', 0),
+(45, '098', '19', '$2y$10$BE.BCQVASqepMnzmdg7MwuZwNUKfdIUtOm.XypYU4mH307yEY/dCC', '', 0, '', '', 0, '', '', '', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -463,7 +441,8 @@ ALTER TABLE `Evenement`
 --
 ALTER TABLE `OEmploi`
   ADD PRIMARY KEY (`id_offre`),
-  ADD KEY `OEmploi_Eleve0_FK` (`id_user`);
+  ADD KEY `OEmploi_Eleve0_FK` (`id_user`),
+  ADD KEY `OEmploi_Eleve1_FK` (`id_user_Eleve`);
 
 --
 -- Index pour la table `Offre`
@@ -471,6 +450,7 @@ ALTER TABLE `OEmploi`
 ALTER TABLE `Offre`
   ADD PRIMARY KEY (`id_offre`),
   ADD KEY `Offre_Eleve_FK` (`id_user`),
+  ADD KEY `Offre_Eleve0_FK` (`id_user_Eleve`),
   ADD KEY `id_cat` (`id_cat`),
   ADD KEY `id_ent` (`id_ent`);
 
@@ -479,7 +459,8 @@ ALTER TABLE `Offre`
 --
 ALTER TABLE `OStage`
   ADD PRIMARY KEY (`id_offre`),
-  ADD KEY `OStage_Eleve0_FK` (`id_user`);
+  ADD KEY `OStage_Eleve0_FK` (`id_user`),
+  ADD KEY `OStage_Eleve1_FK` (`id_user_Eleve`);
 
 --
 -- Index pour la table `participe_event`
@@ -554,13 +535,13 @@ ALTER TABLE `Evenement`
 -- AUTO_INCREMENT pour la table `Offre`
 --
 ALTER TABLE `Offre`
-  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `Post`
 --
 ALTER TABLE `Post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `Preferences`
@@ -578,7 +559,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Contraintes pour les tables déchargées
@@ -645,6 +626,15 @@ ALTER TABLE `OEmploi`
   ADD CONSTRAINT `OEmploi_Eleve0_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Eleve1_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`);
+
+--
+-- Contraintes pour la table `Offre`
+--
+ALTER TABLE `Offre`
+  ADD CONSTRAINT `Offre_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
+  ADD CONSTRAINT `Offre_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
+  ADD CONSTRAINT `Offre_ibfk_1` FOREIGN KEY (`id_cat`) REFERENCES `Categorie` (`id_cat`),
+  ADD CONSTRAINT `Offre_ibfk_2` FOREIGN KEY (`id_ent`) REFERENCES `Entreprise` (`id_user`);
 
 --
 -- Contraintes pour la table `OStage`
