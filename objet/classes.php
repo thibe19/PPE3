@@ -1,10 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: thibault
- * Date: 15/11/18
- * Time: 16:31*
- * v0.0.1
+ * Date: 05/12/18
+ * v0.0.3
  */
 
 require_once '../ToolBox/bdd.inc.php';
@@ -13,5 +11,6 @@ require_once 'class_eleve.php';
 require_once 'class_entreprise.php';
 require_once 'class_offre.php';
 require_once 'class_stage.php';
+require_once 'class_emploi.php';
 
 ?>
