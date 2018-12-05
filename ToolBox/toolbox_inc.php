@@ -195,12 +195,18 @@ function select_image_profil($id_user, $conn) {
     }
 }
 
-function update_image($id_user, $conn) {
-  $SQL2 = "SELECT photo_user FROM Utilisateur
-           WHERE id_user = $id_user";
-  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
-  $res2 = $req2->fetch();
-  unlink("C:/xampp/htdocs/PPE3/template/images/profil/");
+function update_image($namepho, $login, $photo2, $id_user, $conn) {
+
+  $photo = $login.'.jpg';
+  $sql="UPDATE Utilisateur
+        SET photo_user = '$photo'
+        WHERE id_user='$id_user' ";
+  $res = $conn->Query($sql)or die('Erreur modification user');
+  $chemin = "C:/xampp/htdocs/PPE3/template/images/profil/";
+  unlink("C:/xampp/htdocs/PPE3/template/images/profil/".$login);
+
+  move_uploaded_file($photo2,$chemin.$namepho);
+  rename ($chemin.$namepho, $chemin.$login.".jpg");
 }
 
 
