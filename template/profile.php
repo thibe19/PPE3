@@ -113,11 +113,11 @@ if (isset($_SESSION['Eleve'])) {
 
               <?php
 
-              print $sqlP="SELECT * FROM Post
+               $sqlP="SELECT * FROM Post
                      WHERE id_user = (SELECT id_user_Eleve FROM ajoute_amis
                                       WHERE id_user = $id_user)
                      order by date_post desc";
-                     die();
+                  
               $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
               while ($dataP=$resP->fetch())
