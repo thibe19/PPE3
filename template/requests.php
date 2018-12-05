@@ -1,10 +1,15 @@
 <?php
 // YANN THER - 10h20 - 22/11/2018
 session_start();
-
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
-$id_user_session = dec_enc('decrypt',$_SESSION['id']);
+require('../objet/classes.php');
+if (isset($_SESSION['Eleve'])) {
+    $uneleve = unserialize($_SESSION['Eleve']);
+    $id_user = $uneleve->getIdUser();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,11 +77,11 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
               while ($res = $req->fetch()) {
 
 
-                $id_user = $res['id_user'];
+                $id_user2 = $res['id_user'];
 
                 $SQL2 = "SELECT * FROM Utilisateur
-                           WHERE id_user = $id_user
-                           AND id_user != $id_user_session";
+                           WHERE id_user = $id_user2
+                           AND id_user != $id_user";
                   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
                   while ($res2 = $req2->fetch()) {
 
@@ -132,7 +137,7 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
                 $id_user_amis = $_GET['adda'];
 
                 $SQL = "INSERT INTO ajoute_amis
-                        VALUES('$id_user_session', '$id_user_amis');";
+                        VALUES('$id_user', '$id_user_amis');";
                 $res = $conn->Query($SQL)or die('');
                 ?>
                   <script type="text/javascript">
@@ -170,11 +175,11 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
                 while ($res = $req->fetch()) {
 
 
-                  $id_user = $res['id_user'];
+                  $id_user2 = $res['id_user'];
 
                     $SQL2 = "SELECT * FROM Utilisateur
-                            WHERE id_user = $id_user
-                            AND id_user != $id_user_session";
+                            WHERE id_user = $id_user2
+                            AND id_user != $id_user";
                     $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
                     while ($res2 = $req2->fetch()) {
 
@@ -225,7 +230,7 @@ $id_user_session = dec_enc('decrypt',$_SESSION['id']);
                   $id_user_amis = $_GET['adde'];
 
                   $SQL = "INSERT INTO ajoute_amis
-                          VALUES('$id_user_session', '$id_user_amis');";
+                          VALUES('$id_user', '$id_user_amis');";
                   $res = $conn->Query($SQL)or die('');
                   ?>
                     <script type="text/javascript">
