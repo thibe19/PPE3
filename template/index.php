@@ -222,13 +222,13 @@ require('part/header.php');
 
                     <?php
 
-                    $sqlS="SELECT * FROM OStage ";
+                    $sqlS="SELECT * FROM Offre ";
                     $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
 
                     while ($dataS=$resS->fetch())
                     {
                         $offre = $dataS['id_offre'];
-                        $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
+                        $sqlO="SELECT * FROM OStage WHERE id_offre = '$offre' ";
                         $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
                         $dataO=$resO->fetch();
 
@@ -257,15 +257,15 @@ require('part/header.php');
                                         <div class="col s8 media_body">
 
                                             <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                            <span><?php echo$dataO['date_post_offre']; ?></span>
+                                            <span><?php echo$dataS['date_post_offre']; ?></span>
                                         </div>
                                     </div>
                                     <div class="col s4 btn_floating">
 
                                     </div>
                                 </div>
-                                <a class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
-                                <p><?php echo$dataS['desc_user_stage']; ?></p>
+                                <a class="post_heding"><?php echo$dataS['lib_offre']; ?></a>
+                                <p><?php echo$dataO['desc_user_stage']; ?></p>
                             </div>
                             <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
                             <br>

@@ -189,29 +189,6 @@ class Offre
     }
 
 
-
-    ///////////////////////////////////////////// Update  ////////////////////////////////////////////
-    public function update_offre($id_offre, $lib_offre, $niveau_req, $date_debut_offre, $Date_fin_stage, $note_stage, $desc_utilisateur_stage, $salaire_emp, $desc_emp, $conn)
-    {
-        $id_offre = $this->id_offre;
-        $lib_offre = $this->lib_offre;
-        $niveau_req = $this->niveau_req;
-        $date_debut_offre = $this->date_debut_offre;
-        //Emploi
-        $salaire_emp = $this->salaire_emp;
-        $desc_emp = $this->desc_emp;
-        //Stage
-        $Date_fin_stage = $this->Date_fin_stage;
-        $note_stage = $this->note_stage;
-        $desc_utilisateur_stage = $this->desc_utilisateur_stage;
-
-        $SQL = "UPDATE offre SET ******
-                            WHERE id_offre = $id_offre";
-        $res = $conn->Query($SQL);
-
-    }
-
-
 }
 
 ?>
