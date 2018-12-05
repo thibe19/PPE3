@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisateur/Eleve/Stage   date modif : 21/11/2018  vertion:0.0.1
+ * Utilisateur/Eleve/Stage   date modif : 05/12/18  vertion:0.0.2
  */
 
 /////////////////// CREATION CLASS POUR INSCRIPTION
@@ -18,7 +18,7 @@ class Stage extends Offre{
     public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '',
      $date_fin_stage = '', $note_user = '', $desc_user = '')
     {
-        parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $id_user, $id_cat, $id_ent);
+        parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $desc_offre, $id_user, $id_cat, $id_ent);
         $this->date_fin_stage = $date_fin_stage;
         $this->note_user = $note_user;
         $this->desc_user = $desc_user;
@@ -88,6 +88,9 @@ class Stage extends Offre{
         $this->desc_user = $desc_user;
     }
 
+
+  ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
+
     public function insert_stage($conn){
         $this->insert_offre($conn);
         $id = $this->getid_offre();
@@ -103,7 +106,15 @@ class Stage extends Offre{
         $res_getid = $res_getid->fetchAll();
 
         if($res_getid){
+
+          $id_offre = $res_getid[0]['id_offre'];
+          $SQL = "INSERT INTO OStage
+                  VALUES('$id_offre','$date_fin_stage','$note_user','$desc_user','','')";
+          $res = $conn->Query($SQL)or die('Erreur insertion entreprise');
         }
     }
-}
+
+
+
+}//fin class
 ?>

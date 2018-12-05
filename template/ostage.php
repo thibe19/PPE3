@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  29/11/18
+ *  05/12/18
  *  Stage
  *  v0.0.2
  */
@@ -61,11 +61,15 @@
         <img src="images/banner.jpg" alt="" class="banner_img">
     </div>
     <!-- End Tranding Area -->
-
+    <ul class="tranding_select tabs">
+        <li class="tab"><a href="#stage" class="waves-effect btn">Offre Stage</a></li>
+        <li class="tab"><a href="#emploi" class="waves-effect btn">Offre Emploi</a></li>
+    </ul>
     <!-- crée un stage -->
     <section class="messages_area">
       <div class="messages_row row">
         <div class="section_row row">
+          <br>
           <div class="col s12">
             <h2>Crée un stage</h2><br><br>
           </div>
@@ -396,15 +400,16 @@ if (isset($_POST['validSE'])) {
   $lib_offre = $_POST['lib_offre'];
   $descstage = $_POST['descstage'];
   $cat = $_POST['cat'];
-  $enp = $_POST['ent'];
+  $ent = $_POST['ent'];
   $date = date("Y-m-d");
 
   if ( ($nreq && $lib_offre && $descstage) != NULL) {
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
-    //$unstage->insert_stage($unstage,$conn);
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
+    var_dump($unstage->getAllStage());
+    $unstage->insert_stage($unstage,$conn);
 
-    echo $unstage -> getAllStage();
+
 
     $nomEnt = $_POST['nomEnt'];
     $telEnt = $_POST['telEnt'];
@@ -759,10 +764,10 @@ if (isset($_SESSION['Entreprise'])) {
     $lib_offre = $_POST['lib_offre'];
     $descstage = $_POST['descstage'];
     $cat = $_POST['cat'];
-    $enp = unserialize($_SESSION['Entreprise'])->getIdUser();
+    $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$enp,$dateFS,'','');
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
     //$unstage->insert_stage($unstage,$conn);
 
     echo $unstage -> getAllStage();

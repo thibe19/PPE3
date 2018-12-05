@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Offre  date modif : 14/11/2018   vertion:0.0.1
+ * Offre  date modif : 05/12/18   vertion:0.0.2
  */
 class Offre
 {
@@ -23,6 +23,7 @@ class Offre
         $this->niveau_req = $niveau_req;
         $this->date_debut_offre = $date_offre;
         $this->date_post_offre = $date_post;
+        $this->desc_offre = $desc_offre;
         $this->id_user = $id_user;
         $this->id_cat = $id_cat;
         $this->id_ent = $id_ent;
@@ -104,27 +105,7 @@ class Offre
         return $this->desc_offre;
     }
 
-    /*
-    public function getDate_fin_stage()
-    {
-      return $this-> Date_fin_stage;
-    }
-    public function getnote_user_stage()
-    {
-      return $this-> note_user_stage;
-    }
-    public function getdesc_user_stage()
-    {
-      return $this-> desc_user_stage;
-    }
-    public function getsalaire_emp()
-    {
-      return $this-> salaire_emp;
-    }
-    public function getdesc_emp()
-    {
-      return $this-> desc_emp;
-    }*/
+
 
     //////////////////////////////////////////// SET  /////////////////////////////////////////////
     public function setid_offre($id_offre)
@@ -186,30 +167,7 @@ class Offre
         $this->id_ent = $id_ent;
     }
 
-    /* public function setDate_fin_stage($Date_fin_stage)
-     {
-         $this->Date_fin_stage = $Date_fin_stage;
-     }
 
-     public function setnote_user_stage($note_stage)
-     {
-         $this->note_stage = $note_stage;
-     }
-
-     public function setdesc_user_stage($desc_user_stage)
-     {
-         $this->desc_user_stage = $desc_user_stage;
-     }
-
-     public function setsalaire_emp($salaire_emp)
-     {
-         $this->salaire_emp = $salaire_emp;
-     }
-
-     public function setdesc_emp($desc_emp)
-     {
-         $this->desc_emp = $desc_emp;
-     }*/
 
 
     ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
@@ -219,43 +177,18 @@ class Offre
         $niveau_req = $this->niveau_req;
         $date_debut_offre = $this->date_debut_offre;
         $date_post_offre = $this->date_post_offre;
+        $desc_offre = $this->desc_offre;
         $id_user = $this->id_user;
         $id_cat = $this->id_cat;
         $id_ent = $this->id_ent;
 
+
         $SQL = "INSERT INTO Offre
-                VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','','$id_user','$id_cat','$id_ent','')";
+                VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','','$id_cat','$id_ent','')";
 
         $res = $conn->Query($SQL)or die("Erreur insertion de l'offre");
     }
-    public function insert_offre_stage($lib_offre, $niveau_req, $date_debut_offre, $Date_fin_stage, $note_stage, $desc_utilisateur_stage, $conn)
-    {
-        $lib_offre = $this->lib_offre;
-        $niveau_req = $this->niveau_req;
-        $date_debut_offre = $this->date_debut_offre;
-        $Date_fin_stage = $this->Date_fin_stage;
-        $note_stage = $this->note_stage;
-        $desc_utilisateur_stage = $this->desc_utilisateur_stage;
 
-
-        $SQL = "INSERT INTO OStage VALUES('','$lib_offre','$niveau_req','$date_debut_offre','$Date_fin_stage')";     //A faire
-        $res = $conn->Query($SQL);
-
-    }
-
-    public function insert_offre_emploi($lib_offre, $niveau_req, $date_debut_offre, $salaire_emp, $desc_emp, $conn)
-    {
-        $lib_offre = $this->lib_offre;
-        $niveau_req = $this->niveau_req;
-        $date_debut_offre = $this->date_debut_offre;
-        $salaire_emp = $this->salaire_emp;
-        $desc_emp = $this->desc_emp;
-
-
-        $SQL = "INSERT INTO OEmploi VALUES('', ...)";     //A faire
-        $res = $conn->Query($SQL);
-
-    }
 
 
     ///////////////////////////////////////////// Update  ////////////////////////////////////////////
