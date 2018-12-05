@@ -173,11 +173,11 @@ class Offre
     ///////////////////////////////////////////// Insert  ////////////////////////////////////////////
 
     public function insert_offre($conn){
-        $lib_offre = $this->lib_offre;
+        $lib_offre = urlencode($this->lib_offre);
         $niveau_req = $this->niveau_req;
         $date_debut_offre = $this->date_debut_offre;
         $date_post_offre = $this->date_post_offre;
-        $desc_offre = $this->desc_offre;
+        $desc_offre = urlencode($this->desc_offre);
         $id_user = $this->id_user;
         $id_cat = $this->id_cat;
         $id_ent = $this->id_ent;
