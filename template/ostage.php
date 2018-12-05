@@ -62,8 +62,8 @@
     </div>
     <!-- End Tranding Area -->
     <ul class="tranding_select tabs">
-        <li class="tab"><a href="#stage" class="waves-effect btn">Offre Stage</a></li>
-        <li class="tab"><a href="#emploi" class="waves-effect btn">Offre Emploi</a></li>
+        <li class="tab"><a href="./ostage.php" class="waves-effect btn">Offre Stage</a></li>
+        <li class="tab"><a href="./oemploi.php" class="waves-effect btn">Offre Emploi</a></li>
     </ul>
     <!-- crée un stage -->
     <section class="messages_area">
