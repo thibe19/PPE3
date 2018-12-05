@@ -85,10 +85,11 @@ if ($id==$dataE['id_user']) {
       <div class="banner_area banner_2">
           <img src="images/banner-2.jpg" alt="" class="banner_img">
           <div class="media profile_picture">
-              <a href="profile.php"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
+              <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
               <div class="media_body">
                   <a href="profile.php"><?php echo$data['nom_user']; ?>  <?php echo$dataE['prenom_eleve']; ?></a>
-                  <h6><?php echo$data['num_addr_user']; ?> <?php echo$data['rue_addr_user']; ?> <?php echo$data['CP_addr_user']; ?>, <?php echo$data['ville_addr_user']; ?></h6>
+                  <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
+                  <h6><?php print $uneleve->getVilleAddr(); ?></h6>
               </div>
           </div>
       </div>
@@ -126,6 +127,7 @@ if ($id==$dataE['id_user']) {
                   <h1>Option Profil</h1><br><br>
                 </div>
                 <div class="profil">
+                <form class="" action="setting.php" method="post" enctype="multipart/form-data">
                   <div class="modif-image">
                     <div class="modif-image-image">
                       <img src="<?php $data['photo_user'] ?>" >
@@ -133,13 +135,14 @@ if ($id==$dataE['id_user']) {
                     <div class="modif-image-bouton">
                       <div>
                         <input type='file' name='photo'>
-                        <button class="btn btn-primary btn-block mt-5" type="button">
+                        <button class="btn btn-primary btn-block mt-5" name="photo_update" value="1" type="submit">
                           <i class="fa fa-fw fa-camera"></i>
                           <span>Change Photo</span>
                         </button>
                       </div>
                     </div>
                   </div>
+                </form>
                   <!-- fin modif image -->
                   <br>
                   <div class="tab-content pt-3">
@@ -483,7 +486,8 @@ if ($id==$dataE['id_user']) {
 
     if (($mdpA or $mdpN) == '' ) {
 
-      $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
+      print$uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
+      die();
       $uneleve->modifier_eleve($uneleve,$conn);
 
 
@@ -963,6 +967,8 @@ elseif ($id==$dataEn['id_user']) {
 
     <?php
 
+
+
     if (isset($_POST['modifierEn'])) {
 
       $nom = $_POST['nom'];
@@ -974,7 +980,7 @@ elseif ($id==$dataEn['id_user']) {
       $ville = $_POST['ville'];
       $cp = $_POST['cp'];
       $desc = $_POST['desc'];
-      $photo='123456';    //////////////////////////////Pas fini!
+          //////////////////////////////Pas fini!
 
       $mdpA = $_POST['mdpA'];
       $mdpN = $_POST['mdpN'];
@@ -989,7 +995,7 @@ elseif ($id==$dataEn['id_user']) {
 
       if (($mdpA or $mdpN) == '' ) {
 
-        $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
+        $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,'',$desc,$nomresp,$ape,$siteweb);
         $unentreprise->updateentreprise($unentreprise,$conn);
 
         echo "<script>window.location='./setting.php'</script>";
@@ -999,7 +1005,7 @@ elseif ($id==$dataEn['id_user']) {
 
           if ($mdpN==$mdpNC) {
 
-            $unentreprise = new Entreprise($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$nomresp,$ape,$siteweb);
+            $unentreprise = new Entreprise($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,'',$desc,$nomresp,$ape,$siteweb);
             $unentreprise->updateentreprise($unentreprise,$conn);
 
 
@@ -1028,4 +1034,16 @@ elseif ($id==$dataEn['id_user']) {
 
 
 }//fin entreprise
+
+if (isset($_POST['photo_update'])) {
+
+
+
+  $namepho = $_FILES['photo']['name'];
+  $login = $ndc;
+  $photo2 = $_FILES['photo']['tmp_name'];
+
+
+   update_image($namepho, $login, $photo2, $id_user, $conn);
+}
  ?>
