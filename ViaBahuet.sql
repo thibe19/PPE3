@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 05 déc. 2018 à 11:25
+-- Généré le :  jeu. 06 déc. 2018 à 08:12
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -164,7 +164,8 @@ CREATE TABLE `Entreprise` (
 INSERT INTO `Entreprise` (`id_user`, `nom_resp`, `code_APE`, `site_web`) VALUES
 (41, 'roge', '2910X', 'google.fr'),
 (44, 'rogerfb', '8299Z', 'facebook.com'),
-(45, '', '', '');
+(45, '', '', ''),
+(46, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -228,7 +229,9 @@ CREATE TABLE `Offre` (
 --
 
 INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `desc_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
-(10, 'test', 'test', '2018-12-29', '2018-12-05', 'testdesc', 0, 33, 44, 0);
+(10, 'test', 'test', '2018-12-29', '2018-12-05', 'testdesc', 0, 33, 44, 0),
+(11, 'j%27aime+les+patat', 'bac +5', '2018-11-29', '2018-12-05', 'j%27aime+les+patates', 0, 5, 41, 0),
+(12, 'joue+de+la+flut', 'bac +5', '2018-12-03', '2018-12-05', 'un+bon+joueur+de+Fl%C3%BBte++oui', 0, 31, 46, 0);
 
 -- --------------------------------------------------------
 
@@ -250,7 +253,9 @@ CREATE TABLE `OStage` (
 --
 
 INSERT INTO `OStage` (`id_offre`, `date_fin_stage`, `note_user_stage`, `desc_user_stage`, `id_user`, `id_user_Eleve`) VALUES
-(10, '2018-12-22', 0, '', 0, 0);
+(10, '2018-12-22', 0, '', 0, 0),
+(11, '2018-12-12', 0, '', 0, 0),
+(12, '2018-12-23', 0, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -382,11 +387,12 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_user`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
-(40, 'jesuistest', 'test', '$2y$10$UIGsQAf/ze/FZL4fVBik0u6RLsilB..NXxRserhM3vPt3ZFXA7wwy', 'test@test.fr', 0, '25', 'rue du test', 19100, 'villetest', '123456', 'test', '', 0),
+(40, 'jesuistest', 'test', '$2y$10$7Q6eCcUlt3fXzlUHY1l11OoWO2ukpZt.rE4XRS9XY7N6UrOW6DSPy', 'test@test.fr', 0, '25', 'rue du test', 19100, 'villetest', 'test.jpg', 'test', 'pierre', 0),
 (41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
 (42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0),
 (44, 'Facebook', 'fb', '$2y$10$JXjKOOFtK0VBDAhtZd8m1eeFAaLuBh6pSDJ7qjDfWmKYzcWXGBLq2', 'fb@gmail.com', 494839494, '19', 'rue du test entfb', 19100, 'villetestent', '', '', '', 0),
-(45, '098', '19', '$2y$10$BE.BCQVASqepMnzmdg7MwuZwNUKfdIUtOm.XypYU4mH307yEY/dCC', '', 0, '', '', 0, '', '', '', '', 0);
+(45, '098', '19', '$2y$10$BE.BCQVASqepMnzmdg7MwuZwNUKfdIUtOm.XypYU4mH307yEY/dCC', '', 0, '', '', 0, '', '', '', '', 0),
+(46, 'moi', '', '$2y$10$DVdwlpdo0sGfgMROFx8qbOkeyINE3UNpPSUERugDmDUoAUgiCqFMW', '', 0, '19', 'des tulip', 19100, 'brive', '', '', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -462,7 +468,9 @@ ALTER TABLE `Evenement`
 -- Index pour la table `OEmploi`
 --
 ALTER TABLE `OEmploi`
-  ADD PRIMARY KEY (`id_offre`);
+  ADD PRIMARY KEY (`id_offre`),
+  ADD KEY `OEmploi_Eleve0_FK` (`id_user`),
+  ADD KEY `OEmploi_Eleve1_FK` (`id_user_Eleve`);
 
 --
 -- Index pour la table `Offre`
@@ -551,7 +559,7 @@ ALTER TABLE `Evenement`
 -- AUTO_INCREMENT pour la table `Offre`
 --
 ALTER TABLE `Offre`
-  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `Post`
@@ -575,7 +583,7 @@ ALTER TABLE `type_event`
 -- AUTO_INCREMENT pour la table `Utilisateur`
 --
 ALTER TABLE `Utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Contraintes pour les tables déchargées
@@ -642,51 +650,6 @@ ALTER TABLE `OEmploi`
   ADD CONSTRAINT `OEmploi_Eleve0_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Eleve1_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`);
-
---
--- Contraintes pour la table `Offre`
---
-ALTER TABLE `Offre`
-  ADD CONSTRAINT `Offre_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `Offre_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `Offre_ibfk_1` FOREIGN KEY (`id_cat`) REFERENCES `Categorie` (`id_cat`),
-  ADD CONSTRAINT `Offre_ibfk_2` FOREIGN KEY (`id_ent`) REFERENCES `Entreprise` (`id_user`);
-
---
--- Contraintes pour la table `OStage`
---
-ALTER TABLE `OStage`
-  ADD CONSTRAINT `OStage_Eleve0_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `OStage_Eleve1_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `OStage_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`);
-
---
--- Contraintes pour la table `participe_event`
---
-ALTER TABLE `participe_event`
-  ADD CONSTRAINT `participe_event_Evenement_FK` FOREIGN KEY (`id_event`) REFERENCES `Evenement` (`id_event`),
-  ADD CONSTRAINT `participe_event_Utilisateur0_FK` FOREIGN KEY (`id_user`) REFERENCES `Utilisateur` (`id_user`);
-
---
--- Contraintes pour la table `Post`
---
-ALTER TABLE `Post`
-  ADD CONSTRAINT `Post_Categorie_FK` FOREIGN KEY (`id_cat`) REFERENCES `Categorie` (`id_cat`),
-  ADD CONSTRAINT `Post_Utilisateur0_FK` FOREIGN KEY (`id_user`) REFERENCES `Utilisateur` (`id_user`);
-
---
--- Contraintes pour la table `pref_offre`
---
-ALTER TABLE `pref_offre`
-  ADD CONSTRAINT `pref_offre_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`),
-  ADD CONSTRAINT `pref_offre_Preferences0_FK` FOREIGN KEY (`id_pref`) REFERENCES `Preferences` (`id_pref`);
-
---
--- Contraintes pour la table `repond_post`
---
-ALTER TABLE `repond_post`
-  ADD CONSTRAINT `repond_post_Post0_FK` FOREIGN KEY (`id_post`) REFERENCES `Post` (`id_post`),
-  ADD CONSTRAINT `repond_post_Utilisateur_FK` FOREIGN KEY (`id_user`) REFERENCES `Utilisateur` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
