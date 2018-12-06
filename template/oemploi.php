@@ -394,6 +394,8 @@ if (isset($_POST['validOE'])) {
 
 
 if (isset($_SESSION['Entreprise'])) {
+  $unentreprise = unserialize($_SESSION['Entreprise']);
+  $id_user = $unentreprise->getIdUser();
 
   ?>
   <!DOCTYPE html>
@@ -444,13 +446,17 @@ if (isset($_SESSION['Entreprise'])) {
           <img src="images/banner.jpg" alt="" class="banner_img">
       </div>
       <!-- End Tranding Area -->
-
+      <ul class="tranding_select tabs">
+          <li class="tab"><a  onclick="window.location.href='./ostage.php'" class="waves-effect btn">Offre Stage</a></li>
+          <li class="tab"><a  onclick="window.location.href='./oemploi.php'" class="waves-effect btn active">Offre Emploi</a></li>
+      </ul>
       <!-- crée un stage -->
       <section class="messages_area">
         <div class="messages_row row">
           <div class="section_row row">
             <div class="col s12">
-              <h2>Crée un stage</h2><br><br>
+              <br>
+              <h2>Crée une offre d'emploi</h2><br><br>
             </div>
 
               <?php
@@ -493,13 +499,13 @@ if (isset($_SESSION['Entreprise'])) {
                     <div class="col">
                       <div class="form-group">
                         <label class="form-label">Date de debut d'emploi</label>
-                        <input type="date" class="form-control" name="dateDstage" value="">
+                        <input type="date" class="form-control" name="dateDemp" value="">
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-group">
                         <label class="form-label">Salaire </label>
-                        <input type="text" class="form-control" name="Nivreq" value="" placeholder="Exemple : 5000">
+                        <input type="text" class="form-control" name="salaire" value="" placeholder="Exemple : 5000">
                       </div>
                     </div>
 
@@ -509,7 +515,7 @@ if (isset($_SESSION['Entreprise'])) {
                     <div class="col">
                       <div class="form-group">
                         <label class="form-label">Type contrat</label>
-                        <input type="text" class="form-control" name="lib_offre" value="" placeholder="Exemple : CDI">
+                        <input type="text" class="form-control" name="typeC" value="" placeholder="Exemple : CDI">
                       </div>
                     </div>
                   </div>
@@ -527,7 +533,7 @@ if (isset($_SESSION['Entreprise'])) {
                       <div class="form-group">
                         <label class="form-label">Description de l'annonce :</label>
                         <br><br>
-                        <textarea name="descstage" rows="8" cols="80"
+                        <textarea name="descemp" rows="8" cols="80"
                                   style="margin: 0px; height: 86px; width: 619px;"></textarea>
                       </div>
                     </div>
@@ -536,7 +542,7 @@ if (isset($_SESSION['Entreprise'])) {
                   <div class="float-right mt-0 mb-0">
 
                     <button class="btn btn-secondary mr-3"  type="submit">Annuler</button>
-                    <button class="btn btn-primary " name='validSEn' type="submit">Valider</button>
+                    <button class="btn btn-primary " name='validOEn' type="submit">Valider</button>
 
                   </div>
                   <br><br>
@@ -635,17 +641,16 @@ if (isset($_SESSION['Entreprise'])) {
     $lib_offre = $_POST['lib_offre'];
     $descemp = $_POST['descemp'];
     $cat = $_POST['cat'];
-    $ent = $_POST['ent'];
     $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
 
-    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$id_ent,$salaire,$typeC);
+    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC);
     $unemploi->insert_emploi($conn);
 
 
     echo "<script> alert('l\'offre d'emploi a été crée.');
-                    window.location.href='./index-2.php';
+                    window.location.href='./index.php';
           </script>";
   } //fin valider entreprise
 

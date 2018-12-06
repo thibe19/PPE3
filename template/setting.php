@@ -1,40 +1,35 @@
 <?php
 
 /*
- *  05/12/18
+ *  06/12/18
  *  Profil
- *  v0.0.7
+ *  v0.0.8
  */
 
 session_start();
 
-if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
-$mdp=$_SESSION['mdp'];
-$ndc=$_SESSION['login'];
-}
-
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
+
+
 if (isset($_SESSION['Eleve'])) {
-      $uneleve = unserialize($_SESSION['Eleve']);
-      $id_user = $uneleve->getIdUser();
-}
 
-$sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
-$res = $conn -> query($sql)or die($conn -> errorInfo());
-$data = $res -> fetch();
-$id=$data['id_user'];
+  $uneleve = unserialize($_SESSION['Eleve']);
+  $id_user = $uneleve->getIdUser();
+  $mdp=$_SESSION['mdp'];
+  $photo = $uneleve ->getPhotoUser();
 
-$sqlE="SELECT * FROM Eleve WHERE id_user = '$id'";
-$resE = $conn -> query($sqlE)or die($conn -> errorInfo());
-$dataE = $resE -> fetch();
+  $sql="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+  $res = $conn -> query($sql)or die($conn -> errorInfo());
+  $data = $res -> fetch();
 
-$sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id'";
-$resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
-$dataEn = $resEn -> fetch();
+  $sqlE="SELECT * FROM Eleve WHERE id_user = '$id_user'";
+  $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+  $dataE = $resE -> fetch();
 
-if ($id==$dataE['id_user']) {
+
+
 ?>
 
   <!DOCTYPE html>
@@ -93,6 +88,7 @@ if ($id==$dataE['id_user']) {
               </div>
           </div>
       </div>
+      <!-- Fin Banner -->
       <section class="author_profile">
           <div class="row author_profile_row">
               <br><br>
@@ -122,7 +118,7 @@ if ($id==$dataE['id_user']) {
 
             <div class="option-profil">
             <section class="min_container photo_pages">
-              <div class="section_row row">
+
                 <div class="col s12">
                   <h1>Option Profil</h1><br><br>
                 </div>
@@ -130,7 +126,7 @@ if ($id==$dataE['id_user']) {
                 <form class="" action="setting.php" method="post" enctype="multipart/form-data">
                   <div class="modif-image">
                     <div class="modif-image-image">
-                      <img src="<?php $data['photo_user'] ?>" >
+                      <img style='width: 25%;height: 25%;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" >
                     </div>
                     <div class="modif-image-bouton">
                       <div>
@@ -150,7 +146,8 @@ if ($id==$dataE['id_user']) {
                       <form class="form" method="POST" action='./setting.php'>
 
                         <div class="col s12">
-                          <h2>Information personnelle </h2>
+                          <h4>Information personnelle </h4>
+                          <br>
                         </div>
 
                         <div class="row">
@@ -202,7 +199,8 @@ if ($id==$dataE['id_user']) {
                           <div class="col-12 col-sm-6 mb-3">
 
                             <div class="col s12">
-                              <h2>Information complémentaire</h2>
+                              <h4>Information complémentaire</h4>
+                              <br>
                             </div>
 
                             <div class="row">
@@ -213,7 +211,7 @@ if ($id==$dataE['id_user']) {
                               <div class="col">
                                 <div class="form-group">
                                   <label class="form-label">N°Mobile</label>
-                                  <input class="form-control" type="number" name="tel" value="<?php echo$data['tel_ser']; ?>">
+                                  <input class="form-control" type="number" name="tel" value="<?php echo$data['tel_user']; ?>">
                                 </div>
                               </div>
                             </div>
@@ -461,7 +459,6 @@ if ($id==$dataE['id_user']) {
   if (isset($_POST['modifierE'])) {
 
     $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
     $mail = $_POST['mail'];
     $user = $_POST['user'];
     $desc = $_POST['desc'];
@@ -470,7 +467,7 @@ if ($id==$dataE['id_user']) {
     $rue = $_POST['rue'];
     $ville = $_POST['ville'];
     $cp = $_POST['cp'];
-    $photo='123456';    //////////////////////////////Pas fini!
+    $dom_acti = $uneleve ->getDomActi();
 
     $mdpA = $_POST['mdpA'];
     $mdpN = $_POST['mdpN'];
@@ -482,12 +479,9 @@ if ($id==$dataE['id_user']) {
     $choixpos = '1';
 
 
-
-
     if (($mdpA or $mdpN) == '' ) {
 
-      $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
-
+      $uneleve = new Eleve($id_user,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choixpos);
       $uneleve->modifier_eleve($uneleve,$conn);
 
 
@@ -498,7 +492,7 @@ if ($id==$dataE['id_user']) {
 
         if ($mdpN==$mdpNC) {
 
-          $uneleve = new Eleve($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
+          $uneleve = new Eleve($id_user,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choixpos);
           $uneleve->modifier_eleve($uneleve,$conn);
 
       echo "<script>window.location='./setting.php'</script>";
@@ -528,14 +522,29 @@ if ($id==$dataE['id_user']) {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                                                          ////
+////                              Entreprise                                  ////
+////                                                                          ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 
-///////////
-///////////
-///////////
-///////////
-//////////////////////////////////////////////////////////// Nieaux Entreprise /////////////////////////////////////////////////
 
-elseif ($id==$dataEn['id_user']) {
+if (isset($_SESSION['Entreprise'])) {
+
+  $unentreprise = unserialize($_SESSION['Entreprise']);
+  $id_user = $unentreprise->getIdUser();
+  $mdp=$_SESSION['mdp'];
+  $photo = $unentreprise ->getPhotoUser();
+
+  $sql="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+  $res = $conn -> query($sql)or die($conn -> errorInfo());
+  $data = $res -> fetch();
+
+  $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
+  $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
+  $dataEn = $resEn -> fetch();
   ?>
 
     <!DOCTYPE html>
@@ -586,7 +595,7 @@ elseif ($id==$dataEn['id_user']) {
         <div class="banner_area banner_2">
             <img src="images/banner-2.jpg" alt="" class="banner_img">
             <div class="media profile_picture">
-                <a href="profile.php"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
+                <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
                 <div class="media_body">
                     <a href="profile.php"><?php echo$data['nom_user']; ?> </a>
                     <h6><?php echo$data['num_addr_user']; ?> <?php echo$data['rue_addr_user']; ?> <?php echo$data['CP_addr_user']; ?>, <?php echo$data['ville_addr_user']; ?></h6>
@@ -620,7 +629,6 @@ elseif ($id==$dataEn['id_user']) {
           <div class="post profile_post">
             <div class="post_content">
 
-              <div class="option-profil">
               <section class="min_container photo_pages">
                 <div class="section_row row">
                   <div class="col s12">
@@ -802,7 +810,7 @@ elseif ($id==$dataEn['id_user']) {
                   </div>
                 </div>
               </section>
-            </div>
+
             </div>
           </div>
         </div>
@@ -974,13 +982,13 @@ elseif ($id==$dataEn['id_user']) {
       $nom = $_POST['nom'];
       $mail = $_POST['mail'];
       $user = $_POST['user'];
+      $desc = $_POST['desc'];
       $tel = $_POST['tel'];
       $Nrue = $_POST['Nrue'];
       $rue = $_POST['rue'];
       $ville = $_POST['ville'];
       $cp = $_POST['cp'];
-      $desc = $_POST['desc'];
-          //////////////////////////////Pas fini!
+      $dom_acti = $uneleve ->getDomActi();
 
       $mdpA = $_POST['mdpA'];
       $mdpN = $_POST['mdpN'];
@@ -995,7 +1003,8 @@ elseif ($id==$dataEn['id_user']) {
 
       if (($mdpA or $mdpN) == '' ) {
 
-        $unentreprise = new Entreprise($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,'',$desc,$nomresp,$ape,$siteweb);
+
+        $unentreprise = new Entreprise($id_user,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomresp,$ape,$siteweb);
         $unentreprise->updateentreprise($unentreprise,$conn);
 
         echo "<script>window.location='./setting.php'</script>";
@@ -1005,7 +1014,7 @@ elseif ($id==$dataEn['id_user']) {
 
           if ($mdpN==$mdpNC) {
 
-            $unentreprise = new Entreprise($id,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,'',$desc,$nomresp,$ape,$siteweb);
+            $unentreprise = new Entreprise($id_user,$nom,$user,$mdpNC,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomresp,$ape,$siteweb);
             $unentreprise->updateentreprise($unentreprise,$conn);
 
 
@@ -1034,6 +1043,9 @@ elseif ($id==$dataEn['id_user']) {
 
 
 }//fin entreprise
+
+
+
 
 if (isset($_POST['photo_update'])) {
 
