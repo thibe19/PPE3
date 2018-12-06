@@ -1,10 +1,11 @@
 <?php
-
-/*
- *  06/12/18
- *  Profil
- *  v0.0.8
- */
+ //////////////////////////////////////////////////////////////////////////////////
+ ////                                                                          ////
+ ////                                Profil                                    ////
+ ////                                06/12/2018                                ////
+ ////                                v0.0.9                                    ////
+ ////                                                                          ////
+ //////////////////////////////////////////////////////////////////////////////////
 
 session_start();
 
@@ -988,7 +989,7 @@ if (isset($_SESSION['Entreprise'])) {
       $rue = $_POST['rue'];
       $ville = $_POST['ville'];
       $cp = $_POST['cp'];
-      $dom_acti = $uneleve ->getDomActi();
+      $dom_acti = $unentreprise ->getDomActi();
 
       $mdpA = $_POST['mdpA'];
       $mdpN = $_POST['mdpN'];
