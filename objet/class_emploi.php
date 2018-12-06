@@ -76,8 +76,7 @@ class Emploi extends Offre
 //////////////////////////////////////////////////////////////////////////////////
 
   public function insert_emploi($conn){
-    print $this->getAllEmploi();
-    die();
+
       $this->insert_offre($conn);
       $id = $this->getid_offre();
       $id_ent = $this->getIdEnt();
