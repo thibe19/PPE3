@@ -1,10 +1,12 @@
 <?php
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                Stage                                     ////
+////                                06/12/18                                  ////
+////                                V0.0.3                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 
-/*
- *  06/12/18
- *  Stage
- *  v0.0.3
- */
  session_start();
   require('../ToolBox/bdd.inc.php');
   require('../ToolBox/toolbox_inc.php');
@@ -442,6 +444,7 @@ if (isset($_SESSION['Entreprise'])) {
         <div class="messages_row row">
           <div class="section_row row">
             <div class="col s12">
+              <br>
               <h2>Crée un stage</h2><br><br>
             </div>
 
