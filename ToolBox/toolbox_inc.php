@@ -175,7 +175,8 @@ function testsql($sql, $conn)
 
  function image_profil($namepho, $login, $photo2)  // Nom de la photo - login pour rename la photo - Nom photo en ram
  {
-   $chemin = "C:/xampp/htdocs/PPE3/template/images/profil/";
+   $chemin = dirname(__DIR__);
+   print $chemin = $chemin."/template/images/profil/";
 
    move_uploaded_file($photo2,$chemin.$namepho);
    rename ("C:/xampp/htdocs/PPE3/template/images/profil/$namepho", "C:/xampp/htdocs/PPE3/template/images/profil/$login.jpg");
@@ -202,11 +203,13 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
         SET photo_user = '$photo'
         WHERE id_user='$id_user' ";
   $res = $conn->Query($sql)or die('Erreur modification user');
-  $chemin = "C:/xampp/htdocs/PPE3/template/images/profil/";
-  unlink("C:/xampp/htdocs/PPE3/template/images/profil/".$login);
+  $chemin = dirname(__DIR__);
+  print $chemin = $chemin."/template/images/profil/";
+  //unlink("C:/xampp/htdocs/PPE3/template/images/profil/".$login);
 
   move_uploaded_file($photo2,$chemin.$namepho);
   rename ($chemin.$namepho, $chemin.$login.".jpg");
+
 }
 
 
