@@ -154,10 +154,10 @@ class Stage extends Offre{
     public function modifier_stage($conn){
 
       $this->insert_offre($conn);
-      $id_offre = $this->id_offre;
-      $dateF = $this->$date_fin_stage;
-      $note_user_stage = $this->$note_user;
-      $desc_user_stage = $this->$desc_user;
+      $id_offre = $this->getid_offre();
+      $dateF = $this->date_fin_stage;
+      $note_user_stage = $this->note_user;
+      $desc_user_stage = $this->desc_user;
 
         $sql="UPDATE Ostage
               SET date_fin_stage='$dateF', note_user_stage='$note_user_stage', desc_user_stage='$desc_user_stage'
