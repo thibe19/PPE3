@@ -1,10 +1,12 @@
 <?php
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                Emploi                                    ////
+////                                06/12/2018                                ////
+////                                V0.0.2                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 
-/*
- *  06/12/18
- *  Emploi
- *  v0.0.2
- */
  session_start();
   require('../ToolBox/bdd.inc.php');
   require('../ToolBox/toolbox_inc.php');
@@ -325,7 +327,7 @@
 <?php
 
 if (isset($_POST['validOE'])) {
-
+  $id_user;
   $nreq = $_POST['Nivreq'];
   $dateDemp = $_POST['dateDemp'];
   $salaire = $_POST['salaire'];
@@ -355,7 +357,7 @@ if (isset($_POST['validOE'])) {
       }
 
       $id_ent = isset($id_ent)?$id_ent:$ent;
-      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$id_ent,$salaire,$typeC);
+      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$id_ent,$salaire,$typeC);
       $unemploi->insert_emploi($conn);
 
 
@@ -633,7 +635,7 @@ if (isset($_SESSION['Entreprise'])) {
   <?php
 
   if (isset($_POST['validOEn'])) {
-
+    $id_user;
     $nreq = $_POST['Nivreq'];
     $dateDemp = $_POST['dateDemp'];
     $salaire = $_POST['salaire'];
@@ -645,7 +647,7 @@ if (isset($_SESSION['Entreprise'])) {
     $date = date("Y-m-d");
 
 
-    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC);
+    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$ent,$salaire,$typeC);
     $unemploi->insert_emploi($conn);
 
 
