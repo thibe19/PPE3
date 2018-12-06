@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  05/12/18
+ *  06/12/18
  *  class Emploi
- *  v0.0.1
+ *  v0.0.2
  */
 
 class Emploi extends Offre
@@ -76,6 +76,7 @@ class Emploi extends Offre
 //////////////////////////////////////////////////////////////////////////////////
 
   public function insert_emploi($conn){
+
       $this->insert_offre($conn);
       $id = $this->getid_offre();
       $id_ent = $this->getIdEnt();

@@ -66,7 +66,7 @@
     <!-- End Tranding Area -->
     <ul class="tranding_select tabs">
         <li class="tab"><a  onclick="window.location.href='./ostage.php'" class="waves-effect btn">Offre Stage</a></li>
-        <li class="tab"><a  onclick="window.location.href='./oemploi.php'" class="waves-effect btn">Offre Emploi</a></li>
+        <li class="tab"><a  onclick="window.location.href='./oemploi.php'" class="waves-effect btn active">Offre Emploi</a></li>
     </ul>
     <!-- crée un stage -->
     <section class="messages_area">
@@ -355,8 +355,8 @@ if (isset($_POST['validOE'])) {
       }
 
       $id_ent = isset($id_ent)?$id_ent:$ent;
-      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC);
-      $unemploi->insert_emploi($unemploi,$conn);
+      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$id_ent,$salaire,$typeC);
+      $unemploi->insert_emploi($conn);
 
 
 

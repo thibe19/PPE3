@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Offre  date modif : 05/12/18   vertion:0.0.2
+ * Offre  date modif : 06/12/18   vertion:0.0.2
  */
 class Offre
 {
@@ -192,8 +192,7 @@ class Offre
 
         $SQL = "INSERT INTO Offre
                 VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','','$id_cat','$id_ent','')";
-                
-        $res = $conn->Query($SQL)or die($SQL);
+        $res = $conn->Query($SQL)or die(errorInfo());
     }
 
 
