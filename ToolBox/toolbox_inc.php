@@ -183,8 +183,9 @@ function testsql($sql, $conn)
  }
 
 function select_image_profil($id_user, $conn) {
-  $SQL2 = "SELECT * FROM Utilisateur
-           WHERE id_user = $id_user";
+  $SQL2 = "SELECT U.photo_user FROM Utilisateur U, Eleve E
+           WHERE U.id_user = E.id_user
+           AND U.id_user = $id_user";
   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
   $res2 = $req2->fetch();
 
@@ -194,6 +195,8 @@ function select_image_profil($id_user, $conn) {
     else {
       print $res2['photo_user'];
     }
+
+
 }
 
 function update_image($namepho, $login, $photo2, $id_user, $conn) {
@@ -210,7 +213,7 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   move_uploaded_file($photo2,$chemin.$namepho);
   rename ($chemin.$namepho, $chemin.$login.".jpg");
 
-  sleep(3.5);
+  sleep(5);
 }
 
 

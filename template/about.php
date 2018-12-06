@@ -153,7 +153,7 @@ require('part/header.php');
                 <div class="post profile_post">
                     <div class="post_content">
 
-                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout'])) { ?>
+                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout']) && empty($_POST['delabout']) && empty($_POST['valstabouts'])) { ?>
 
                             <form action="about.php" method="post">
 
@@ -347,16 +347,23 @@ require('part/header.php');
                             <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
 
                             <?php
-                            $sql_aff_stg = "SELECT * FROM OStage
+                            $sql_aff_stg = "SELECT * FROM offre
                                             WHERE id_user = $id_user";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
+                              $id_offre_req = $res_aff_stg['id_offre'];
+                              $sql_aff_stg2 = "SELECT * FROM Ostage
+                                               WHERE id_offre = $id_offre_req";
+                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                              $res_aff_stg2 = $req_aff_stg2->fetch();
                              ?>
+                             <form action="about.php" method="post">
+                               Titre : <input type="text" name="titresn" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
                             <div class="select_option">
                                 <p> Domaine :</p>
-                                    <select name="selectdomaine">
+                                    <select name="selectdomaines">
                                         <?php foreach ($domaine as $d) { ?>
-                                            <option value="<?php $d->id_cat ?>">
+                                            <option value="<?php print $d->id_cat ?>" <?php ($d->id_cat == $res_aff_stg['id_cat']) ? print "selected" : false ?> >
                                                 <?php print $d->lib_cat ?>
                                             </option>
                                         <?php } ?>
@@ -364,9 +371,9 @@ require('part/header.php');
                             </div>
                             <div class="select_option">
                                 <p> Entreprise :</p>
-                                    <select name="selectent">
+                                    <select name="selectents">
                                         <?php foreach ($list_ent as $le) { ?>
-                                            <option value="<?php $le->id_user ?>">
+                                            <option value="<?php $le->id_user ?>" <?php ($le->id_user == $res_aff_stg['id_ent']) ? print "selected" : false ?> >
                                                 <?php print $le->nom_user ?>
                                             </option>
                                         <?php } ?>
@@ -380,16 +387,28 @@ require('part/header.php');
                                     <td>Fin</td>
                                 </tr>
                                 <tr>
-                                    <td><input type="date" name="date_about_debut_s" value=""
+                                    <td><input type="date" name="date_about_debut_s" value="<?php echo $res_aff_stg['date_debut_offre']; ?>"
                                                placeholder="Exemple : 2015 - 2017"></td>
-                                    <td><input type="date" name="date_about_fin_s" value=""
+                                    <td><input type="date" name="date_about_fin_s" value="<?php echo $res_aff_stg2['date_fin_stage']; ?>"
                                                placeholder="Exemple : 2015 - 2017"></td>
                                 </tr>
                             </table>
+                            <!-- Place : <input type="text" name="place_about_s" value=""
+                                           placeholder="Exemple : Paris">  </p> -->
                             <p> Description : <textarea name="desc_about_s" class="textareabout" rows="8"
-                                                        cols="80"><?php echo $descs; ?></textarea></p>
-                            <button type="submit" id="cancelabout" value="1" name="delabout"><i
-                                        class="fas fa-trash-alt"></i></button>
+                                                        cols="80"><?php echo $res_aff_stg2['desc_user_stage']; ?></textarea></p>
+
+                            <input type="number" name="quantitys" min="1" max="5" value="<?php echo $res_aff_stg2['note_user_stage']; ?>" placeholder="Note">
+
+                            <button type="submit" id="updateabout" value="1" name="valstabouts"><i
+                                        class="fas fa-check"></i></button>
+                            </form>
+                            <br>
+                            <form action="about.php" method="post">
+                              <button type="submit" id="cancelabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="delabout"><i
+                                          class="fas fa-trash-alt"></i></button>
+
+                            </form>
                             <?php } ?>
 
 
@@ -432,8 +451,8 @@ require('part/header.php');
                                                        placeholder="Exemple : 2015 - 2017"></td>
                                         </tr>
                                     </table>
-                                    Place : <input type="text" name="place_about_sn" value=""
-                                                   placeholder="Exemple : Paris">  </p>
+                                    <!-- Place : <input type="text" name="place_about_sn" value=""
+                                                   placeholder="Exemple : Paris">  </p> -->
                                     <p> Description : <textarea name="desc_about_sn" class="textareabout" rows="8" placeholder="Description du stage"
                                                                 cols="80"></textarea></p>
 
@@ -1388,27 +1407,56 @@ require('part/header.php');
 
 if (isset($_POST['valstabout'])) {
 
-  ?>
-    <script type="text/javascript">
-      alert("est");
-    </script>
-  <?php
 
-  //  $id_catsn = $_POST['selectdomainesn'];
-  //  $id_entsn = $_POST['selectentsn'];
-  //  $dated = $_POST['date_about_debut_sn'];
-  //  $datef = $_POST['date_about_fin_sn'];
-  //  $addsn = $_POST['place_about_sn'];
-  //  $descsn = $_POST['desc_about_sn'];
-  //  $libo = $_POST['titresn'];
-  //  $notesn = $_POST['quantitysn'];
-  //
-  // $unstage=NEW Stage('', $libo, '', $dated, '', $id_user, $id_catsn, $id_entsn, $datef, $descsn);
-  //
-  // $unstage->insert_offre($conn);
+
+   $id_catsn = $_POST['selectdomainesn'];
+   $id_entsn = $_POST['selectentsn'];
+   $dated = $_POST['date_about_debut_sn'];
+   $datef = $_POST['date_about_fin_sn'];
+   //$addsn = $_POST['place_about_sn'];
+   $descsn = $_POST['desc_about_sn'];
+   $libo = $_POST['titresn'];
+   $notesn = $_POST['quantitysn'];
+   $date = date("Y-m-d");
+
+   $unstage = new Stage('',$libo,'',$dated,$date,'',$id_user,$id_catsn,$id_entsn,$datef,$notesn,$descsn);
+   $unstage->insert_stage($conn);
+   ?>
+     <script>
+       window.location='./about.php';
+     </script>
+   <?php
+
 
 }
 
+if (isset($_POST['delabout'])) {
+  $id_offre = $_POST['delabout'];
+  $unstage = new Offre($id_offre);
+  $unstage->delete_offre($conn);
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
+}
+
+if (isset($_POST['valstabouts'])) {
+
+
+  $id_offre = $_POST['delabout'];
+  $datef = $_POST['date_about_fin_s'];
+  $notes = $_POST['quantitys'];
+  $descs = $_POST['desc_about_s'];
+  $libo = $_POST['titres'];
+  $dated = $_POST['date_about_debut_s'];
+  $id_cats = $_POST['selectdomaines'];
+  $id_ents = $_POST['selectents'];
+
+
+  $unstage = new Ostage($id_offre, $libo, '', $dated, '', '', '', $id_cats, $id_ents, $datef, $notes, $descs);
+  $unstage->modifier_stage($conn);
+}
 
 
 // $surname_a = $_POQT['surname_about'];

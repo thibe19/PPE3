@@ -191,8 +191,47 @@ class Offre
 
 
         $SQL = "INSERT INTO Offre
-                VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','','$id_cat','$id_ent','')";
+                VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','$id_user','$id_cat','$id_ent','')";
         $res = $conn->Query($SQL)or die(errorInfo());
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                DELETE                                    ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    public function delete_offre($conn){
+      $id_offre = $this->id_offre;
+
+      $SQL = "DELETE FROM Offre WHERE id_offre = $id_offre";
+      $res = $conn->Query($SQL)or die(errorInfo());
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                MODIFIER                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    public function modifier_stage($conn){
+
+      $id_offre = $this->id_offre;
+      $lib_offre = $this->lib_offre;
+      $date_debut_offre = $this->date_debut_offre;
+      $id_cat = $this->id_cat;
+      $id_ent = $this->id_ent;
+
+        $sql="UPDATE Offre
+              SET lib_offe='$lib_offre', date_debut_offre='$date_debut_offre', id_cat='$id_cat', id_ent='$id_ent'
+              WHERE id_offre='$id_offre'";
+        $res = $conn->Query($sql)or die('Erreur modification user');
+
+
     }
 
 

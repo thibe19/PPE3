@@ -127,7 +127,45 @@ class Stage extends Offre{
 
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                DELETE                                    ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
 
+
+    public function delete_stage($conn){
+      $id_offre = $this->id_offre;
+
+      $SQL = "DELETE FROM Ostage WHERE id_offre = $id_offre";
+      $res = $conn->Query($SQL)or die(errorInfo());
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                MODIFIER                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    public function modifier_stage($conn){
+
+      $this->insert_offre($conn);
+      $id_offre = $this->id_offre;
+      $dateF = $this->$date_fin_stage;
+      $note_user_stage = $this->$note_user;
+      $desc_user_stage = $this->$desc_user;
+
+        $sql="UPDATE Ostage
+              SET date_fin_stage='$dateF', note_user_stage='$note_user_stage', desc_user_stage='$desc_user_stage'
+              WHERE id_offre='$id_offre' ";
+        $res = $conn->Query($sql)or die('Erreur modification user');
+
+
+    }
 
 }//fin class
 ?>
