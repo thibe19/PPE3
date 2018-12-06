@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Stage                                     ////
-////                                06/12/18                                  ////
+////                                06/12/2018                                ////
 ////                                V0.0.3                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
@@ -315,7 +315,7 @@
 <?php
 
 if (isset($_POST['validSE'])) {
-
+  $id_user;
   $nreq = $_POST['Nivreq'];
   $dateDS = $_POST['dateDstage'];
   $dateFS = $_POST['dateFstage'];
@@ -343,7 +343,7 @@ if (isset($_POST['validSE'])) {
       }
 
       $id_ent = isset($id_ent)?$id_ent:$ent;
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$id_ent,$dateFS,'','');
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$id_ent,$dateFS,'','');
     $unstage->insert_stage($conn);
 
 
@@ -613,7 +613,7 @@ if (isset($_SESSION['Entreprise'])) {
   <?php
 
   if (isset($_POST['validSEn'])) {
-
+    $id_user;
     $nreq = $_POST['Nivreq'];
     $dateDS = $_POST['dateDstage'];
     $dateFS = $_POST['dateFstage'];
@@ -623,7 +623,7 @@ if (isset($_SESSION['Entreprise'])) {
     $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,'',$cat,$ent,$dateFS,'','');
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$ent,$dateFS,'','');
     $unstage->insert_stage($conn);
 
     echo "<script> alert('Le stage a été crée.');
