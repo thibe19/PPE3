@@ -108,7 +108,20 @@ else{
                   $sql = "SELECT * FROM ajoute_amis";
                   $req = $conn->Query($sql)or die('Erreur dans le requete cat');
                   while ($res = $req->fetch()) {
-                      ?> <li><a href="#"><img width="40px" height="40px" src="images/profil/avatar.png" alt="" class="circle"></a></li> <?php
+                    $id_user2 = $res['id_user_Eleve'];
+                    $SQL2 = "SELECT * FROM Utilisateur
+                             WHERE id_user = $id_user2";
+                    $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+                    $res2 = $req2->fetch();
+
+                      if ($res2['photo_user'] == "") {
+                        $photo = "avatar.png";
+                      }
+                      else {
+                        $photo = $res2['photo_user'];
+                      }
+
+                      ?> <li><a href="#"><img width="40px" height="40px" src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle"></a></li> <?php
                    } ?>
                 </ul>
             </div>

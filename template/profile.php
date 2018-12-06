@@ -148,7 +148,7 @@ if (isset($_SESSION['Eleve'])) {
                        </a>
                        <div class="row author_area">
                            <div class="col s4 author">
-                               <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+                               <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user_util, $conn) ?>" alt="" class="circle"></div>
 
                                <div class="col s8 media_body">
 

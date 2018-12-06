@@ -5,6 +5,13 @@ require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 if (isset($_SESSION['Eleve'])) {
     $uneleve = unserialize($_SESSION['Eleve']);
+    $pos_user = $uneleve->getChoixPosition();
+    $desc_user = $uneleve->getDescUser();
+    $photo_user = $uneleve->getPhotoUser();
+    $tel_user = $uneleve->getNumTelUser();
+    $mail_user = $uneleve->getEmailUser();
+    $pass_user = $uneleve->getMdpUser();
+    $login_user = $uneleve->getLoginUser();
     $id_user = $uneleve->getIdUser();
     $nom = $uneleve->getNomUser();
     $prenom = $uneleve->getPrenomEleve();
@@ -90,12 +97,17 @@ require('part/header.php');
 
 <!-- Tranding-select and banner Area -->
 <div class="banner_area banner_2">
+    <?php
+        $id = dec_enc('decrypt',$_SESSION['id']);
+        $uneleve = unserialize($_SESSION['Eleve']);
+        ?>
     <img src="images/banner-2.jpg" alt="" class="banner_img">
     <div class="media profile_picture">
-        <a href="profile.html"><img src="images/profile-hed-1.jpg" alt="" class="circle"></a>
+        <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
         <div class="media_body">
-            <a href="profile.html"><?php print $pren ?></a>
-            <h6><?php print $placephrase ?></h6>
+            <a href="profile.php"><?php print $uneleve->getNomUser().' '.$uneleve->getPrenomEleve() ?></a>
+            <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
+            <h6><?php print $uneleve->getVilleAddr(); ?></h6>
         </div>
     </div>
 </div>
@@ -275,22 +287,29 @@ require('part/header.php');
                             </form>
                         <?php } else {
 
-                            ////////// MODIFICATION DU ABOUT
+                          //////////////////////////////////////////////////////////////////////////////////
+                          ////                                                                          ////
+                          ////                                                                          ////
+                          ////                              MODDIFICATION                               ////
+                          ////                                                                          ////
+                          ////                                                                          ////
+                          //////////////////////////////////////////////////////////////////////////////////
                             ?>
 
                             <h3>Modification</h3>
                             <h5>A propos</h5>
+
                             <table>
                                 <tr>
                                     <td width="22%"><p>Nom</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="surname_about" value="<?php echo $pren; ?>"></p>
+                                    <td><p><input type="text" name="surname_about" value="<?php echo $nom; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="22%"><p>Prénom</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="surname_about" value="<?php echo $pren; ?>"></p>
+                                    <td><p><input type="text" name="name_about" value="<?php echo $prenom; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -903,6 +922,7 @@ require('part/header.php');
                                         <button type="submit" id="updateabout" value="1" name="validabout"><i
                                                     class="fas fa-check"></i></button>
                                     </td>
+
                                     <form action="about.php" method="post">
                                         <td>
                                             <button type="submit" id="cancelabout" value="1" name="cancelabout"><i
@@ -1367,21 +1387,38 @@ require('part/header.php');
 /// TRAITEMENT
 
 if (isset($_POST['valstabout'])) {
-   $id_catsn = $_POST['selectdomainesn'];
-   $id_entsn = $_POST['selectentsn'];
-   $dated = $_POST['date_about_debut_sn'];
-   $datef = $_POST['date_about_fin_sn'];
-   $addsn = $_POST['place_about_sn'];
-   $descsn = $_POST['desc_about_sn'];
-   $libo = $_POST['titresn'];
-   $notesn = $_POST['quantitysn'];
 
-  $unstage=NEW Stage('', $libo, '', $dated, '', $id_user, $id_catsn, $id_entsn, $datef, $descsn);
+  ?>
+    <script type="text/javascript">
+      alert("est");
+    </script>
+  <?php
 
-  $unstage->insert_offre($conn);
+  //  $id_catsn = $_POST['selectdomainesn'];
+  //  $id_entsn = $_POST['selectentsn'];
+  //  $dated = $_POST['date_about_debut_sn'];
+  //  $datef = $_POST['date_about_fin_sn'];
+  //  $addsn = $_POST['place_about_sn'];
+  //  $descsn = $_POST['desc_about_sn'];
+  //  $libo = $_POST['titresn'];
+  //  $notesn = $_POST['quantitysn'];
+  //
+  // $unstage=NEW Stage('', $libo, '', $dated, '', $id_user, $id_catsn, $id_entsn, $datef, $descsn);
+  //
+  // $unstage->insert_offre($conn);
 
 }
 
+
+
+// $surname_a = $_POQT['surname_about'];
+// $name_a = $_POST['name_about'];
+// $skill_a = $_POST['skill_about'];
+// $birth_a = $_POST['birth_about'];
+//
+// $uneleve = new Eleve($id_user,$surname_a,$login_user,$pass_user,$mail_user,$tel_user,$Nrue,$rue,$cp,$ville,$photo_user,$desc_user,$skill_a,$name_a,$birth_a,$pos_user);
+//
+// $uneleve->modifier_eleve($uneleve,$conn);
  ?>
 
 

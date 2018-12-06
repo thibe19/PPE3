@@ -34,13 +34,13 @@ if (isset($_POST['post']) ) {
     $resI = $conn->Query($sqlI)or die('Erreur modification user');
 
     echo "<script> alert('Le Post a été crée.');
-                    window.location.href='./index-2.php';
+                    window.location.href='./index.php';
           </script>";
   }
   else {
 
     echo "<script> alert('Tous les champs n\'ont pas été remplis.');
-                    window.location.href='./index-2.php';
+                    window.location.href='./index.php';
           </script>";
   }
 
