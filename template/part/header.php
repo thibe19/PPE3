@@ -9,6 +9,12 @@
 if (isset($_GET['logout'])){
     unset($_SESSION['login']);
     unset($_SESSION['mdp']);
+    if (isset($_SESSION['Eleve'])){
+        unset($_SESSION['Eleve']);
+    }
+    if (isset($_SESSION['Entreprise'])){
+        unset($_SESSION['Entreprise']);
+    }
     header('Location:../');
 }
 
