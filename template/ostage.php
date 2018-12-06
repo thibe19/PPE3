@@ -9,7 +9,6 @@
   require('../ToolBox/bdd.inc.php');
   require('../ToolBox/toolbox_inc.php');
   require('../objet/classes.php');
-
  if (isset($_SESSION['Eleve'])) {
    $uneleve = unserialize($_SESSION['Eleve']);
    $id_user = $uneleve->getIdUser();
@@ -531,7 +530,7 @@ if (isset($_SESSION['Entreprise'])) {
 
         </section>
       <!-- Fin crée un stage -->
-      
+
       <!-- Footer area -->
       <footer class="footer_area">
           <div class="footer_row row">
