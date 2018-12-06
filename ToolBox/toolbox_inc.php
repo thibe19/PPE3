@@ -167,6 +167,13 @@ function testsql($sql, $conn)
 }
 
 
+function testsqlfetch($sql, $conn)
+{
+    $req = $conn->Query($sql) or die("Erreur requete");
+    $req = $req->fetch();
+    return $req;
+}
+
 /*
  *
  * Ajout images
@@ -185,16 +192,29 @@ function testsql($sql, $conn)
 function select_image_profil($id_user, $conn) {
   $SQL2 = "SELECT U.photo_user FROM Utilisateur U, Eleve E
            WHERE U.id_user = E.id_user
-           AND U.id_user = $id_user";
-  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
-  $res2 = $req2->fetch();
+           AND E.id_user = $id_user";
+  $reseleve = testsqlfetch($SQL2,$conn);
 
-    if ($res2['photo_user'] == NULL) {
-      print "avatar.png";
+  $SQL2 = "SELECT U.photo_user FROM Utilisateur U, Entreprise E
+           WHERE U.id_user = E.id_user
+           AND E.id_user = $id_user";
+  $resent = testsqlfetch($SQL2,$conn);
+  if($reseleve){
+    if(is_null($reseleve['photo_user']) || empty($reseleve['photo_user'])){
+      print 'avatar.png';
     }
     else {
-      print $res2['photo_user'];
+      print $reseleve['photo_user'];
     }
+  }
+  elseif ($resent) {
+    if(is_null($resent['photo_user']) || empty($resent['photo_user'])){
+      print 'avatar2.png';
+    }
+    else {
+      print $resent['photo_user'];
+    }
+  }
 
 
 }
