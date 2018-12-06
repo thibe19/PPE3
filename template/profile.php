@@ -123,8 +123,8 @@ if (isset($_SESSION['Eleve'])) {
 
 
 
-              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
-              $req = $conn->Query($SQL) or die("La requete n'a pas aboutie");
+              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
+              $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
               while ($res=$req->fetch()) {
 
 
