@@ -34,15 +34,15 @@ class Offre
 
 
     public function getAllOffre(){
-        $data[] = $this->id_offre;
-        $data = $data.$this->lib_offre;
-        $data = $data.$this->niveau_req;
-        $data = $data.$this->date_debut_offre;
-        $data = $data.$this->date_post_offre;
-        $data = $data.$this->desc_offre;
-        $data = $data.$this->id_user;
-        $data = $data.$this->id_cat;
-        $data = $data.$this->id_ent;
+        $data = $this->id_offre.' ';
+        $data = $data.$this->lib_offre.' ';
+        $data = $data.$this->niveau_req.' ';
+        $data = $data.$this->date_debut_offre.' ';
+        $data = $data.$this->date_post_offre.' ';
+        $data = $data.$this->desc_offre.' ';
+        $data = $data.$this->id_user.' ';
+        $data = $data.$this->id_cat.' ';
+        $data = $data.$this->id_ent.' ';
 
         return $data;
     }
