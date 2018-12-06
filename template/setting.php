@@ -486,8 +486,8 @@ if ($id==$dataE['id_user']) {
 
     if (($mdpA or $mdpN) == '' ) {
 
-      print$uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
-      die();
+      $uneleve = new Eleve($id,$nom,$user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo,$desc,$prenom,$date,$choixpos);
+
       $uneleve->modifier_eleve($uneleve,$conn);
 
 
@@ -1045,5 +1045,12 @@ if (isset($_POST['photo_update'])) {
 
 
    update_image($namepho, $login, $photo2, $id_user, $conn);
+?>
+  <script>
+    window.location='./setting.php';
+  </script>
+<?php
+
+
 }
  ?>

@@ -170,7 +170,7 @@ require('part/header.php');
 
                     <?php
 
-                    $sqlP="SELECT * FROM Post order by date_post desc";
+                    $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
                     $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
                     while ($dataP=$resP->fetch())
@@ -195,7 +195,7 @@ require('part/header.php');
                                 </a>
                                 <div class="row author_area">
                                     <div class="col s4 author">
-                                        <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
+                                        <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></div>
 
                                         <div class="col s8 media_body">
 
