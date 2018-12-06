@@ -24,9 +24,9 @@ class Emploi extends Offre
    * Getters
    */
   public function getAllEmploi(){
-      $data = $this->getAllOffre().' ';
-      $data = $data.$this->salaire_emp.' ';
-      $data = $data.$this->type_emp.' ';
+      $data[] = $this->getAllOffre();
+      $data = $data.$this->salaire_emp;
+      $data = $data.$this->type_emp;
 
       return $data;
   }
