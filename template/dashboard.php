@@ -1,5 +1,22 @@
+<?php
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                state                                     ////
+////                                06/12/2018                                ////
+////                                V0.0.1                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+session_start();
+require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
+require('../objet/classes.php');
+if (isset($_SESSION['Eleve'])) {
+    $uneleve = unserialize($_SESSION['Eleve']);
+    $id_user = $uneleve->getIdUser();
+}
+ ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:38:03 GMT -->
 <head>
@@ -7,7 +24,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Open List | Html template</title>
+    <title>ViaBahuet</title>
 
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
