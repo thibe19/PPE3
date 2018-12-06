@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  05/12/18
+ *  06/12/18
  *  Emploi
- *  v0.0.1
+ *  v0.0.2
  */
  session_start();
   require('../ToolBox/bdd.inc.php');
@@ -362,12 +362,12 @@ if (isset($_POST['validOE'])) {
 
       if (($nomEnt && $telEnt) != NULL) {
 
-        echo "<script> alert('Le stage a été crée.');
+        echo "<script> alert('L\'ffre d\'emploi a été crée.');
                         window.location.href='./index.php';
               </script>";
       }
 
-      echo "<script> alert('Le stage a été crée.');
+      echo "<script> alert('L\'offre d\'emploi a été crée.');
                       window.location.href='./index.php';
             </script>";
 
@@ -635,15 +635,16 @@ if (isset($_SESSION['Entreprise'])) {
     $lib_offre = $_POST['lib_offre'];
     $descemp = $_POST['descemp'];
     $cat = $_POST['cat'];
+    $ent = $_POST['ent'];
     $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
 
-    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$ent,$salaire,$typeC,'','');
-    $unemploi->insert_stage($unemploi,$conn);
+    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,'',$cat,$id_ent,$salaire,$typeC);
+    $unemploi->insert_emploi($conn);
 
 
-    echo "<script> alert('Le stage a été crée.');
+    echo "<script> alert('l\'offre d'emploi a été crée.');
                     window.location.href='./index-2.php';
           </script>";
   } //fin valider entreprise

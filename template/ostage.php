@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  05/12/18
+ *  06/12/18
  *  Stage
- *  v0.0.2
+ *  v0.0.3
  */
  session_start();
   require('../ToolBox/bdd.inc.php');
