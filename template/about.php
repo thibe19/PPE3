@@ -30,6 +30,8 @@ if (isset($_SESSION['Eleve'])) {
     $placephrase = $Nrue . " " . $rue . " " . $ville . " " . $cp;
 
 
+
+
     $uneoffre = new Stage(1, 'test doffre', 'bac +5', date('Y-m-d'), date('Y-m-d'), $id_user, '2', 1, date('Y-m-d'), '3', 'pas mal');
 
 
@@ -358,7 +360,7 @@ require('part/header.php');
                               $res_aff_stg2 = $req_aff_stg2->fetch();
                              ?>
                              <form action="about.php" method="post">
-                               Titre : <input type="text" name="titresn" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
+                               Titre : <input type="text" name="titres" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
                             <div class="select_option">
                                 <p> Domaine :</p>
                                     <select name="selectdomaines">
@@ -400,7 +402,7 @@ require('part/header.php');
 
                             <input type="number" name="quantitys" min="1" max="5" value="<?php echo $res_aff_stg2['note_user_stage']; ?>" placeholder="Note">
 
-                            <button type="submit" id="updateabout" value="1" name="valstabouts"><i
+                            <button type="submit" id="updateabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="valstabouts"><i
                                         class="fas fa-check"></i></button>
                             </form>
                             <br>
@@ -1444,7 +1446,7 @@ if (isset($_POST['delabout'])) {
 if (isset($_POST['valstabouts'])) {
 
 
-  $id_offre = $_POST['delabout'];
+  $id_offre = $_POST['valstabouts'];
   $datef = $_POST['date_about_fin_s'];
   $notes = $_POST['quantitys'];
   $descs = $_POST['desc_about_s'];
@@ -1454,8 +1456,13 @@ if (isset($_POST['valstabouts'])) {
   $id_ents = $_POST['selectents'];
 
 
-  $unstage = new Ostage($id_offre, $libo, '', $dated, '', '', '', $id_cats, $id_ents, $datef, $notes, $descs);
+  $unstage = new Stage($id_offre, $libo, '', $dated, '', '', '', $id_cats, $id_ents, $datef, $notes, $descs);
   $unstage->modifier_stage($conn);
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
 }
 
 

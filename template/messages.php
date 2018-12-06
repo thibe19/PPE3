@@ -4,7 +4,14 @@ session_start();
 
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
-$id_user_session = dec_enc('decrypt',$_SESSION['id']);
+require('../objet/classes.php');
+
+if (isset($_SESSION['Eleve'])) {
+    $uneleve = unserialize($_SESSION['Eleve']);
+    $id_user = $uneleve->getIdUser();
+}
+
+
 
 if (isset($_GET['ctc'])) {
   $id_user_chat = $_POST['ctc'];
@@ -42,7 +49,7 @@ if (isset($_GET['ctc'])) {
 	<link rel="stylesheet" href="css/style.css" media="all" />
 
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]> 
+    <!--[if lt IE 9]>
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->

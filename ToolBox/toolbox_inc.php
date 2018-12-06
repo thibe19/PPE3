@@ -183,10 +183,11 @@ function testsqlfetch($sql, $conn)
  function image_profil($namepho, $login, $photo2)  // Nom de la photo - login pour rename la photo - Nom photo en ram
  {
    $chemin = dirname(__DIR__);
-   $chemin = $chemin."/template/images/profil/";
+   $chemin = dirname(__DIR__);
+  $chemin = $chemin."/template/images/profil/";
 
    move_uploaded_file($photo2,$chemin.$namepho);
-   rename ("C:/xampp/htdocs/PPE3/template/images/profil/$namepho", "C:/xampp/htdocs/PPE3/template/images/profil/$login.jpg");
+   rename ($chemin.$namepho, $chemin.$login.".jpg");
  }
 
 function select_image_profil($id_user, $conn) {
