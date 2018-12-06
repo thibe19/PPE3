@@ -1,9 +1,9 @@
 <?php
 
 /*
- *  05/11/18
+ *  06/11/18
  *  index
- *  v0.0.3
+ *  v0.0.4
  */
 session_start();
 require('../ToolBox/bdd.inc.php');
@@ -19,9 +19,6 @@ if (isset($_SESSION['Eleve'])) {
     $uneleve = unserialize($_SESSION['Eleve']);
     $id_user = $uneleve->getIdUser();
 }
-
-
-
 
 
 $sql="SELECT * FROM Utilisateur WHERE login_user = '$ndc'";
@@ -93,77 +90,14 @@ require('part/header.php');
             <!-- début de l'affichage des Post -->
 
 
-
-
-            <!-- TRIE PART -->
             <?php
-            if (isset($_POST['type_post'])) {
-
-                //TODO Elasticsearch ??????? moteur de recherche
-
-               $mot_post = $_POST['mot_post'];
-
-               $member_name = $_POST['member_name'];
-
-               $date_debut = $_POST['date_debut'];
-
-               $date_fin = $_POST['date_fin'];
-
-               $cat_post = $_POST['cat_post'];
-
-               $type_post = $_POST['type_post'];
-
-               $data_trie = data_base_in_array("Post", $conn);
-               foreach($data_trie as $d){
-                   if(strpos($d['contenu_post'],$mot_post)){
-                       print $d['titre_post'].'<br>'.$d['contenu_post'];
-                   }
-                   if (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && isset($cat_post) && !empty($type_post)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d) && in_array($type_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin) && !empty($cat_post)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d) && in_array($cat_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut) && !empty($date_fin)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d) && in_array($date_fin,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name) && !empty($date_debut)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d) && in_array($date_debut,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post) && !empty($member_name)){
-                       if(in_array($mot_post,$d) && in_array($member_name,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   elseif (!empty($mot_post)){
-                       if(in_array($mot_post,$d)){
-                           var_dump($d);
-                       }
-                   }
-                   else {
-                     print 'Pas de resultat';
-                   }
-
-               }
-            }
-             ?>
-
-
-
-
-
-
-
-
-            <?php if (empty($_POST['type_post'])) {
+            //////////////////////////////////////////////////////////////////////////////////
+            ////                                                                          ////
+            ////                                                                          ////
+            ////                                  Post                                    ////
+            ////                                                                          ////
+            ////                                                                          ////
+            //////////////////////////////////////////////////////////////////////////////////
              ?>
             <div id="post">
                 <div class="fast_post">
@@ -224,23 +158,30 @@ require('part/header.php');
                     ?>
                 </div>
             </div>
-          <?php } ?>
-            <!-- Stage  -->
+          <?php
+
+          //////////////////////////////////////////////////////////////////////////////////
+          ////                                                                          ////
+          ////                                                                          ////
+          ////                                  Stage                                   ////
+          ////                                                                          ////
+          ////                                                                          ////
+          //////////////////////////////////////////////////////////////////////////////////
+
+           ?>
             <div id="stage">
                 <div class="fast_post">
-
-
                     <?php
 
-                    $sqlO="SELECT * FROM Offre ";
-                    $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+                    $sqlS="SELECT * FROM OStage ";
+                    $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
 
-                    while ($dataO=$resO->fetch())
+                    while ($dataS=$resS->fetch())
                     {
-                        $offre = $dataO['id_offre'];
-                        $sqlS="SELECT * FROM OStage WHERE id_offre = '$offre' ";
-                        $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
-                        $dataS=$resS->fetch();
+                        $offre = $dataS['id_offre'];
+                        $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre'";
+                        $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+                        $dataO=$resO->fetch();
 
                         $cat = $dataO['id_cat'];
                         $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
@@ -290,8 +231,15 @@ require('part/header.php');
                     ?>
                 </div>
             </div>
-
-            <!-- Emploi  -->
+            <?php
+            //////////////////////////////////////////////////////////////////////////////////
+            ////                                                                          ////
+            ////                                                                          ////
+            ////                                  Emploi                                  ////
+            ////                                                                          ////
+            ////                                                                          ////
+            //////////////////////////////////////////////////////////////////////////////////
+            ?>
             <div id="emploi">
                 <div class="fast_post">
 
@@ -303,20 +251,22 @@ require('part/header.php');
 
                     while ($dataE=$resE->fetch())
                     {
-                        $cat = $dataE['id_cat'];
-                        $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                        $dataC=$resC->fetch();
-
-                        $id_user= $dataE['id_user'];
-                        $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                        $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                        $dataU = $resU -> fetch();
 
                         $offre = $dataE['id_offre'];
                         $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
                         $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
                         $dataO=$resO->fetch();
+
+                        $cat = $dataO['id_cat'];
+                        $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
+                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                        $dataC=$resC->fetch();
+
+                        $id_user= $dataO['id_user'];
+                        $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                        $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
+                        $dataU = $resU -> fetch();
+
                         ?>
                         <!-- Post -->
 
@@ -332,24 +282,22 @@ require('part/header.php');
 
                                         <div class="col s8 media_body">
 
-                                            <a href="#"><?php echo$dataU['nom_user']; ?></a>
-                                            <span><?php echo$dataO['date_post_offre']; ?></span>
+                                            <a ><?php echo urldecode($dataO['date_post_offre']); ?></a>
+
                                         </div>
                                     </div>
                                     <div class="col s4 btn_floating">
 
                                     </div>
-
                                 </div>
-                                <a  class="post_heding"><?php echo$dataO['lib_offre']; ?></a>
-                                <p><?php echo$dataE['desc_emp']; ?></p>
+                                <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
+                                <p><?php echo urldecode($dataO['desc_offre']); ?></p>
                             </div>
                             <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
                             <br>
                         </div>
                         <!-- End Post -->
                         <br>
-
 
                         <?php
                     }
