@@ -48,6 +48,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 foreach (reqtoobj("SELECT * FROM Utilisateur
                     WHERE id_user='$id'",$conn) as $r){
                     $nom = $r->nom_user;
+                    $mdp = $r->mdp_user;
                     $email = $r->email_user;
                     $tel = $r->tel_user;
                     $numadd = $r->num_addr_user;
@@ -64,7 +65,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $date = $r->date_naiss;
                     $choix = $r->choix_position;
                 }
-                $uneleve = new Eleve($id,$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choix);
+                $uneleve = new Eleve($id,$nom,$login,$mdp,$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$prenom,$date,$choix);
                 $_SESSION['Eleve']= serialize($uneleve);
             }
             elseif(testsql("SELECT id_user FROM Entreprise WHERE id_user='$id'",$conn)){
@@ -73,6 +74,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                 foreach (reqtoobj($SQL,$conn) as $r){
                     $nom = $r->nom_user;
                     $email = $r->email_user;
+                    $mdp = $r->mdp_user;
                     $tel = $r->tel_user;
                     $numadd = $r->num_addr_user;
                     $rue = $r->rue_addr_user;
@@ -89,7 +91,7 @@ elseif (isset($_POST['login']) && isset($_POST['pass'])) {
                     $ape = $r->code_APE;
                     $site = $r->site_web;
                 }
-                $unent = new Entreprise($id,$nom,'','',$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomrep,$ape,$site);
+                $unent = new Entreprise($id,$nom,$login,$mdp,$email,$tel,$numadd,$rue,$cp,$ville,$photo,$desc,$dom_acti,$nomrep,$ape,$site);
                 $_SESSION['Entreprise']=serialize($unent);
             }
             $_SESSION['login'] = $_POST['login'];
