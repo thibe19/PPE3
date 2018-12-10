@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Profile                                   ////
-////                                06/12/2018                                ////
-////                                V0.0.6                                    ////
+////                                10/12/2018                                ////
+////                                V0.0.7                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -91,26 +91,25 @@ if (isset($_SESSION['Eleve'])) {
             </div>
 
             <?php
-            $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";
-            $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
-            $dataP=$resP->fetch();
-            $sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
-            $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-            $dataO=$resO->fetch();
-            $post=$dataP['post'];
-            $offre=$dataO['offre'];
-            $total=$post+$offre;
+            $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
+            $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+            $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+
+            $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
+            $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
+            $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+
              ?>
             <div class="col l4 m6">
                 <ul class="post_follow">
-                    <li>Posts <b><?php print$total ?></b></li>
-                    <li>Followers <b>389</b></li>
-                    <li>Following <b>51</b></li>
+                    <li>Posts <b><?php print $total; ?></b></li>
+                    <li>Followers <b><?php print $ami;  ?></b></li>
+                    <li>Following <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
             <div class="col l4 m6">
                 <ul class="follow_messages">
-                    <li><a href="#" class="waves-effect">Follow</a></li>
+                    <li><a href="./requests.php?groupe=elve" class="waves-effect">Follow</a></li>
                     <li><a href="#" class="waves-effect">Messages</a></li>
                 </ul>
             </div>
@@ -124,15 +123,6 @@ if (isset($_SESSION['Eleve'])) {
             <div class="middle_section col">
 
               <?php
-
-              //   $sqlP="SELECT * FROM Post
-              //        WHERE id_user = (SELECT id_user_Eleve FROM ajoute_amis
-              //                         WHERE id_user = $id_user)
-              //        order by date_post desc";
-              //
-              // $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
-
-
 
 
               $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
