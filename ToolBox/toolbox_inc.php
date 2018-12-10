@@ -116,6 +116,17 @@ function dec_enc($action, $string)
 }
 
 
+
+/* Affichage en beauté du var_dump*/
+function affiche_vardump($affiche){
+
+    print '<pre>';
+    var_dump($affiche);
+    print '<pre>';
+}
+
+
+
 /*
  *
  * Mail password
