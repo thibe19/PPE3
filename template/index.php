@@ -239,7 +239,7 @@ if (isset($_SESSION['Eleve']) ) {
 
                         $sqlE="SELECT * FROM OEmploi ";
                         $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
-
+                        
                         while ($dataE=$resE->fetch())
                         {
 
