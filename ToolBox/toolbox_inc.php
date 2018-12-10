@@ -248,7 +248,7 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   sleep(5);
 }
 
-//Creation d'une requete a partir d'un inout pour la recherche
+//Creation d'une requete a partir d'un inout pour la recherche :)
 function req_recherche($searchs,$tables,$conn){
     $search_exploded = preg_split ( "/[\s,\/]+/", $searchs );
 
