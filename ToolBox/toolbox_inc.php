@@ -248,6 +248,41 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   sleep(5);
 }
 
+//Creation d'une requete a partir d'un inout pour la recherche
+function req_recherche($searchs,$tables,$conn){
+    $search_exploded = preg_split ( "/[\s,\/]+/", $searchs );
 
+
+    foreach ($tables as $t => $table) {
+        $req = 'SELECT ';
+        $cond = '';
+        foreach ($table as $champs) {
+            $req .= $champs.', ';
+            $champs = explode(", ",$champs);
+            foreach ($champs as $champ) {
+                if (count($search_exploded) == 1){
+                    $cond .= " $champ LIKE '%$searchs%' OR ";
+                }
+                else{
+                    $i = 0;
+                    foreach( $search_exploded as $search_each ) {
+                        $cond .= "OR $champ LIKE '%$search_each%' ";
+                    }
+                }
+            }
+        }
+        if (count($search_exploded) == 1){
+            $cond = rtrim($cond,'OR ');
+        }
+        else{
+            $cond =ltrim($cond,'OR ');
+        }
+        $req = rtrim($req,', ').' FROM '.$t.' WHERE '.$cond;
+        $result[$t] = reqtoobj($req,$conn);
+    }
+
+
+    return $result;
+}
 
 ?>
