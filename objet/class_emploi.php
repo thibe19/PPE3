@@ -107,6 +107,30 @@ class Emploi extends Offre
   }
 
 
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                MODIFIER                                  ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
+  public function modifier_emploi($conn){
+
+    $this->modifier_offre($conn);
+
+
+
+
+  }
+
+  public function delete_emploi($conn){
+    $id_offre = $this->getid_offre();
+
+    $SQL = "DELETE FROM OEmploi WHERE id_offre = $id_offre";
+    $res = $conn->Query($SQL)or die(errorInfo());
+  }
+
 }//fin class
 
 

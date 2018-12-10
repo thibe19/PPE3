@@ -18,6 +18,7 @@ if (isset($_SESSION['Eleve'])) {
 
   $uneleve = unserialize($_SESSION['Eleve']);
   $id_user = $uneleve->getIdUser();
+  $ndc = $uneleve->getLoginUser();
   $mdp=$_SESSION['mdp'];
   $photo = $uneleve ->getPhotoUser();
 

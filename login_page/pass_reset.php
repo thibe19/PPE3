@@ -49,9 +49,10 @@
 
           <?php
           include('../ToolBox/bdd.inc.php');
+          include('../ToolBox/toolbox_inc.php');
           if (isset($_POST['pass_resetn'])) {
             if (isset($_POST['cpass']) == isset($_POST['cpassv'])) {
-              $idrpass = $_GET['id'];
+              $idrpass = dec_enc('decrypt',$_GET['id']);
               $passrncry = $_POST['cpass'];
 
 

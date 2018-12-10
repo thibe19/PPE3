@@ -248,8 +248,6 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   sleep(5);
 }
 
-<<<<<<< HEAD
-=======
 //Creation d'une requete a partir d'un inout pour la recherche :)
 function req_recherche($searchs,$tables,$conn){
     $search_exploded = preg_split ( "/[\s,\/]+/", $searchs );
@@ -282,8 +280,7 @@ function req_recherche($searchs,$tables,$conn){
         $req = rtrim($req,', ').' FROM '.$t.' WHERE '.$cond;
         $result[$t] = reqtoobj($req,$conn);
     }
-
->>>>>>> f90d19f14f82c7c412fa12f13df2c6620e196a24
+}
 
 
 ?>

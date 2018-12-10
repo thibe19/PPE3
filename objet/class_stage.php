@@ -137,9 +137,9 @@ class Stage extends Offre{
 
 
     public function delete_stage($conn){
-      $id_offre = $this->id_offre;
+      $id_offre = $this->getid_offre();
 
-      $SQL = "DELETE FROM Ostage WHERE id_offre = $id_offre";
+      $SQL = "DELETE FROM OStage WHERE id_offre = $id_offre";
       $res = $conn->Query($SQL)or die(errorInfo());
     }
 
@@ -153,19 +153,22 @@ class Stage extends Offre{
 
     public function modifier_stage($conn){
 
-      $this->insert_offre($conn);
+      $this->modifier_offre($conn);
       $id_offre = $this->getid_offre();
       $dateF = $this->date_fin_stage;
       $note_user_stage = $this->note_user;
       $desc_user_stage = $this->desc_user;
 
-        $sql="UPDATE Ostage
+        $sql="UPDATE OStage
               SET date_fin_stage='$dateF', note_user_stage='$note_user_stage', desc_user_stage='$desc_user_stage'
               WHERE id_offre='$id_offre' ";
-        $res = $conn->Query($sql)or die('Erreur modification user');
+        $res = $conn->Query($sql)or die('Erreur modification stage');
 
 
     }
+
+
+
 
 }//fin class
 ?>
