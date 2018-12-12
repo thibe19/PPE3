@@ -308,6 +308,9 @@ function req_recherche($searchs,$tables,$conn){
         $req = rtrim($req,', ').' FROM '.$t.' WHERE '.$cond;
         $result[$t] = reqtoobj($req,$conn);
     }
+
+
+    return $result;
 }
 
 
