@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                index                                     ////
-////                                06/12/2018                                ////
-////                                V0.0.5                                    ////
+////                                12/12/2018                                ////
+////                                V0.0.6                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@ if (isset($_SESSION['Eleve']) ) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title>VivBahuet</title>
+        <title>ViaBahuet</title>
 
         <!-- Favicon -->
         <link rel="icon" href="images/favicon.png" type="image/x-icon" />
@@ -161,8 +161,6 @@ if (isset($_SESSION['Eleve']) ) {
 
                ?>
                <form name="stage" action="index.php" method="post">
-
-
                 <div id="stage">
                     <div class="fast_post">
 
@@ -213,7 +211,16 @@ if (isset($_SESSION['Eleve']) ) {
                                     <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
                                     <p><?php echo urldecode($dataO['desc_offre']); ?></p>
                                 </div>
-                                <center><button class="btn btn-primary " value="<?php print$dataS['id_offre']; ?>" name='postulerS' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+                                <?php
+                                $idoffre=$dataS['id_offre'];
+                                $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+                               if (testsql($sqlD,$conn)) {
+                                  ?><center><div class="btn btn-primary " ><i class="fa fa-bullhorn"> En Attente</i></div></center><?php
+                                }
+                                else {
+                                  ?><center><button class="btn btn-primary " value="<?php print$dataS['id_offre']; ?>" name='postulerS' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center><?php
+                                }
+                                 ?>
                                 <br>
                             </div>
                             <!-- End Post -->
@@ -237,12 +244,10 @@ if (isset($_SESSION['Eleve']) ) {
                 ////                                                                          ////
                 //////////////////////////////////////////////////////////////////////////////////
                 ?>
+                <form name="emploi" action="index.php" method="post">
                 <div id="emploi">
                     <div class="fast_post">
-
-
                         <?php
-
                         $sqlE="SELECT * FROM OEmploi ";
                         $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
 
@@ -290,7 +295,16 @@ if (isset($_SESSION['Eleve']) ) {
                                     <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
                                     <p><?php echo urldecode($dataO['desc_offre']); ?></p>
                                 </div>
-                                <center><button class="btn btn-primary " name='postulerE' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+                                <?php
+
+                                $idoffre=$dataS['id_offre'];
+                                $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+                               if (testsql($sqlD,$conn)) {
+                                  ?><center><div class="btn btn-primary " ><i class="fa fa-bullhorn"> En Attente</i></div></center><?php
+                                }else {
+                                  ?><center><button class="btn btn-primary " value="<?php print$dataO['id_offre']; ?>" name='postulerE' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center><?php
+                                }
+                                 ?>
                                 <br>
                             </div>
                             <!-- End Post -->
@@ -302,7 +316,7 @@ if (isset($_SESSION['Eleve']) ) {
                         ?>
                     </div>
                 </div>
-
+              </form>
             </div>   <!-- Fin des post/stage/emploi -->
 
             <!-- left side bar -->
@@ -447,23 +461,45 @@ if (isset($_SESSION['Eleve']) ) {
 if (isset($_POST['postulerS'])) {
 $stage = $_POST['postulerS'];
 
-$sql="SELECT * FROM Offre WHERE id_offre = '$stage'";
-$res = $conn -> query($sql)or die($conn -> errorInfo());
-$data=$res->fetch();
-$id_user = $data['id_user'];
-$id_ent = $data['id_ent'];
+$sqlO="SELECT * FROM Offre WHERE id_offre = '$stage'";
+$resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+$dataO=$resO->fetch();
+$id_user = $dataO['id_user'];
+$id_ent = $dataO['id_ent'];
 
 
+  $SQL = "INSERT INTO demande
+          VALUES(NULL,'$id_user','$id_ent','$stage')";
+  $res = $conn->Query($SQL)or die('Erreur inscription eleve');
+  echo "<script> alert('Une demande a été envoiler ');
+                  window.location.href='./index.php';
+        </script>";
 
 
-}
+}//fin postulerS
+
+if (isset($_POST['postulerE'])) {
+$emploi = $_POST['postulerE'];
+
+$sqlO="SELECT * FROM Offre WHERE id_offre = '$emploi'";
+$resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+$dataO=$resO->fetch();
+$id_user = $dataO['id_user'];
+$id_ent = $dataO['id_ent'];
+
+
+  $SQL = "INSERT INTO demande
+          VALUES(NULL,'$id_user','$id_ent','$emploi')";
+  $res = $conn->Query($SQL)or die('Erreur inscription eleve');
+  echo "<script> alert('Une demande a été envoiler ');
+        </script>";
+
+
+}//fin postulerS
 
 
 
 }//fin if eleve
-
-
-
 
 
 
