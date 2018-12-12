@@ -326,9 +326,6 @@ if (isset($_SESSION['Eleve']) ) {
                         ?>
                     </div>
                 </div>
-<<<<<<< HEAD
-              </form>
-=======
 
 
                 <?php }
@@ -433,7 +430,6 @@ if (isset($_SESSION['Eleve']) ) {
                 ?>
 
 
->>>>>>> 714dc14e7886dc10040e5d3cb4a1d1e7797ef2a6
             </div>   <!-- Fin des post/stage/emploi -->
 
             <!-- left side bar -->
