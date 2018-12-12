@@ -10,7 +10,7 @@ if (isset($_SESSION['Eleve'])) {
     $photo_user = $uneleve->getPhotoUser();
     $tel_user = $uneleve->getNumTelUser();
     $mail_user = $uneleve->getEmailUser();
-    $pass_user = $uneleve->getMdpUser();
+    print $pass_user = $uneleve->getMdpUser();
     $login_user = $uneleve->getLoginUser();
     $id_user = $uneleve->getIdUser();
     $nom = $uneleve->getNomUser();
@@ -155,7 +155,7 @@ require('part/header.php');
                 <div class="post profile_post">
                     <div class="post_content">
 
-                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout']) && empty($_POST['delabout']) && empty($_POST['valstabouts'])) { ?>
+                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout']) && empty($_POST['delabout']) && empty($_POST['valstabouts']) && empty($_POST['valprofil'])) { ?>
 
                             <form action="about.php" method="post">
 
@@ -300,7 +300,7 @@ require('part/header.php');
 
                             <h3>Modification</h3>
                             <h5>A propos</h5>
-
+                            <form class="" action="about.php" method="post">
                             <table>
                                 <tr>
                                     <td width="22%"><p>Nom</p></td>
@@ -333,8 +333,13 @@ require('part/header.php');
 
                             <h5>Description</h5>
                             <?php ?>
-                            <p><textarea name="desc_about" class="textareabout" rows="8"
-                                         cols="80"><?php echo $desc == "Vous n'avez pas encore entré de description." ? '' : $desc; ?></textarea>
+                            <p><textarea name="desc_about" class="textareabout" rows="8" placeholder="Vous n'avez pas encore entré de description."
+                                         cols="80"><?php echo $desc_user; ?></textarea>
+                                         <?php ////////ICI prof ?>
+                                         <button type="submit" id="updateabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="valprofil"><i
+                                                     class="fas fa-check"></i></button>
+
+                                                   </form>
                             </p>
                             <br>
                             <hr>
@@ -349,8 +354,9 @@ require('part/header.php');
                             <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
 
                             <?php
-                            $sql_aff_stg = "SELECT * FROM offre
-                                            WHERE id_user = $id_user";
+                            $sql_aff_stg = "SELECT * FROM offre O, OStage S
+                                            WHERE O.id_user = S.id_user
+                                            AND O.id_user = $id_user";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
@@ -482,41 +488,70 @@ require('part/header.php');
 
                             <?php
 
-                            $sql_aff_stg = "SELECT * FROM OEmploi
-                                            WHERE id_user = $id_user";
+                            $sql_aff_stg = "SELECT * FROM offre O, OEmploi E
+                                            WHERE O.id_user = E.id_user
+                                            AND O.id_user = $id_user";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
+                              $id_offre_req = $res_aff_stg['id_offre'];
+                              $sql_aff_stg2 = "SELECT * FROM OEmploi
+                                               WHERE id_offre = $id_offre_req";
+                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                              $res_aff_stg2 = $req_aff_stg2->fetch();
 
                              ?>
 
+                             <form action="about.php" method="post">
+                               Titre : <input type="text" name="titret" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
                             <div class="select_option">
-                                <p> Domaine :
-                                    <select>
+                                <p> Domaine :</p>
+                                    <select name="selectdomainet">
                                         <?php foreach ($domaine as $d) { ?>
-                                            <option name="domaine_about_s" value="<?php $d->id_cat ?>">
+                                            <option value="<?php print $d->id_cat ?>" <?php ($d->id_cat == $res_aff_stg['id_cat']) ? print "selected" : false ?> >
                                                 <?php print $d->lib_cat ?>
                                             </option>
                                         <?php } ?>
                                     </select>
                             </div>
+                            <div class="select_option">
+                                <p> Entreprise :</p>
+                                    <select name="selectentt">
+                                        <?php foreach ($list_ent as $le) { ?>
+                                            <option value="<?php $le->id_user ?>" <?php ($le->id_user == $res_aff_stg['id_ent']) ? print "selected" : false ?> >
+                                                <?php print $le->nom_user ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                            </div>
+
                             Date :
                             <table>
                                 <tr>
                                     <td>Début</td>
-                                    <td>Fin</td>
+
                                 </tr>
                                 <tr>
-                                    <td><input type="date" name="date_about_debut_t" value=""
+                                    <td><input type="date" name="date_about_debut_t" value="<?php echo $res_aff_stg['date_debut_offre']; ?>"
                                                placeholder="Exemple : 2015 - 2017"></td>
-                                    <td><input type="date" name="date_about_fin_t" value=""
-                                               placeholder="Exemple : 2015 - 2017"></td>
+
                                 </tr>
                             </table>
-                            Place : <input type="text" name="place_about_t" value="<?php echo $placephrase; ?>">  </p>
+                            <!-- Place : <input type="text" name="place_about_s" value=""
+                                           placeholder="Exemple : Paris">  </p> -->
                             <p> Description : <textarea name="desc_about_t" class="textareabout" rows="8"
-                                                        cols="80"><?php echo $descs; ?></textarea></p>
-                            <button type="submit" id="cancelabout" value="1" name="deltabout"><i
-                                        class="fas fa-trash-alt"></i></i></button>
+                                                        cols="80"><?php echo $res_aff_stg['desc_offre']; ?></textarea></p>
+
+
+
+                            <button type="submit" id="updateabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="valstabouttt"><i
+                                        class="fas fa-check"></i></button>
+                            </form>
+                            <br>
+                            <form action="about.php" method="post">
+                              <button type="submit" id="cancelabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="delaboutt"><i
+                                          class="fas fa-trash-alt"></i></button>
+
+                            </form>
 
                             <?php } ?>
 
@@ -536,28 +571,52 @@ require('part/header.php');
 
                             <!-- Ajout d'un pour nouveau travail fait -->
                             <div style="display:none" id="id1">
-                                <p> Domaine : <input type="text" name="domaine_about_tn" value=""
-                                                     placeholder="Exemple : Développeur">
-                                    Date :
-                                <table>
-                                    <tr>
-                                        <td>Début</td>
-                                        <td>Fin</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="date" name="date_about_debut_tn" value=""
-                                                   placeholder="Exemple : 2015 - 2017"></td>
-                                        <td><input type="date" name="date_about_fin_tn" value=""
-                                                   placeholder="Exemple : 2015 - 2017"></td>
-                                    </tr>
-                                </table>
-                                Entreprise : <input type="text" name="place_about_tn" value=""
-                                                    placeholder="Exemple : InterMarché">  </p>
-                                <p> Description : <textarea name="desc_about_tn" rows="8" cols="80"
-                                                            class="textareabout"></textarea>
-                                </p>
-                                <button type="submit" id="updateabout" value="1" name="valtrabout"><i
-                                            class="fas fa-check"></i></button>
+                              <form action="about.php" method="post">
+                                Titre : <input type="text" name="titretn" value="">
+                                  <div class="select_option">
+                                      <p> Domaine :
+                                          <select name="selectdomainetn">
+                                              <?php foreach ($domaine as $d) { ?>
+                                                  <option value="<?php print $d->id_cat ?>">
+                                                      <?php print $d->lib_cat ?>
+                                                  </option>
+                                              <?php } ?>
+                                          </select>
+                                  </div>
+                                  <div class="select_option">
+                                      <p> Entreprise :
+                                          <select name="selectenttn">
+                                              <?php foreach ($list_ent as $le) { ?>
+                                                  <option value="<?php print $le->id_user ?>">
+                                                      <?php print $le->nom_user ?>
+                                                  </option>
+                                              <?php } ?>
+                                          </select>
+                                  </div>
+
+                                  Date :
+                                  <table>
+                                      <tr>
+                                          <td>Début</td>
+
+                                      </tr>
+                                      <tr>
+                                          <td><input type="date" name="date_about_debut_tn" value=""
+                                                     placeholder="Exemple : 2015 - 2017"></td>
+
+                                      </tr>
+                                  </table>
+                                  <!-- Place : <input type="text" name="place_about_sn" value=""
+                                                 placeholder="Exemple : Paris">  </p> -->
+                                  <p> Description : <textarea name="desc_about_tn" class="textareabout" rows="8" placeholder="Description du stage"
+                                                              cols="80"></textarea></p>
+
+
+
+                                  <button type="submit" id="updateabout" value="1" name="valstaboutt"><i
+                                              class="fas fa-check"></i></button>
+                                              <?php //////////// ICI TRAV ?>
+                              </form>
                             </div>
 
                             <br><br>
@@ -1407,10 +1466,9 @@ require('part/header.php');
 <?php
 /// TRAITEMENT
 
+//////////AJOUT STAGE
+
 if (isset($_POST['valstabout'])) {
-
-
-
    $id_catsn = $_POST['selectdomainesn'];
    $id_entsn = $_POST['selectentsn'];
    $dated = $_POST['date_about_debut_sn'];
@@ -1428,14 +1486,17 @@ if (isset($_POST['valstabout'])) {
        window.location='./about.php';
      </script>
    <?php
-
-
 }
+
+//////////DELETE STAGE
 
 if (isset($_POST['delabout'])) {
   $id_offre = $_POST['delabout'];
+  $unstage = new Stage($id_offre);
+  $unstage->delete_stage($conn);
   $unstage = new Offre($id_offre);
   $unstage->delete_offre($conn);
+
   ?>
     <script>
       window.location='./about.php';
@@ -1443,9 +1504,9 @@ if (isset($_POST['delabout'])) {
   <?php
 }
 
+//////////MOFIFIER STAGE
+
 if (isset($_POST['valstabouts'])) {
-
-
   $id_offre = $_POST['valstabouts'];
   $datef = $_POST['date_about_fin_s'];
   $notes = $_POST['quantitys'];
@@ -1458,6 +1519,91 @@ if (isset($_POST['valstabouts'])) {
 
   $unstage = new Stage($id_offre, $libo, '', $dated, '', '', '', $id_cats, $id_ents, $datef, $notes, $descs);
   $unstage->modifier_stage($conn);
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
+}
+
+
+
+////////////////////////////
+
+
+
+//////////AJOUT TRAVAIL
+
+if (isset($_POST['valstaboutt'])) {
+   $id_cattn = $_POST['selectdomainetn'];
+   $id_enttn = $_POST['selectenttn'];
+   $dated = $_POST['date_about_debut_tn'];
+   $datef = $_POST['date_about_fin_tn'];
+   //$addsn = $_POST['place_about_sn'];
+   $desctn = $_POST['desc_about_tn'];
+   $libo = $_POST['titretn'];
+   $notetn = $_POST['quantitytn'];
+   $date = date("Y-m-d");
+
+   $unemploi = new Emploi('',$libo,'',$dated,$date,$desctn,$id_user,$id_cattn,$id_enttn,'','');
+   $unemploi->insert_emploi($conn);
+   ?>
+     <script>
+       window.location='./about.php';
+     </script>
+   <?php
+}
+
+//////////DELETE TRAVAIL
+
+if (isset($_POST['delaboutt'])) {
+  $id_offre = $_POST['delaboutt'];
+  $unstage = new Emploi($id_offre);
+  $unstage->delete_emploi($conn);
+  $unstage = new Offre($id_offre);
+  $unstage->delete_offre($conn);
+
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
+}
+
+//////////MOFIFIER TRAVAIL
+
+if (isset($_POST['valstabouttt'])) {
+  $id_offre = $_POST['valstabouttt'];
+  $desct = $_POST['desc_about_t'];
+  $libo = $_POST['titret'];
+  $dated = $_POST['date_about_debut_t'];
+  $id_catt = $_POST['selectdomainet'];
+  $id_entt = $_POST['selectentt'];
+
+
+  $unstage = new Emploi($id_offre, $libo, '', $dated, '', $desct, '', $id_catt, $id_entt, '', '');
+  $unstage->modifier_emploi($conn);
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
+}
+
+
+if (isset($_POST['valprofil'])) {
+  $nom = $_POST['surname_about'];
+  $prenom = $_POST['name_about'];
+  $daten = $_POST['birth_about'];
+  $comp = $_POST['skill_about'];
+  $desc = $_POST['desc_about'];
+  $mdp = $_SESSION['mdp'];
+  $photo = $uneleve->getPhotoUser();
+  $choixpos = $uneleve->getChoixPosition();
+
+
+  // $unstage = new Eleve($id_user,$nom,$login_user,$mdp,$mail_user,$tel_user,$Nrue,$rue,$cp,$ville,$photo,$desc,$comp,$prenom,$daten,$choixpos);
+  // $unstage->modifier_eleve($unstage,$conn);
   ?>
     <script>
       window.location='./about.php';

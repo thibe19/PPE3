@@ -145,7 +145,7 @@ function mail_reset_mdp($mail, $conn)
 
     $text = "Bonjour " . $result['nom_user'] . "\n";
     $text = $text . "Pour changer votre mot de passe utiliser le lien ci-dessous : \n";
-    $text = $text . "http://localhost/PPE3/login_page/pass_reset.php?id=" . urlencode($result['id_user']) . "\n\n\n";
+    $text = $text . "http://localhost/PPE3/login_page/pass_reset.php?id=" . urlencode(dec_enc('encrypt',$result['id_user'])) . "\n\n\n";
     $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.";
 
     mail($mail, $objet, $text, $entete);
@@ -248,7 +248,7 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   sleep(5);
 }
 
-//Creation d'une requete a partir d'un inout pour la recherche
+//Creation d'une requete a partir d'un inout pour la recherche :)
 function req_recherche($searchs,$tables,$conn){
     $search_exploded = preg_split ( "/[\s,\/]+/", $searchs );
 
@@ -280,9 +280,7 @@ function req_recherche($searchs,$tables,$conn){
         $req = rtrim($req,', ').' FROM '.$t.' WHERE '.$cond;
         $result[$t] = reqtoobj($req,$conn);
     }
-
-
-    return $result;
 }
+
 
 ?>

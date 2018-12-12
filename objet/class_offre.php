@@ -218,18 +218,19 @@ class Offre
     ////                                                                          ////
     //////////////////////////////////////////////////////////////////////////////////
 
-    public function modifier_stage($conn){
+    public function modifier_offre($conn){
 
       $id_offre = $this->id_offre;
       $lib_offre = $this->lib_offre;
       $date_debut_offre = $this->date_debut_offre;
       $id_cat = $this->id_cat;
       $id_ent = $this->id_ent;
+      $desc_offre = $this->desc_offre;
 
         $sql="UPDATE Offre
-              SET lib_offe='$lib_offre', date_debut_offre='$date_debut_offre', id_cat='$id_cat', id_ent='$id_ent'
+              SET lib_offre='$lib_offre', date_debut_offre='$date_debut_offre', desc_offre='$desc_offre', id_cat='$id_cat', id_ent='$id_ent'
               WHERE id_offre='$id_offre'";
-        $res = $conn->Query($sql)or die('Erreur modification user');
+        $res = $conn->Query($sql)or die('Erreur modification offre');
 
 
     }
