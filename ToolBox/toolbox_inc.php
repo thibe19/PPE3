@@ -98,6 +98,55 @@ function getnomuser($id,$conn)
 
 
 
+//recuperation de la categorie en fonction de l'id
+function getnomcategorie($id,$conn)
+{
+    $SQL = "SELECT lib_cat FROM Categorie
+            WHERE id_cat='$id'";
+    $req = $conn->Query($SQL) or die ('Erreur selection utilisateur');
+    $res = $req->fetch();
+
+    return $res['lib_cat'];
+}
+
+
+
+//REcupération du nom utilisateur d'une entreprise
+function getnoment($id,$conn)
+{
+    $SQL = "SELECT nom_user FROM Utilisateur U,Entreprise E
+            WHERE  E.id_user=U.id_user
+            AND U.id_user='$id'";
+    $req = $conn->Query($SQL) or die ($SQL.'Erreur selection entreprise');
+    $res = $req->fetch();
+
+    return $res['nom_user'];
+}
+
+
+//Recupération des données d'un stage a partir d'une offre
+function getoffrestagebdd($id,$conn)
+{
+    $SQL = "SELECT OS.* FROM OStage OS,Offre O
+            WHERE  O.id_offre=OS.id_offre
+            AND O.id_offre='$id'";
+
+    return reqtoobj($SQL,$conn);
+}
+
+
+//Recupération des données d'un emploi a partir d'une offre
+function getoffreempbdd($id,$conn)
+{
+    $SQL = "SELECT OE.* FROM OEmploi OE,Offre O
+            WHERE  O.id_offre=OE.id_offre
+            AND O.id_offre='$id'";
+
+    return reqtoobj($SQL,$conn);
+}
+
+
+
 /*********************** Fetch en objet ******************/
 function reqtoobj($SQL,$conn)
 {
@@ -270,8 +319,8 @@ function req_recherche($searchs,$tables,$conn){
 
      if(empty($tables)){
          $tables = array(
-             "Post" => array("titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user"),
-             "Offre" => array("lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","desc_offre","id_ent"),
+             "Post" => array("titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user","id_cat"),
+             "Offre" => array("id_offre","lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","id_ent","id_cat"),
              "Entreprise" => array("nom_resp","site_web","code_APE"),
              "Eleve" => array("prenom_eleve"),
              "Utilisateur" => array("nom_user","ville_addr_user","CP_addr_user"),

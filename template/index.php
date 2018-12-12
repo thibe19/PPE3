@@ -337,7 +337,6 @@ if (isset($_SESSION['Eleve']) ) {
 
                     $resultats = req_recherche($_POST['search'],'',$conn);
                     $trouve = 0;
-                    //affiche_vardump($resultats);
 
                     //AFFICHARGE RESULTAT RECHERCHE
                     foreach ($resultats as $r=>$resultat) {
@@ -350,7 +349,9 @@ if (isset($_SESSION['Eleve']) ) {
                                         <div class="post_content">
                                             <a href="details.html" class="post_img">
                                                 <img src="images/post.jpg" alt="">
-                                                <span><i class="ion-android-radio-button-off"></i></span>
+                                                <span><i class="ion-android-radio-button-off"></i>
+                                                <?php print getnomcategorie($data->id_cat,$conn) ?>
+                                                </span>
                                             </a>
                                             <div class="row author_area">
                                                 <div class="col s4 author">
@@ -384,41 +385,93 @@ if (isset($_SESSION['Eleve']) ) {
                             }
                             if($r == "Offre") {
                                 foreach ($resultat as $data) {
-                                    ?>
-                                    <div class="post">
-                                        <div class="post_content">
-                                            <a href="details.html" class="post_img">
-                                                <img src="images/post.jpg" alt="">
-                                                <span><i class="ion-android-radio-button-off"></i></span>
-                                            </a>
-                                            <div class="row author_area">
-                                                <div class="col s4 author">
-                                                    <div class="col s4 media_left"><img height="53px" width="53px"
-                                                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                                                        alt="profil picture"
-                                                                                        class="circle">
+                                    $stage = getoffrestagebdd($data->id_offre,$conn);
+                                    $emploi = getoffreempbdd($data->id_offre,$conn);
+                                    if ($stage){
+                                        foreach ($stage as $s) { ?>
+                                            <div class="post">
+                                                <div class="post_content">
+                                                    <a href="details.html" class="post_img">
+                                                        <img src="images/post.jpg" alt="">
+                                                        <span><i class="ion-android-radio-button-off"></i>
+                                                            <?php print getnomcategorie($data->id_cat,$conn) ?></span>
+                                                    </a>
+                                                    <div class="row author_area">
+                                                        <div class="col s4 author">
+                                                            <div class="col s4 media_left"><img height="53px"
+                                                                                                width="53px"
+                                                                                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                                                                alt="profil picture"
+                                                                                                class="circle">
+                                                            </div>
+                                                            <div class="col s8 media_body">
+
+                                                                <a href="#"><?php print getnoment($data->id_ent, $conn) ?></a>
+                                                                <span><?php print $data->date_post_offre ?></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s4 btn_floating">
+
+                                                        </div>
+
                                                     </div>
-
-                                                    <div class="col s8 media_body">
-
-                                                        <a href="#"><?php print getnomuser($data->id_user, $conn) ?></a>
-                                                        <span><?php print $data->date_post."<br>".$data->heure_post ?></span>
-                                                    </div>
+                                                    <a class="post_heding"><?php print urldecode($data->lib_offre) ?></a>
+                                                    <p><b>Niveau requis &nbsp:&nbsp </b><?php print $data->niveau_req ?></p>
+                                                    <p><b>Date de début &nbsp:&nbsp </b><?php print $data->date_debut_offre ?></p>
+                                                    <p><b>Date de fin &nbsp:&nbsp </b><?php print $s->date_fin_stage ?></p>
+                                                    <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($data->desc_offre) ?></p>
                                                 </div>
-                                                <div class="col s4 btn_floating">
-
-                                                </div>
-
+                                                <center><a href="#" class="btn-floating waves-effect"><i
+                                                                class="ion-navicon-round"></i></a>
+                                                </center>
+                                                <br>
                                             </div>
-                                            <a class="post_heding"><?php print $data->titre_post ?></a>
-                                            <p><?php print $data->contenu_post ?></p>
-                                        </div>
-                                        <center><a href="#" class="btn-floating waves-effect"><i
-                                                        class="ion-navicon-round"></i></a>
-                                        </center>
-                                        <br>
-                                    </div>
-                                    <?php
+                                            <?php
+                                        }
+                                    }
+                                    elseif ($emploi){
+                                        foreach ($emploi as $s) { ?>
+                                            <div class="post">
+                                                <div class="post_content">
+                                                    <a href="details.html" class="post_img">
+                                                        <img src="images/post.jpg" alt="">
+                                                        <span><i class="ion-android-radio-button-off"></i>
+                                                            <?php print getnomcategorie($data->id_cat,$conn) ?></span>
+                                                    </a>
+                                                    <div class="row author_area">
+                                                        <div class="col s4 author">
+                                                            <div class="col s4 media_left"><img height="53px"
+                                                                                                width="53px"
+                                                                                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                                                                alt="profil picture"
+                                                                                                class="circle">
+                                                            </div>
+                                                            <div class="col s8 media_body">
+
+                                                                <a href="#"><?php print getnoment($data->id_ent, $conn) ?></a>
+                                                                <span><?php print $data->date_post_offre ?></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s4 btn_floating">
+
+                                                        </div>
+
+                                                    </div>
+                                                    <a class="post_heding"><?php print urldecode($data->lib_offre) ?></a>
+                                                    <p><b>Niveau requis &nbsp:&nbsp </b><?php print $data->niveau_req ?></p>
+                                                    <p><b>Salaire de départ &nbsp:&nbsp </b><?php print $s->salaire_emp ?> €</p>
+                                                    <p><b>Type de contrat &nbsp:&nbsp </b><?php print $s->type_emp ?></p>
+                                                    <p><b>Date de début &nbsp:&nbsp </b><?php print $data->date_debut_offre ?></p>
+                                                    <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($data->desc_offre) ?></p>
+                                                </div>
+                                                <center><a href="#" class="btn-floating waves-effect"><i
+                                                                class="ion-navicon-round"></i></a>
+                                                </center>
+                                                <br>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
                                 }
                             }
                         }
