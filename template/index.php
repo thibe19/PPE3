@@ -59,15 +59,18 @@ if (isset($_SESSION['Eleve']) ) {
     <?php
 
     require('part/header.php');
+
     ?>
     <!-- End  Header_Area -->
 
     <!-- Tranding-select and banner Area -->
+    <?php if (!isset($_POST['search'])){ ?>
     <ul class="tranding_select tabs">
         <li class="tab"><a href="#post" class="waves-effect btn active">Post</a></li>
         <li class="tab"><a href="#stage" class="waves-effect btn">Stage</a></li>
         <li class="tab"><a href="#emploi" class="waves-effect btn">Emploi</a></li>
     </ul>
+    <?php } ?>
     <div class="banner_area">
         <img src="images/banner.jpg" alt="" class="banner_img">
     </div>
@@ -82,6 +85,13 @@ if (isset($_SESSION['Eleve']) ) {
 
 
                 <?php
+
+
+                //TEST POUR LA RECHERCHE EN COURS
+
+
+                if(!isset($_POST['search'])){
+
                 //////////////////////////////////////////////////////////////////////////////////
                 ////                                                                          ////
                 ////                                                                          ////
@@ -302,6 +312,109 @@ if (isset($_SESSION['Eleve']) ) {
                         ?>
                     </div>
                 </div>
+
+
+                <?php }
+
+
+
+                //FIN DE TEST DE LA RECHERCHE EN COURS
+                else{
+
+                    $resultats = req_recherche($_POST['search'],'',$conn);
+                    $trouve = 0;
+                    //affiche_vardump($resultats);
+
+                    //AFFICHARGE RESULTAT RECHERCHE
+                    foreach ($resultats as $r=>$resultat) {
+                        if(!empty($resultat)) {
+                            $trouve = 1;
+                            if($r == "Post") {
+                                foreach ($resultat as $data) {
+                                    ?>
+                                    <div class="post">
+                                        <div class="post_content">
+                                            <a href="details.html" class="post_img">
+                                                <img src="images/post.jpg" alt="">
+                                                <span><i class="ion-android-radio-button-off"></i></span>
+                                            </a>
+                                            <div class="row author_area">
+                                                <div class="col s4 author">
+                                                    <div class="col s4 media_left"><img height="53px" width="53px"
+                                                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                                                        alt="profil picture"
+                                                                                        class="circle">
+                                                    </div>
+
+                                                    <div class="col s8 media_body">
+
+                                                        <a href="#"><?php print getnomuser($data->id_user, $conn) ?></a>
+                                                        <span><?php print $data->date_post."<br>".$data->heure_post ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col s4 btn_floating">
+
+                                                </div>
+
+                                            </div>
+                                            <a class="post_heding"><?php print $data->titre_post ?></a>
+                                            <p><?php print $data->contenu_post ?></p>
+                                        </div>
+                                        <center><a href="#" class="btn-floating waves-effect"><i
+                                                        class="ion-navicon-round"></i></a>
+                                        </center>
+                                        <br>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            if($r == "Offre") {
+                                foreach ($resultat as $data) {
+                                    ?>
+                                    <div class="post">
+                                        <div class="post_content">
+                                            <a href="details.html" class="post_img">
+                                                <img src="images/post.jpg" alt="">
+                                                <span><i class="ion-android-radio-button-off"></i></span>
+                                            </a>
+                                            <div class="row author_area">
+                                                <div class="col s4 author">
+                                                    <div class="col s4 media_left"><img height="53px" width="53px"
+                                                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                                                        alt="profil picture"
+                                                                                        class="circle">
+                                                    </div>
+
+                                                    <div class="col s8 media_body">
+
+                                                        <a href="#"><?php print getnomuser($data->id_user, $conn) ?></a>
+                                                        <span><?php print $data->date_post."<br>".$data->heure_post ?></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col s4 btn_floating">
+
+                                                </div>
+
+                                            </div>
+                                            <a class="post_heding"><?php print $data->titre_post ?></a>
+                                            <p><?php print $data->contenu_post ?></p>
+                                        </div>
+                                        <center><a href="#" class="btn-floating waves-effect"><i
+                                                        class="ion-navicon-round"></i></a>
+                                        </center>
+                                        <br>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                        }
+                    }
+                    if($trouve == 0){
+                        print 'Pas de résultats';
+                    }
+                }
+                ?>
+
 
             </div>   <!-- Fin des post/stage/emploi -->
 
