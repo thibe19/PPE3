@@ -5,7 +5,7 @@ include 'bdd.inc.php';
 /******************
  * / 1.DATA BASES
  * /******************/
-function browse_data_base($tbname)
+function browse_data_base($tbname,$conn)
 {
     $SQL = "SELECT * FROM $tbname";
     $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
@@ -13,7 +13,7 @@ function browse_data_base($tbname)
     return $res;
 }
 
-function browse_by_id($tbname, $columid, $id)
+function browse_by_id($tbname, $columid, $id,$conn)
 {
     $SQL = "SELECT * FROM $tbname WHERE $columid=$id";
     $res = $conn->Query($SQL) or die("La requete n'a pas aboutie");
@@ -80,6 +80,23 @@ function getIDBDD($login, $mdp, $email, $conn)
         return 0;
     }
 }
+
+
+
+/********* Recupéré un utilisateur grace a son id ******/
+
+
+function getnomuser($id,$conn)
+{
+    $SQL = "SELECT nom_user FROM Utilisateur
+            WHERE id_user='$id'";
+    $req = $conn->Query($SQL) or die ('Erreur selection utilisateur');
+    $res = $req->fetch();
+
+    return $res['nom_user'];
+}
+
+
 
 /*********************** Fetch en objet ******************/
 function reqtoobj($SQL,$conn)
@@ -250,6 +267,17 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
 
 //Creation d'une requete a partir d'un inout pour la recherche :)
 function req_recherche($searchs,$tables,$conn){
+
+     if(empty($tables)){
+         $tables = array(
+             "Post" => array("titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user"),
+             "Offre" => array("lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","desc_offre","id_ent"),
+             "Entreprise" => array("nom_resp","site_web","code_APE"),
+             "Eleve" => array("prenom_eleve"),
+             "Utilisateur" => array("nom_user","ville_addr_user","CP_addr_user"),
+         );
+     }
+
     $search_exploded = preg_split ( "/[\s,\/]+/", $searchs );
 
 
