@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 06 déc. 2018 à 08:12
+-- Généré le :  mer. 12 déc. 2018 à 15:30
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -79,6 +79,26 @@ CREATE TABLE `cree_event` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `demande`
+--
+
+CREATE TABLE `demande` (
+  `id_demande` int(11) NOT NULL,
+  `id_user_eleve` int(11) NOT NULL,
+  `id_user_entreprise` int(11) NOT NULL,
+  `id_offre` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `demande`
+--
+
+INSERT INTO `demande` (`id_demande`, `id_user_eleve`, `id_user_entreprise`, `id_offre`) VALUES
+(16, 40, 41, 16);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Diplome`
 --
 
@@ -107,7 +127,7 @@ CREATE TABLE `Eleve` (
 --
 
 INSERT INTO `Eleve` (`id_user`, `prenom_eleve`, `date_naiss`, `choix_position`) VALUES
-(40, '', '0000-00-00', 0),
+(40, '', '0000-00-00', 1),
 (42, 'Eleve2', '1998-06-02', 2);
 
 -- --------------------------------------------------------
@@ -205,6 +225,13 @@ CREATE TABLE `OEmploi` (
   `id_user_Eleve` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
+--
+-- Déchargement des données de la table `OEmploi`
+--
+
+INSERT INTO `OEmploi` (`id_offre`, `salaire_emp`, `type_emp`, `id_user`, `id_user_Eleve`) VALUES
+(14, 5000, 'CDI', 40, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -229,9 +256,9 @@ CREATE TABLE `Offre` (
 --
 
 INSERT INTO `Offre` (`id_offre`, `lib_offre`, `niveau_req`, `date_debut_offre`, `date_post_offre`, `desc_offre`, `id_user`, `id_cat`, `id_ent`, `id_user_Eleve`) VALUES
-(10, 'test', 'test', '2018-12-29', '2018-12-05', 'testdesc', 0, 33, 44, 0),
-(11, 'j%27aime+les+patat', 'bac +5', '2018-11-29', '2018-12-05', 'j%27aime+les+patates', 0, 5, 41, 0),
-(12, 'joue+de+la+flut', 'bac +5', '2018-12-03', '2018-12-05', 'un+bon+joueur+de+Fl%C3%BBte++oui', 0, 31, 46, 0);
+(14, 'Je+test+emploi', 'bac +5', '2019-02-14', '2018-12-12', 'je+veux+test+id+user', 40, 44, 41, 0),
+(16, 'test+fin', 'B+19', '2018-12-21', '2018-12-12', 'test+du+demand', 40, 37, 41, 0),
+(17, 'j%27aime+les+patat', 'bac +5', '2018-12-23', '2018-12-12', 'test+de+patat', 40, 15, 44, 0);
 
 -- --------------------------------------------------------
 
@@ -253,9 +280,8 @@ CREATE TABLE `OStage` (
 --
 
 INSERT INTO `OStage` (`id_offre`, `date_fin_stage`, `note_user_stage`, `desc_user_stage`, `id_user`, `id_user_Eleve`) VALUES
-(10, '2018-12-22', 0, '', 0, 0),
-(11, '2018-12-12', 0, '', 0, 0),
-(12, '2018-12-23', 0, '', 0, 0);
+(16, '2019-01-12', 0, '', 40, 0),
+(17, '2019-03-02', 0, '', 40, 0);
 
 -- --------------------------------------------------------
 
@@ -387,7 +413,7 @@ CREATE TABLE `Utilisateur` (
 --
 
 INSERT INTO `Utilisateur` (`id_user`, `nom_user`, `login_user`, `mdp_user`, `email_user`, `tel_user`, `num_addr_user`, `rue_addr_user`, `CP_addr_user`, `ville_addr_user`, `photo_user`, `desc_user`, `dom_acti`, `mail_check`) VALUES
-(40, 'jesuistest', 'test', '$2y$10$7Q6eCcUlt3fXzlUHY1l11OoWO2ukpZt.rE4XRS9XY7N6UrOW6DSPy', 'test@test.fr', 0, '25', 'rue du test', 19100, 'villetest', 'test.jpg', 'test', 'pierre', 0),
+(40, 'jesuistest', 'test', '$2y$10$khuJVxXGSiXuQYStZF/rNe4EqrCkgdKEr.b4xiwsWLOGMlKPNPPvW', 'test@test.fr', 0, '25', 'rue du test', 19100, 'villetest', 'test.jpg', 'test', 'pierre', 0),
 (41, 'google', 'testent', '$2y$10$a8ohmxBWTxLz4TEQpnLH.OF1o4fbUPe7EJmWkHXad47JnZcO6hCEa', 'testent@ent.fr', 494839494, '25', 'rue du test ent', 19100, 'villetestent', '123456', '', '', 0),
 (42, 'Eleve2', 'eleve2', '$2y$10$Md5F9PmDxLy/Mm.xY17D/.ka5zC42HlQIVyHS5sEcVEW89Japmo4e', 'eleve2@eleve2.fr', 0, '18 bis', 'rue blanche selva', 19100, 'BRIVE LA GAILLARDE', '', '', '', 0),
 (44, 'Facebook', 'fb', '$2y$10$JXjKOOFtK0VBDAhtZd8m1eeFAaLuBh6pSDJ7qjDfWmKYzcWXGBLq2', 'fb@gmail.com', 494839494, '19', 'rue du test entfb', 19100, 'villetestent', '', '', '', 0),
@@ -417,6 +443,12 @@ ALTER TABLE `Categorie`
 ALTER TABLE `cree_event`
   ADD PRIMARY KEY (`id_user`,`id_event`),
   ADD KEY `cree_event_Evenement0_FK` (`id_event`);
+
+--
+-- Index pour la table `demande`
+--
+ALTER TABLE `demande`
+  ADD PRIMARY KEY (`id_demande`);
 
 --
 -- Index pour la table `Diplome`
@@ -468,9 +500,7 @@ ALTER TABLE `Evenement`
 -- Index pour la table `OEmploi`
 --
 ALTER TABLE `OEmploi`
-  ADD PRIMARY KEY (`id_offre`),
-  ADD KEY `OEmploi_Eleve0_FK` (`id_user`),
-  ADD KEY `OEmploi_Eleve1_FK` (`id_user_Eleve`);
+  ADD PRIMARY KEY (`id_offre`);
 
 --
 -- Index pour la table `Offre`
@@ -544,6 +574,12 @@ ALTER TABLE `Categorie`
   MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
+-- AUTO_INCREMENT pour la table `demande`
+--
+ALTER TABLE `demande`
+  MODIFY `id_demande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT pour la table `Diplome`
 --
 ALTER TABLE `Diplome`
@@ -559,7 +595,7 @@ ALTER TABLE `Evenement`
 -- AUTO_INCREMENT pour la table `Offre`
 --
 ALTER TABLE `Offre`
-  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `Post`
@@ -647,8 +683,6 @@ ALTER TABLE `Evenement`
 -- Contraintes pour la table `OEmploi`
 --
 ALTER TABLE `OEmploi`
-  ADD CONSTRAINT `OEmploi_Eleve0_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `OEmploi_Eleve1_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
   ADD CONSTRAINT `OEmploi_Offre_FK` FOREIGN KEY (`id_offre`) REFERENCES `Offre` (`id_offre`);
 COMMIT;
 
