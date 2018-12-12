@@ -203,7 +203,7 @@ $( function() {
 
                 <!-- NOTIF  -->
 
-                <!-- Profile -->
+                <!-- Profile  a-->
                 <?php
 
                  ?>
@@ -219,7 +219,7 @@ $( function() {
                         </li> -->
                         <!-- <li class="b_b"><a href="#"><i class="ion-ios-locked"></i>Change Password</a></li> -->
                         <li><a href="setting.php"><i class="ion-gear-b"></i>Paramètres</a></li>
-                        <li><a href="#"><i class="ion-ios-flag"></i>Règles</a></li>
+                        <!-- <li><a href="#"><i class="ion-ios-flag"></i>Règles</a></li> -->
                         <!-- <li><a href="#"><i class="ion-podium"></i>FAQ</a></li> -->
                         <li><a onclick="window.location='./?logout=1'"><i class="ion-power"></i>Se déconnecter</a></li>
                     </ul>
