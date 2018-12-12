@@ -3,7 +3,7 @@
  ////                                                                          ////
  ////                                Profil                                    ////
  ////                                12/12/2018                                ////
- ////                                v0.1.0                                    ////
+ ////                                v0.1.1                                    ////
  ////                                                                          ////
  //////////////////////////////////////////////////////////////////////////////////
 
@@ -190,7 +190,7 @@ if (isset($_SESSION['Eleve'])) {
                               <div class="col mb-3">
                                 <div class="form-group">
                                   <label class="form-label">A propos de moi</label>
-                                  <textarea class="form-control" rows="2" name="desc" value="<?php echo urldecode($data['desc_user']); ?>"><?php echo$data['desc_user']; ?></textarea>
+                                  <textarea class="form-control" rows="2" name="desc" value="<?php echo urldecode($data['desc_user']); ?>"><?php echo urldecode($data['desc_user']); ?></textarea>
                                 </div>
                               </div>
                             </div>
@@ -710,7 +710,7 @@ if (isset($_SESSION['Entreprise'])) {
                                 <div class="col mb-3">
                                   <div class="form-group">
                                     <label class="form-label">A propos de moi</label>
-                                    <textarea class="form-control" rows="2" name="desc" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                                    <textarea class="form-control" rows="2" name="desc" value="<?php echo urldecode($data['desc_user']); ?>"><?php echo urldecode($data['desc_user']); ?></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -984,7 +984,7 @@ if (isset($_SESSION['Entreprise'])) {
       $nom = $_POST['nom'];
       $mail = $_POST['mail'];
       $user = $_POST['user'];
-      $desc = $_POST['desc'];
+      $desc = urlencode($_POST['desc']);
       $tel = $_POST['tel'];
       $Nrue = $_POST['Nrue'];
       $rue = $_POST['rue'];
