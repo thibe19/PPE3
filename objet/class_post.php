@@ -1,6 +1,6 @@
 <?php
 /**
-* Post  date modif : 14/11/2018   vertion:0.0.1
+* Post  date modif : 12/12/2018   vertion:0.0.3
 */
 class Post
 {
@@ -90,7 +90,7 @@ class Post
   public function insert_post($conn)
   {
     $titre_post = $this-> titre_post;
-    $contenu_post = $this-> contenu_post;
+    $contenu_post = urlencode($this-> contenu_post);
     $date_post = $this-> date_post;
     $heure_post = $this-> heure_post;
     $id_cat = $this-> id_cat;
@@ -108,7 +108,7 @@ class Post
   {
     $id_post = $this-> id_post;
     $titre_post = $this-> titre_post;
-    $contenu_post = $this-> contenu_post;
+    $contenu_post = urlencode($this-> contenu_post);
     $date_post = $this-> date_post;
     $heure_post = $this-> heure_post;
     $id_cat = $this-> id_cat;

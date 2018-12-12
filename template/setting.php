@@ -2,8 +2,8 @@
  //////////////////////////////////////////////////////////////////////////////////
  ////                                                                          ////
  ////                                Profil                                    ////
- ////                                06/12/2018                                ////
- ////                                v0.0.9                                    ////
+ ////                                12/12/2018                                ////
+ ////                                v0.1.0                                    ////
  ////                                                                          ////
  //////////////////////////////////////////////////////////////////////////////////
 
@@ -190,7 +190,7 @@ if (isset($_SESSION['Eleve'])) {
                               <div class="col mb-3">
                                 <div class="form-group">
                                   <label class="form-label">A propos de moi</label>
-                                  <textarea class="form-control" rows="2" name="desc" value="<?php echo$data['desc_user']; ?>"><?php echo$data['desc_user']; ?></textarea>
+                                  <textarea class="form-control" rows="2" name="desc" value="<?php echo urldecode($data['desc_user']); ?>"><?php echo$data['desc_user']; ?></textarea>
                                 </div>
                               </div>
                             </div>
