@@ -450,8 +450,8 @@ $stage = $_POST['postulerS'];
 $sql="SELECT * FROM Offre WHERE id_offre = '$stage'";
 $res = $conn -> query($sql)or die($conn -> errorInfo());
 $data=$res->fetch();
-$id_user = $date[''];
-$id_ent =
+$id_user = $data['id_user'];
+$id_ent = $data['id_ent'];
 
 
 
