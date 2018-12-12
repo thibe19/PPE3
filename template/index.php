@@ -104,7 +104,7 @@ if (isset($_SESSION['Eleve']) ) {
                     <div class="fast_post">
 
                         <?php
-
+  
                         $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
                         $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
