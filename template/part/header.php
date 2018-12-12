@@ -131,9 +131,9 @@ $( function() {
             <ul class="right right_menu hide-on-med-and-down">
                 <li class="search_min">
                     <ul class="search_from">
-                      <form action="index.php?search=<?php echo isset($_POST['search'])?$_POST['search']:''; ?>" method="get" id="myform">
+                      <form action="index.php?search=<?php echo isset($_POST['search'])?$_POST['search']:''; ?>" method="POST" id="formrecherche">
                         <li><input type="text" placeholder="Rechercher" id="searchjs" name="search" value="" type="text"></li>
-                        <li><a href="#" onclick="document.getElementById('myform').submit()" name="abut" class="search_icon"><i class="ion-ios-search"></i></a></li>
+                        <li><a onclick="document.getElementById('formrecherche').submit()" name="abut" class="search_icon"><i class="ion-ios-search"></i></a></li>
                       </form>
 
 
