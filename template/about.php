@@ -10,7 +10,7 @@ if (isset($_SESSION['Eleve'])) {
     $photo_user = $uneleve->getPhotoUser();
     $tel_user = $uneleve->getNumTelUser();
     $mail_user = $uneleve->getEmailUser();
-    print $pass_user = $uneleve->getMdpUser();
+    $pass_user = $uneleve->getMdpUser();
     $login_user = $uneleve->getLoginUser();
     $id_user = $uneleve->getIdUser();
     $nom = $uneleve->getNomUser();
@@ -117,7 +117,7 @@ require('part/header.php');
     <div class="row author_profile_row">
         <div class="col l4 m6">
             <ul class="profile_menu">
-                <li><a href="profile.html">Activiter</a></li>
+                <li><a href="profile.php">Activiter</a></li>
                 <li><a href="about.php">A propos</a></li>
                 <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
                     <!-- Dropdown Structure -->
@@ -155,7 +155,7 @@ require('part/header.php');
                 <div class="post profile_post">
                     <div class="post_content">
 
-                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout']) && empty($_POST['delabout']) && empty($_POST['valstabouts']) && empty($_POST['valprofil'])) { ?>
+                        <?php if (empty($_POST['updateabout']) && empty($_POST['valstabout']) && empty($_POST['delabout']) && empty($_POST['valstabouts']) && empty($_POST['valprofil']) && empty($_POST['contactcvs'])) { ?>
 
                             <form action="about.php" method="post">
 
@@ -199,7 +199,7 @@ require('part/header.php');
                                 <!-- DESCRIPTION -->
 
                                 <h5>Description</h5>
-                                <p><?php echo $desc; ?></p>
+                                <p><?php echo $desc_user; ?></p>
                                 <br>
                                 <hr>
                                 <br>
@@ -208,64 +208,73 @@ require('part/header.php');
 
                                 <h5>Experience</h5>
                                 <br>
-                                <?php
-
-                                $sql_aff_stg = "SELECT * FROM OStage
-                                                WHERE id_user = $id_user";
-                                $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
-                                while ($res_aff_stg = $req_aff_stg->fetch()) {
-
-                                 ?>
                                 <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
-
-
-                                 <p>TEST</p>
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
-                                <br>
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
-                                <br>
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
-
-                              <?php } ?>
-
-                                <br>
-                                <hr>
                                 <br>
                                 <?php
+                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM offre O, OStage S
+                                                 WHERE O.id_offre = S.id_offre
+                                                 AND O.id_user = $id_user
+                                                 ORDER BY O.date_debut_offre DESC";
+                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref');
+                                while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
 
-                                $sql_aff_stg = "SELECT * FROM OEmploi
-                                                WHERE id_user = $id_user";
-                                $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
-                                while ($res_aff_stg = $req_aff_stg->fetch()) {
-
+                                  $id_offre_req = $res_aff_stg3['id_offre'];
+                                  $sql_aff_stg2 = "SELECT * FROM Ostage
+                                                   WHERE id_offre = $id_offre_req";
+                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                                  $res_aff_stg2 = $req_aff_stg2->fetch();
                                  ?>
-                                <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
 
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
-                                <br>
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
-                                <br>
-                                <p><b> <?php echo $domaine . " " . $date . "<br>"; ?> </b>
-                                    <i> <?php echo $placephrase . "<br>"; ?> </i></p>
-                                <p> <?php echo $descs; ?> </p>
+                                   <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
+                                   <p>du <?php echo $res_aff_stg3['date_debut_offre']; ?> au <?php echo urldecode($res_aff_stg2['date_fin_stage']); ?> à <?php print $res_aff_stg3['id_ent'] ?></p>
+
+                                   <p>Domaine : <?php print $res_aff_stg3['id_cat'] ?> </p>
+
+                                   <p><?php echo $res_aff_stg2['desc_user_stage']; ?></p>
+
+                                   <p>Note : <?php echo $res_aff_stg2['note_user_stage']; ?> / 5</p>
 
 
-                                <br>
-                                <hr>
-                                <br>
+
 
                                 <?php } ?>
 
+                                <br>
+                                <hr>
+                                <br>
+                                <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
+
+                                <?php
+                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM offre O, OEmploi E
+                                                 WHERE O.id_offre = E.id_offre
+                                                 AND O.id_user = $id_user
+                                                 ORDER BY O.date_debut_offre DESC";
+                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref');
+                                while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
+
+                                  $id_offre_req = $res_aff_stg3['id_offre'];
+                                  $sql_aff_stg2 = "SELECT * FROM Ostage
+                                                   WHERE id_offre = $id_offre_req";
+                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                                  $res_aff_stg2 = $req_aff_stg2->fetch();
+                                 ?>
+
+                                   <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
+                                   <p>Début le <?php echo $res_aff_stg3['date_debut_offre']; ?> à <?php print $res_aff_stg3['id_ent'] ?></p>
+
+                                   <p>Domaine : <?php print $res_aff_stg3['id_cat'] ?> </p>
+
+                                   <p><?php echo $res_aff_stg2['desc_user_stage']; ?></p>
+
+
+
+
+
+
+                                <?php } ?>
+                                <br>
+                                <hr>
+                                <br>
                                 <!-- CONTACT -->
 
                                 <h5>Contact</h5>
@@ -273,18 +282,14 @@ require('part/header.php');
                                     <tr>
                                         <td width="14%"><p>Téléphone</p></td>
                                         <td width="5%"><p> : </p></td>
-                                        <td><p><?php echo $pren; ?></p></td>
+                                        <td><p><?php echo $tel_user; ?></p></td>
                                     </tr>
                                     <tr>
                                         <td><p>E-mail</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><?php echo $skill; ?></p></td>
+                                        <td><p><?php echo $mail_user; ?></p></td>
                                     </tr>
-                                    <tr>
-                                        <td><p>Localisation</p></td>
-                                        <td><p> : </p></td>
-                                        <td><p><?php echo $skill; ?></p></td>
-                                    </tr>
+
                                 </table>
                             </form>
                         <?php } else {
@@ -355,8 +360,9 @@ require('part/header.php');
 
                             <?php
                             $sql_aff_stg = "SELECT * FROM offre O, OStage S
-                                            WHERE O.id_user = S.id_user
-                                            AND O.id_user = $id_user";
+                                            WHERE O.id_offre = S.id_offre
+                                            AND O.id_user = $id_user
+                                            ORDER BY O.date_debut_offre DESC";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
@@ -489,8 +495,9 @@ require('part/header.php');
                             <?php
 
                             $sql_aff_stg = "SELECT * FROM offre O, OEmploi E
-                                            WHERE O.id_user = E.id_user
-                                            AND O.id_user = $id_user";
+                                            WHERE O.id_offre = E.id_offre
+                                            AND O.id_user = $id_user
+                                            ORDER BY O.date_debut_offre DESC";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
@@ -632,41 +639,39 @@ require('part/header.php');
 
 
                             <!-- CONTACT -->
-
+                              <form action="about.php" method="post">
                             <h5>Contact</h5>
                             <table>
                                 <tr>
                                     <td width="14%"><p>Téléphone</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="adress_about" value="<?php echo $skill; ?>"></p>
+                                    <td><p><input type="text" name="tel_about" value="<?php echo "0".$tel_user; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><p>E-mail</p></td>
                                     <td><p> : </p></td>
-                                    <td><p><input type="text" name="adress_about" value="<?php echo $skill; ?>"></p>
+                                    <td><p><input type="text" name="mail_about" value="<?php echo $mail_user; ?>"></p>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><p>Adresse</p></td>
-                                    <td><p> : </p></td>
-                                    <td><p><input type="text" name="adress_about" value="<?php echo $skill; ?>"></p>
-                                    </td>
-                                </tr>
+
                             </table>
 
                             <table>
                                 <tr>
                                     <td>
-                                        <button type="submit" id="updateabout" value="1" name="validabout"><i
+                                        <button type="submit" id="updateabout" value="1" name="contactcvs"><i
                                                     class="fas fa-check"></i></button>
                                     </td>
-                                    <form action="about.php" method="post">
-                                        <td>
-                                            <button type="submit" id="cancelabout" value="1" name="cancelabout"><i
-                                                        class="fas fa-ban"></i></button>
-                                        </td>
-                                    </form>
+                                  </form>
+                                </tr>
+                                <tr>
+                                  <form action="about.php" method="post">
+                                      <td>
+                                          <button type="submit" id="cancelabout" value="1" name="cancelabout"><i
+                                                      class="fas fa-ban"></i></button>
+                                      </td>
+                                  </form>
                                 </tr>
                             </table>
 
@@ -1324,143 +1329,8 @@ require('part/header.php');
 <!-- End Min Container area -->
 
 <!-- Footer area -->
-<footer class="footer_area">
-    <div class="footer_row row">
-        <div class="col l3 m6 footer_col">
-            <div class="popular_posts">
-                <h3 class="categories_tittle">Popular Posts</h3>
-                <div class="row valign-wrapper popular_item">
-                    <div class="col s3 p_img">
-                        <a href="#">
-                            <img src="images/recent-post-1.jpg" alt="" class="circle responsive-img">
-                        </a>
-                    </div>
-                    <div class="col s9 p_content">
-                        <a href="#">Poster can be one of the <br> effective marketing and </a>
-                        <span class="black_text">2 days ago</span>
-                    </div>
-                </div>
-                <div class="row valign-wrapper popular_item">
-                    <div class="col s3 p_img">
-                        <a href="#">
-                            <img src="images/recent-post-2.jpg" alt="" class="circle responsive-img">
-                        </a>
-                    </div>
-                    <div class="col s9 p_content">
-                        <a href="#">Color is so powerful that it can persuade, motivate, inspire</a>
-                        <span class="black_text">3 days ago</span>
-                    </div>
-                </div>
-                <div class="row valign-wrapper popular_item">
-                    <div class="col s3 p_img">
-                        <a href="#">
-                            <img src="images/recent-post-3.jpg" alt="" class="circle responsive-img">
-                        </a>
-                    </div>
-                    <div class="col s9 p_content">
-                        <a href="#">What makes one logo better than another?</a>
-                        <span class="black_text">4 days ago</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col l3 m6 footer_col footer_trending">
-            <h3 class="categories_tittle">Trending</h3>
-            <div class="trending_area">
-                <ul class="collapsible trending_collaps" data-collapsible="accordion">
-                    <li>
-                        <div class="collapsible-header"><i class="ion-chevron-right"></i>Healthy Environment For Self
-                            Esteem
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row collaps_wrpper">
-                                <div class="col s1 media_l">
-                                    <b>1</b>
-                                    <i class="ion-android-arrow-dropup-circle"></i>
-                                </div>
-                                <div class="col s11 media_b">
-                                    <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
-                                        to pack. You may not even have a problem</p>
-                                    <h6>By <a href="#">Thomas Omalley</a></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="ion-chevron-right"></i>Burn The Ships</div>
-                        <div class="collapsible-body">
-                            <div class="row collaps_wrpper">
-                                <div class="col s1 media_l">
-                                    <b>1</b>
-                                    <i class="ion-android-arrow-dropup-circle"></i>
-                                </div>
-                                <div class="col s11 media_b">
-                                    <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
-                                        to pack. You may not even have a problem</p>
-                                    <h6>By <a href="#">Thomas Omalley</a></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header active"><i class="ion-chevron-right"></i>Harness The Power Of
-                            Your Dreams
-                        </div>
-                        <div class="collapsible-body">
-                            <div class="row collaps_wrpper">
-                                <div class="col s1 media_l">
-                                    <b>1</b>
-                                    <i class="ion-android-arrow-dropup-circle"></i>
-                                </div>
-                                <div class="col s11 media_b">
-                                    <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
-                                    <p>If you will be traveling for a ski vacation, it is often difficult to know what
-                                        to pack. You may not even have a problem</p>
-                                    <h6>By <a href="#">Thomas Omalley</a></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col l3 m6 footer_col">
-            <div class="badges">
-                <h3 class="categories_tittle">Badges</h3>
-                <ul class="badges_list">
-                    <li><a href="#"><i class="ion-bonfire"></i><span>6</span></a></li>
-                    <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                    <li><a href="#"><i class="ion-coffee"></i></a></li>
-                    <li><a href="#"><i class="ion-clock"></i> <span>3</span></a></li>
-                    <li><a href="#"><i class="ion-camera"></i></a></li>
-                    <li><a href="#"><i class="ion-ios-bell-outline"></i><span>2</span></a></li>
-                    <li><a href="#"><i class="ion-bluetooth"></i></a></li>
-                    <li><a href="#"><i class="ion-coffee"></i></a></li>
-                    <li><a href="#"><i class="ion-clock"></i></a></li>
-                </ul>
-            </div>
+<?php require('part/footer.php'); ?>
 
-            <div class="social_Sharing">
-                <h3 class="categories_tittle">Social Sharing</h3>
-                <ul class="social_icon">
-                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                    <li><a href="#" class="tumblr"><i class="ion-social-tumblr"></i></a></li>
-                    <li><a href="#" class="googleplus"><i class="ion-social-googleplus"></i></a></li>
-                    <li><a href="#" class="pinterest"><i class="ion-social-pinterest"></i></a></li>
-                    <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col l3 m6 footer_col">
-            <img src="images/advertis-3.jpg" alt="" class="responsive-img">
-        </div>
-    </div>
-    <div class="copy_right">
-        © 2018 <a href="#">Open List</a>. All rights reserved.
-    </div>
-</footer>
 
 
 <?php
@@ -1602,8 +1472,23 @@ if (isset($_POST['valprofil'])) {
   $choixpos = $uneleve->getChoixPosition();
 
 
-  // $unstage = new Eleve($id_user,$nom,$login_user,$mdp,$mail_user,$tel_user,$Nrue,$rue,$cp,$ville,$photo,$desc,$comp,$prenom,$daten,$choixpos);
-  // $unstage->modifier_eleve($unstage,$conn);
+  $unstage = new Eleve($id_user,$nom,$login_user,$mdp,$mail_user,$tel_user,$Nrue,$rue,$cp,$ville,$photo,$desc,$comp,$prenom,$daten,$choixpos);
+  $unstage->modifier_eleve($unstage,$conn);
+  ?>
+    <script>
+      window.location='./about.php';
+    </script>
+  <?php
+}
+
+
+if (isset($_POST['contactcvs'])) {
+  $tel = $_POST['tel_about'];
+  $mail = $_POST['mail_about'];
+  $mdp = $_SESSION['mdp'];
+
+  $unstage = new Eleve($id_user,$nom,$login_user,$mdp,$mail,$tel,$Nrue,$rue,$cp,$ville,$photo_user,$desc_user,$skill,$prenom,$birth,$choixpos);
+  $unstage->modifier_eleve($unstage,$conn);
   ?>
     <script>
       window.location='./about.php';
