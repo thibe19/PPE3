@@ -160,8 +160,12 @@ if (isset($_SESSION['Eleve']) ) {
               //////////////////////////////////////////////////////////////////////////////////
 
                ?>
+               <form name="stage" action="index.php" method="post">
+
+
                 <div id="stage">
                     <div class="fast_post">
+
                         <?php
 
                         $sqlS="SELECT * FROM OStage ";
@@ -209,7 +213,7 @@ if (isset($_SESSION['Eleve']) ) {
                                     <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
                                     <p><?php echo urldecode($dataO['desc_offre']); ?></p>
                                 </div>
-                                <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
+                                <center><button class="btn btn-primary " value="<?php print$dataS['id_offre']; ?>" name='postulerS' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center>
                                 <br>
                             </div>
                             <!-- End Post -->
@@ -220,8 +224,10 @@ if (isset($_SESSION['Eleve']) ) {
                         }
 
                         ?>
+
                     </div>
                 </div>
+               </form>
                 <?php
                 //////////////////////////////////////////////////////////////////////////////////
                 ////                                                                          ////
@@ -239,7 +245,7 @@ if (isset($_SESSION['Eleve']) ) {
 
                         $sqlE="SELECT * FROM OEmploi ";
                         $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
-                        
+
                         while ($dataE=$resE->fetch())
                         {
 
@@ -284,7 +290,7 @@ if (isset($_SESSION['Eleve']) ) {
                                     <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
                                     <p><?php echo urldecode($dataO['desc_offre']); ?></p>
                                 </div>
-                                <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
+                                <center><button class="btn btn-primary " name='postulerE' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center>
                                 <br>
                             </div>
                             <!-- End Post -->
@@ -437,7 +443,34 @@ if (isset($_SESSION['Eleve']) ) {
     </html>
 
     <?php
+
+if (isset($_POST['postulerS'])) {
+$stage = $_POST['postulerS'];
+
+$sql="SELECT * FROM Offre WHERE id_offre = '$stage'";
+$res = $conn -> query($sql)or die($conn -> errorInfo());
+$data=$res->fetch();
+$id_user = $date[''];
+$id_ent =
+
+
+
+
+}
+
+
+
 }//fin if eleve
+
+
+
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
