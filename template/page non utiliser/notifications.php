@@ -1,5 +1,26 @@
+
+
+<?php
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                noti                                     ////
+////                                06/12/2018                                ////
+////                                V0.0.1                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+session_start();
+require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
+require('../objet/classes.php');
+if (isset($_SESSION['Eleve'])) {
+    $uneleve = unserialize($_SESSION['Eleve']);
+    $id_user = $uneleve->getIdUser();
+}
+ ?>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/notifications.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:36 GMT -->
 <head>
@@ -36,7 +57,6 @@
 <body>
     <!-- Header_Area -->
     <?php
-    require('../ToolBox/bdd.inc.php');
     require('part/header.php');
     ?>
     <!-- End  Header_Area -->

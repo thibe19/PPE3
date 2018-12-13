@@ -1,5 +1,11 @@
 <?php
-// YANN THER - 10h20 - 22/11/2018
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                Request                                   ////
+////                                10/12/2018                                ////
+////                                V0.0.7                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
@@ -12,7 +18,7 @@ if (isset($_SESSION['Eleve'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/requests.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:24 GMT -->
 <head>
@@ -20,7 +26,7 @@ if (isset($_SESSION['Eleve'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>Open List | Html template</title>
+    <title>ViaBahuet</title>
 
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
