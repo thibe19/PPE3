@@ -194,7 +194,7 @@ if (isset($_SESSION['Eleve'])) {
                 <div class="left_side_bar">
                     <div class="categories">
                         <h3 class="categories_tittle me_tittle">About Me</h3>
-                        <p><?php (!empty($uneleve->getDescUser()))? print $uneleve->getDescUser() : print 'Encore aucune description' ?></p>
+                        <p><?php (!empty($uneleve->getDescUser()))? print urldecode($uneleve->getDescUser()) : print 'Encore aucune description' ?></p>
                     </div>
                     <?php require ('./part/left.php')?>
             <!-- Right side bar -->
@@ -558,7 +558,7 @@ elseif(isset($_SESSION['Entreprise'])){
                   <div class="left_side_bar">
                       <div class="categories">
                           <h3 class="categories_tittle me_tittle">About Me</h3>
-                          <p><?php (!empty($uneleve->getDescUser()))? print $uneleve->getDescUser() : print 'Encore aucune description' ?></p>
+                          <p><?php (!empty($uneent->getDescUser()))? print urldecode($uneent->getDescUser()) : print 'Encore aucune description' ?></p>
                       </div>
                       <?php require ('./part/left.php')?>
               <!-- Right side bar -->
