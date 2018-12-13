@@ -1,17 +1,21 @@
 <?php
-/*
-*  28/11/18
-*  post traitement
-*  v0.0.2
-*/
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                             Post traitement                              ////
+////                               13/12/2018                                 ////
+////                                V0.0.3                                    ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+
 session_start();
+require('../ToolBox/bdd.inc.php');
+require('../ToolBox/toolbox_inc.php');
+require('../objet/classes.php');
 
 if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
   $mdp=$_SESSION['mdp'];
   $ndc=$_SESSION['login'];
 }
-
-require('../ToolBox/bdd.inc.php');
 
 if (isset($_POST['post']) ) {
   $titre = $_POST['post_titre'];
@@ -30,8 +34,8 @@ if (isset($_POST['post']) ) {
     $date = date("Y-m-d");
     $heur = date("H:i:s");
 
-    $sqlI="INSERT INTO Post VALUES (NULL,'$titre','$desc','$photo','$date','$heur','$cat','$id') ";
-    $resI = $conn->Query($sqlI)or die('Erreur modification user');
+    $unpost = new Post ('',$titre,$desc,$photo,$date,$heur,$cat,$id);
+    $unpost ->insert_post($conn);
 
     echo "<script> alert('Le Post a été crée.');
                     window.location.href='./index.php';
