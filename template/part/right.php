@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Right                                     ////
-////                                06/12/2018                                ////
+////                                13/12/2018                                ////
 ////                                V0.0.4                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,50 @@
  ?>
 <div class="right_side_bar col">
     <div class="right_sidebar_iner">
+
+      <div class="trending_area">
+          <h3 class="categories_tittle">Mais Demande</h3>
+          <ul class="collapsible trending_collaps" data-collapsible="accordion">
+            <?php
+
+            $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
+            $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+
+            while ($dataD=$resD->fetch())
+            {
+              $idoffre=$dataD['id_offre'];
+
+              $sqlO="SELECT * FROM Offre WHERE id_offre = '$idoffre'";
+              $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+              $dataO=$resO->fetch();
+
+
+              $id_userE= $dataD['id_user_entreprise'];
+              $sqlUE="SELECT * FROM Utilisateur WHERE id_user = '$id_userE'";
+              $resUE = $conn -> query($sqlUE)or die($conn -> errorInfo());
+              $dataUE = $resUE -> fetch();
+
+              ?>
+              <li>
+                  <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($dataO['lib_offre']);?></div>
+                  <div class="collapsible-body">
+                      <div class="row collaps_wrpper">
+                          <div class="col s11 media_b">
+                            <a href="#" class="close_btn"><i class="ion-close-round"></i></a>
+                              <h5><a href="#"><?php print($dataUE['nom_user']); ?></a></h5>
+                              <h7><a href="#" ><?php print($dataUE['email_user']); ?></a></h7>
+                              <p><?php print urldecode($dataO['desc_offre']); ?></p>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+              <hr>
+            <?php
+            }?>
+          </ul>
+      </div>
+
+
         <div class="popular_posts popular_fast">
             <h3 class="categories_tittle">My Submisstion</h3>
             <div class="row valign-wrapper popular_item">
@@ -215,6 +259,8 @@
                 </li>
             </ul>
         </div>
+
+
     </div>
 </div>
 
