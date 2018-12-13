@@ -314,7 +314,21 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
   sleep(5);
 }
 
-//Creation d'une requete a partir d'un inout pour la recherche :)
+
+
+
+
+
+
+/*
+ *
+ *
+ *
+ * Creation d'une requete a partir d'un inout pour la recherche :)
+ *
+ *
+ *
+ */
 function req_recherche($searchs,$tables,$conn){
 
      if(empty($tables)){
@@ -323,7 +337,7 @@ function req_recherche($searchs,$tables,$conn){
              "Offre" => array("id_offre","lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","id_ent","id_cat"),
              "Entreprise" => array("nom_resp","site_web","code_APE"),
              "Eleve" => array("prenom_eleve"),
-             "Utilisateur" => array("nom_user","ville_addr_user","CP_addr_user"),
+             "Utilisateur" => array("id_user","nom_user","ville_addr_user","CP_addr_user"),
          );
      }
 
@@ -363,4 +377,247 @@ function req_recherche($searchs,$tables,$conn){
 }
 
 
+
+/*
+ *
+ * Fonction pour posutler a une offre
+ *
+ *
+ */
+
+function postule($idoffre,$id_user,$id_ent,$conn){
+    $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+    if (testsql($sqlD,$conn)) {
+        ?>
+        <div id="paspostule<?php print $idoffre;?>" style="display:none">
+            <input type="hidden" id="id_ent" value="<?php print $id_ent ?>">
+            <input type="hidden" id="id_user" value="<?php print $id_user ?>">
+            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre; ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        </div>
+        <div id="postule<?php print $idoffre;?>" style="display:block">
+        <center>
+            <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
+            <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>)"><i class="fa fa-times"></i></div>
+        </center>
+        </div>
+        <?php
+    }
+    else {
+        ?>
+        <div id="paspostule<?php print $idoffre;?>" style="display:block">
+            <input type="hidden" id="id_ent" value="<?php print $id_ent ?>">
+            <input type="hidden" id="id_user" value="<?php print $id_user ?>">
+            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre; ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        </div>
+        <div id="postule<?php print $idoffre;?>" style="display:none">
+            <center>
+                <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
+                <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>)"><i class="fa fa-times"></i></div>
+            </center>
+        </div>
+        <?php
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *
+ * Fonction d'affichage d'un stage
+ *
+ *
+ */
+
+function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
+
+<div class="fast_post">
+    <div class="post">
+        <div class="post_content">
+            <a href="details.html" class="post_img">
+                <img src="images/post.jpg" alt="">
+                <span><i class="ion-android-radio-button-off"></i>
+                    <?php print getnomcategorie($id_cat,$conn) ?></span>
+            </a>
+            <div class="row author_area">
+                <div class="col s4 author">
+                    <div class="col s4 media_left"><img height="53px"
+                                                        width="53px"
+                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                        alt="profil picture"
+                                                        class="circle">
+                    </div>
+                    <div class="col s8 media_body">
+
+                        <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
+                        <span><?php print $date_post_offre ?></span>
+                    </div>
+                </div>
+                <div class="col s4 btn_floating">
+
+                </div>
+
+            </div>
+            <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
+            <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
+            <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
+            <p><b>Date de fin &nbsp:&nbsp </b><?php print $date_fin_stage ?></p>
+            <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
+        </div>
+
+        <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
+
+        <br>
+    </div>
+</div>
+<?php
+}
+
+
+
+
+
+
+/*
+ *
+ * Fonction affichage d'emplois
+ *
+ */
+function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$salaire_emp,$type_emp,$date_debut_offre,$desc_offre,$conn){?>
+
+<div class="fast_post">
+    <div class="post">
+        <div class="post_content">
+            <a href="details.html" class="post_img">
+                <img src="images/post.jpg" alt="">
+                <span><i class="ion-android-radio-button-off"></i>
+                    <?php print getnomcategorie($id_cat,$conn) ?></span>
+            </a>
+            <div class="row author_area">
+                <div class="col s4 author">
+                    <div class="col s4 media_left"><img height="53px"
+                                                        width="53px"
+                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                        alt="profil picture"
+                                                        class="circle">
+                    </div>
+                    <div class="col s8 media_body">
+
+                        <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
+                        <span><?php print $date_post_offre ?></span>
+                    </div>
+                </div>
+                <div class="col s4 btn_floating">
+
+                </div>
+
+            </div>
+            <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
+            <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
+            <p><b>Salaire de départ &nbsp:&nbsp </b><?php print $salaire_emp ?> €</p>
+            <p><b>Type de contrat &nbsp:&nbsp </b><?php print $type_emp ?></p>
+            <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
+            <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
+        </div>
+        <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
+        <br>
+    </div>
+</div>
+    <?php
+}
+
+
+
+
+
+/*
+ *
+ * Fonction affichage posts
+ *
+ *
+ */
+
+function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$conn){
+    ?>
+
+<div class="fast_post">
+    <div class="post">
+        <div class="post_content">
+            <a href="details.html" class="post_img">
+                <img src="images/post.jpg" alt="">
+                <span><i class="ion-android-radio-button-off"></i>
+                    <?php print getnomcategorie($id_cat,$conn) ?>
+                                                </span>
+            </a>
+            <div class="row author_area">
+                <div class="col s4 author">
+                    <div class="col s4 media_left"><img height="53px" width="53px"
+                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                        alt="profil picture"
+                                                        class="circle">
+                    </div>
+
+                    <div class="col s8 media_body">
+
+                        <a href="#"><?php print getnomuser($id_user, $conn) ?></a>
+                        <span><?php print $date_post."<br>".$heure_post ?></span>
+                    </div>
+                </div>
+                <div class="col s4 btn_floating">
+
+                </div>
+
+            </div>
+            <a class="post_heding"><?php print $titre_post ?></a>
+            <p><?php print $contenu_post ?></p>
+        </div>
+        <center><a href="#" class="btn-floating waves-effect"><i
+                        class="ion-navicon-round"></i></a>
+        </center>
+        <br>
+    </div>
+</div>
+    <?php
+}
+
+
+
+
+/*
+ *
+ * Fonction affichage des utilisateurs
+ *
+ *
+ */
+function afficheuser(){
+    ?>
+        <li>
+            <div class="media first_child">
+                <img src="images/profil/test.jpg" alt="" class="circle responsive-img">
+                <div class="media_body">
+                    <p><b>jesuistest</b></p>
+                    <h6> 25, rue du test, 19100 villetest </h6>
+
+                    <div class="btn_group">
+
+                        <table>
+                            <tbody><tr>
+                                <td><span class="waves-effect follow_b">Contacter</span></td>
+                                <td>
+                                    <span class="waves-effect">Ajouter amis</span>                                         </td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                </div>
+            </div>
+        </li>
+    <?php
+}
 ?>

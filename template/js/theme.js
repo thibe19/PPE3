@@ -98,3 +98,46 @@
     graphChart ();
 
 })(jQuery);
+
+function postuler(id_offre){
+
+    var id_offre  = id_offre;
+    var id_user  = document.getElementById('id_user').value;
+    var id_ent  = document.getElementById('id_ent').value;
+
+    $.ajax({
+        url: '../ToolBox/trait_postuler.php',
+        type: "GET",
+        data: {
+            'postule' : 1,
+            'id_offre' : id_offre,
+            'id_user' : id_user,
+            'id_ent' : id_ent,
+        }
+    });
+    var div = "paspostule"+id_offre;
+    document.getElementById(div).style.display="none";
+    var divaff = "postule"+id_offre;
+    document.getElementById(divaff).style.display="block";
+}
+
+function annuldemande(id_offre){
+    var id_offre  = id_offre;
+    var id_user  = document.getElementById('id_user').value;
+    var id_ent  = document.getElementById('id_ent').value;
+
+    $.ajax({
+        url: '../ToolBox/trait_postuler.php',
+        type: "GET",
+        data: {
+            'canceldemande' : 1,
+            'id_offre' : id_offre,
+            'id_user' : id_user,
+            'id_ent' : id_ent,
+        }
+    });
+    var div = "paspostule"+id_offre;
+    document.getElementById(div).style.display="block";
+    var divaff = "postule"+id_offre;
+    document.getElementById(divaff).style.display="none";
+}

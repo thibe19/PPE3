@@ -52,7 +52,19 @@ if (isset($_SESSION['Eleve']) ) {
         <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
         <script src="js/respond.min.js"></script>
-        <![endif]-->
+        <![endif]
+
+
+
+        <!-- Gestion des demandes offres -->
+        <script>
+
+
+        </script>
+
+
+
+
     </head>
     <body>
     <!-- Header_Area -->
@@ -81,6 +93,8 @@ if (isset($_SESSION['Eleve']) ) {
         <div class="section_row">
 
             <div class="middle_section col" id="infinite_scroll">
+
+
                 <!-- début de l'affichage des Post -->
 
 
@@ -170,7 +184,6 @@ if (isset($_SESSION['Eleve']) ) {
               //////////////////////////////////////////////////////////////////////////////////
 
                ?>
-               <form name="stage" action="index.php" method="post">
                 <div id="stage">
                     <div class="fast_post">
 
@@ -192,47 +205,13 @@ if (isset($_SESSION['Eleve']) ) {
                             $dataC=$resC->fetch();
 
                             $id_user= $dataO['id_user'];
-                            $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                            $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                            $dataU = $resU -> fetch();
+                            $id_user= $dataO['id_user'];
                             ?>
                             <!-- Post -->
 
-                            <div class="post">
-                                <div class="post_content">
-                                    <a href="details.html" class="post_img">
-                                        <img src="images/post.jpg" alt="">
-                                        <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                                    </a>
-                                    <div class="row author_area">
-                                        <div class="col s4 author">
-                                            <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                            <div class="col s8 media_body">
-
-                                                <a ><?php echo urldecode($dataO['date_post_offre']); ?></a>
-
-                                            </div>
-                                        </div>
-                                        <div class="col s4 btn_floating">
-
-                                        </div>
-                                    </div>
-                                    <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
-                                    <p><?php echo urldecode($dataO['desc_offre']); ?></p>
-                                </div>
-                                <?php
-                                $idoffre=$dataS['id_offre'];
-                                $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
-                               if (testsql($sqlD,$conn)) {
-                                  ?><center><div class="btn btn-primary " ><i class="fa fa-bullhorn"> En Attente</i></div></center><?php
-                                }
-                                else {
-                                  ?><center><button class="btn btn-primary " value="<?php print$dataS['id_offre']; ?>" name='postulerS' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center><?php
-                                }
-                                 ?>
-                                <br>
-                            </div>
+                            <?php affichestage($dataC['id_cat'],$id_user,$dataO['id_offre'],$dataO['id_ent'],$dataO['date_post_offre'],
+                            $dataO['lib_offre'],$dataO['niveau_req'],$dataO['date_debut_offre'],$dataS['date_fin_stage'],$dataO['desc_offre'],$conn);
+                            ?>
                             <!-- End Post -->
                             <br>
 
@@ -244,7 +223,6 @@ if (isset($_SESSION['Eleve']) ) {
 
                     </div>
                 </div>
-               </form>
                 <?php
                 //////////////////////////////////////////////////////////////////////////////////
                 ////                                                                          ////
@@ -254,8 +232,7 @@ if (isset($_SESSION['Eleve']) ) {
                 ////                                                                          ////
                 //////////////////////////////////////////////////////////////////////////////////
                 ?>
-                <form name="emploi" action="index.php" method="post">
-                <div id="emploi">
+                    <div id="emploi">
                     <div class="fast_post">
                         <?php
                         $sqlE="SELECT * FROM OEmploi ";
@@ -275,48 +252,13 @@ if (isset($_SESSION['Eleve']) ) {
                             $dataC=$resC->fetch();
 
                             $id_user= $dataO['id_user'];
-                            $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-                            $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                            $dataU = $resU -> fetch();
 
                             ?>
                             <!-- Post -->
 
-                            <div class="post">
-                                <div class="post_content">
-                                    <a href="details.html" class="post_img">
-                                        <img src="images/post.jpg" alt="">
-                                        <span><i class="ion-android-radio-button-off"></i><?php echo$dataC['lib_cat']; ?></span>
-                                    </a>
-                                    <div class="row author_area">
-                                        <div class="col s4 author">
-                                            <div class="col s4 media_left"><img src="images/author-1.jpg" alt="" class="circle"></div>
-
-                                            <div class="col s8 media_body">
-
-                                                <a ><?php echo urldecode($dataO['date_post_offre']); ?></a>
-
-                                            </div>
-                                        </div>
-                                        <div class="col s4 btn_floating">
-
-                                        </div>
-                                    </div>
-                                    <a class="post_heding"><?php echo urldecode($dataO['lib_offre']); ?></a>
-                                    <p><?php echo urldecode($dataO['desc_offre']); ?></p>
-                                </div>
-                                <?php
-
-                                $idoffre=$dataS['id_offre'];
-                                $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
-                               if (testsql($sqlD,$conn)) {
-                                  ?><center><div class="btn btn-primary " ><i class="fa fa-bullhorn"> En Attente</i></div></center><?php
-                                }else {
-                                  ?><center><button class="btn btn-primary " value="<?php print$dataO['id_offre']; ?>" name='postulerE' type="submit"><i class="fa fa-bullhorn"> Postuler</i></button></center><?php
-                                }
-                                 ?>
-                                <br>
-                            </div>
+                            <?php afficheemploi($dataC['id_cat'],$dataO['id_offre'],$id_user,$dataO['id_ent'],$dataO['date_post_offre'],
+                            $dataO['lib_offre'],$dataO['niveau_req'],$dataE['salaire_emp'],$dataE['type_emp'],$dataO['date_debut_offre'],$dataO['desc_offre'],$conn)
+                            ?>
                             <!-- End Post -->
                             <br>
 
@@ -328,7 +270,9 @@ if (isset($_SESSION['Eleve']) ) {
                 </div>
 
 
-                <?php }
+
+                <?php
+                }
 
 
 
@@ -342,142 +286,108 @@ if (isset($_SESSION['Eleve']) ) {
                     foreach ($resultats as $r=>$resultat) {
                         if(!empty($resultat)) {
                             $trouve = 1;
-                            if($r == "Post") {
-                                foreach ($resultat as $data) {
+                            switch($r)
+                            {
+                                /*
+                                 *
+                                 *
+                                 * Recherche de posts
+                                 *
+                                 *
+                                 */
+
+                                case "Post":
+                                    foreach ($resultat as $data) {
+                                    affichepost($data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
+                                    }
+                                break;
+
+
+                                /*
+                                 *
+                                 * Recherche d'utilisateurs
+                                 *
+                                 *
+                                 */
+
+
+                                case "Utilisateur":
                                     ?>
-                                    <div class="post">
-                                        <div class="post_content">
-                                            <a href="details.html" class="post_img">
-                                                <img src="images/post.jpg" alt="">
-                                                <span><i class="ion-android-radio-button-off"></i>
-                                                <?php print getnomcategorie($data->id_cat,$conn) ?>
-                                                </span>
-                                            </a>
-                                            <div class="row author_area">
-                                                <div class="col s4 author">
-                                                    <div class="col s4 media_left"><img height="53px" width="53px"
-                                                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                                                        alt="profil picture"
-                                                                                        class="circle">
-                                                    </div>
+                                    <section class="liste_user">
+                                        <div class="notifications">
+                                            <!-- Dropdown Structure -->
 
-                                                    <div class="col s8 media_body">
+                                            <div class="hed_notic">Utilisateurs <span></span></div>
 
-                                                        <a href="#"><?php print getnomuser($data->id_user, $conn) ?></a>
-                                                        <span><?php print $data->date_post."<br>".$data->heure_post ?></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4 btn_floating">
-
-                                                </div>
-
+                                                <ul class="notifications_content follow">
+                                                    <?php
+                                                    foreach ($resultat as $data) {
+                                                       afficheuser();
+                                                    }
+                                                    ?>
+                                                </ul>
                                             </div>
-                                            <a class="post_heding"><?php print $data->titre_post ?></a>
-                                            <p><?php print $data->contenu_post ?></p>
-                                        </div>
-                                        <center><a href="#" class="btn-floating waves-effect"><i
-                                                        class="ion-navicon-round"></i></a>
-                                        </center>
-                                        <br>
-                                    </div>
+                                        </section>
                                     <?php
-                                }
-                            }
-                            if($r == "Offre") {
-                                foreach ($resultat as $data) {
-                                    $stage = getoffrestagebdd($data->id_offre,$conn);
-                                    $emploi = getoffreempbdd($data->id_offre,$conn);
-                                    if ($stage){
-                                        foreach ($stage as $s) { ?>
-                                            <div class="post">
-                                                <div class="post_content">
-                                                    <a href="details.html" class="post_img">
-                                                        <img src="images/post.jpg" alt="">
-                                                        <span><i class="ion-android-radio-button-off"></i>
-                                                            <?php print getnomcategorie($data->id_cat,$conn) ?></span>
-                                                    </a>
-                                                    <div class="row author_area">
-                                                        <div class="col s4 author">
-                                                            <div class="col s4 media_left"><img height="53px"
-                                                                                                width="53px"
-                                                                                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                                                                alt="profil picture"
-                                                                                                class="circle">
-                                                            </div>
-                                                            <div class="col s8 media_body">
+                                break;
 
-                                                                <a href="#"><?php print getnoment($data->id_ent, $conn) ?></a>
-                                                                <span><?php print $data->date_post_offre ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col s4 btn_floating">
 
-                                                        </div>
 
-                                                    </div>
-                                                    <a class="post_heding"><?php print urldecode($data->lib_offre) ?></a>
-                                                    <p><b>Niveau requis &nbsp:&nbsp </b><?php print $data->niveau_req ?></p>
-                                                    <p><b>Date de début &nbsp:&nbsp </b><?php print $data->date_debut_offre ?></p>
-                                                    <p><b>Date de fin &nbsp:&nbsp </b><?php print $s->date_fin_stage ?></p>
-                                                    <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($data->desc_offre) ?></p>
-                                                </div>
-                                                <center><a href="#" class="btn-floating waves-effect"><i
-                                                                class="ion-navicon-round"></i></a>
-                                                </center>
-                                                <br>
-                                            </div>
-                                            <?php
+
+                                /*
+                                 *
+                                 *
+                                 * Recherche d'offres
+                                 *
+                                 *
+                                 */
+
+
+                                case "Offre":
+                                    foreach ($resultat as $data) {
+                                        $stage = getoffrestagebdd($data->id_offre,$conn);
+                                        $emploi = getoffreempbdd($data->id_offre,$conn);
+
+
+                                        /*
+                                         *
+                                         *
+                                         * Recherche de stage
+                                         *
+                                         *
+                                         */
+                                        if ($stage){
+                                            foreach ($stage as $s) {
+                                                affichestage($data->id_cat,$id_user,$data->id_offre,$data->id_ent,$data->date_post_offre,
+                                                    $data->lib_offre,$data->niveau_req,$data->date_debut_offre,$s->date_fin_stage,$data->desc_offre,$conn);
+                                            }
+                                        }
+
+
+                                        /*
+                                         *
+                                         *
+                                         * Recherche d'emploi
+                                         *
+                                         *
+                                         */
+
+                                        elseif ($emploi){
+                                            foreach ($emploi as $s) {
+                                                afficheemploi($data->id_cat,$data->id_offre,$id_user,$data->id_ent,$data->date_post_offre,$data->lib_offre,
+                                                    $data->niveau_req,$s->salaire_emp,$s->type_emp,$data->date_debut_offre,$data->desc_offre,$conn);
+                                            }
                                         }
                                     }
-                                    elseif ($emploi){
-                                        foreach ($emploi as $s) { ?>
-                                            <div class="post">
-                                                <div class="post_content">
-                                                    <a href="details.html" class="post_img">
-                                                        <img src="images/post.jpg" alt="">
-                                                        <span><i class="ion-android-radio-button-off"></i>
-                                                            <?php print getnomcategorie($data->id_cat,$conn) ?></span>
-                                                    </a>
-                                                    <div class="row author_area">
-                                                        <div class="col s4 author">
-                                                            <div class="col s4 media_left"><img height="53px"
-                                                                                                width="53px"
-                                                                                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                                                                alt="profil picture"
-                                                                                                class="circle">
-                                                            </div>
-                                                            <div class="col s8 media_body">
-
-                                                                <a href="#"><?php print getnoment($data->id_ent, $conn) ?></a>
-                                                                <span><?php print $data->date_post_offre ?></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col s4 btn_floating">
-
-                                                        </div>
-
-                                                    </div>
-                                                    <a class="post_heding"><?php print urldecode($data->lib_offre) ?></a>
-                                                    <p><b>Niveau requis &nbsp:&nbsp </b><?php print $data->niveau_req ?></p>
-                                                    <p><b>Salaire de départ &nbsp:&nbsp </b><?php print $s->salaire_emp ?> €</p>
-                                                    <p><b>Type de contrat &nbsp:&nbsp </b><?php print $s->type_emp ?></p>
-                                                    <p><b>Date de début &nbsp:&nbsp </b><?php print $data->date_debut_offre ?></p>
-                                                    <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($data->desc_offre) ?></p>
-                                                </div>
-                                                <center><a href="#" class="btn-floating waves-effect"><i
-                                                                class="ion-navicon-round"></i></a>
-                                                </center>
-                                                <br>
-                                            </div>
-                                            <?php
-                                        }
-                                    }
-                                }
+                                break;
                             }
                         }
                     }
-                    if($trouve == 0){
-                        print 'Pas de résultats';
+                    if($trouve == 0){  ?>
+
+                        <span>Pas de résultats</span>
+
+                        <?php
                     }
                 }
                 ?>
@@ -490,7 +400,7 @@ if (isset($_SESSION['Eleve']) ) {
                 <div class="left_side_bar">
                     <div class="categories">
                         <h3 class="categories_tittle me_tittle">About Me</h3>
-                        <p><?php (!empty($uneleve->getDescUser()))? print $uneleve->getDescUser() : print 'Encore aucune description' ?></p>
+                        <p><?php (!empty($uneleve->getDescUser()))? print urldecode($uneleve->getDescUser()) : print 'Encore aucune description' ?></p>
                     </div>
                     <?php require ('./part/left.php')?>
             <!-- Right side bar -->
@@ -624,44 +534,6 @@ if (isset($_SESSION['Eleve']) ) {
 
     <?php
 
-if (isset($_POST['postulerS'])) {
-$stage = $_POST['postulerS'];
-
-$sqlO="SELECT * FROM Offre WHERE id_offre = '$stage'";
-$resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-$dataO=$resO->fetch();
-$id_user = $dataO['id_user'];
-$id_ent = $dataO['id_ent'];
-
-
-  $SQL = "INSERT INTO demande
-          VALUES(NULL,'$id_user','$id_ent','$stage')";
-  $res = $conn->Query($SQL)or die('Erreur inscription eleve');
-  echo "<script> alert('Une demande a été envoiler ');
-                  window.location.href='./index.php';
-        </script>";
-
-
-}//fin postulerS
-
-if (isset($_POST['postulerE'])) {
-$emploi = $_POST['postulerE'];
-
-$sqlO="SELECT * FROM Offre WHERE id_offre = '$emploi'";
-$resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-$dataO=$resO->fetch();
-$id_user = $dataO['id_user'];
-$id_ent = $dataO['id_ent'];
-
-
-  $SQL = "INSERT INTO demande
-          VALUES(NULL,'$id_user','$id_ent','$emploi')";
-  $res = $conn->Query($SQL)or die('Erreur inscription eleve');
-  echo "<script> alert('Une demande a été envoiler ');
-        </script>";
-
-
-}//fin postulerS
 
 
 
