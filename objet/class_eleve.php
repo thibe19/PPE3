@@ -1,12 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * Date: 21/11/18
- * Time: 14H
- * v0.0.3
- */
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                               Eleve class                                ////
+////                               13/12/2018                                 ////
+////                               V0.0.3                                     ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 
-//////////////////// class Eleve //////////////////////
+
 class Eleve extends Utilisateur
 {
 
@@ -24,11 +25,6 @@ class Eleve extends Utilisateur
         $this->date = $date;
         $this->choix_position = $choix;
     }
-
-
-    /////////////////// Update Eleve ////////////////////
-
-
 
     /*
      * GETTERS
@@ -94,9 +90,14 @@ class Eleve extends Utilisateur
         $this->choix_position = $choix_position;
     }
 
-    /*
-     * Inscription eleve
-     */
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                Insert                                    ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
     public function inscriptioneleve($objet, $conn)
     {
         $objet->inscription($objet,$conn);
@@ -120,6 +121,14 @@ class Eleve extends Utilisateur
             $res = $conn->Query($SQL)or die('Erreur inscription eleve');
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                MODIFIER                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
 
     public function modifier_eleve($objet,$conn){
 
