@@ -118,7 +118,7 @@ if (isset($_SESSION['Eleve']) ) {
                     <div class="fast_post">
 
                         <?php
-  
+
                         $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
                         $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
 
@@ -297,9 +297,11 @@ if (isset($_SESSION['Eleve']) ) {
                                  */
 
                                 case "Post":
+                                ?>   <div class="fast_post"> <?php
                                     foreach ($resultat as $data) {
                                     affichepost($data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
                                     }
+                                ?> </div> <?php
                                 break;
 
 
@@ -322,7 +324,7 @@ if (isset($_SESSION['Eleve']) ) {
                                                 <ul class="notifications_content follow">
                                                     <?php
                                                     foreach ($resultat as $data) {
-                                                       afficheuser();
+                                                       afficheuser($id_user,$data->num_addr_user,$data->rue_addr_user,$data->CP_addr_user,$data->ville_addr_user,$conn);
                                                     }
                                                     ?>
                                                 </ul>
@@ -344,6 +346,7 @@ if (isset($_SESSION['Eleve']) ) {
 
 
                                 case "Offre":
+                                ?>   <div class="fast_post"> <?php
                                     foreach ($resultat as $data) {
                                         $stage = getoffrestagebdd($data->id_offre,$conn);
                                         $emploi = getoffreempbdd($data->id_offre,$conn);
@@ -379,6 +382,7 @@ if (isset($_SESSION['Eleve']) ) {
                                             }
                                         }
                                     }
+                                ?> </div> <?php
                                 break;
                             }
                         }

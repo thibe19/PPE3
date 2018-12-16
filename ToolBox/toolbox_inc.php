@@ -337,7 +337,7 @@ function req_recherche($searchs,$tables,$conn){
              "Offre" => array("id_offre","lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","id_ent","id_cat"),
              "Entreprise" => array("nom_resp","site_web","code_APE"),
              "Eleve" => array("prenom_eleve"),
-             "Utilisateur" => array("id_user","nom_user","ville_addr_user","CP_addr_user"),
+             "Utilisateur" => array("id_user","nom_user","num_addr_user","rue_addr_user","ville_addr_user","CP_addr_user"),
          );
      }
 
@@ -438,44 +438,36 @@ function postule($idoffre,$id_user,$id_ent,$conn){
 
 function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
 
-<div class="fast_post">
-    <div class="post">
-        <div class="post_content">
-            <a href="details.html" class="post_img">
-                <img src="images/post.jpg" alt="">
-                <span><i class="ion-android-radio-button-off"></i>
-                    <?php print getnomcategorie($id_cat,$conn) ?></span>
-            </a>
-            <div class="row author_area">
-                <div class="col s4 author">
-                    <div class="col s4 media_left"><img height="53px"
-                                                        width="53px"
-                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                        alt="profil picture"
-                                                        class="circle">
-                    </div>
-                    <div class="col s8 media_body">
 
-                        <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
-                        <span><?php print $date_post_offre ?></span>
-                    </div>
-                </div>
-                <div class="col s4 btn_floating">
+<div class="post">
+    <div class="post_content">
+        <a href="details.html" class="post_img">
+            <img src="images/post.jpg" alt="">
+            <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
+        </a>
+        <div class="row author_area">
+            <div class="col s4 author">
+                <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="profil picture" class="circle"></div>
+
+                <div class="col s8 media_body">
+
+                  <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
+                  <span><?php print $date_post_offre ?></span>
 
                 </div>
+            </div>
+            <div class="col s4 btn_floating">
 
             </div>
-            <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
-            <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
-            <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
-            <p><b>Date de fin &nbsp:&nbsp </b><?php print $date_fin_stage ?></p>
-            <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
         </div>
-
-        <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
-
-        <br>
+        <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
+        <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
+        <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
+        <p><b>Date de fin &nbsp:&nbsp </b><?php print $date_fin_stage ?></p>
+        <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
     </div>
+    <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
+    <br>
 </div>
 <?php
 }
@@ -492,34 +484,28 @@ function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_o
  */
 function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$salaire_emp,$type_emp,$date_debut_offre,$desc_offre,$conn){?>
 
-<div class="fast_post">
     <div class="post">
         <div class="post_content">
             <a href="details.html" class="post_img">
                 <img src="images/post.jpg" alt="">
-                <span><i class="ion-android-radio-button-off"></i>
-                    <?php print getnomcategorie($id_cat,$conn) ?></span>
+                <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
             </a>
             <div class="row author_area">
                 <div class="col s4 author">
-                    <div class="col s4 media_left"><img height="53px"
-                                                        width="53px"
-                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                        alt="profil picture"
-                                                        class="circle">
-                    </div>
+                    <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></div>
+
                     <div class="col s8 media_body">
 
-                        <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
-                        <span><?php print $date_post_offre ?></span>
+                      <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
+                      <span><?php print $date_post_offre ?></span>
+
                     </div>
                 </div>
                 <div class="col s4 btn_floating">
 
                 </div>
-
             </div>
-            <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
+            <a class="post_heding"<?php print urldecode($lib_offre) ?></a>
             <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
             <p><b>Salaire de départ &nbsp:&nbsp </b><?php print $salaire_emp ?> €</p>
             <p><b>Type de contrat &nbsp:&nbsp </b><?php print $type_emp ?></p>
@@ -529,7 +515,6 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
         <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
         <br>
     </div>
-</div>
     <?php
 }
 
@@ -539,7 +524,8 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
 
 /*
  *
- * Fonction affichage posts
+ *
+ *    Fonction affichage posts
  *
  *
  */
@@ -547,7 +533,6 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
 function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$conn){
     ?>
 
-<div class="fast_post">
     <div class="post">
         <div class="post_content">
             <a href="details.html" class="post_img">
@@ -583,7 +568,6 @@ function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$conten
         </center>
         <br>
     </div>
-</div>
     <?php
 }
 
@@ -596,14 +580,14 @@ function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$conten
  *
  *
  */
-function afficheuser(){
+function afficheuser($id_user,$numad,$ruead,$villead,$cpad,$conn){
     ?>
         <li>
             <div class="media first_child">
-                <img src="images/profil/test.jpg" alt="" class="circle responsive-img">
+                <img src="images/profil/<?php print $test1 ?>" alt="" class="circle responsive-img">
                 <div class="media_body">
-                    <p><b>jesuistest</b></p>
-                    <h6> 25, rue du test, 19100 villetest </h6>
+                    <p><b><?php print getnomuser($id_user, $conn) ?></b></p>
+                    <h6> <?php print $numad.'&nbsp'.$ruead.'&nbsp'.$villead.'&nbsp'.$cpad; ?></h6>
 
                     <div class="btn_group">
 
