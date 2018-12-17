@@ -119,8 +119,8 @@ if (isset($_SESSION['Eleve']) ) {
 
                         <?php
 
-                        $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
-                        $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+                        $unpost = new Post();
+                        $resP = $unpost->selectpostorderby($conn);
 
                         while ($dataP=$resP->fetch())
                         {
