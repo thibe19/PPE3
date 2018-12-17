@@ -169,6 +169,14 @@ Public function getAllpost(){
 
   }
 
+
+  function selectpostprderby($conn){
+      $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
+      $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+
+      return $resP;
+  }
+
 }
 
  ?>

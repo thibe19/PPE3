@@ -17,7 +17,7 @@ class Eleve extends Utilisateur
 
 
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                         $ville = "", $photo = "", $desc_user = "", $dom_acti, $prenom = "", $date = "", $choix = "")
+                         $ville = "", $photo = "", $desc_user = "", $dom_acti = "", $prenom = "", $date = "", $choix = "")
     {
         Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
             $ville,$photo, $desc_user, $dom_acti);

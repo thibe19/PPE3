@@ -119,8 +119,9 @@ if (isset($_SESSION['Eleve']) ) {
 
                         <?php
 
-                        $sqlP="SELECT * FROM Post ORDER BY date_post DESC";
-                        $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+
+                        $post = new Post();
+                        $resP = $post->selectpostprderby($conn);
 
                         while ($dataP=$resP->fetch())
                         {
@@ -232,7 +233,7 @@ if (isset($_SESSION['Eleve']) ) {
                 ////                                                                          ////
                 //////////////////////////////////////////////////////////////////////////////////
                 ?>
-                    <div id="emploi">
+                <div id="emploi">
                     <div class="fast_post">
                         <?php
                         $sqlE="SELECT * FROM OEmploi ";
@@ -397,7 +398,8 @@ if (isset($_SESSION['Eleve']) ) {
                 ?>
 
 
-            </div>   <!-- Fin des post/stage/emploi -->
+            </div>
+            <!-- Fin des post/stage/emploi -->
 
             <!-- left side bar -->
             <div class="col">
