@@ -28,7 +28,6 @@
             while ($dataD=$resD->fetch())
             {
               $idoffre=$dataD['id_offre'];
-
               $sqlO="SELECT * FROM Offre WHERE id_offre = '$idoffre'";
               $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
               $dataO=$resO->fetch();
