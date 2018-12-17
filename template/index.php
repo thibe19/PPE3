@@ -11,7 +11,6 @@ session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
-trttttrrrr;
 
 if (isset($_SESSION['Eleve']) ) {
   $uneleve = unserialize($_SESSION['Eleve']);
