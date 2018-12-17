@@ -102,8 +102,8 @@ if (isset($_SESSION['Eleve'])) {
             <div class="col l4 m6">
                 <ul class="post_follow">
                     <li>Posts <b><?php print $total; ?></b></li>
-                    <li>Followers <b><?php print $ami;  ?></b></li>
-                    <li>Following <b><?php print $suivi; ?></b></li>
+                    <li>Following <b><?php print $ami;  ?></b></li>
+                    <li>Followers <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
             <div class="col l4 m6">

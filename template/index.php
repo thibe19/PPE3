@@ -129,8 +129,8 @@ if (isset($_SESSION['Eleve']) ) {
                             $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
                             $dataC=$resC->fetch();
 
-                            $id_user= $dataP['id_user'];
-                            $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+                            $id_user2= $dataP['id_user'];
+                            $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user2'";
                             $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
                             $dataU = $resU -> fetch();
                             ?>
@@ -144,7 +144,7 @@ if (isset($_SESSION['Eleve']) ) {
                                     </a>
                                     <div class="row author_area">
                                         <div class="col s4 author">
-                                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></div>
+                                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user2, $conn) ?>" alt="" class="circle"></div>
 
                                             <div class="col s8 media_body">
 
