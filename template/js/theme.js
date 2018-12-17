@@ -106,7 +106,7 @@ function postuler(id_offre){
     var id_ent  = document.getElementById('id_ent').value;
 
     $.ajax({
-        url: '../ToolBox/trait_postuler.php',
+        url: '../ToolBox/trait_ajax.php',
         type: "GET",
         data: {
             'postule' : 1,
@@ -127,7 +127,7 @@ function annuldemande(id_offre){
     var id_ent  = document.getElementById('id_ent').value;
 
     $.ajax({
-        url: '../ToolBox/trait_postuler.php',
+        url: '../ToolBox/trait_ajax.php',
         type: "GET",
         data: {
             'canceldemande' : 1,
@@ -140,4 +140,25 @@ function annuldemande(id_offre){
     document.getElementById(div).style.display="block";
     var divaff = "postule"+id_offre;
     document.getElementById(divaff).style.display="none";
+}
+
+function modifpreferences(id_user){
+    var preferences = new Array();
+    $('.checkedpref:checked').each(function() {
+        preferences.push(this.value);
+    });
+
+    prefjs = JSON.stringify(preferences);
+
+    $.ajax({
+        url: '../ToolBox/trait_ajax.php',
+        type: "GET",
+        data: {
+            'modifpref' : 1,
+            'preferences' : prefjs,
+            'id_user' : id_user,
+        },
+        sucess:console.log('ajax marche')
+    });
+
 }

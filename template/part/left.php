@@ -51,8 +51,7 @@ if (isset($_SESSION['Eleve'])) {
 
 ?>
 <div class="interests">
-  <form method="post" name="checkboxform" action="<?php print $_SERVER['SCRIPT_NAME'] . "#intersets"; ?>">
-    <h3 id="intersets" class="categories_tittle">Vos préférences <span onclick="checkboxform.submit()">Modifier</span>
+    <h3 id="intersets" class="categories_tittle">Vos préférences <span onclick="modifpreferences(<?php print $iduser ?>)">Modifier</span>
     </h3>
     <ul class="interests_list">
       <?php if (isset($pref)) {
@@ -60,7 +59,7 @@ if (isset($_SESSION['Eleve'])) {
           if (in_array($p->id_pref, $prefuser)) {
             ?>
             <div class="checkbox">
-              <input id="checkbox<?php print $p->id_pref ?>" class="styled"
+              <input id="checkbox<?php print $p->id_pref ?>" class="checkedpref styled"
               name="prefusermodif[]"
               value="<?php print $p->id_pref ?>" type="checkbox" checked>
               <label for="checkbox<?php print $p->id_pref ?>">
@@ -71,7 +70,7 @@ if (isset($_SESSION['Eleve'])) {
           }
           else { ?>
             <div class="checkbox">
-              <input id="checkbox<?php print $p->id_pref ?>" class="styled"
+              <input id="checkbox<?php print $p->id_pref ?>" class="checkedpref styled"
               name="prefusermodif[]"
               value="<?php print $p->id_pref ?>" type="checkbox">
               <label for="checkbox<?php print $p->id_pref ?>">
@@ -84,7 +83,6 @@ if (isset($_SESSION['Eleve'])) {
       ?>
     </ul>
     <input type="hidden" name="suprisok" value="1">
-  </form>
 </div>
 <?php
 

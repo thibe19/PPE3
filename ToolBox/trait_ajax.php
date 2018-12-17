@@ -30,4 +30,16 @@ if ($_GET['canceldemande']){
             AND id_offre='$offre'";
     $req = $conn->Query($SQL)or die('erreur suppression demande offre');
 }
+
+if ($_GET['modifpref']){
+
+    $id_user = $_GET['id_user'];
+    $pref = json_decode($_GET['preferences']);
+
+    foreach ($pref as $p){
+        $SQL = "INSERT INTO eleve_pref VALUES('$p','$id_user')";
+        $req = $conn->Query($SQL)or die('Erreur insert pref eleve');
+    }
+
+}
 ?>
