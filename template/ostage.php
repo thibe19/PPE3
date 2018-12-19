@@ -80,8 +80,8 @@
           </div>
 
             <?php
-            $sqlEnt="SELECT * FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
-            $resEnt = $conn -> query($sqlEnt)or die($conn -> errorInfo());
+            $unentreprise = new Entreprise();
+            $resEnt = $unentreprise->listentreprise($conn);
             ?>
             <div class="row">
               <div class="col">

@@ -147,4 +147,12 @@ class Entreprise extends Utilisateur
 
     }
 
+
+    function listentreprise($conn){
+
+        $sqlEnt="SELECT U.id_user,U.nom_user FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
+        $resEnt = $conn -> query($sqlEnt)or die($conn -> errorInfo());
+
+        return $resEnt;
+    }
 }// class
