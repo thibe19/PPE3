@@ -94,7 +94,8 @@ if (isset($_SESSION['Eleve'])) {
 
     <?php
     $sql = "SELECT * FROM ajoute_amis
-            WHERE id_user_Eleve != '$id_user'";
+            WHERE id_user_Eleve != '$id_user'
+            AND id_user = '$id_user'";
     $req = $conn->Query($sql)or die('Erreur dans le requete cat');
     while ($res = $req->fetch()) {
       $id_user2 = $res['id_user_Eleve'];
