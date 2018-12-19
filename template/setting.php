@@ -2,8 +2,8 @@
  //////////////////////////////////////////////////////////////////////////////////
  ////                                                                          ////
  ////                                Profil                                    ////
- ////                                12/12/2018                                ////
- ////                                v0.1.1                                    ////
+ ////                                19/12/2018                                ////
+ ////                                v0.1.2                                    ////
  ////                                                                          ////
  //////////////////////////////////////////////////////////////////////////////////
 
@@ -22,12 +22,13 @@ if (isset($_SESSION['Eleve'])) {
   $mdp=$_SESSION['mdp'];
   $photo = $uneleve ->getPhotoUser();
 
-  $sql="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-  $res = $conn -> query($sql)or die($conn -> errorInfo());
-  $data = $res -> fetch();
+  $unutilisateur = new Utilisateur();
+  $resU = $unutilisateur->selectAllUtilisateur($id_user,$conn);
+  $data = $resU -> fetch();
 
-  $sqlE="SELECT * FROM Eleve WHERE id_user = '$id_user'";
-  $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+
+  $uneleve = new Eleve();
+  $resE = $uneleve->selectAllEleve($id_user,$conn);
   $dataE = $resE -> fetch();
 
 
@@ -540,12 +541,12 @@ if (isset($_SESSION['Entreprise'])) {
   $mdp=$_SESSION['mdp'];
   $photo = $unentreprise ->getPhotoUser();
 
-  $sql="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-  $res = $conn -> query($sql)or die($conn -> errorInfo());
-  $data = $res -> fetch();
+  $unutilisateur = new Utilisateur();
+  $resU = $unutilisateur->selectAllUtilisateur($id_user,$conn);
+  $data = $resU -> fetch();
 
-  $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
-  $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
+  $unentreprise = new Entreprise();
+  $resEn= $unentreprise-> selectAllEntreprise($id_user,$conn);
   $dataEn = $resEn -> fetch();
   ?>
 

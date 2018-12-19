@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Eleve class                                ////
-////                               13/12/2018                                 ////
-////                               V0.0.3                                     ////
+////                               19/12/2018                                 ////
+////                               V0.0.4                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@ class Eleve extends Utilisateur
 
 
     function __construct($id = "", $nom = "", $login = "", $mdp = "", $email = "", $numt = "", $numa = "", $rue = "", $CP = "",
-                         $ville = "", $photo = "", $desc_user = "", $dom_acti, $prenom = "", $date = "", $choix = "")
+                         $ville = "", $photo = "", $desc_user = "", $dom_acti = "", $prenom = "", $date = "", $choix = "")
     {
         Utilisateur::__construct($id, $nom, $login, $mdp, $email, $numt, $numa, $rue, $CP,
             $ville,$photo, $desc_user, $dom_acti);
@@ -145,4 +145,23 @@ class Eleve extends Utilisateur
 
 
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Fonction                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+function selectAllEleve($id_user,$conn){
+
+  $sqlE="SELECT * FROM Eleve WHERE id_user = '$id_user'";
+  $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+
+  return $resE;
+}
+
+
 }//fin class

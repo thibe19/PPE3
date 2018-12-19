@@ -14,7 +14,7 @@
 
 <div id="post_modal" class="add_post modal">
   <h2>Nouveau post</h2>
-  <form class="input_group" action="./send_post.php" method="POST">
+  <form class="input_group" action="./send_post.php" method="POST" enctype="multipart/form-data">
     <div class="input-field">
 
       <input type="text" name="post_titre" class="validate" placeholder="Ajouter un titre">

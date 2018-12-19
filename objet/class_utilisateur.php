@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Utilisateur class                          ////
-////                               13/12/2018                                 ////
-////                               V0.0.6                                     ////
+////                               19/12/2018                                 ////
+////                               V0.0.7                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -325,7 +325,7 @@ class Utilisateur
     ////                                                                          ////
     ////                                                                          ////
     //////////////////////////////////////////////////////////////////////////////////
-    
+
 
 Public function modifier_utilisateur( $objet,$conn){
   $id = $this->getIdUser($objet);
@@ -350,6 +350,14 @@ Public function modifier_utilisateur( $objet,$conn){
 
 }
 
+
+function selectAllUtilisateur($id_user,$conn){
+  $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
+  $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
+
+  return $resU;
+
+}
 
 }// fin class
 ?>
