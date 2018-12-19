@@ -147,7 +147,7 @@ class Entreprise extends Utilisateur
 
     }
 
-
+    //Liste des entreprise
     function listentreprise($conn){
 
         $sqlEnt="SELECT U.id_user,U.nom_user FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
