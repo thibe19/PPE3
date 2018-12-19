@@ -299,7 +299,7 @@ function select_image_profil($id_user, $conn) {
 
 
 function select_image_banner($id_post, $conn) {
-  $SQL2 = "SELECT * FROM Post
+  $SQL2 = "SELECT photo_post FROM Post
            WHERE id_post = '$id_post'";
   $resbanner = testsqlfetch($SQL2,$conn);
 
@@ -353,7 +353,7 @@ function req_recherche($searchs,$tables,$conn){
 
      if(empty($tables)){
          $tables = array(
-             "Post" => array("titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user","id_cat"),
+             "Post" => array("id_post","titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user","id_cat"),
              "Offre" => array("id_offre","lib_offre","desc_offre","niveau_req","date_post_offre","date_debut_offre","id_ent","id_cat"),
              "Entreprise" => array("nom_resp","site_web","code_APE"),
              "Eleve" => array("prenom_eleve"),
@@ -546,13 +546,13 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
  *
  */
 
-function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$conn){
+function affichepost($id_post,$id_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$conn){
     ?>
 
     <div class="post">
         <div class="post_content">
             <a href="details.html" class="post_img">
-                <img src="images/post.jpg" alt="">
+                <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post, $conn) ?>" alt="">
                 <span><i class="ion-android-radio-button-off"></i>
                     <?php print getnomcategorie($id_cat,$conn) ?>
                                                 </span>

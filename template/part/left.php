@@ -79,6 +79,10 @@ if (isset($_SESSION['Eleve'])) {
       $unentreprise = unserialize($_SESSION['Entreprise']);
       $id_user = $unentreprise->getIdUser();
     }
+    elseif (isset($_SESSION['Eleve'])){
+        $uneleve = unserialize($_SESSION['Eleve']);
+        $id_user = $uneleve->getIdUser();
+    }
 
     $sql = "SELECT * FROM ajoute_amis
             WHERE id_user_Eleve != '$id_user'

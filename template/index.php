@@ -133,36 +133,10 @@ if (isset($_SESSION['Eleve']) ) {
                             $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user2'";
                             $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
                             $dataU = $resU -> fetch();
+
+                            affichepost($dataP['id_post'],$dataC['id_cat'],$dataU['id_user'],$dataP['date_post'],$dataP['heure_post'],$dataP['titre_post'],$dataP['contenu_post'],$conn)
+
                             ?>
-                            <!-- Post -->
-
-                            <div class="post">
-                                <div class="post_content">
-                                    <a href="details.html" class="post_img">
-                                        <img src="images/post.jpg" alt="">
-                                        <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
-                                    </a>
-                                    <div class="row author_area">
-                                        <div class="col s4 author">
-                                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user2, $conn) ?>" alt="" class="circle"></div>
-
-                                            <div class="col s8 media_body">
-
-                                                <a href="#"><?php echo urldecode($dataU['nom_user']); ?></a>
-                                                <span><?php echo $dataP['date_post']; ?>,<?php echo$dataP['heure_post']; ?></span>
-                                            </div>
-                                        </div>
-                                        <div class="col s4 btn_floating">
-
-                                        </div>
-
-                                    </div>
-                                    <a  class="post_heding"><?php echo urldecode($dataP['titre_post']); ?></a>
-                                    <p><?php echo urldecode($dataP['contenu_post']); ?></p>
-                                </div>
-                                <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                                <br>
-                            </div>
                             <!-- End Post -->
                             <br>
 
@@ -301,7 +275,7 @@ if (isset($_SESSION['Eleve']) ) {
 
                                 case "Post":
                                     foreach ($resultat as $data) {
-                                    affichepost($data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
+                                    affichepost($data->id_post,$data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
                                     }
                                 break;
 

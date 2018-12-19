@@ -543,61 +543,43 @@ function displayul() {
     <form class="" action="index.php" id="search_more" method="post">
     <table>
       <tr>
-        <td width="10%" height="0%">Mots clé</td>
-        <td width="10%" height="0%">Membre</td>
+          <td width="10%" height="0%">Catégorie</td>
+          <td width="10%" height="0%">Type</td>
         <td width="10%" height="0%">Date Minimum</td>
         <td width="10%" height="0%">Date Maximum</td>
       </tr>
       <tr>
-        <td width="10%" height="0%">
-          <div class="ui-widget">
-            <input name="mot_post" id="titre">
-          </div>
-        </td>
-        <td width="10%" height="0%">
-          <div class="ui-widget">
-            <input name="member_name" id="tags">
-          </div>
-        </td>
+          <td width="10%" height="0%">
+              <select class="" name="cat_post">
+                  <option value="0"></option>
+                  <?php
+                  $sql = "SELECT * FROM Categorie";
+                  $req = $conn->Query($sql)or die('Erreur dans le requete cat');
+                  while ($res = $req->fetch()) {
+                      ?>
+                      <option value="<?php echo $res['id_cat']; ?>"><?php echo $res['lib_cat']; ?></option>
+                  <?php } ?>
+              </select>
+          </td>
+          <td width="10%" height="0%">
+              <select class="" name="type_post">
+                  <option value="1">Post</option>
+                  <option value="2">Stage</option>
+                  <option value="3">Travail</option>
+              </select>
+          </td>
         <td> <input type="date" name="date_debut" value=""> </td>
         <td> <input type="date" name="date_fin" value=""> </td>
       </tr>
-      <tr>
-        <td width="10%" height="0%"></td>
-        <td width="10%" height="0%">Catégorie</td>
-        <td width="10%" height="0%">Type</td>
-        <td width="10%" height="0%"></td>
-      </tr>
-      <tr>
-        <td width="10%" height="0%">
 
-        </td>
-        <td width="10%" height="0%">
-          <select class="" name="cat_post">
-            <option value="0"></option>
-            <?php
-            $sql = "SELECT * FROM Categorie";
-            $req = $conn->Query($sql)or die('Erreur dans le requete cat');
-            while ($res = $req->fetch()) {
-             ?>
-            <option value="<?php echo $res['id_cat']; ?>"><?php echo $res['lib_cat']; ?></option>
-          <?php } ?>
-          </select>
-        </td>
-        <td width="10%" height="0%">
-          <select class="" name="type_post">
-            <option value="1">Post</option>
-            <option value="2">Stage</option>
-            <option value="3">Travail</option>
-          </select>
-        </td>
-        <td width="10%" height="0%">
-          <center> <a href="#" onclick="document.getElementById('search_more').submit()" class="waves-effect btn post_btn modal-trigger" name="search_trie" value="0"><i class="ion-plus"><span> Rechercher</span></i></a> </center>
+
+
           <!-- onclick="document.getElementById('myform').submit()"  -->
-        </td>
-      </tr>
+
     </table>
-  </form>
+        <center> <a href="#" onclick="document.getElementById('search_more').submit()" class="waves-effect btn post_btn modal-trigger" name="search_trie" value="0"><i class="ion-plus"><span> Rechercher</span></i></a> </center>
+
+ <br> </form>
   </center>
   </nav>
 </div>
