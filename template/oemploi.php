@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Emploi                                    ////
-////                                06/12/2018                                ////
-////                                V0.0.2                                    ////
+////                                19/12/2018                                ////
+////                                V0.0.3                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -80,8 +80,8 @@
           </div>
 
             <?php
-            $sqlEnt="SELECT * FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
-            $resEnt = $conn -> query($sqlEnt)or die($conn -> errorInfo());
+            $unentreprise = new Entreprise();
+            $resEn = $unentreprise->selectStageEnt($conn);
             ?>
             <div class="row">
               <div class="col">
@@ -99,7 +99,7 @@
                       <label class="form-label">Choisissez une entreprise :</label>
                       <select name='ent'>
                         <?php
-                        while ($dataEnt=$resEnt->fetch())
+                        while ($dataEnt=$resEn->fetch())
                         {
 
                           echo " <option value=".$dataEnt['id_user']."> ".$dataEnt['nom_user']." </option>";
@@ -173,8 +173,8 @@
                   <div class="form-group">
                     <label class="form-label">Categorie</label>
                     <?php
-                    $sqlC="SELECT * FROM Categorie ORDER BY lib_cat ";
-                    $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                    $uncat = new Categorie;
+                    $resC = $uncat->selectAllCategorie($conn);
                     ?>
                     <select name='cat'>
                       <?php
@@ -460,11 +460,6 @@ if (isset($_SESSION['Entreprise'])) {
               <br>
               <h2>Crée une offre d'emploi</h2><br><br>
             </div>
-
-              <?php
-              $sqlEnt="SELECT * FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
-              $resEnt = $conn -> query($sqlEnt)or die($conn -> errorInfo());
-              ?>
               <div class="row">
                 <div class="col">
                 <form class="form" method="POST" action='./oemploi.php'>
@@ -483,8 +478,8 @@ if (isset($_SESSION['Entreprise'])) {
                       <div class="form-group">
                         <label class="form-label">Categorie</label>
                         <?php
-                        $sqlC="SELECT * FROM Categorie ORDER BY lib_cat ";
-                        $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+                        $uncat = new Categorie;
+                        $resC = $uncat->selectAllCategorie($conn);
                         ?>
                         <select name='cat'>
                           <?php

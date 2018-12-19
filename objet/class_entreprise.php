@@ -147,12 +147,27 @@ class Entreprise extends Utilisateur
 
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Fonction                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    function selectAllEntreprise($id_user,$conn){
+      $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
+      $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
+      return $resEn;
+    }
+
     //Liste des entreprise
-    function listentreprise($conn){
+    function selectStageEnt($conn){
 
-        $sqlEnt="SELECT U.id_user,U.nom_user FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
-        $resEnt = $conn -> query($sqlEnt)or die($conn -> errorInfo());
+        $sqlEn="SELECT U.id_user,U.nom_user FROM Utilisateur U, Entreprise E WHERE U.id_user=E.id_user ";
+        $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
 
-        return $resEnt;
+        return $resEn;
     }
 }// class

@@ -240,7 +240,37 @@ class Offre
 
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Fonction                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
 
+    function selectAllOffre ($id_offre,$conn){
+
+      $sqlO="SELECT * FROM Offre WHERE id_offre = '$id_offre'";
+      $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+      return $resO;
+
+    }
+
+    function selectRightDemande($id_user,$conn){
+
+      $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
+      $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+
+      return $resD;
+    }
+
+    function selectRightOffre($id_user,$conn){
+
+      $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
+      $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+
+      return $resD;
+    }
 }
 
 ?>

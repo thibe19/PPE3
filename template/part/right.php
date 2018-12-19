@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Right                                     ////
-////                                13/12/2018                                ////
-////                                V0.0.4                                    ////
+////                                19/12/2018                                ////
+////                                V0.0.5                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -22,21 +22,22 @@
           <ul class="collapsible trending_collaps" data-collapsible="accordion">
             <?php
 
-            $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
-            $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+            $unedemande = new Offre();
+            $resD = $unedemande->selectRightDemande($id_user,$conn);
 
             while ($dataD=$resD->fetch())
             {
-              $idoffre=$dataD['id_offre'];
-              $sqlO="SELECT * FROM Offre WHERE id_offre = '$idoffre'";
-              $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+              $id_offre=$dataD['id_offre'];
+              $uneoffre = new Offre();
+              $resO = $uneoffre->selectAllOffre($id_offre,$conn);
               $dataO=$resO->fetch();
 
-
               $id_userE= $dataD['id_user_entreprise'];
-              $sqlUE="SELECT * FROM Utilisateur WHERE id_user = '$id_userE'";
-              $resUE = $conn -> query($sqlUE)or die($conn -> errorInfo());
-              $dataUE = $resUE -> fetch();
+
+              $unutilisateur = new Utilisateur();
+              $resU = $unutilisateur->selectAllUtilisateur($id_userE,$conn);
+              $dataUE = $resU -> fetch();
+
 
               ?>
               <li>
@@ -290,8 +291,8 @@ elseif(isset($_SESSION['Entreprise'])){
             <ul class="collapsible trending_collaps" data-collapsible="accordion">
               <?php
 
-              $sqlD="SELECT  DISTINCT(id_offre) FROM demande WHERE  id_user_entreprise = '$id_user'";
-              $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+              $unedemande = new Offre();
+              $resD = $unedemande->selectRightDemande($id_user,$conn);
 
               while ($dataD=$resD->fetch())
               {
