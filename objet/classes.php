@@ -15,4 +15,5 @@ require_once 'class_offre.php';
 require_once 'class_stage.php';
 require_once 'class_emploi.php';
 require_once 'class_post.php';
+require_once 'class_categorie.php';
 ?>

@@ -562,7 +562,7 @@ function affichepost($id_cat,$id_user,$date_post,$heure_post,$titre_post,$conten
         <center><a href="#" class="btn-floating waves-effect"><i
                         class="ion-navicon-round"></i></a>
         </center>
-
+        <br>
     </div>
     <?php
 }
