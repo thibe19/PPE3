@@ -81,6 +81,7 @@
 
             <?php
             $unentreprise = new Entreprise();
+            
             $resEnt = $unentreprise->listentreprise($conn);
             ?>
             <div class="row">
