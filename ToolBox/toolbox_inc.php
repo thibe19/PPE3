@@ -390,14 +390,12 @@ function postule($idoffre,$id_user,$id_ent,$conn){
     if (testsql($sqlD,$conn)) {
         ?>
         <div id="paspostule<?php print $idoffre;?>" style="display:none">
-            <input type="hidden" id="id_ent" value="<?php print $id_ent ?>">
-            <input type="hidden" id="id_user" value="<?php print $id_user ?>">
-            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre; ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
         <div id="postule<?php print $idoffre;?>" style="display:block">
         <center>
             <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-            <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>)"><i class="fa fa-times"></i></div>
+            <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-times"></i></div>
         </center>
         </div>
         <?php
@@ -405,14 +403,12 @@ function postule($idoffre,$id_user,$id_ent,$conn){
     else {
         ?>
         <div id="paspostule<?php print $idoffre;?>" style="display:block">
-            <input type="hidden" id="id_ent" value="<?php print $id_ent ?>">
-            <input type="hidden" id="id_user" value="<?php print $id_user ?>">
-            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre; ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
         <div id="postule<?php print $idoffre;?>" style="display:none">
             <center>
                 <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-                <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>)"><i class="fa fa-times"></i></div>
+                <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-times"></i></div>
             </center>
         </div>
         <?php
