@@ -1,4 +1,5 @@
 <?php
+//V2
 session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
@@ -162,10 +163,13 @@ require('part/header.php');
 
                             <form action="about.php" method="post">
 
+                              <?php
+                                if (empty($_GET['visit'])) {
 
+                               ?>
                                 <button type="submit" id="updateabout" value="1" name="updateabout"><i
                                             class="fas fa-pen"></i></button>
-
+                              <?php } ?>
 
                                 <br><br>
 
