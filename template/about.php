@@ -13,6 +13,9 @@ if (isset($_SESSION['Eleve'])) {
     $pass_user = $uneleve->getMdpUser();
     $login_user = $uneleve->getLoginUser();
     $id_user = $uneleve->getIdUser();
+    if (isset($_GET['visit'])) {
+      $id_user = $_GET['visit'];
+    }
     $nom = $uneleve->getNomUser();
     $prenom = $uneleve->getPrenomEleve();
     $pren = $uneleve->getPrenomEleve() . " " . $uneleve->getNomUser();
