@@ -4501,3 +4501,22 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 .header_area2 ul.left_menu {
   padding-left: 125px;
 }
+
+.but_right_A{
+  border-radius:12px 0 12px 0;
+	background: #228B22;
+	border:none;
+	color:#fff;
+	font:bold 12px Verdana;
+	padding:6px 4px 6px 4px;
+
+}
+.but_right_R{
+  border-radius:12px 0 12px 0;
+	background: #d34836;
+	border:none;
+	color:#fff;
+	font:bold 12px Verdana;
+	padding:6px 4px 6px 4px;
+
+}
