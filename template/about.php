@@ -1,4 +1,5 @@
 <?php
+//V2
 session_start();
 require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
