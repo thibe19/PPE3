@@ -143,7 +143,7 @@ function annuldemande(id_offre,id_ent,id_user){
     document.getElementById(divaff).style.display="none";
 }
 
-function modifpreferences(id_user){
+function modifpreferences(id_user){ 
     var preferences = new Array();
     $('.checkedpref:checked').each(function() {
         preferences.push(this.value);

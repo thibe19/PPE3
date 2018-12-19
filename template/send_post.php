@@ -29,10 +29,22 @@ if (isset($_POST['post']) ) {
 
     $titre = $_POST['post_titre'];
     $desc = $_POST['post_desc'];
-    $photo= '123456';
     $cat = $_POST['cat'];
     $date = date("Y-m-d");
     $heur = date("H:i:s");
+
+    $chemin = dirname(__DIR__);
+    $chemin = $chemin."/template/images/post/";
+
+    $namepho = $_FILES['file']['name'];
+    $logininf = $ndc;
+    $photo2 = $_FILES['file']['tmp_name'];
+
+
+    move_uploaded_file($photo2,$chemin.$namepho);
+    rename ($chemin.$namepho, $chemin.$logininf.".jpg");
+
+    $photo = $logininf.".jpg";
 
     $unpost = new Post ('',$titre,$desc,$photo,$date,$heur,$cat,$id);
     $unpost ->insert_post($conn);
