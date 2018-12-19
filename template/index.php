@@ -283,6 +283,9 @@ if (isset($_SESSION['Eleve']) ) {
                     $trouve = 0;
 
                     //AFFICHARGE RESULTAT RECHERCHE
+
+                    ?> <div class="fast_post">  <?php
+
                     foreach ($resultats as $r=>$resultat) {
                         if(!empty($resultat)) {
                             $trouve = 1;
@@ -297,11 +300,9 @@ if (isset($_SESSION['Eleve']) ) {
                                  */
 
                                 case "Post":
-                                ?>   <div class="fast_post"> <?php
                                     foreach ($resultat as $data) {
                                     affichepost($data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
                                     }
-                                ?> </div> <?php
                                 break;
 
 
@@ -346,7 +347,6 @@ if (isset($_SESSION['Eleve']) ) {
 
 
                                 case "Offre":
-                                ?>   <div class="fast_post"> <?php
                                     foreach ($resultat as $data) {
                                         $stage = getoffrestagebdd($data->id_offre,$conn);
                                         $emploi = getoffreempbdd($data->id_offre,$conn);
@@ -382,11 +382,12 @@ if (isset($_SESSION['Eleve']) ) {
                                             }
                                         }
                                     }
-                                ?> </div> <?php
                                 break;
                             }
                         }
                     }
+
+                    ?> </div> <?php
                     if($trouve == 0){  ?>
 
                         <span>Pas de résultats</span>
