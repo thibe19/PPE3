@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Entreprise class                           ////
-////                               13/12/2018                                 ////
-////                               V0.0.3                                     ////
+////                               19/12/2018                                 ////
+////                               V0.0.4                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -145,6 +145,22 @@ class Entreprise extends Utilisateur
                WHERE id_user='$id_user'";
         $res = $conn->Query($SQL)or die('Erreur insertion entreprise');
 
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Fonction                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    function selectAllEntreprise($id_user,$conn){
+
+      $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
+      $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
+
+      return $resEn;
     }
 
 }// class
