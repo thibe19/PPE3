@@ -15,7 +15,7 @@ require('../objet/classes.php');
 if (isset($_SESSION['Eleve'])) {
     $uneleve = unserialize($_SESSION['Eleve']);
     $id_user = $uneleve->getIdUser();
-
+    
 
 //TODO PENSER A DESCTIVER LA SESSION Profilon quand navigation en dehors d'une page profil
 ?>
@@ -106,12 +106,12 @@ if (isset($_SESSION['Eleve'])) {
                     <li>Followers <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
-            <div class="col l4 m6">
+            <!-- <div class="col l4 m6">
                 <ul class="follow_messages">
                     <li><a href="./requests.php?groupe=elve" class="waves-effect">Follow</a></li>
                     <li><a href="#" class="waves-effect">Messages</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- End Tranding Area -->
@@ -143,13 +143,16 @@ if (isset($_SESSION['Eleve'])) {
                <!-- Post -->
                <div class="post">
                    <div class="post_content">
-                       <a href="details.html" class="post_img">
+                       <div class="post_img">
                            <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post_now, $conn) ?>" alt="">
                            <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
-                       </a>
+                       </div>
                        <div class="row author_area">
                            <div class="col s4 author">
+                             <a href="about.php?visit=<?php echo $dataU['id_user']; ?>">
                                <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user_util, $conn) ?>" alt="" class="circle"></div>
+                             </a>
+
 
                                <div class="col s8 media_body">
 
@@ -470,12 +473,12 @@ elseif(isset($_SESSION['Entreprise'])){
                       <li>Following <b><?php print $suivi; ?></b></li>
                   </ul>
               </div>
-              <div class="col l4 m6">
+              <!-- <div class="col l4 m6">
                   <ul class="follow_messages">
                       <li><a href="./requests.php?groupe=elve" class="waves-effect">Follow</a></li>
                       <li><a href="#" class="waves-effect">Messages</a></li>
                   </ul>
-              </div>
+              </div> -->
           </div>
       </section>
       <!-- End Tranding Area -->
@@ -492,7 +495,7 @@ elseif(isset($_SESSION['Entreprise'])){
                 $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
                 while ($res=$req->fetch()) {
 
-
+                  $id_post_now = $res['id_post'];
                   $cat = $res['id_cat'];
                     $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
                     $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
@@ -507,8 +510,8 @@ elseif(isset($_SESSION['Entreprise'])){
                  <!-- Post -->
                  <div class="post">
                      <div class="post_content">
-                         <a href="details.html" class="post_img">
-                             <img src="images/post.jpg" alt="">
+                         <a href="#" class="post_img">
+                             <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post_now, $conn) ?>" alt="">
                              <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
                          </a>
                          <div class="row author_area">
