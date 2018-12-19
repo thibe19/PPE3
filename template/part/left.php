@@ -93,7 +93,7 @@ if (isset($_SESSION['Eleve'])) {
   <ul class="profile_pic">
 
     <?php
-    $sql = "SELECT * FROM ajoute_amis
+    print $sql = "SELECT * FROM ajoute_amis
             WHERE id_user_Eleve != '$id_user'
             AND id_user = '$id_user'";
     $req = $conn->Query($sql)or die('Erreur dans le requete cat');

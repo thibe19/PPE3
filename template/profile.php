@@ -128,7 +128,7 @@ if (isset($_SESSION['Eleve'])) {
               $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
               while ($res=$req->fetch()) {
 
-
+              $id_post_now = $res['id_post'];
                 $cat = $res['id_cat'];
                   $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
                   $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
@@ -144,7 +144,7 @@ if (isset($_SESSION['Eleve'])) {
                <div class="post">
                    <div class="post_content">
                        <a href="details.html" class="post_img">
-                           <img src="images/post.jpg" alt="">
+                           <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post_now, $conn) ?>" alt="">
                            <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
                        </a>
                        <div class="row author_area">
@@ -488,7 +488,7 @@ elseif(isset($_SESSION['Entreprise'])){
                 <?php
 
 
-                $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
+                $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user AND am.id_user = '$id_user' ORDER BY p.date_post DESC";
                 $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
                 while ($res=$req->fetch()) {
 
@@ -721,7 +721,7 @@ elseif(isset($_SESSION['Entreprise'])){
     </body>
 
     <!-- Mirrored from uxart.io/downloads/openlist-html/all-template/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Nov 2018 13:39:22 GMT -->
-    </html>*
+    </html>
 
     <?php
 }

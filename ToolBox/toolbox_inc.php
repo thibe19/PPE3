@@ -259,7 +259,7 @@ function testsqlfetch($sql, $conn)
 
  function image_profil($namepho, $login, $photo2)  // Nom de la photo - login pour rename la photo - Nom photo en ram
  {
-  
+
    $chemin = dirname(__DIR__);
    $chemin = $chemin."/template/images/profil/";
 
@@ -296,6 +296,26 @@ function select_image_profil($id_user, $conn) {
 
 
 }
+
+
+function select_image_banner($id_post, $conn) {
+  $SQL2 = "SELECT * FROM Post
+           WHERE id_post = '$id_post'";
+  $resbanner = testsqlfetch($SQL2,$conn);
+
+  if($resbanner){
+    if(is_null($resbanner['photo_post']) || empty($resbanner['photo_post'])){
+      print 'post.jpg';
+    }
+    else {
+      print $resbanner['photo_post'];
+    }
+  }
+
+
+}
+
+
 
 function update_image($namepho, $login, $photo2, $id_user, $conn) {
 

@@ -117,9 +117,12 @@ if (isset($_SESSION['Eleve'])) {
                                          <td><span onClick="window.location='requests.php?groupe=elve&ctc';" class="waves-effect follow_b">Contacter</span></td>
                                          <td>
                                          <?php
+
                                          $SQL3 = "SELECT * FROM ajoute_amis
-                                                  WHERE id_user_Eleve = $id_user_amis";
+                                                  WHERE id_user_Eleve = $id_user_amis
+                                                  AND id_user = $id_user";
                                          $req3 = $conn->Query($SQL3) or die("L'utilisateur n'existe pas");
+                                         //$res3 = $req3->fetch();
                                          if ($res3 = $req3->fetch()) {
                                            ?> <span onClick="window.location='requests.php?groupe=elve&dela=<?php echo $res2['id_user']; ?>';" class="waves-effect">Supprimer amis</span> <?php
                                          }
@@ -155,7 +158,8 @@ if (isset($_SESSION['Eleve'])) {
                 $id_user_amis = $_GET['dela'];
 
                 $SQL = "DELETE FROM ajoute_amis
-                        WHERE id_user_Eleve = $id_user_amis;";
+                        WHERE id_user_Eleve = $id_user_amis
+                        AND id_user = $id_user;";
                 $res = $conn->Query($SQL)or die('');
                 ?>
                   <script type="text/javascript">
@@ -540,7 +544,8 @@ elseif (isset($_SESSION['Entreprise'])) {
                                          <td>
                                          <?php
                                          $SQL3 = "SELECT * FROM ajoute_amis
-                                                  WHERE id_user_Eleve = $id_user_amis";
+                                                  WHERE id_user_Eleve = $id_user_amis
+                                                  AND id_user = $id_user";
                                          $req3 = $conn->Query($SQL3) or die("L'utilisateur n'existe pas");
                                          if ($res3 = $req3->fetch()) {
                                            ?> <span onClick="window.location='requests.php?groupe=elve&dela=<?php echo $res2['id_user']; ?>';" class="waves-effect">Supprimer amis</span> <?php
@@ -561,7 +566,7 @@ elseif (isset($_SESSION['Entreprise'])) {
 
 
               if (isset($_GET['adda'])) {
-                $id_user_amis = $_GET['adda'];
+                print $id_user_amis = $_GET['adda'];
 
                 $SQL = "INSERT INTO ajoute_amis
                         VALUES('$id_user', '$id_user_amis');";
@@ -577,7 +582,8 @@ elseif (isset($_SESSION['Entreprise'])) {
                 $id_user_amis = $_GET['dela'];
 
                 $SQL = "DELETE FROM ajoute_amis
-                        WHERE id_user_Eleve = $id_user_amis;";
+                        WHERE id_user_Eleve = $id_user_amis
+                        AND id_user = $id_user;";
                 $res = $conn->Query($SQL)or die('');
                 ?>
                   <script type="text/javascript">
