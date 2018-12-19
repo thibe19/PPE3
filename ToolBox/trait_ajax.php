@@ -36,6 +36,10 @@ if ($_GET['modifpref']){
     $id_user = $_GET['id_user'];
     $pref = json_decode($_GET['preferences']);
 
+    $suprprefsql = "DELETE FROM eleve_pref
+    WHERE id_user='$id_user';";
+    $ressuprsql = $conn->Query($suprprefsql) or die('Erreur suppresion pref');
+
     foreach ($pref as $p){
         $SQL = "INSERT INTO eleve_pref VALUES('$p','$id_user')";
         $req = $conn->Query($SQL)or die('Erreur insert pref eleve');
