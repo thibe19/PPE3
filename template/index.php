@@ -301,7 +301,7 @@ if (isset($_SESSION['Eleve']) ) {
                                     foreach ($resultat as $data) {
                                     affichepost($data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
                                     }
-                                ?> </div> <?php
+                                ?> </div><?php
                                 break;
 
 
