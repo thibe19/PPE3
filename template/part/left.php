@@ -12,6 +12,7 @@ require('./../ToolBox/bdd.inc.php');
 
 
 if (isset($_SESSION['Eleve'])) {
+
   $iduser = unserialize($_SESSION['Eleve'])->getIdUser();
 
   $pref = data_base_in_object('Preferences', $conn);
@@ -73,7 +74,13 @@ if (isset($_SESSION['Eleve'])) {
   <ul class="profile_pic">
 
     <?php
-    print $sql = "SELECT * FROM ajoute_amis
+    if (isset($_SESSION['Entreprise'])) {
+
+      $unentreprise = unserialize($_SESSION['Entreprise']);
+      $id_user = $unentreprise->getIdUser();
+    }
+
+    $sql = "SELECT * FROM ajoute_amis
             WHERE id_user_Eleve != '$id_user'
             AND id_user = '$id_user'";
     $req = $conn->Query($sql)or die('Erreur dans le requete cat');
