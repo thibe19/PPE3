@@ -19,9 +19,9 @@ class Offre
     private $id_user;
     private $id_cat;
     private $id_ent;
+    private $id_user_eleve;
 
-
-    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '',$id_cat = '', $id_ent = '')
+    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '',$id_cat = '', $id_ent = '',$id_user_eleve='')
     {
         $this->id_offre = $id_offre;
         $this->lib_offre = $lib_offre;
@@ -32,6 +32,7 @@ class Offre
         $this->id_user = $id_user;
         $this->id_cat = $id_cat;
         $this->id_ent = $id_ent;
+        $this->id_user_eleve = $id_user_eleve;
 
     }
 
@@ -48,7 +49,7 @@ class Offre
         $data = $data.$this->id_user.' ';
         $data = $data.$this->id_cat.' ';
         $data = $data.$this->id_ent.' ';
-
+        $data = $data.$this->id_user_eleve.' ';
         return $data;
     }
     public function getid_offre()
@@ -109,7 +110,10 @@ class Offre
     {
         return $this->desc_offre;
     }
-
+    public function getIdUserEleve()
+    {
+        return $this->id_user_eleve;
+    }
 
 
     //////////////////////////////////////////// SET  /////////////////////////////////////////////
@@ -174,6 +178,10 @@ class Offre
         $this->id_ent = $id_ent;
     }
 
+    public function setIdUserEleve($id_user_eleve)
+    {
+        $this->id_user_eleve = $id_user_eleve;
+    }
 
     //////////////////////////////////////////////////////////////////////////////////
     ////                                                                          ////
@@ -193,10 +201,11 @@ class Offre
         $id_user = $this->id_user;
         $id_cat = $this->id_cat;
         $id_ent = $this->id_ent;
+        $id_user_eleve = $this->id_user_eleve;
 
 
         $SQL = "INSERT INTO Offre
-                VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','$id_user','$id_cat','$id_ent','')";
+                VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','$id_user','$id_cat','$id_ent','$id_user_eleve')";
         $res = $conn->Query($SQL)or die(errorInfo());
     }
 
@@ -231,9 +240,10 @@ class Offre
       $id_cat = $this->id_cat;
       $id_ent = $this->id_ent;
       $desc_offre = $this->desc_offre;
+      $id_user_eleve = $this->id_user_eleve;
 
         $sql="UPDATE Offre
-              SET lib_offre='$lib_offre', date_debut_offre='$date_debut_offre', desc_offre='$desc_offre', id_cat='$id_cat', id_ent='$id_ent'
+              SET lib_offre='$lib_offre', date_debut_offre='$date_debut_offre', desc_offre='$desc_offre', id_cat='$id_cat', id_ent='$id_ent', id_user_Eleve='$id_user_eleve'
               WHERE id_offre='$id_offre'";
         $res = $conn->Query($sql)or die('Erreur modification offre');
 
@@ -264,11 +274,10 @@ class Offre
       return $resD;
     }
 
-    function selectRightOffre($id_user,$conn){
+    function selectRightDemandeEnt($id_user,$conn){
 
-      $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
+      $sqlD="SELECT  DISTINCT(id_offre), id_demande FROM demande WHERE  id_user_entreprise = '$id_user'";
       $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
-
       return $resD;
     }
 }
