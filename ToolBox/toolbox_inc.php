@@ -458,7 +458,7 @@ function postule($idoffre,$id_user,$id_ent,$conn){
 function affichestage($id_cat,$id_user,$id_creater,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
 
 
-<div class="post">
+<div class="post">   
     <div class="post_content">
         <div class="row author_area">
             <div class="col s4 author">
