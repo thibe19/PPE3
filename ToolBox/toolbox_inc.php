@@ -455,26 +455,24 @@ function postule($idoffre,$id_user,$id_ent,$conn){
  *
  */
 
-function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
+function affichestage($id_cat,$id_user,$id_creater,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
 
 
-<div class="post">
+<div class="post">   
     <div class="post_content">
-        <a href="details.html" class="post_img">
-            <img width="600px" height="300px" src="images/post/post.jpg" alt="">
-            <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
-        </a>
         <div class="row author_area">
             <div class="col s4 author">
-                <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="profil picture" class="circle"></div>
+                <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_creater, $conn) ?>" alt="profil picture" class="circle"></div>
 
                 <div class="col s8 media_body" style="padding-left: 10px;">
 
                   <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
                   <span><?php print $date_post_offre ?></span>
-
+                    <div class="float-right">
+                        <span><?php print getnomcategorie($id_cat,$conn) ?></span></div>
                 </div>
             </div>
+
             <div class="col s4 btn_floating">
 
             </div>
@@ -501,7 +499,7 @@ function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_o
  * Fonction affichage d'emplois
  *
  */
-function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$salaire_emp,$type_emp,$date_debut_offre,$desc_offre,$conn){?>
+function afficheemploi($id_cat,$id_offre,$id_user,$id_creater,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$salaire_emp,$type_emp,$date_debut_offre,$desc_offre,$conn){?>
 
     <div class="post">
         <div class="post_content">
@@ -511,7 +509,7 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
             </a>
             <div class="row author_area">
                 <div class="col s4 author">
-                    <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></div>
+                    <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_creater, $conn) ?>" alt="" class="circle"></div>
 
                     <div class="col s8 media_body" style="padding-left: 10px;">
 
