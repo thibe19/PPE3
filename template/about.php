@@ -5,45 +5,54 @@ require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 if (isset($_SESSION['Eleve'])) {
-    $uneleve = unserialize($_SESSION['Eleve']);
-    $pos_user = $uneleve->getChoixPosition();
-    $desc_user = $uneleve->getDescUser();
-    $photo_user = $uneleve->getPhotoUser();
-    $tel_user = $uneleve->getNumTelUser();
-    $mail_user = $uneleve->getEmailUser();
-    $pass_user = $uneleve->getMdpUser();
-    $login_user = $uneleve->getLoginUser();
-    $id_user = $uneleve->getIdUser();
     if (isset($_GET['visit'])) {
-      $id_user = $_GET['visit'];
+        $id_user = dec_enc('decrypt',$_GET['visit']);
+        $neweleve = new Eleve();
+        $elevedata = $neweleve->getAllUserDB($id_user,$conn);
+        foreach ($elevedata as $d){
+            $uneleve = new Utilisateur($id_user,$d->nom_user,$d->login_user,'',$d->email_user,$d->tel_user,$d->num_addr_user
+                ,$d->rue_addr_user,$d->CP_addr_user,$d->ville_addr_user,$d->photo_user,$d->desc_user,$d->dom_acti);
+        }
     }
-    $nom = $uneleve->getNomUser();
-    $prenom = $uneleve->getPrenomEleve();
-    $pren = $uneleve->getPrenomEleve() . " " . $uneleve->getNomUser();
-    $skill = $uneleve->getDomActi();
-    setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-    $birth = $uneleve->getdateEleve();
-    $births = explode('-', $uneleve->getdateEleve());
-    $birthphrase = strftime("%d %B %Y.", mktime(0, 0, 0, $births[1], $births[2], $births[0])); //Affichera par exemple "date du jour en français : samedi 24 juin 2006."
-    $desc = empty($uneleve->getDescUser()) ? "Vous n'avez pas encore entré de description." : false;
-    $date = "A remplir avec date de 'Offre'";
-    $Nrue = $uneleve->getNumAddr();
-    $rue = $uneleve->getRueAddr();
-    $cp = $uneleve->getCPAddr();
-    $ville = $uneleve->getVilleAddr();
-    $placephrase = $Nrue . " " . $rue . " " . $ville . " " . $cp;
+    else{
+        $uneleve = unserialize($_SESSION['Eleve']);
+        $pos_user = $uneleve->getChoixPosition();
+        $desc_user = $uneleve->getDescUser();
+        $photo_user = $uneleve->getPhotoUser();
+        $tel_user = $uneleve->getNumTelUser();
+        $mail_user = $uneleve->getEmailUser();
+        $pass_user = $uneleve->getMdpUser();
+        $login_user = $uneleve->getLoginUser();
+        $id_user = $uneleve->getIdUser();
+        $nom = $uneleve->getNomUser();
+        $prenom = $uneleve->getPrenomEleve();
+        $pren = $uneleve->getPrenomEleve() . " " . $uneleve->getNomUser();
+        $skill = $uneleve->getDomActi();
+        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+        $birth = $uneleve->getdateEleve();
+        $births = explode('-', $uneleve->getdateEleve());
+        $birthphrase = strftime("%d %B %Y.", mktime(0, 0, 0, $births[1], $births[2], $births[0])); //Affichera par exemple "date du jour en français : samedi 24 juin 2006."
+        $desc = empty($uneleve->getDescUser()) ? "Vous n'avez pas encore entré de description." : false;
+        $date = "A remplir avec date de 'Offre'";
+        $Nrue = $uneleve->getNumAddr();
+        $rue = $uneleve->getRueAddr();
+        $cp = $uneleve->getCPAddr();
+        $ville = $uneleve->getVilleAddr();
+        $placephrase = $Nrue . " " . $rue . " " . $ville . " " . $cp;
 
 
 
 
-    $uneoffre = new Stage(1, 'test doffre', 'bac +5', date('Y-m-d'), date('Y-m-d'), $id_user, '2', 1, date('Y-m-d'), '3', 'pas mal');
+        $uneoffre = new Stage(1, 'test doffre', 'bac +5', date('Y-m-d'), date('Y-m-d'), $id_user, '2', 1, date('Y-m-d'), '3', 'pas mal');
 
 
-    $list_ent = reqtoobj("SELECT E.id_user,nom_user FROM Utilisateur U,Entreprise E
+        $list_ent = reqtoobj("SELECT E.id_user,nom_user FROM Utilisateur U,Entreprise E
                               WHERE U.id_user=E.id_user", $conn);
-    $domaine = data_base_in_object('Categorie', $conn);
+        $domaine = data_base_in_object('Categorie', $conn);
 
-    $descs = "A remplir avec la desc user de l'offre de stage";
+        $descs = "A remplir avec la desc user de l'offre de stage";
+    }
+
 
 
 
@@ -103,15 +112,11 @@ require('part/header.php');
 
 <!-- Tranding-select and banner Area -->
 <div class="banner_area banner_2">
-    <?php
-        $id = dec_enc('decrypt',$_SESSION['id']);
-        $uneleve = unserialize($_SESSION['Eleve']);
-        ?>
     <img src="images/banner-2.jpg" alt="" class="banner_img">
     <div class="media profile_picture">
         <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
         <div class="media_body">
-            <a href="profile.php"><?php print $uneleve->getNomUser().' '.$uneleve->getPrenomEleve() ?></a>
+            <a href="profile.php"><?php print $uneleve->getNomUser().' '/*.$uneleve->getPrenomEleve()*/ ?></a>
             <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
             <h6><?php print $uneleve->getVilleAddr(); ?></h6>
         </div>
@@ -181,7 +186,7 @@ require('part/header.php');
                                     <tr>
                                         <td width="22%"><p>Nom</p></td>
                                         <td width="5%"><p> : </p></td>
-                                        <td><p><?php echo $nom; ?></p></td>
+                                        <td><p><?php echo $uneleve->getNomUser(); ?></p></td>
                                     </tr>
                                     <tr>
                                         <td width="22%"><p>Prénom</p></td>
@@ -191,7 +196,7 @@ require('part/header.php');
                                     <tr>
                                         <td><p>Compétences</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><?php echo $skill; ?></p></td>
+                                        <td><p><?php echo $uneleve->getDomActi(); ?></p></td>
                                     </tr>
                                     <tr>
                                         <td><p>Date de naissance</p></td>
@@ -206,7 +211,7 @@ require('part/header.php');
                                 <!-- DESCRIPTION -->
 
                                 <h5>Description</h5>
-                                <p><?php echo $desc_user; ?></p>
+                                <p><?php echo $uneleve->getDescUser(); ?></p>
                                 <br>
                                 <hr>
                                 <br>
@@ -218,17 +223,17 @@ require('part/header.php');
                                 <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
                                 <br>
                                 <?php
-                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM offre O, OStage S
+                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OStage S
                                                  WHERE O.id_offre = S.id_offre
                                                  AND O.id_user = $id_user
                                                  ORDER BY O.date_debut_offre DESC";
-                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref');
+                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref1');
                                 while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
 
                                   $id_offre_req = $res_aff_stg3['id_offre'];
-                                  $sql_aff_stg2 = "SELECT * FROM Ostage
-                                                   WHERE id_offre = $id_offre_req";
-                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                                  $sql_aff_stg2 = "SELECT * FROM OStage
+                                                   WHERE id_offre = '$id_offre_req'";
+                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref2');
                                   $res_aff_stg2 = $req_aff_stg2->fetch();
                                  ?>
 
@@ -252,17 +257,17 @@ require('part/header.php');
                                 <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
 
                                 <?php
-                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM offre O, OEmploi E
+                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OEmploi E
                                                  WHERE O.id_offre = E.id_offre
                                                  AND O.id_user = $id_user
                                                  ORDER BY O.date_debut_offre DESC";
-                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref');
+                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref3');
                                 while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
 
                                   $id_offre_req = $res_aff_stg3['id_offre'];
-                                  $sql_aff_stg2 = "SELECT * FROM Ostage
+                                  $sql_aff_stg2 = "SELECT * FROM OStage
                                                    WHERE id_offre = $id_offre_req";
-                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref4');
                                   $res_aff_stg2 = $req_aff_stg2->fetch();
                                  ?>
 
@@ -366,16 +371,16 @@ require('part/header.php');
                             <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
 
                             <?php
-                            $sql_aff_stg = "SELECT * FROM offre O, OStage S
+                            $sql_aff_stg = "SELECT * FROM Offre O, OStage S
                                             WHERE O.id_offre = S.id_offre
                                             AND O.id_user = $id_user
                                             ORDER BY O.date_debut_offre DESC";
-                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref5');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
                               $sql_aff_stg2 = "SELECT * FROM Ostage
                                                WHERE id_offre = $id_offre_req";
-                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref6');
                               $res_aff_stg2 = $req_aff_stg2->fetch();
                              ?>
                              <form action="about.php" method="post">
@@ -501,16 +506,16 @@ require('part/header.php');
 
                             <?php
 
-                            $sql_aff_stg = "SELECT * FROM offre O, OEmploi E
+                            $sql_aff_stg = "SELECT * FROM Offre O, OEmploi E
                                             WHERE O.id_offre = E.id_offre
                                             AND O.id_user = $id_user
                                             ORDER BY O.date_debut_offre DESC";
-                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref');
+                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref7');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
                               $sql_aff_stg2 = "SELECT * FROM OEmploi
                                                WHERE id_offre = $id_offre_req";
-                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref');
+                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref8');
                               $res_aff_stg2 = $req_aff_stg2->fetch();
 
                              ?>
