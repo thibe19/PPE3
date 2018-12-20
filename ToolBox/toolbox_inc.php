@@ -98,6 +98,9 @@ function getnomuser($id,$conn)
 
 
 
+
+
+
 //recuperation de la categorie en fonction de l'id
 function getnomcategorie($id,$conn)
 {
@@ -458,7 +461,7 @@ function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_o
 <div class="post">
     <div class="post_content">
         <a href="details.html" class="post_img">
-            <img src="images/post.jpg" alt="">
+            <img width="600px" height="300px" src="images/post/post.jpg" alt="">
             <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
         </a>
         <div class="row author_area">
@@ -551,19 +554,22 @@ function affichepost($id_post,$id_cat,$id_user,$date_post,$heure_post,$titre_pos
 
     <div class="post">
         <div class="post_content">
-            <a href="details.html" class="post_img">
+            <div class="post_img">
                 <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post, $conn) ?>" alt="">
                 <span><i class="ion-android-radio-button-off"></i>
                     <?php print getnomcategorie($id_cat,$conn) ?>
                                                 </span>
-            </a>
+            </div>
             <div class="row author_area">
                 <div class="col s4 author">
-                    <div class="col s4 media_left"><img height="53px" width="53px"
-                                                        src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                        alt="profil picture"
-                                                        class="circle">
-                    </div>
+                    <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user) ?>">
+                        <div class="col s4 media_left"><img height="53px" width="53px"
+                                                            src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
+                                                            alt="profil picture"
+                                                            class="circle">
+                        </div>
+                    </a>
+
 
                     <div class="col s8 media_body">
 

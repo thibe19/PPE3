@@ -351,6 +351,16 @@ Public function modifier_utilisateur( $objet,$conn){
 }
 
 
+function getAllUserDB($id,$conn)
+{
+    $SQL = "SELECT * FROM Utilisateur
+        WHERE id_user='$id'";
+    $req = $conn->Query($SQL) or die ('Erreur selection utilisateur');
+    $req = $req->fetchAll(PDO::FETCH_OBJ);
+
+    return $req;
+}
+
 function selectAllUtilisateur($id_user,$conn){
   $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());

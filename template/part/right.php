@@ -18,7 +18,7 @@
     <div class="right_sidebar_iner">
 
       <div class="trending_area">
-          <h3 class="categories_tittle">Mais Demande</h3>
+          <h3 class="categories_tittle">Mes Demande(s)</h3>
           <ul class="collapsible trending_collaps" data-collapsible="accordion">
             <?php
 
