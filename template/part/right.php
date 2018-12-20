@@ -18,7 +18,7 @@
     <div class="right_sidebar_iner">
 
       <div class="trending_area">
-          <h3 class="categories_tittle">Mais Demande</h3>
+          <h3 class="categories_tittle">Mes Demande(s)</h3>
           <ul class="collapsible trending_collaps" data-collapsible="accordion">
             <?php
 
@@ -286,61 +286,71 @@ elseif(isset($_SESSION['Entreprise'])){
   <div class="right_side_bar col">
       <div class="right_sidebar_iner">
 
-        <div class="trending_area">
-            <h3 class="categories_tittle">Demande</h3>
-            <ul class="collapsible trending_collaps" data-collapsible="accordion">
-              <?php
+        <form class="form" method="POST" action='./demande.php'>
+          <div class="trending_area">
+              <h3 class="categories_tittle">Demande</h3>
+              <ul class="collapsible trending_collaps" data-collapsible="accordion">
+                <?php
 
-              $unedemande = new Offre();
-              $resD = $unedemande->selectRightDemande($id_user,$conn);
+                $unedemande = new Offre();
+                $resD = $unedemande->selectRightDemandeEnt($id_user,$conn);
 
-              while ($dataD=$resD->fetch())
-              {
-                $T=0;
-                $idoffre=$dataD['id_offre'];
-               $sql="SELECT O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
-                        WHERE D.id_offre=O.id_offre
-                        AND D.id_offre='$idoffre'";
+                while ($dataD=$resD->fetch())
+                {
+                  $T=0;
+                  $idoffre=$dataD['id_offre'];
+                 $sql="SELECT O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
+                          WHERE D.id_offre=O.id_offre
+                          AND D.id_offre='$idoffre'";
 
-                foreach (reqtoobj($sql,$conn) as $data) {
+                  foreach (reqtoobj($sql,$conn) as $data) {
 
 
-                $SQL = "SELECT U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
-                        WHERE D.id_user_Eleve=U.id_user
-                        AND D.id_offre='$idoffre'";
+                  $SQL = "SELECT U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
+                          WHERE D.id_user_Eleve=U.id_user
+                          AND D.id_offre='$idoffre'";
 
-                ?>
-                <li>
-                    <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($data->lib_offre);?> avec <?php print ($data->total); ?> demande(s)</div>
-                    <hr>
-                    <?php foreach (reqtoobj($SQL,$conn) as $data_user) {
-                      $T=$T+1;
-                      ?>
-                    <div class="collapsible-body">
-                        <div class="row collaps_wrpper">
-                            <div class="col s1 media_l">
-                                <b><?php print$T; ?></b>
-                                <i class="ion-android-arrow-dropdown-circle"></i>
-                            </div>
+                  ?>
+                  <li>
+                      <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($data->lib_offre);?> avec <?php print ($data->total); ?> demande(s)</div>
+                      <hr>
+                      <?php foreach (reqtoobj($SQL,$conn) as $data_user) {
+                        $T=$T+1;
+                        ?>
+                      <div class="collapsible-body">
+                          <div class="row collaps_wrpper">
+                              <div class="col s1 media_l">
+                                  <b><?php print$T; ?></b>
 
-                            <div class="col s11 media_b">
+                              </div>
 
-                                <h5><a href="#"><?php print($data_user->nom_user); ?></a></h5>
-                                <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
-                                <p><?php print urldecode($data_user->desc_user); ?></p>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
+                              <div class="col s11 media_b">
 
-                    <?php
-                    } ?>
-                </li>
-              <?php }
-            }?>
-            </ul>
-        </div>
+                                  <h5><a href="#"><?php print($data_user->nom_user); ?></a></h5>
+                                  <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
+                                  <p><?php print urldecode($data_user->desc_user); ?></p>
+                              </div>
+                              <div class="col s11 media_b">
+                                <center>
+                                  <button type="submit" class="but_right_A" name="accepte">Accépté</button>
+                                  &nbsp&nbsp
+                                  <button type="submit" class="but_right_R" name="refuser">Refuser</button>
+                                  <input type="hidden" name="demande" value="<?php print $dataD['id_demande']; ?>">
+                                </center>
+                              </div>
+                          </div>
+                          <hr>
+                      </div>
 
+                      <?php
+                      } ?>
+                  </li>
+                <?php }
+              }?>
+              </ul>
+
+          </div>
+        </form>
 
           <div class="popular_posts popular_fast">
             <h3 class="categories_tittle">My Submisstion</h3>
@@ -546,4 +556,5 @@ elseif(isset($_SESSION['Entreprise'])){
   </div>
 <?php
 
-} ?>
+} //fin entreprise
+?>
