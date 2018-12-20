@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Profile                                   ////
-////                                10/12/2018                                ////
-////                                V0.0.7                                    ////
+////                                20/12/2018                                ////
+////                                V0.0.8                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -64,7 +64,7 @@ if (isset($_SESSION['Eleve'])) {
 
     <!-- TEST ELEVE -->
     <div class="banner_area banner_2">
-        <img src="images/banner-2.jpg" alt="" class="banner_img">
+        <img style='width: 1900px;height: 400px;' src="images/banner/<?php select_image_bann($id_user, $conn) ?>" alt="" class="banner_img">
         <div class="media profile_picture">
             <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
             <div class="media_body">
@@ -107,12 +107,12 @@ if (isset($_SESSION['Eleve'])) {
                     <li>Followers <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
-            <!-- <div class="col l4 m6">
-                <ul class="follow_messages">
-                    <li><a href="./requests.php?groupe=elve" class="waves-effect">Follow</a></li>
-                    <li><a href="#" class="waves-effect">Messages</a></li>
+            <div class="col l4 m6">
+                <ul id="postpro"  class="tranding_select tabs">
+                  <li><a href="#postami" class="tab active">Posts de mes amis</a></li>
+                  <li><a href="#post" class="tab ">Mes Posts</a></li>
                 </ul>
-            </div> -->
+            </div>
         </div>
     </section>
     <!-- End Tranding Area -->
