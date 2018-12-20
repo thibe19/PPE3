@@ -15,7 +15,7 @@ require('../objet/classes.php');
 if (isset($_SESSION['Eleve'])) {
     $uneleve = unserialize($_SESSION['Eleve']);
     $id_user = $uneleve->getIdUser();
-    
+
 
 //TODO PENSER A DESCTIVER LA SESSION Profilon quand navigation en dehors d'une page profil
 ?>
@@ -124,7 +124,7 @@ if (isset($_SESSION['Eleve'])) {
               <?php
 
 
-              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user ORDER BY p.date_post DESC";
+              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user AND p.id_user != '$id_user' ORDER BY p.date_post DESC";
               $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
               while ($res=$req->fetch()) {
 
@@ -138,39 +138,11 @@ if (isset($_SESSION['Eleve'])) {
                   $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user_util'";
                   $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
                   $dataU = $resU -> fetch();
+                  affichepost($res['id_post'],$dataC['id_cat'],$dataU['id_user'],$res['date_post'],$res['heure_post'],$res['titre_post'],$res['contenu_post'],$conn)
                   ?>
 
                <!-- Post -->
-               <div class="post">
-                   <div class="post_content">
-                       <div class="post_img">
-                           <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post_now, $conn) ?>" alt="">
-                           <span><i class="ion-android-radio-button-off"></i><?php echo $dataC['lib_cat']; ?></span>
-                       </div>
-                       <div class="row author_area">
-                           <div class="col s4 author">
-                             <a href="about.php?visit=<?php echo $dataU['id_user']; ?>">
-                               <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user_util, $conn) ?>" alt="" class="circle"></div>
-                             </a>
-
-
-                               <div class="col s8 media_body">
-
-                                   <a href="#"><?php echo $dataU['nom_user']; ?></a>
-                                   <span><?php echo $res['date_post'].", ".$res['heure_post']; ?></span>
-                               </div>
-                           </div>
-                           <div class="col s4 btn_floating">
-
-                           </div>
-
-                       </div>
-                       <a  class="post_heding"><?php echo $res['titre_post']; ?></a>
-                       <p><?php echo $res['contenu_post']; ?></p>
-                   </div>
-                   <center><a href="#" class="btn-floating waves-effect"><i class="ion-navicon-round"></i></a></center>
-                   <br>
-               </div>
+                
                <!-- End Post -->
              <?php
 
