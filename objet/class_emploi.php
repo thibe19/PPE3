@@ -15,9 +15,9 @@ class Emploi extends Offre
   private $type_emp;
 
   function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '',
-   $salaire_emp = '', $type_emp = '')
+   $id_user_eleve = "",$salaire_emp = '', $type_emp = '')
   {
-    parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $desc_offre, $id_user, $id_cat, $id_ent);
+    parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $desc_offre, $id_user, $id_cat, $id_ent, $id_user_eleve);
     $this ->salaire_emp = $salaire_emp;
     $this ->type_emp = $type_emp;
   }
@@ -131,6 +131,14 @@ class Emploi extends Offre
 
     $SQL = "DELETE FROM OEmploi WHERE id_offre = $id_offre";
     $res = $conn->Query($SQL)or die(errorInfo());
+  }
+
+  public function selectOEmploibyid($id_offre,$conn){
+    $sql = "SELECT id_offre FROM OEmploi WHERE id_offre='$id_offre'";
+    $req = $conn->Query($sql)or die('Erreur selection OEmploi');
+    $req = $req->fetchAll();
+
+    return $req;
   }
 
 }//fin class
