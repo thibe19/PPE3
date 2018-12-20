@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mer. 12 déc. 2018 à 15:30
+-- Généré le :  jeu. 20 déc. 2018 à 16:54
 -- Version du serveur :  10.1.35-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -297,6 +297,25 @@ CREATE TABLE `participe_event` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Photo`
+--
+
+CREATE TABLE `Photo` (
+  `id_photo` int(2) NOT NULL,
+  `lib_banner` varchar(255) COLLATE latin1_bin NOT NULL,
+  `id_user` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Déchargement des données de la table `Photo`
+--
+
+INSERT INTO `Photo` (`id_photo`, `lib_banner`, `id_user`) VALUES
+(1, 'test.jpg', 40);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Post`
 --
 
@@ -524,6 +543,12 @@ ALTER TABLE `participe_event`
   ADD KEY `participe_event_Utilisateur0_FK` (`id_user`);
 
 --
+-- Index pour la table `Photo`
+--
+ALTER TABLE `Photo`
+  ADD PRIMARY KEY (`id_photo`);
+
+--
 -- Index pour la table `Post`
 --
 ALTER TABLE `Post`
@@ -598,6 +623,12 @@ ALTER TABLE `Offre`
   MODIFY `id_offre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT pour la table `Photo`
+--
+ALTER TABLE `Photo`
+  MODIFY `id_photo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `Post`
 --
 ALTER TABLE `Post`
@@ -629,9 +660,9 @@ ALTER TABLE `Utilisateur`
 -- Contraintes pour la table `ajoute_amis`
 --
 ALTER TABLE `ajoute_amis`
-  ADD CONSTRAINT `ajoute_amis_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `ajoute_amis_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Eleve` (`id_user`),
-  ADD CONSTRAINT `id_user_Eleve` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Eleve` (`id_user`);
+  ADD CONSTRAINT `ajoute_amis_Eleve0_FK` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Utilisateur` (`id_user`),
+  ADD CONSTRAINT `ajoute_amis_Eleve_FK` FOREIGN KEY (`id_user`) REFERENCES `Utilisateur` (`id_user`),
+  ADD CONSTRAINT `id_user_Eleve` FOREIGN KEY (`id_user_Eleve`) REFERENCES `Utilisateur` (`id_user`);
 
 --
 -- Contraintes pour la table `cree_event`
