@@ -600,7 +600,7 @@ function afficheuser($id_user,$numad,$ruead,$villead,$cpad,$conn){
     ?>
         <li>
             <div class="media first_child">
-                <img src="images/profil/<?php print $test1 ?>" alt="" class="circle responsive-img">
+                <img src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle responsive-img">
                 <div class="media_body">
                     <p><b><?php print getnomuser($id_user, $conn) ?></b></p>
                     <h6> <?php print $numad.'&nbsp'.$ruead.'&nbsp'.$villead.'&nbsp'.$cpad; ?></h6>
