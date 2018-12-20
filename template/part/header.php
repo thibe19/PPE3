@@ -132,7 +132,7 @@ $( function() {
             <ul class="right right_menu hide-on-med-and-down">
                 <li class="search_min">
                     <ul class="search_from">
-                      <form action="index.php?search=<?php echo isset($_POST['search'])?$_POST['search']:''; ?>" method="POST" id="formrecherche">
+                      <form action="index.php" method="POST" id="formrecherche">
                         <li><input type="text" placeholder="Rechercher" id="searchjs" name="search" value="" type="text"></li>
                         <li><a onclick="document.getElementById('formrecherche').submit()" name="abut" class="search_icon"><i class="ion-ios-search"></i></a></li>
                       </form>
@@ -145,7 +145,7 @@ $( function() {
                     </ul>
                 </li>
                 <li>
-                  <a href="javascript: displayul()" class="waves-effect btn post_btn modal-trigger"><i class="ion-plus"></i><span>Trier</span></a>
+                  <a href="javascript: displayul()" onclick="trirecherche()" class="waves-effect btn post_btn modal-trigger"><i class="fa fa-filter"></i><span>Filtrer</span></a>
 
                   <!-- <li>
                     <a href="requests.php?groupe=elve">
@@ -552,15 +552,16 @@ function displayul() {
     <form class="" action="index.php" id="search_more" method="post">
     <table>
       <tr>
-          <td width="10%" height="0%">Catégorie</td>
-          <td width="10%" height="0%">Type</td>
+        <td width="10%" height="0%">Mot(s) clé(s)</td>
+        <td width="10%" height="0%">Catégorie</td>
+        <td width="10%" height="0%">Type</td>
         <td width="10%" height="0%">Date Minimum</td>
         <td width="10%" height="0%">Date Maximum</td>
       </tr>
       <tr>
+          <td width="10%" height="0%"><input type="text" placeholder="Rechercher" id="searchjs" class="rechtri" name="search" type="text"></td>
           <td width="10%" height="0%">
-              <select class="" name="cat_post">
-                  <option value="0"></option>
+              <select class="tricss" name="cat_post">
                   <?php
                   $sql = "SELECT * FROM Categorie";
                   $req = $conn->Query($sql)or die('Erreur dans le requete cat');
@@ -571,7 +572,7 @@ function displayul() {
               </select>
           </td>
           <td width="10%" height="0%">
-              <select class="" name="type_post">
+              <select class="tricss" name="type_post">
                   <option value="1">Post</option>
                   <option value="2">Stage</option>
                   <option value="3">Travail</option>

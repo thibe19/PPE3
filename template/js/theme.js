@@ -229,3 +229,12 @@ function annuldemande(id_demande){
     document.getElementById(div).style.display="none";
   }
 }
+
+function trirecherche(){
+    if(document.getElementById('formrecherche').style.display == "none"){
+        document.getElementById('formrecherche').style.display="block";
+    }
+    else{
+        document.getElementById('formrecherche').style.display="none";
+    }
+}

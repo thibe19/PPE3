@@ -120,6 +120,14 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   padding-left: 15px;
 }
 
+.rechtri{
+  background-color:#2e3d55 !important;
+  border-radius: 10px !important;
+}
+
+.rechtri::placeholder{
+  padding-left: 10px;
+}
 
 .header_area ul {
   /* Small Search */
