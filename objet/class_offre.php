@@ -268,7 +268,7 @@ class Offre
 
     function selectRightDemande($id_user,$conn){
 
-      $sqlD="SELECT id_user_entreprise, id_offre FROM demande WHERE  id_user_eleve = '$id_user'";
+      $sqlD="SELECT * FROM demande WHERE  id_user_eleve = '$id_user'";
       $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
 
       return $resD;

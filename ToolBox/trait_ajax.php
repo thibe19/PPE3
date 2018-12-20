@@ -78,4 +78,12 @@ if ($_GET['refuserdemande']) {
   $sql="DELETE FROM demande WHERE id_demande = '$id_demande'";
   $res = $conn->Query($sql) or die();
 }
+
+
+if ($_GET['annuldemande']) {
+  $id_demande=$_GET['id_demande'];
+
+  $sql="DELETE FROM demande WHERE id_demande = '$id_demande'";
+  $res = $conn->Query($sql) or die();
+}
 ?>

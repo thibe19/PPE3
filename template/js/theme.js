@@ -205,7 +205,25 @@ function refuserdemande(id_demande){
             'refuserdemande' : 1,
             'id_demande' : id_demande,
         },
-        sucess:console.log('demande accepter')
+        sucess:console.log('demande supp')
+    });
+    var div = "demande"+id_demande;
+    document.getElementById(div).style.display="none";
+  }
+}
+
+function annuldemande(id_demande){
+  if (confirm('Etes vous sur de vouloir annuler cette demande?')) {
+
+
+    $.ajax({
+        url: '../ToolBox/trait_ajax.php',
+        type: "GET",
+        data: {
+            'annuldemande' : 1,
+            'id_demande' : id_demande,
+        },
+        sucess:console.log('demande supp')
     });
     var div = "demande"+id_demande;
     document.getElementById(div).style.display="none";
