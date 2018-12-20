@@ -823,7 +823,7 @@ require('part/header.php');
                 <div class="categories">
                     <h3 class="categories_tittle me_tittle">About Me</h3>
 
-                    <p><?php (!empty($unentreprise->getDescUser()))? print $unentreprise->getDescUser() : print 'Encore aucune description' ?></p>
+                    <p><?php (!empty($unentreprise->getDescUser()))? print urldecode($unentreprise->getDescUser()) : print 'Encore aucune description' ?></p>
                 </div>
                 <?php require ('./part/left.php')?>
         <!-- Right side bar -->

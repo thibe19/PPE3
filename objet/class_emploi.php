@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Emploi class                               ////
-////                               13/12/2018                                 ////
-////                               V0.0.2                                     ////
+////                               20/12/2018                                 ////
+////                               V0.0.4                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -120,11 +120,29 @@ class Emploi extends Offre
   public function modifier_emploi($conn){
 
     $this->modifier_offre($conn);
+    $id = $this->getid_offre();
+    $id_ent = $this->getIdEnt();
+    $id_user = $this->getIdUser();
+    $id_user_eleve=$this->getIdUserEleve();
+    $salaire_emp = $this->salaire_emp;
+    $type_emp = $this->type_emp;
 
+    $SQL = "UPDATE OEmploi
+    SET salaire_emp = '$salaire_emp', type_emp='$type_emp', id_user='$id_user',id_user_Eleve='$id_user_eleve'";
 
 
 
   }
+
+
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                Fonction                                  ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
 
   public function delete_emploi($conn){
     $id_offre = $this->getid_offre();
@@ -133,12 +151,21 @@ class Emploi extends Offre
     $res = $conn->Query($SQL)or die(errorInfo());
   }
 
+
   public function selectOEmploibyid($id_offre,$conn){
     $sql = "SELECT id_offre FROM OEmploi WHERE id_offre='$id_offre'";
     $req = $conn->Query($sql)or die('Erreur selection OEmploi');
     $req = $req->fetchAll();
 
     return $req;
+  }
+
+  function modifiUserEleveEmp($id_user_eleve,$id_offre,$conn){
+    $this->modifiOffreEleve($id_user_eleve,$id_offre,$conn);
+    $sql="UPDATE OEmploi
+          SET id_user_Eleve='$id_user_eleve'
+          WHERE id_offre='$id_offre'";
+    $res = $conn->Query($sql)or die('Erreur modification offre');
   }
 
 }//fin class

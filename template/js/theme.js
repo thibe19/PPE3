@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                               JS                                         ////
+////                               20/12/2018                                 ////
+////                               V0.1.0                                     ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 ;(function ($) {
     "use strict";
 
@@ -143,7 +150,7 @@ function annuldemande(id_offre,id_ent,id_user){
     document.getElementById(divaff).style.display="none";
 }
 
-function modifpreferences(id_user){ 
+function modifpreferences(id_user){
     var preferences = new Array();
     $('.checkedpref:checked').each(function() {
         preferences.push(this.value);
@@ -162,4 +169,45 @@ function modifpreferences(id_user){
         sucess:console.log('ajax marche')
     });
 
+}
+
+
+function acceptedemande(id_demande){
+  if (confirm("Etes vous sur de vouloir accepter cette demande ?")) {
+
+    $.ajax({
+        url: '../ToolBox/trait_ajax.php',
+        type: "GET",
+        data: {
+            'acceptedemande' : 1,
+            'id_demande' : id_demande,
+        },
+        sucess:console.log('demande accepter')
+    });
+
+      var div = "demandeaccepte"+id_demande;
+      document.getElementById(div).style.display="block";
+      var divaff = "demandeencours"+id_demande;
+      document.getElementById(divaff).style.display="none";
+
+  }
+}
+
+function refuserdemande(id_demande){
+
+  if (confirm('Etes vous sur de vouloir refuser cette demande?')) {
+
+
+    $.ajax({
+        url: '../ToolBox/trait_ajax.php',
+        type: "GET",
+        data: {
+            'refuserdemande' : 1,
+            'id_demande' : id_demande,
+        },
+        sucess:console.log('demande accepter')
+    });
+    var div = "demande"+id_demande;
+    document.getElementById(div).style.display="none";
+  }
 }

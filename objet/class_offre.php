@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Offre class                                 ////
-////                               13/12/2018                                 ////
-////                               V0.0.2                                     ////
+////                               20/12/2018                                 ////
+////                               V0.0.4                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -279,6 +279,13 @@ class Offre
       $sqlD="SELECT  DISTINCT(id_offre), id_demande FROM demande WHERE  id_user_entreprise = '$id_user'";
       $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
       return $resD;
+    }
+
+    function modifiOffreEleve($id_user_eleve,$id_offre,$conn){
+      $sql="UPDATE Offre
+            SET id_user_Eleve='$id_user_eleve'
+            WHERE id_offre='$id_offre'";
+      $res = $conn->Query($sql)or die('Erreur modification offre');
     }
 }
 

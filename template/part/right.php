@@ -286,7 +286,6 @@ elseif(isset($_SESSION['Entreprise'])){
   <div class="right_side_bar col">
       <div class="right_sidebar_iner">
 
-        <form class="form" method="POST" action='./demande.php'>
           <div class="trending_area">
               <h3 class="categories_tittle">Demande</h3>
               <ul class="collapsible trending_collaps" data-collapsible="accordion">
@@ -299,22 +298,22 @@ elseif(isset($_SESSION['Entreprise'])){
                 {
                   $T=0;
                   $idoffre=$dataD['id_offre'];
-                 $sql="SELECT O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
+                 $sql="SELECT O.id_user_Eleve,O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
                           WHERE D.id_offre=O.id_offre
                           AND D.id_offre='$idoffre'";
 
                   foreach (reqtoobj($sql,$conn) as $data) {
-
 
                   $SQL = "SELECT U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
                           WHERE D.id_user_Eleve=U.id_user
                           AND D.id_offre='$idoffre'";
 
                   ?>
-                  <li>
+                  <li id="demande<?php print $dataD['id_demande'] ?>">
                       <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($data->lib_offre);?> avec <?php print ($data->total); ?> demande(s)</div>
                       <hr>
                       <?php foreach (reqtoobj($SQL,$conn) as $data_user) {
+
                         $T=$T+1;
                         ?>
                       <div class="collapsible-body">
@@ -330,14 +329,39 @@ elseif(isset($_SESSION['Entreprise'])){
                                   <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
                                   <p><?php print urldecode($data_user->desc_user); ?></p>
                               </div>
-                              <div class="col s11 media_b">
+                              <?php
+                              if ($data->id_user_Eleve != 0) { ?>
+                                <div class="col s11 media_b" id="demandeaccepte<?php print $dataD['id_demande'] ?>" style="display:block;">
+                                  <center>
+                                    <br>
+                                  <span  class="btn btn-primary" style="cursor:default;">demande accepté</span>
+                                </center>
+                                </div>
+
+                                  <div class="col s11 media_b" id="demandeencours<?php print $dataD['id_demande'] ?>" style="display:none;">
+                                    <center>
+                                      <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
+                                      &nbsp&nbsp
+                                      <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
+                                    </center>
+                                  </div>
+                              <?php
+                            }else { ?>
+                              <div class="col s11 media_b" id="demandeaccepte<?php print $dataD['id_demande'] ?>" style="display:none;">
                                 <center>
-                                  <button type="submit" class="but_right_A" name="accepte">Accépté</button>
+                                  <br>
+                                <span  class="btn btn-primary" style="cursor:default;">demande accepté</span>
+                              </center>
+                              </div>
+                              <div class="col s11 media_b" id="demandeencours<?php print $dataD['id_demande'] ?>" style="display:block;">
+                                <center>
+                                  <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
                                   &nbsp&nbsp
-                                  <button type="submit" class="but_right_R" name="refuser">Refuser</button>
-                                  <input type="hidden" name="demande" value="<?php print $dataD['id_demande']; ?>">
+                                  <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
                                 </center>
                               </div>
+                            <?php
+                            } ?>
                           </div>
                           <hr>
                       </div>
@@ -350,7 +374,6 @@ elseif(isset($_SESSION['Entreprise'])){
               </ul>
 
           </div>
-        </form>
 
           <div class="popular_posts popular_fast">
             <h3 class="categories_tittle">My Submisstion</h3>

@@ -38,6 +38,7 @@ if (isset($_SESSION['Eleve'])) {
     <link rel="stylesheet" href="vendors/tooltip/balloon.min.css">
     <!-- Icon CSS-->
     <link rel="stylesheet" href="vendors/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link href="../../../../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel="stylesheet">
     <!-- Calendar CSS-->
     <link rel="stylesheet" href="vendors/calendar/dcalendar.picker.css">
@@ -142,7 +143,7 @@ if (isset($_SESSION['Eleve'])) {
                   ?>
 
                <!-- Post -->
-                
+
                <!-- End Post -->
              <?php
 
