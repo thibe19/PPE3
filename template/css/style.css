@@ -3596,7 +3596,7 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 }
 @media (max-width: 1550px) {
   .header_area ul .search_min .search_from input {
-    width: 200px;
+    width: 150px;
   }
 
   .min_container .section_row {

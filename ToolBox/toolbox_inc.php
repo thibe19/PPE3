@@ -468,7 +468,7 @@ function affichestage($id_cat,$id_user,$id_offre,$id_ent,$date_post_offre,$lib_o
             <div class="col s4 author">
                 <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="profil picture" class="circle"></div>
 
-                <div class="col s8 media_body">
+                <div class="col s8 media_body" style="padding-left: 10px;">
 
                   <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
                   <span><?php print $date_post_offre ?></span>
@@ -513,7 +513,7 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_ent,$date_post_offre,$lib_
                 <div class="col s4 author">
                     <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></div>
 
-                    <div class="col s8 media_body">
+                    <div class="col s8 media_body" style="padding-left: 10px;">
 
                       <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
                       <span><?php print $date_post_offre ?></span>
@@ -571,7 +571,7 @@ function affichepost($id_post,$id_cat,$id_user,$date_post,$heure_post,$titre_pos
                     </a>
 
 
-                    <div class="col s8 media_body">
+                    <div class="col s8 media_body" style="padding-left: 10px;">
 
                         <a href="#"><?php print getnomuser($id_user, $conn) ?></a>
                         <span><?php print $date_post."<br>".$heure_post ?></span>
