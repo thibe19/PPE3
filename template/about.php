@@ -12,6 +12,13 @@ if (isset($_SESSION['Eleve'])) {
         foreach ($elevedata as $d){
             $uneleve = new Utilisateur($id_user,$d->nom_user,$d->login_user,'',$d->email_user,$d->tel_user,$d->num_addr_user
                 ,$d->rue_addr_user,$d->CP_addr_user,$d->ville_addr_user,$d->photo_user,$d->desc_user,$d->dom_acti);
+                $unutilisateur = new Utilisateur();
+                $resU = $unutilisateur->selectAllUtilisateur($id_user,$conn);
+                $data = $resU -> fetch();
+
+                $uneleve = new Eleve();
+                $resE = $uneleve->selectAllEleve($id_user,$conn);
+                $dataE = $resE -> fetch();
         }
     }
     else{
@@ -51,6 +58,16 @@ if (isset($_SESSION['Eleve'])) {
         $domaine = data_base_in_object('Categorie', $conn);
 
         $descs = "A remplir avec la desc user de l'offre de stage";
+
+
+        $unutilisateur = new Utilisateur();
+        $resU = $unutilisateur->selectAllUtilisateur($id_user,$conn);
+        $data = $resU -> fetch();
+
+        $uneleve = new Eleve();
+        $resE = $uneleve->selectAllEleve($id_user,$conn);
+        $dataE = $resE -> fetch();
+
     }
 
 
@@ -112,13 +129,13 @@ require('part/header.php');
 
 <!-- Tranding-select and banner Area -->
 <div class="banner_area banner_2">
-    <img src="images/banner-2.jpg" alt="" class="banner_img">
+    <img style='width: 1900px;height: 400px;' src="images/banner/<?php select_image_bann($id_user, $conn) ?>" alt="" class="banner_img">
     <div class="media profile_picture">
         <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
         <div class="media_body">
-            <a href="profile.php"><?php print $uneleve->getNomUser().' '/*.$uneleve->getPrenomEleve()*/ ?></a>
-            <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
-            <h6><?php print $uneleve->getVilleAddr(); ?></h6>
+            <a href="profile.php"><?php print $dataE['prenom_eleve']." ".$data['nom_user']; ?></a>
+            <h6><?php print $data['num_addr_user']." ".$data['rue_addr_user']; ?></h6>
+            <h6><?php print $data['CP_addr_user']." ".$data['ville_addr_user']; ?></h6>
         </div>
     </div>
 </div>
@@ -137,11 +154,21 @@ require('part/header.php');
                 </li>
             </ul>
         </div>
+        <?php
+        $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
+        $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+        $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+
+        $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
+        $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
+        $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+
+         ?>
         <div class="col l4 m6">
             <ul class="post_follow">
-                <li>Posts <b>102</b></li>
-                <li>Followers <b>389</b></li>
-                <li>Following <b>51</b></li>
+                <li>Posts <b><?php print $total; ?></b></li>
+                <li>Following <b><?php print $ami;  ?></b></li>
+                <li>Followers <b><?php print $suivi; ?></b></li>
             </ul>
         </div>
         <!-- <div class="col l4 m6">
@@ -181,27 +208,29 @@ require('part/header.php');
 
                                 <!-- A PROPOS -->
 
+
+
                                 <h5>A propos</h5>
                                 <table>
                                     <tr>
                                         <td width="22%"><p>Nom</p></td>
                                         <td width="5%"><p> : </p></td>
-                                        <td><p><?php echo $uneleve->getNomUser(); ?></p></td>
+                                        <td><p><?php echo $data['nom_user']; ?></p></td>
                                     </tr>
                                     <tr>
                                         <td width="22%"><p>Prénom</p></td>
                                         <td width="5%"><p> : </p></td>
-                                        <td><p><?php echo $prenom; ?></p></td>
+                                        <td><p><?php echo $dataE['prenom_eleve']; ?></p></td>
                                     </tr>
                                     <tr>
                                         <td><p>Compétences</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><?php echo $uneleve->getDomActi(); ?></p></td>
+                                        <td><p><?php echo $data['dom_acti']; ?></p></td>
                                     </tr>
                                     <tr>
                                         <td><p>Date de naissance</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><?php echo $birthphrase; ?></p></td>
+                                        <td><p><?php echo $dataE['date_naiss']; ?></p></td>
                                     </tr>
                                 </table>
                                 <br>
@@ -211,7 +240,7 @@ require('part/header.php');
                                 <!-- DESCRIPTION -->
 
                                 <h5>Description</h5>
-                                <p><?php echo $uneleve->getDescUser(); ?></p>
+                                <p><?php echo $data['desc_user'] ?></p>
                                 <br>
                                 <hr>
                                 <br>
@@ -226,6 +255,7 @@ require('part/header.php');
                                 $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OStage S
                                                  WHERE O.id_offre = S.id_offre
                                                  AND O.id_user = $id_user
+                                                 AND O.id_user_Eleve = $id_user
                                                  ORDER BY O.date_debut_offre DESC";
                                 $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref1');
                                 while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
@@ -238,9 +268,20 @@ require('part/header.php');
                                  ?>
 
                                    <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
-                                   <p>du <?php echo $res_aff_stg3['date_debut_offre']; ?> au <?php echo urldecode($res_aff_stg2['date_fin_stage']); ?> à <?php print $res_aff_stg3['id_ent'] ?></p>
+                                   <p>du <?php echo $res_aff_stg3['date_debut_offre']; ?> au <?php echo urldecode($res_aff_stg2['date_fin_stage']); ?> à
+                                   <?php
+                                   $unutilisateur = new Utilisateur();
+                                   $resEn = $unutilisateur->selectAllUtilisateur($res_aff_stg3['id_ent'],$conn);
+                                   $dataEn = $resEn -> fetch();
+                                   print $dataEn['nom_user'];
+                                   ?>
+                                  </p>
 
-                                   <p>Domaine : <?php print $res_aff_stg3['id_cat'] ?> </p>
+                                   <p>Domaine : <?php
+                                   $unecat = new Categorie();
+                                   $resC = $unecat->selectCategorie($res_aff_stg3['id_cat'],$conn);
+                                   $dataC = $resC -> fetch();
+                                   print $dataC['lib_cat'] ?> </p>
 
                                    <p><?php echo $res_aff_stg2['desc_user_stage']; ?></p>
 
@@ -260,6 +301,7 @@ require('part/header.php');
                                 $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OEmploi E
                                                  WHERE O.id_offre = E.id_offre
                                                  AND O.id_user = $id_user
+                                                 AND O.id_user_Eleve = $id_user
                                                  ORDER BY O.date_debut_offre DESC";
                                 $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref3');
                                 while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
@@ -272,9 +314,18 @@ require('part/header.php');
                                  ?>
 
                                    <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
-                                   <p>Début le <?php echo $res_aff_stg3['date_debut_offre']; ?> à <?php print $res_aff_stg3['id_ent'] ?></p>
+                                   <p>Début le <?php echo $res_aff_stg3['date_debut_offre']; ?> à <?php
+                                   $unutilisateur = new Utilisateur();
+                                   $resEn = $unutilisateur->selectAllUtilisateur($res_aff_stg3['id_ent'],$conn);
+                                   $dataEn = $resEn -> fetch();
+                                   print $dataEn['nom_user'];
+                                    ?></p>
 
-                                   <p>Domaine : <?php print $res_aff_stg3['id_cat'] ?> </p>
+                                   <p>Domaine : <?php
+                                   $unecat = new Categorie();
+                                   $resC = $unecat->selectCategorie($res_aff_stg3['id_cat'],$conn);
+                                   $dataC = $resC -> fetch();
+                                   print $dataC['lib_cat'] ?> </p>
 
                                    <p><?php echo $res_aff_stg2['desc_user_stage']; ?></p>
 
@@ -294,12 +345,12 @@ require('part/header.php');
                                     <tr>
                                         <td width="14%"><p>Téléphone</p></td>
                                         <td width="5%"><p> : </p></td>
-                                        <td><p><?php echo $tel_user; ?></p></td>
+                                        <td><p><?php echo "0".$data['tel_user']; ?></p></td>
                                     </tr>
                                     <tr>
                                         <td><p>E-mail</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><?php echo $mail_user; ?></p></td>
+                                        <td><p><?php echo $data['email_user'] ?></p></td>
                                     </tr>
 
                                 </table>
@@ -322,24 +373,24 @@ require('part/header.php');
                                 <tr>
                                     <td width="22%"><p>Nom</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="surname_about" value="<?php echo $nom; ?>"></p>
+                                    <td><p><input type="text" name="surname_about" value="<?php echo $data['nom_user']; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width="22%"><p>Prénom</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="name_about" value="<?php echo $prenom; ?>"></p>
+                                    <td><p><input type="text" name="name_about" value="<?php echo $dataE['prenom_eleve']; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><p>Compétences</p></td>
                                     <td><p> : </p></td>
-                                    <td><p><input type="text" name="skill_about" value="<?php echo $skill; ?>"></p></td>
+                                    <td><p><input type="text" name="skill_about" value="<?php echo $data['dom_acti']; ?>"></p></td>
                                 </tr>
                                 <tr>
                                     <td><p>Date de naissance</p></td>
                                     <td><p> : </p></td>
-                                    <td><p><input type="date" name="birth_about" value="<?php echo $birth; ?>"></p></td>
+                                    <td><p><input type="date" name="birth_about" value="<?php echo $dataE['date_naiss']; ?>"></p></td>
                                 </tr>
                             </table>
                             <br>
@@ -351,7 +402,7 @@ require('part/header.php');
                             <h5>Description</h5>
                             <?php ?>
                             <p><textarea name="desc_about" class="textareabout" rows="8" placeholder="Vous n'avez pas encore entré de description."
-                                         cols="80"><?php echo $desc_user; ?></textarea>
+                                         cols="80"><?php echo $data['desc_user']; ?></textarea>
                                          <?php ////////ICI prof ?>
                                          <button type="submit" id="updateabout" value="<?php echo $res_aff_stg['id_offre']; ?>" name="valprofil"><i
                                                      class="fas fa-check"></i></button>
@@ -374,6 +425,7 @@ require('part/header.php');
                             $sql_aff_stg = "SELECT * FROM Offre O, OStage S
                                             WHERE O.id_offre = S.id_offre
                                             AND O.id_user = $id_user
+                                            AND O.id_user_Eleve = $id_user
                                             ORDER BY O.date_debut_offre DESC";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref5');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
@@ -399,7 +451,7 @@ require('part/header.php');
                                 <p> Entreprise :</p>
                                     <select name="selectents">
                                         <?php foreach ($list_ent as $le) { ?>
-                                            <option value="<?php $le->id_user ?>" <?php ($le->id_user == $res_aff_stg['id_ent']) ? print "selected" : false ?> >
+                                            <option value="<?php print $le->id_user ?>" <?php ($le->id_user == $res_aff_stg['id_ent']) ? print "selected" : false ?> >
                                                 <?php print $le->nom_user ?>
                                             </option>
                                         <?php } ?>
@@ -509,6 +561,7 @@ require('part/header.php');
                             $sql_aff_stg = "SELECT * FROM Offre O, OEmploi E
                                             WHERE O.id_offre = E.id_offre
                                             AND O.id_user = $id_user
+                                            AND O.id_user_Eleve = $id_user
                                             ORDER BY O.date_debut_offre DESC";
                             $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref7');
                             while ($res_aff_stg = $req_aff_stg->fetch()) {
@@ -657,13 +710,13 @@ require('part/header.php');
                                 <tr>
                                     <td width="14%"><p>Téléphone</p></td>
                                     <td width="5%"><p> : </p></td>
-                                    <td><p><input type="text" name="tel_about" value="<?php echo "0".$tel_user; ?>"></p>
+                                    <td><p><input type="text" name="tel_about" value="<?php echo "0".$data['tel_user']; ?>"></p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><p>E-mail</p></td>
                                     <td><p> : </p></td>
-                                    <td><p><input type="text" name="mail_about" value="<?php echo $mail_user; ?>"></p>
+                                    <td><p><input type="text" name="mail_about" value="<?php echo $data['email_user']; ?>"></p>
                                     </td>
                                 </tr>
 
@@ -713,12 +766,13 @@ require('part/header.php');
   $uneent= unserialize($_SESSION['Entreprise']);
   $id_user = $uneent->getIdUser();
 
-  $sql="SELECT * FROM Utilisateur WHERE id_user = '$id_user'";
-  $res = $conn -> query($sql)or die($conn -> errorInfo());
-  $data = $res -> fetch();
 
-  $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
-  $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
+  $unutilisateur = new Utilisateur();
+  $resU = $unutilisateur->selectAllUtilisateur($id_user,$conn);
+  $data = $resU -> fetch();
+
+  $unentreprise = new Entreprise();
+  $resEn = $unentreprise->selectAllEntreprise($id_user,$conn);
   $dataEn = $resEn -> fetch();
   ?>
 
@@ -760,41 +814,67 @@ require('part/header.php');
 
     </head>
     <body>
-        <!-- Header -->
-        <?php
-        require('part/header.php');
-        ?>
-        <!-- End  Header -->
+      <!-- Header_Area -->
+      <?php
+      require('part/header.php');
+      ?>
+      <!-- End  Header_Area -->
 
-        <!-- Tranding-select and banner Area -->
-        <div class="banner_area banner_2">
-            <img src="images/banner-2.jpg" alt="" class="banner_img">
-            <div class="media profile_picture">
-                <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
-                <div class="media_body">
-                    <a href="profile.php"><?php echo$data['nom_user']; ?> </a>
-                    <h6><?php echo$data['num_addr_user']; ?> <?php echo$data['rue_addr_user']; ?> <?php echo$data['CP_addr_user']; ?>, <?php echo$data['ville_addr_user']; ?></h6>
-                </div>
-            </div>
-        </div>
-        <section class="author_profile">
-            <div class="row author_profile_row">
-                <br><br>
-                <div class="col l4 m6">
-                    <ul class="post_follow">
-                        <li>Posts <b>102</b></li>
-                        <li>Followers <b>389</b></li>
-                        <li>Following <b>51</b></li>
-                    </ul>
-                </div>
-                <!-- <div class="col l4 m6">
-                    <ul class="follow_messages">
-                        <li><a href="#" class="waves-effect">Follow</a></li>
-                        <li><a href="#" class="waves-effect">Messages</a></li>
-                    </ul>
-                </div> -->
-            </div>
-        </section>
+      <!-- Tranding-select and banner Area -->
+      <div class="banner_area banner_2">
+          <img src="images/banner-2.jpg" alt="" class="banner_img">
+          <div class="media profile_picture">
+              <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
+              <div class="media_body">
+                  <a href="profile.php"><?php echo$data['nom_user'] ?></a>
+                  <h6><?php echo$data['num_addr_user']." ".$data['rue_addr_user']; ?></h6>
+                  <h6><?php echo$data['CP_addr_user']." ".$data['ville_addr_user']; ?></h6>
+              </div>
+          </div>
+      </div>
+      <section class="author_profile">
+          <div class="row author_profile_row">
+              <div class="col l4 m6">
+                  <ul class="profile_menu">
+                      <li><a href="profile.php">Activiter</a></li>
+                      <li><a href="about.php">A propos</a></li>
+                      <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
+                          <!-- Dropdown Structure -->
+                          <ul id="dro_pm" class="dropdown-content">
+                              <li><a href="#">Popular Post</a></li>
+                              <li><a href="#">Save Post</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+              <?php
+              $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
+              $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+              $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+
+              $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
+              $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
+              $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+
+               ?>
+              <div class="col l4 m6">
+                  <ul class="post_follow">
+                      <li>Posts <b><?php print $total; ?></b></li>
+                      <li>Following <b><?php print $ami;  ?></b></li>
+                      <li>Followers <b><?php print $suivi; ?></b></li>
+                  </ul>
+              </div>
+              <!-- <div class="col l4 m6">
+                  <ul class="follow_messages">
+                      <li><a href="#" class="waves-effect">Follow</a></li>
+                      <li><a href="#" class="waves-effect">Messages</a></li>
+                  </ul>
+              </div> -->
+          </div>
+      </section>
+      <!-- End Tranding Area -->
+
+      <!-- Min Container area -->
 
     <section class="min_container profile_pages">
         <div class="section_row">
@@ -803,7 +883,32 @@ require('part/header.php');
             <div class="middle_section col">
                 <div class="post profile_post">
                     <div class="post_content">
-
+                        <table>
+                          <tr>
+                            <td><p>Nom de l'entreprise : </p></td>
+                            <td><p><?php echo $data['nom_user']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td><p>Domaine d'activité : </p></td>
+                            <td><p><?php echo $dataEn['code_APE']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td><p>Téléphone : </p></td>
+                            <td><p><?php echo "0".$data['tel_user']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td><p>Mail : </p></td>
+                            <td><p><?php echo $data['email_user']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td><p>Adresse : </p></td>
+                            <td><p><?php echo$data['num_addr_user']; ?> <?php echo$data['rue_addr_user']; ?> <?php echo$data['CP_addr_user']; ?>, <?php echo$data['ville_addr_user']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td><p>Site Internet : </p></td>
+                            <td><p> <a href="<?php echo $dataEn['site_web']; ?>"><?php echo $dataEn['site_web']; ?></a> </p></td>
+                          </tr>
+                        </table>
 
                     </div>
                 </div>
@@ -846,9 +951,10 @@ if (isset($_POST['valstabout'])) {
    $libo = $_POST['titresn'];
    $notesn = $_POST['quantitysn'];
    $date = date("Y-m-d");
+   $id_user_eleve = $id_user;
 
-   $unstage = new Stage('',$libo,'',$dated,$date,'',$id_user,$id_catsn,$id_entsn,$datef,$notesn,$descsn);
-   $unstage->insert_stage($conn);
+    $unstage = new Stage('',$libo,'',$dated,$date,'',$id_user,$id_catsn,$id_entsn,$id_user_eleve,$datef,$notesn,$descsn);
+    $unstage->insert_stage($conn);
    ?>
      <script>
        window.location='./about.php';
@@ -883,9 +989,10 @@ if (isset($_POST['valstabouts'])) {
   $dated = $_POST['date_about_debut_s'];
   $id_cats = $_POST['selectdomaines'];
   $id_ents = $_POST['selectents'];
+  $id_user_Eleve = $id_user;
 
 
-  $unstage = new Stage($id_offre, $libo, '', $dated, '', '', '', $id_cats, $id_ents, $datef, $notes, $descs);
+  $unstage = new Stage($id_offre, $libo, '', $dated, '', $descs, '', $id_cats, $id_ents, $id_user_Eleve, $datef, $notes, $descs);
   $unstage->modifier_stage($conn);
   ?>
     <script>
@@ -912,8 +1019,9 @@ if (isset($_POST['valstaboutt'])) {
    $libo = $_POST['titretn'];
    $notetn = $_POST['quantitytn'];
    $date = date("Y-m-d");
+   $id_user_eleve = $id_user;
 
-   $unemploi = new Emploi('',$libo,'',$dated,$date,$desctn,$id_user,$id_cattn,$id_enttn,'','');
+   $unemploi = new Emploi('',$libo,'',$dated,$date,$desctn,$id_user,$id_cattn,$id_enttn,$id_user_eleve,'','');
    $unemploi->insert_emploi($conn);
    ?>
      <script>
@@ -947,9 +1055,9 @@ if (isset($_POST['valstabouttt'])) {
   $dated = $_POST['date_about_debut_t'];
   $id_catt = $_POST['selectdomainet'];
   $id_entt = $_POST['selectentt'];
+  $id_user_Eleve = $id_user;
 
-
-  $unstage = new Emploi($id_offre, $libo, '', $dated, '', $desct, '', $id_catt, $id_entt, '', '');
+  $unstage = new Emploi($id_offre, $libo, '', $dated, '', $desct, '', $id_catt, $id_entt, $id_user_Eleve, '', '');
   $unstage->modifier_emploi($conn);
   ?>
     <script>

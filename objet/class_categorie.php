@@ -60,10 +60,17 @@ class Categorie
 
     function selectAllCategorie($conn){
 
-      $sqlC="SELECT * FROM Categorie ORDER BY lib_cat ";
+      $sqlC="SELECT * FROM Categorie ORDER BY lib_cat DESC";
       $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
 
       return $resC;
+    }
+
+    function selectCategorie($id_cat,$conn){
+      $sqlC="SELECT * FROM Categorie WHERE id_cat = '$id_cat'";
+      $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+      return $resC;
+
     }
 
 

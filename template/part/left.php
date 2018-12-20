@@ -95,14 +95,9 @@ if (isset($_SESSION['Eleve'])) {
       $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
       $res2 = $req2->fetch();
 
-      if ($res2['photo_user'] == "") {
-        $photo = "avatar.png";
-      }
-      else {
-        $photo = $res2['photo_user'];
-      }
 
-      ?> <li><a href="#"><img width="40px" height="40px" src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle"></a></li> <?php
+
+      ?> <li><a href="about.php?visit=<?php print dec_enc('encrypt',$res2['id_user']) ?>"><img style='width: 40px;height: 40px;' src="images/profil/<?php select_image_profil($res2['id_user'], $conn) ?>" alt="" class="circle"></a></li> <?php
     } ?>
   </ul>
 </div>

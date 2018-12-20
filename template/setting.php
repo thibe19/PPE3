@@ -73,44 +73,65 @@ if (isset($_SESSION['Eleve'])) {
 
   </head>
   <body>
-      <!-- Header -->
-      <?php
-      require('part/header.php');
-      ?>
-      <!-- End  Header -->
+    <!-- Header_Area -->
+    <?php
+    require('part/header.php');
+    ?>
+    <!-- End  Header_Area -->
 
-      <!-- Tranding-select and banner Area -->
-      <div class="banner_area banner_2">
-          <img src="images/banner-2.jpg" alt="" class="banner_img">
-          <div class="media profile_picture">
-              <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
-              <div class="media_body">
-                  <a href="profile.php"><?php echo$data['nom_user']; ?>  <?php echo$dataE['prenom_eleve']; ?></a>
-                  <h6><?php print $uneleve->getNumAddr()." ".$uneleve->getRueAddr(); ?></h6>
-                  <h6><?php print $uneleve->getVilleAddr(); ?></h6>
-              </div>
-          </div>
-      </div>
-      <!-- Fin Banner -->
-      <section class="author_profile">
-          <div class="row author_profile_row">
-              <br><br>
-              <div class="col l4 m6">
-                  <ul class="post_follow">
-                      <li>Posts <b>102</b></li>
-                      <li>Followers <b>389</b></li>
-                      <li>Following <b>51</b></li>
-                  </ul>
-              </div>
-              <div class="col l4 m6">
-                  <ul class="follow_messages">
-                      <li><a href="#" class="waves-effect">Follow</a></li>
-                      <li><a href="#" class="waves-effect">Messages</a></li>
-                  </ul>
-              </div>
-          </div>
-      </section>
-      <!-- End Tranding Area -->
+    <!-- Tranding-select and banner Area -->
+    <div class="banner_area banner_2">
+        <img style='width: 1900px;height: 400px;' src="images/banner/<?php select_image_bann($id_user, $conn) ?>" alt="" class="banner_img">
+        <div class="media profile_picture">
+            <a href="profile.php"><img style='width: 170px;height: 165px;' src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle"></a>
+            <div class="media_body">
+                <a href="profile.php"><?php print $dataE['prenom_eleve']." ".$data['nom_user']; ?></a>
+                <h6><?php print $data['num_addr_user']." ".$data['rue_addr_user']; ?></h6>
+                <h6><?php print $data['CP_addr_user']." ".$data['ville_addr_user']; ?></h6>
+            </div>
+        </div>
+    </div>
+    <section class="author_profile">
+        <div class="row author_profile_row">
+            <div class="col l4 m6">
+                <ul class="profile_menu">
+                    <li><a href="profile.php">Activiter</a></li>
+                    <li><a href="about.php">A propos</a></li>
+                    <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
+                        <!-- Dropdown Structure -->
+                        <ul id="dro_pm" class="dropdown-content">
+                            <li><a href="#">Popular Post</a></li>
+                            <li><a href="#">Save Post</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <?php
+            $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
+            $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
+            $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+
+            $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
+            $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
+            $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+
+             ?>
+            <div class="col l4 m6">
+                <ul class="post_follow">
+                    <li>Posts <b><?php print $total; ?></b></li>
+                    <li>Following <b><?php print $ami;  ?></b></li>
+                    <li>Followers <b><?php print $suivi; ?></b></li>
+                </ul>
+            </div>
+            <!-- <div class="col l4 m6">
+                <ul class="follow_messages">
+                    <li><a href="#" class="waves-effect">Follow</a></li>
+                    <li><a href="#" class="waves-effect">Messages</a></li>
+                </ul>
+            </div> -->
+        </div>
+    </section>
+    <!-- End Tranding Area -->
 
   <!----------------------------------------------------------------------------------------------------------- -->
 
@@ -125,6 +146,7 @@ if (isset($_SESSION['Eleve'])) {
                 <div class="col s12">
                   <h1>Option Profil</h1><br><br>
                 </div>
+                <p>Image de Profil</p>
                 <div class="profil">
                 <form class="" action="setting.php" method="post" enctype="multipart/form-data">
                   <div class="modif-image">
@@ -142,6 +164,28 @@ if (isset($_SESSION['Eleve'])) {
                     </div>
                   </div>
                 </form>
+                <!--  -->
+                <br>
+                <p>Bannière</p>
+
+                <form class="" action="setting.php" method="post" enctype="multipart/form-data">
+                  <div class="modif-image">
+
+                    <div class="modif-image-bouton">
+                      <div>
+                        <input type='file' name='photo_ban'>
+                        <button class="btn btn-primary btn-block mt-5" name="photo_banner" value="1" type="submit">
+                          <i class="fa fa-fw fa-camera"></i>
+                          <span>Change Photo</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+
+
+
                   <!-- fin modif image -->
                   <br>
                   <div class="tab-content pt-3">
@@ -1067,5 +1111,19 @@ if (isset($_POST['photo_update'])) {
 <?php
 
 
+}
+
+if (isset($_POST['photo_banner'])) {
+  $namepho = $_FILES['photo_ban']['name'];
+  $login = $ndc;
+  $photo2 = $_FILES['photo_ban']['tmp_name'];
+
+
+  update_image_banner($namepho, $login, $photo2, $id_user, $conn);
+?>
+ <script>
+   window.location='./setting.php';
+ </script>
+<?php
 }
  ?>

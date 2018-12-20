@@ -207,14 +207,23 @@ $( function() {
                 <!-- Profile  a-->
                 <?php
 
+if (isset($_SESSION['Eleve'])) {
+  $uneleve = unserialize($_SESSION['Eleve']);
+  $id_user_el = $uneleve->getIdUser();
+}
+
+if (isset($_SESSION['Entreprise'])) {
+  $uneentreprise = unserialize($_SESSION['Entreprise']);
+  $id_user_el = $uneentreprise->getIdUser();
+}
                  ?>
 
                 <li class="user_dropdown"><a class="dropdown-button" href="#!" data-activates="dropdown1"><img width="55px" height="55px"
-                                src="images/profil/<?php select_image_profil($id_user, $conn) ?>" alt="" class="circle p_2"></a>
+                                src="images/profil/<?php select_image_profil($id_user_el, $conn) ?>" alt="" class="circle p_2"></a>
                                 <!-- Image de profil /\ -->
                     <!-- Dropdown Structure -->
                     <ul id="dropdown1" class="dropdown-content">
-                        <li><a href="profile.php"><i class="ion-person"></i>Mon profile</a></li>
+                        <li><a href="profile.php"><i class="ion-person"></i>Mon profil</a></li>
                         <!-- <li><a href="read-later.php"><i class="ion-android-folder-open"></i>Saved Articles</a></li>
                         <li class="b_t"><a href="#"><i class="ion-android-notifications"></i>Notification settings</a>
                         </li> -->

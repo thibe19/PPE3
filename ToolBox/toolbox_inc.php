@@ -207,7 +207,7 @@ function mail_reset_mdp($mail, $conn)
     $objet = "Mot de passe compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
 
-    $SQL = "SELECT * FROM utilisateur
+    $SQL = "SELECT * FROM Utilisateur
                   WHERE email_user='$mail';";
     $Req = $conn->Query($SQL);
     $result = $Req->fetch();
@@ -226,7 +226,7 @@ function mail_forgot_login($mail, $conn)
     $objet = "Login compte : ViaBahuet.";
     $entete = "From: yannther99@gmail.com";
 
-    $SQL = "SELECT * FROM utilisateur
+    $SQL = "SELECT * FROM Utilisateur
                   WHERE email_user='$mail';";
     $Req = $conn->Query($SQL);
     $result = $Req->fetch();
@@ -237,6 +237,30 @@ function mail_forgot_login($mail, $conn)
     $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.";
 
     mail($mail, $objet, $text, $entete);
+}
+
+function mail_accept($id_user, $id_ent, $conn) {
+
+  $SQL = "SELECT * FROM Utilisateur
+          WHERE id_user=$id_user;";
+  $Req = $conn->Query($SQL);
+  $result = $Req->fetch();
+
+  $mail = $result['email_user'];
+  $objet = "Demande stage.";
+  $entete = "From: yannther99@gmail.com";
+
+  $SQL2 = "SELECT * FROM Entreprise
+          WHERE id_user=$id_ent;";
+  $Req2 = $conn->Query($SQL2);
+  $result2 = $Req2->fetch();
+
+  $text = "Bonjour\n";
+  $text = $text."Nous vous informons que votre demande chez".$result2['nom_user']."a été accepté votre demande de stage.\n";
+  $text = $text."Pour plus d'informations utiliser leur adresse mail : ".$result2['email.user']." \n\n\n";
+  $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.\n";
+
+  mail($mail, $objet, $text, $entete);
 }
 
 function testsql($sql, $conn)
@@ -338,7 +362,54 @@ function update_image($namepho, $login, $photo2, $id_user, $conn) {
 }
 
 
+function update_image_banner($namepho, $login, $photo2, $id_user, $conn) {
+  $photo = $login.".jpg";
+  $sql="SELECT * FROM Photo
+        WHERE id_user = '$id_user'";
+  $req = $conn->Query($sql)or die('Erreur modification user');
+  $res = $req->fetch();
 
+  $chemin = dirname(__DIR__);
+  $chemin = $chemin."/template/images/banner/";
+
+  if (isset($res['lib_banner'])) {
+    $sql="UPDATE Photo
+          SET lib_banner = '$photo'
+          WHERE id_user='$id_user' ";
+    $res = $conn->Query($sql)or die('Erreur modification user');
+
+    move_uploaded_file($photo2,$chemin.$namepho);
+    rename ($chemin.$namepho, $chemin.$login.".jpg");
+  }
+  else {
+    $sql="INSERT INTO Photo
+          VALUES(NULL,'$photo','$id_user')";
+    $res = $conn->Query($sql)or die('Erreur modification user');
+
+    move_uploaded_file($photo2,$chemin.$namepho);
+    rename ($chemin.$namepho, $chemin.$login.".jpg");
+  }
+}
+
+
+function select_image_bann($id_user, $conn) {
+$SQL2 = "SELECT lib_banner FROM Photo
+           WHERE id_user = $id_user";
+           $req2 = $conn->Query($SQL2)or die('Erreur modification user2');
+           $res2 = $req2->fetch();
+
+
+  if($res2){
+    if(is_null($res2['lib_banner']) || empty($res2['lib_banner'])){
+      print 'banner.jpg';
+    }
+    else {
+      print $res2['lib_banner'];
+    }
+  }
+
+
+}
 
 
 
@@ -458,18 +529,23 @@ function postule($idoffre,$id_user,$id_ent,$conn){
 function affichestage($id_cat,$id_user,$id_creater,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
 
 
-<div class="post">   
-    <div class="post_content">
-        <div class="row author_area">
+  <div class="post">
+      <div class="post_content">
+          <div class="post_img">
+              <img src="images/post/hide.png" alt="">
+              <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
+          </div>
+          <div class="row author_area">
             <div class="col s4 author">
+              <a href="about.php?visit=<?php print dec_enc('encrypt',$id_ent) ?>">
                 <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_creater, $conn) ?>" alt="profil picture" class="circle"></div>
-
+              </a>
                 <div class="col s8 media_body" style="padding-left: 10px;">
 
                   <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
                   <span><?php print $date_post_offre ?></span>
                     <div class="float-right">
-                        <span><?php print getnomcategorie($id_cat,$conn) ?></span></div>
+                        </div>
                 </div>
             </div>
 
@@ -501,16 +577,17 @@ function affichestage($id_cat,$id_user,$id_creater,$id_offre,$id_ent,$date_post_
  */
 function afficheemploi($id_cat,$id_offre,$id_user,$id_creater,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$salaire_emp,$type_emp,$date_debut_offre,$desc_offre,$conn){?>
 
-    <div class="post">
-        <div class="post_content">
-            <a href="details.html" class="post_img">
-                <img src="images/post.jpg" alt="">
-                <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
-            </a>
+  <div class="post">
+      <div class="post_content">
+          <div class="post_img">
+              <img src="images/post/hide.png" alt="">
+              <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
+          </div>
             <div class="row author_area">
                 <div class="col s4 author">
+                  <a href="about.php?visit=<?php print dec_enc('encrypt',$id_ent) ?>">
                     <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_creater, $conn) ?>" alt="" class="circle"></div>
-
+                  </a>
                     <div class="col s8 media_body" style="padding-left: 10px;">
 
                       <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
