@@ -181,7 +181,7 @@ if (isset($_SESSION['Eleve']) ) {
                             ?>
                             <!-- Post -->
 
-                            <?php affichestage($dataC['id_cat'],$uneleve->getIdUser(),$dataO['id_offre'],$dataO['id_ent'],$dataO['date_post_offre'],
+                            <?php affichestage($dataC['id_cat'],$uneleve->getIdUser(),$dataO['id_user'],$dataO['id_offre'],$dataO['id_ent'],$dataO['date_post_offre'],
                             $dataO['lib_offre'],$dataO['niveau_req'],$dataO['date_debut_offre'],$dataS['date_fin_stage'],$dataO['desc_offre'],$conn);
                             ?>
                             <!-- End Post -->
@@ -227,7 +227,7 @@ if (isset($_SESSION['Eleve']) ) {
                             ?>
                             <!-- Post -->
 
-                            <?php afficheemploi($dataC['id_cat'],$dataO['id_offre'],$uneleve->getIdUser(),$dataO['id_ent'],$dataO['date_post_offre'],
+                            <?php afficheemploi($dataC['id_cat'],$dataO['id_offre'],$uneleve->getIdUser(),$dataO['id_user'],$dataO['id_ent'],$dataO['date_post_offre'],
                             $dataO['lib_offre'],$dataO['niveau_req'],$dataE['salaire_emp'],$dataE['type_emp'],$dataO['date_debut_offre'],$dataO['desc_offre'],$conn)
                             ?>
                             <!-- End Post -->

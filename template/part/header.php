@@ -3,13 +3,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Header                                    ////
-////                                13/12/2018                                ////
-////                                V0.0.5                                    ////
+////                                08/01/2019                                ////
+////                                V0.0.6                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 if (isset($_GET['logout'])){
     unset($_SESSION['login']);
     unset($_SESSION['mdp']);
+
+    unset($_COOKIE['login']);
+    unset($_COOKIE['mdp']);
+    setcookie('login', null, -1, '/');
+    setcookie('mdp', null, -1, '/');
+
+
+
     if (isset($_SESSION['Eleve'])){
         unset($_SESSION['Eleve']);
     }
@@ -18,7 +26,6 @@ if (isset($_GET['logout'])){
     }
     header('Location:../');
 }
-
 
 
 $auto_compl = "";
