@@ -181,33 +181,20 @@ if (isset($_SESSION['Eleve']) ) {
                     <div id="emploi">
                     <div class="fast_post">
                         <?php
-                        $sqlE="SELECT * FROM OEmploi WHERE id_user_Eleve = 0";
-                        $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+                        $uneoffre = new Emploi();
+                        $param = array(
+                            "FiltreSelect" => "c.lib_cat,u.photo_user,u.nom_user,oe.salaire_emp,oe.type_emp",
+                            "FiltreJoin" => array("INNER JOIN OEmploi oe ON Offre.id_offre=oe.id_offre",
+                                "INNER JOIN Categorie c ON Offre.id_cat=c.id_cat",
+                                "INNER JOIN Utilisateur u ON Offre.id_ent=u.id_user",
+                                "INNER JOIN Entreprise ent ON Offre.id_ent=ent.id_user"),
+                            "FiltreWhere" => "Offre.id_user_Eleve = 0"
+                        );
+                        $res = $uneoffre->getAll($param,$conn);
 
-                        while ($dataE=$resE->fetch())
-                        {
-
-                            $offre = $dataE['id_offre'];
-                            $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre' ";
-                            $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-                            $dataO=$resO->fetch();
-
-                            $cat = $dataO['id_cat'];
-                            $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                            $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                            $dataC=$resC->fetch();
-
-
-                            ?>
-                            <!-- Post -->
-
-                            <?php afficheemploi($dataC['id_cat'],$dataO['id_offre'],$uneleve->getIdUser(),$dataO['id_user'],$dataO['id_ent'],$dataO['date_post_offre'],
-                            $dataO['lib_offre'],$dataO['niveau_req'],$dataE['salaire_emp'],$dataE['type_emp'],$dataO['date_debut_offre'],$dataO['desc_offre'],$conn)
-                            ?>
-                            <!-- End Post -->
-                            <br>
-
-                            <?php
+                        foreach ($res as $re) {
+                            $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
+                            print "<br>";
                         }
 
                         ?>
