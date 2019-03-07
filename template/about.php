@@ -122,6 +122,7 @@ if (isset($_SESSION['Eleve'])) {
 </head>
 <body>
 <!-- Header_Area -->
+
 <?php
 require('part/header.php');
 ?>
@@ -147,21 +148,25 @@ require('part/header.php');
                 <li><a href="about.php">A propos</a></li>
                 <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
                     <!-- Dropdown Structure -->
-                    <ul id="dro_pm" class="dropdown-content">
+                    <!-- <ul id="dro_pm" class="dropdown-content">
                         <li><a href="#">Popular Post</a></li>
                         <li><a href="#">Save Post</a></li>
-                    </ul>
-                </li>
+                    </ul> -->
+                <!-- </li> -->
             </ul>
         </div>
         <?php
-        $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
-        $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-        $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
 
-        $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
-        $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
-        $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+        $untoto = new Post;
+        $resP = $untoto->countPosts($id_user,$conn);
+        $dataP=$resP->fetch();
+        $total=$dataP['resulta'];
+
+        $unamie = new Post;
+        $resA = $unamie->countAmis($id_user,$conn);
+        $dataA=$resA->fetch();
+        $amis=$dataA['amis'];
+        $suivi=$dataA['suivi'];
 
          ?>
         <div class="col l4 m6">
