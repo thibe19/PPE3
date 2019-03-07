@@ -179,20 +179,7 @@ $( function() {
 
                 </li>
                 <!-- Messages -->
-                <li><a href="messages.php">
-                  <i class="ion-ios-chatboxes-outline"> </i>
-                  <!-- <b class="n-number"></b>    Notification          -->
-                  </a>
-                    <!-- Dropdown Structure -->
 
-                    <ul id="dropdown4" class="dropdown-content">
-                        <li class="hed_notic">Follow feed <span><i class="ion-ios-gear-outline"></i></span></li>
-
-                        <li><a href="messages.php" class="waves-effect chack_all_btn">Check All Follow Requests</a>
-                        </li>
-                    </ul>
-
-                </li>
                 <!-- Notifications -->
                 <!-- <li><a href="messages.php">
                   <i class="ion-ios-bell-outline"> </i> -->

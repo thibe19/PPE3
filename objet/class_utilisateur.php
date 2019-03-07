@@ -272,7 +272,24 @@ class Utilisateur
         $this->dom_acti = $dom_acti;
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                               DELETE                                     ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
 
+    function supprimerAmis($id_user_amis,$conn,$zone) {
+      $SQL = "DELETE FROM ajoute_amis
+              WHERE id_user_Eleve = $id_user_amis;";
+      $res = $conn->Query($SQL)or die('');
+      ?>
+        <script type="text/javascript">
+          window.location='requests.php?groupe=<?php print $zone ?>';
+        </script>
+      <?php
+    }
 
     //////////////////////////////////////////////////////////////////////////////////
     ////                                                                          ////
@@ -318,6 +335,20 @@ class Utilisateur
         return $var;
     }
 
+    //// INSERT Amis
+
+    function ajoutAmis($id_user_amis,$id_user,$conn,$zone) {
+      $SQL = "INSERT INTO ajoute_amis
+              VALUES('$id_user', '$id_user_amis');";
+      $res = $conn->Query($SQL)or die('');
+      ?>
+        <script type="text/javascript">
+          window.location='requests.php?groupe=<?php print $zone ?>';
+        </script>
+      <?php
+    }
+
+
     //////////////////////////////////////////////////////////////////////////////////
     ////                                                                          ////
     ////                                                                          ////
@@ -350,6 +381,13 @@ Public function modifier_utilisateur( $objet,$conn){
 
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                                                          ////
+////                               SELECT                                     ////
+////                                                                          ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
 
 function getAllUserDB($id,$conn)
 {
@@ -378,6 +416,27 @@ function selectAmisCompte($id_user, $conn) {
 
   return $req;
 }
+
+// Select tout les utilisateurs sauf sois même
+function selectSpecielUser($id_user,$id_user2,$conn) {
+  $SQL2 = "SELECT * FROM Utilisateur
+           WHERE id_user = $id_user2
+           AND id_user != $id_user";
+  $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
+
+  return $req2;
+}
+
+// Selection tout les user amis
+function selectAllAmis($id_user,$id_user_amis,$conn) {
+  $SQL3 = "SELECT * FROM ajoute_amis
+           WHERE id_user_Eleve = $id_user_amis
+           AND id_user = $id_user";
+  $req3 = $conn->Query($SQL3) or die("L'utilisateur n'existe pas");
+
+  return $req3;
+}
+
 
 
 }// fin class

@@ -169,7 +169,7 @@ if (isset($_SESSION['Eleve'])) {
                 </form>
                 <!--  -->
                 <br>
-                <p>Bannière</p>
+                <p>Bannière - <i>recommandé 1900*400px</i></p>
 
                 <form class="" action="setting.php" method="post" enctype="multipart/form-data">
                   <div class="modif-image">
@@ -179,7 +179,7 @@ if (isset($_SESSION['Eleve'])) {
                         <input type='file' name='photo_ban'>
                         <button class="btn btn-primary btn-block mt-5" name="photo_banner" value="1" type="submit">
                           <i class="fa fa-fw fa-camera"></i>
-                          <span>Change Photo</span>
+                          <span>Change BANNIERE</span>
                         </button>
                       </div>
                     </div>

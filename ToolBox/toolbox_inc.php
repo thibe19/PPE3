@@ -398,11 +398,8 @@ $SQL2 = "SELECT lib_banner FROM Photo
            $req2 = $conn->Query($SQL2)or die('Erreur modification user');
 $res2 = $req2->fetch();
 
-
-
     if(isset($res2['lib_banner'])){
       print $res2['lib_banner'];
-      
     }
     else {
       print 'banner.jpg';

@@ -37,12 +37,12 @@
     </div>
     <div class="input-field col s12 select_option">
       <?php
-      $sqlC="SELECT * FROM Categorie ";
-      $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+      $unecat = new Categorie();
+      $resU = $unecat->selectAllCategorie($conn);
       ?>
       <select name='cat'>
         <?php
-        while ($dataC=$resC->fetch())
+        while ($dataC=$resU->fetch())
         {
           echo " <option value=".$dataC['id_cat']."> ".$dataC['lib_cat']." </option>";
         }
