@@ -395,18 +395,17 @@ function update_image_banner($namepho, $login, $photo2, $id_user, $conn) {
 function select_image_bann($id_user, $conn) {
 $SQL2 = "SELECT lib_banner FROM Photo
            WHERE id_user = $id_user";
-           $req2 = $conn->Query($SQL2)or die('Erreur modification user2');
-           $res2 = $req2->fetch();
+           $req2 = $conn->Query($SQL2)or die('Erreur modification user');
+$res2 = $req2->fetch();
 
 
-  if($res2){
-    if(is_null($res2['lib_banner']) || empty($res2['lib_banner'])){
-      print 'banner.jpg';
-    }
-    else {
+
+    if(isset($res2['lib_banner'])){
       print $res2['lib_banner'];
     }
-  }
+    else {
+      print 'banner.jpg';
+    }
 
 
 }

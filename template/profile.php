@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Profile                                   ////
-////                                20/12/2018                                ////
-////                                V0.0.8                                    ////
+////                                07/03/2019                                ////
+////                                V0.0.9                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -91,13 +91,16 @@ if (isset($_SESSION['Eleve'])) {
             </div>
 
             <?php
-            $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
-            $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-            $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+            $sqlP="SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = '$id_user') + (SELECT COUNT(*) FROM Offre WHERE id_user = '$id_user') as resulta;";
+            $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+            $dataP=$resP->fetch();
+            $total=$dataP['resulta'];
 
-            $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
-            $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
-            $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+            $sqlA="SELECT (SELECT COUNT(*) FROM ajoute_amis WHERE id_user = '$id_user') as amis, (SELECT COUNT(*) FROM ajoute_amis WHERE id_user_Eleve = '$id_user') as suivi";
+            $resA = $conn -> query($sqlA)or die($conn -> errorInfo());
+            $dataA=$resA->fetch();
+            $ami=$dataA['amis'];
+            $suivi=$dataA['suivi'];
 
              ?>
             <div class="col l4 m6">
@@ -130,17 +133,19 @@ if (isset($_SESSION['Eleve'])) {
               while ($res=$req->fetch()) {
 
               $id_post_now = $res['id_post'];
-                $cat = $res['id_cat'];
-                  $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                  $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                  $dataC=$resC->fetch();
 
-                  $id_user_util = $res['id_user'];
-                  $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user_util'";
-                  $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                  $dataU = $resU -> fetch();
-                  affichepost($res['id_post'],$dataC['id_cat'],$dataU['id_user'],$res['date_post'],$res['heure_post'],$res['titre_post'],$res['contenu_post'],$conn)
-                  ?>
+              $cat = $res['id_cat'];
+              $uncat = new Categorie;
+              $resC = $uncat->selectCategorie($cat,$conn);
+              $dataC=$resC->fetch();
+
+              $id_user_util = $res['id_user'];
+
+              $unuti = new utilisateur;
+              $resU = $unuti->selectAllUtilisateur($id_user_util,$conn);
+              $dataU = $resU -> fetch();
+              affichepost($res['id_post'],$dataC['id_cat'],$dataU['id_user'],$res['date_post'],$res['heure_post'],$res['titre_post'],$res['contenu_post'],$conn)
+              ?>
 
                <!-- Post -->
 
@@ -149,21 +154,6 @@ if (isset($_SESSION['Eleve'])) {
 
               }
                ?>
-
-
-               <!-- Post -->
-                <!-- <div class="pagination_area">
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#!"><i class="ion-chevron-left"></i></a></li>
-                        <li class="active"><a href="#!" class="waves-effect">1</a></li>
-                        <li><a href="#!" class="waves-effect">2</a></li>
-                        <li><a href="#!" class="waves-effect">3</a></li>
-                        <li><a href="#!" class="waves-effect">4</a></li>
-                        <li><a href="#!" class="waves-effect">...</a></li>
-                        <li><a href="#!" class="waves-effect">20</a></li>
-                        <li><a href="#!" class="waves-effect"><i class="ion-chevron-right"></i></a></li>
-                    </ul>
-                </div> -->
             </div>
             <!-- left side bar -->
             <div class="col">

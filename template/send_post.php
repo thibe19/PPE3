@@ -42,9 +42,9 @@ if (isset($_POST['post']) ) {
 
 
     move_uploaded_file($photo2,$chemin.$namepho);
-    rename ($chemin.$namepho, $chemin.$logininf.".jpg");
+    rename ($chemin.$namepho, $chemin.$logininf.date("dmYHi").".jpg");
 
-    $photo = $logininf.".jpg";
+    $photo = $logininf.date("dmYHi").".jpg";
 
     $unpost = new Post ('',$titre,$desc,$photo,$date,$heur,$cat,$id);
     $unpost ->insert_post($conn);
