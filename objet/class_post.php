@@ -113,8 +113,107 @@ Public function getAllpost(){
     $this-> id_user = $id_user;
   }
 
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                GetAll                                    ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
+  //@param FiltreJoin jointure de tables -> ["INNER JOIN table ON table.id=table.id]
+  //@param FiltreWhere conditions
+  //@param FiltreSelect ajout select
+  public function getAll(array $param,$conn){
+
+    if (isset($param['FiltreJoin'])){
+      $join = "";
+      foreach ($param['FiltreJoin'] as $data){
+        $join .= $data." ";
+      }
+    }
+    else{
+      $join = "";
+    }
+
+    if (isset($param['FiltreWhere'])){
+      $where = "WHERE ".$param['FiltreWhere'];
+    }
+    else{
+      $where = "";
+    }
+
+    if (isset($param['FiltreSelect'])){
+        $select = ",".$param['FiltreSelect'];
+    }
+    else{
+      $select = "";
+    }
+
+    $SQL = "SELECT Post.*".$select." FROM Post"
+        ." ".$join." "
+        ." ".$where." "
+        ."ORDER BY date_post DESC";
+    $req = $conn->Query($SQL) or die('Erreur selection Post');
+    $req = $req->fetchAll(PDO::FETCH_OBJ);
+    return $req;
+  }
 
 
+
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                Affichage post                            ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
+
+  function affichepost($photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
+
+    ?>
+
+    <div class="post">
+      <div class="post_content">
+        <div class="post_img">
+          <img width="auto" height="auto" src="images/post/<?php testphoto($photo_post); ?>" alt="">
+          <span><i class="ion-android-radio-button-off"></i>
+                    <?php print $lib_cat ?>
+                                                </span>
+        </div>
+        <div class="row author_area">
+          <div class="col s4 author">
+            <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user) ?>">
+              <div class="col s4 media_left"><img height="53px" width="53px"
+                                                  src="images/profil/<?php testphoto($photo_user); ?>"
+                                                  alt="profil picture"
+                                                  class="circle">
+              </div>
+            </a>
+
+
+            <div class="col s8 media_body" style="padding-left: 10px;">
+
+              <a href="#"><?php print $nom_user ?></a>
+              <span><?php print $date_post."<br>".$heure_post ?></span>
+            </div>
+          </div>
+          <div class="col s4 btn_floating">
+
+          </div>
+
+        </div>
+        <a class="post_heding"><?php print $titre_post ?></a>
+        <p><?php print urldecode($contenu_post) ?></p>
+      </div>
+      <center><a href="#" class="btn-floating waves-effect"><i
+              class="ion-navicon-round"></i></a>
+      </center>
+      <br>
+    </div>
+    <?php
+  }
 
   //////////////////////////////////////////////////////////////////////////////////
   ////                                                                          ////
@@ -176,5 +275,23 @@ Public function getAllpost(){
       return $resP;
   }
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                                                          ////
+////                                Image                                     ////
+////                                                                          ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+
+function testphoto($photo){
+    if(is_null($photo) || empty($photo)){
+        print 'post.jpg';
+    }
+    else {
+        print $photo;
+    }
+}
+
 
  ?>

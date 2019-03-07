@@ -12,7 +12,6 @@ require('../ToolBox/bdd.inc.php');
 require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 
-
 if (isset($_SESSION['Eleve']) ) {
   $uneleve = unserialize($_SESSION['Eleve']);
   $id_user = $uneleve->getIdUser();
@@ -120,28 +119,15 @@ if (isset($_SESSION['Eleve']) ) {
                         <?php
 
                         $unpost = new Post();
-                        $resP = $unpost->selectpostorderby($conn);
-
-                        while ($dataP=$resP->fetch())
-                        {
-                            $cat = $dataP['id_cat'];
-                            $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                            $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                            $dataC=$resC->fetch();
-
-                            $id_user2= $dataP['id_user'];
-                            $sqlU="SELECT * FROM Utilisateur WHERE id_user = '$id_user2'";
-                            $resU = $conn -> query($sqlU)or die($conn -> errorInfo());
-                            $dataU = $resU -> fetch();
-
-                            affichepost($dataP['id_post'],$dataC['id_cat'],$dataU['id_user'],$dataP['date_post'],$dataP['heure_post'],$dataP['titre_post'],$dataP['contenu_post'],$conn)
-
-                            ?>
-                            <!-- End Post -->
-                            <br>
-
-
-                            <?php
+                        $param = array(
+                                "FiltreSelect" => "u.nom_user,u.id_user,c.lib_cat,u.photo_user",
+                            "FiltreJoin" => array("INNER JOIN Categorie c ON Post.id_cat=c.id_cat",
+                                                    "INNER JOIN Utilisateur u ON Post.id_user=u.id_user")
+                        );
+                        $res = $unpost->getAll($param,$conn);
+                        foreach ($res as $data){
+                            $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
+                            print "<br>";
                         }
 
                         ?>
@@ -162,33 +148,21 @@ if (isset($_SESSION['Eleve']) ) {
                     <div class="fast_post">
 
                         <?php
-
-                        $sqlS="SELECT * FROM OStage WHERE id_user_Eleve = 0";
-                        $resS = $conn -> query($sqlS)or die($conn -> errorInfo());
-
-                        while ($dataS=$resS->fetch())
-                        {
-                            $offre = $dataS['id_offre'];
-                            $sqlO="SELECT * FROM Offre WHERE id_offre = '$offre'";
-                            $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-                            $dataO=$resO->fetch();
-
-                            $cat = $dataO['id_cat'];
-                            $sqlC="SELECT * FROM Categorie WHERE id_cat = '$cat' ";
-                            $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
-                            $dataC=$resC->fetch();
-
-                            ?>
-                            <!-- Post -->
-
-                            <?php affichestage($dataC['id_cat'],$uneleve->getIdUser(),$dataO['id_user'],$dataO['id_offre'],$dataO['id_ent'],$dataO['date_post_offre'],
-                            $dataO['lib_offre'],$dataO['niveau_req'],$dataO['date_debut_offre'],$dataS['date_fin_stage'],$dataO['desc_offre'],$conn);
-                            ?>
-                            <!-- End Post -->
-                            <br>
+                        $uneoffre = new Stage();
+                        $param = array(
+                          "FiltreSelect" => "c.lib_cat,u.photo_user,u.nom_user,os.date_fin_stage",
+                          "FiltreJoin" => array("INNER JOIN OStage os ON Offre.id_offre=os.id_offre",
+                                                "INNER JOIN Categorie c ON Offre.id_cat=c.id_cat",
+                                                "INNER JOIN Utilisateur u ON Offre.id_ent=u.id_user",
+                                                "INNER JOIN Entreprise ent ON Offre.id_ent=ent.id_user"),
+                           "FiltreWhere" => "Offre.id_user_Eleve = 0"
+                        );
+                        $res = $uneoffre->getAll($param,$conn);
 
 
-                            <?php
+                        foreach ($res as $re) {
+                            $uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
+                            print "<br>";
                         }
 
                         ?>
@@ -249,6 +223,17 @@ if (isset($_SESSION['Eleve']) ) {
 
                 //FIN DE TEST DE LA RECHERCHE EN COURS
                 else{
+
+                    $table = array();
+
+                    if (($_POST['type_post']!=0) || ($_POST['cat_post']!=0)){
+                        switch ($_POST['type_post']){
+                            case "Post" :
+                                $table['Post'] = array("id_post","titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user","id_cat");
+                                break;
+
+                        }
+                    }
 
                     $resultats = req_recherche($_POST['search'],'',$conn);
                     $trouve = 0;
@@ -332,7 +317,7 @@ if (isset($_SESSION['Eleve']) ) {
                                          */
                                         if ($stage){
                                             foreach ($stage as $s) {
-                                                affichestage($data->id_cat,$id_user,$data->id_offre,$data->id_ent,$data->date_post_offre,
+                                                affichestage($data->id_cat,$id_user,$s->id_user,$data->id_offre,$data->id_ent,$data->date_post_offre,
                                                     $data->lib_offre,$data->niveau_req,$data->date_debut_offre,$s->date_fin_stage,$data->desc_offre,$conn);
                                             }
                                         }
@@ -348,7 +333,7 @@ if (isset($_SESSION['Eleve']) ) {
 
                                         elseif ($emploi){
                                             foreach ($emploi as $s) {
-                                                afficheemploi($data->id_cat,$data->id_offre,$id_user,$data->id_ent,$data->date_post_offre,$data->lib_offre,
+                                                afficheemploi($data->id_cat,$data->id_offre,$id_user,$s->id_user,$data->id_ent,$data->date_post_offre,$data->lib_offre,
                                                     $data->niveau_req,$s->salaire_emp,$s->type_emp,$data->date_debut_offre,$data->desc_offre,$conn);
                                             }
                                         }

@@ -402,6 +402,7 @@ $res2 = $req2->fetch();
 
     if(isset($res2['lib_banner'])){
       print $res2['lib_banner'];
+      
     }
     else {
       print 'banner.jpg';
@@ -513,62 +514,6 @@ function postule($idoffre,$id_user,$id_ent,$conn){
 
 
 
-
-
-
-
-
-/*
- *
- * Fonction d'affichage d'un stage
- *
- *
- */
-
-function affichestage($id_cat,$id_user,$id_creater,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
-
-
-  <div class="post">
-      <div class="post_content">
-          <div class="post_img">
-              <img src="images/post/hide.png" alt="">
-              <span><i class="ion-android-radio-button-off"></i><?php print getnomcategorie($id_cat,$conn) ?></span>
-          </div>
-          <div class="row author_area">
-            <div class="col s4 author">
-              <a href="about.php?visit=<?php print dec_enc('encrypt',$id_ent) ?>">
-                <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php select_image_profil($id_creater, $conn) ?>" alt="profil picture" class="circle"></div>
-              </a>
-                <div class="col s8 media_body" style="padding-left: 10px;">
-
-                  <a href="#"><?php print getnoment($id_ent, $conn) ?></a>
-                  <span><?php print $date_post_offre ?></span>
-                    <div class="float-right">
-                        </div>
-                </div>
-            </div>
-
-            <div class="col s4 btn_floating">
-
-            </div>
-        </div>
-        <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
-        <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
-        <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
-        <p><b>Date de fin &nbsp:&nbsp </b><?php print $date_fin_stage ?></p>
-        <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
-    </div>
-    <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
-    <br>
-</div>
-<?php
-}
-
-
-
-
-
-
 /*
  *
  * Fonction affichage d'emplois
@@ -614,58 +559,6 @@ function afficheemploi($id_cat,$id_offre,$id_user,$id_creater,$id_ent,$date_post
 
 
 
-
-/*
- *
- *
- *    Fonction affichage posts
- *
- *
- */
-
-function affichepost($id_post,$id_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$conn){
-    ?>
-
-    <div class="post">
-        <div class="post_content">
-            <div class="post_img">
-                <img width="600px" height="300px" src="images/post/<?php select_image_banner($id_post, $conn) ?>" alt="">
-                <span><i class="ion-android-radio-button-off"></i>
-                    <?php print getnomcategorie($id_cat,$conn) ?>
-                                                </span>
-            </div>
-            <div class="row author_area">
-                <div class="col s4 author">
-                    <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user) ?>">
-                        <div class="col s4 media_left"><img height="53px" width="53px"
-                                                            src="images/profil/<?php select_image_profil($id_user, $conn) ?>"
-                                                            alt="profil picture"
-                                                            class="circle">
-                        </div>
-                    </a>
-
-
-                    <div class="col s8 media_body" style="padding-left: 10px;">
-
-                        <a href="#"><?php print getnomuser($id_user, $conn) ?></a>
-                        <span><?php print $date_post."<br>".$heure_post ?></span>
-                    </div>
-                </div>
-                <div class="col s4 btn_floating">
-
-                </div>
-
-            </div>
-            <a class="post_heding"><?php print $titre_post ?></a>
-            <p><?php print $contenu_post ?></p>
-        </div>
-        <center><a href="#" class="btn-floating waves-effect"><i
-                        class="ion-navicon-round"></i></a>
-        </center>
-        <br>
-    </div>
-    <?php
-}
 
 
 
