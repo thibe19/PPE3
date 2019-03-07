@@ -177,7 +177,7 @@ Public function getAllpost(){
     <div class="post">
       <div class="post_content">
         <div class="post_img">
-          <img width="auto" height="auto" src="images/post/<?php testphoto($photo_post); ?>" alt="">
+          <img width="600px" height="323px" src="images/post/<?php testphoto($photo_post); ?>" alt="">
           <span><i class="ion-android-radio-button-off"></i>
                     <?php print $lib_cat ?>
                                                 </span>
@@ -274,24 +274,51 @@ Public function getAllpost(){
 
       return $resP;
   }
-}
 
-//////////////////////////////////////////////////////////////////////////////////
-////                                                                          ////
-////                                                                          ////
-////                                Image                                     ////
-////                                                                          ////
-////                                                                          ////
-//////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                Function                                  ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
 
-function testphoto($photo){
-    if(is_null($photo) || empty($photo)){
-        print 'post.jpg';
-    }
-    else {
-        print $photo;
-    }
-}
+  function countPosts($id_user,$conn){
+    $sqlP="SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = '$id_user') + (SELECT COUNT(*) FROM Offre WHERE id_user = '$id_user') as resulta;";
+    $resP = $conn -> query($sqlP) or die($conn -> errorInfo());
+
+    return $resP;
+  }
+
+  function countAmis($id_user,$conn){
+    $sqlA="SELECT (SELECT COUNT(*) FROM ajoute_amis WHERE id_user = '$id_user') as amis, (SELECT COUNT(*) FROM ajoute_amis WHERE id_user_Eleve = '$id_user') as suivi";
+    $resA = $conn -> query($sqlA) or die($conn -> errorInfo());
+
+    return $resA;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
+  ////                                                                          ////
+  ////                                                                          ////
+  ////                                Image                                     ////
+  ////                                                                          ////
+  ////                                                                          ////
+  //////////////////////////////////////////////////////////////////////////////////
+
+  function testphoto($photo){
+      if(is_null($photo) || empty($photo)){
+          print 'post.jpg';
+      }
+      else {
+          print $photo;
+      }
+
+  }
+
+}//fin post
+
+
+
 
 
  ?>

@@ -91,22 +91,23 @@ if (isset($_SESSION['Eleve'])) {
             </div>
 
             <?php
-            $sqlP="SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = '$id_user') + (SELECT COUNT(*) FROM Offre WHERE id_user = '$id_user') as resulta;";
-            $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+
+            $untoto = new Post;
+            $resP = $untoto->countPosts($id_user,$conn);
             $dataP=$resP->fetch();
             $total=$dataP['resulta'];
 
-            $sqlA="SELECT (SELECT COUNT(*) FROM ajoute_amis WHERE id_user = '$id_user') as amis, (SELECT COUNT(*) FROM ajoute_amis WHERE id_user_Eleve = '$id_user') as suivi";
-            $resA = $conn -> query($sqlA)or die($conn -> errorInfo());
+            $unamie = new Post;
+            $resA = $unamie->countAmis($id_user,$conn);
             $dataA=$resA->fetch();
-            $ami=$dataA['amis'];
+            $amis=$dataA['amis'];
             $suivi=$dataA['suivi'];
 
              ?>
             <div class="col l4 m6">
                 <ul class="post_follow">
                     <li>Posts <b><?php print $total; ?></b></li>
-                    <li>Following <b><?php print $ami;  ?></b></li>
+                    <li>Following <b><?php print $amis;  ?></b></li>
                     <li>Followers <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
