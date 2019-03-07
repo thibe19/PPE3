@@ -163,5 +163,14 @@ function selectAllEleve($id_user,$conn){
   return $resE;
 }
 
+// Select tout les élèves
+
+function selectEleve($conn){
+  $sqlE="SELECT * FROM Eleve";
+  $resE = $conn -> query($sqlE)or die($conn -> errorInfo());
+
+  return $resE;
+}
+
 
 }//fin class

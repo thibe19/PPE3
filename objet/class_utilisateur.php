@@ -369,5 +369,7 @@ function selectAllUtilisateur($id_user,$conn){
 
 }
 
+
+
 }// fin class
 ?>

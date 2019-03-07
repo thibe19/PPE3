@@ -170,4 +170,12 @@ class Entreprise extends Utilisateur
 
         return $resEn;
     }
+
+    // Select toute les entreprises
+
+    function selectEntreprise($conn){
+      print $SQL = "SELECT * FROM Entreprise";
+      $resE = $conn -> query($SQL)or die($conn -> errorInfo());
+    }
+
 }// class

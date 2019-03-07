@@ -249,53 +249,7 @@
 
 
     <!-- Footer area -->
-    <footer class="footer_area">
-        <div class="footer_row row">
-            <div class="col l3 m6 footer_col">
-                <div class="popular_posts">
-                    <h3 class="categories_tittle">Popular Posts</h3>
-                    <div class="row valign-wrapper popular_item">
-                        <div class="col s3 p_img">
-                           <a href="#">
-                                <img src="images/recent-post-1.jpg" alt="" class="circle responsive-img">
-                           </a>
-                        </div>
-                        <div class="col s9 p_content">
-                           <a href="#">Poster can be one of the <br> effective marketing and </a>
-                            <span class="black_text">2 days ago</span>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper popular_item">
-                        <div class="col s3 p_img">
-                           <a href="#">
-                                <img src="images/recent-post-2.jpg" alt="" class="circle responsive-img">
-                           </a>
-                        </div>
-                        <div class="col s9 p_content">
-                           <a href="#">Color is so powerful that it can persuade, motivate, inspire</a>
-                            <span class="black_text">3 days ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col l3 m6 footer_col">
-                <div class="social_Sharing">
-                    <h3 class="categories_tittle">Social Sharing</h3>
-                    <ul class="social_icon">
-                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                        <li><a href="#" class="tumblr"><i class="ion-social-tumblr"></i></a></li>
-                        <li><a href="#" class="googleplus"><i class="ion-social-googleplus"></i></a></li>
-                        <li><a href="#" class="pinterest"><i class="ion-social-pinterest"></i></a></li>
-                        <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="copy_right">
-            © 2018 <a href="#">Open List</a>. All rights reserved.
-        </div>
-    </footer>
+    <?php require('part/footer.php'); ?>
     <!-- End Footer area -->
 
 
@@ -553,53 +507,7 @@ if (isset($_SESSION['Entreprise'])) {
       <!-- Fin crée un stage -->
 
       <!-- Footer area -->
-      <footer class="footer_area">
-          <div class="footer_row row">
-              <div class="col l3 m6 footer_col">
-                  <div class="popular_posts">
-                      <h3 class="categories_tittle">Popular Posts</h3>
-                      <div class="row valign-wrapper popular_item">
-                          <div class="col s3 p_img">
-                             <a href="#">
-                                  <img src="images/recent-post-1.jpg" alt="" class="circle responsive-img">
-                             </a>
-                          </div>
-                          <div class="col s9 p_content">
-                             <a href="#">Poster can be one of the <br> effective marketing and </a>
-                              <span class="black_text">2 days ago</span>
-                          </div>
-                      </div>
-                      <div class="row valign-wrapper popular_item">
-                          <div class="col s3 p_img">
-                             <a href="#">
-                                  <img src="images/recent-post-2.jpg" alt="" class="circle responsive-img">
-                             </a>
-                          </div>
-                          <div class="col s9 p_content">
-                             <a href="#">Color is so powerful that it can persuade, motivate, inspire</a>
-                              <span class="black_text">3 days ago</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="col l3 m6 footer_col">
-                  <div class="social_Sharing">
-                      <h3 class="categories_tittle">Social Sharing</h3>
-                      <ul class="social_icon">
-                          <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                          <li><a href="#" class="tumblr"><i class="ion-social-tumblr"></i></a></li>
-                          <li><a href="#" class="googleplus"><i class="ion-social-googleplus"></i></a></li>
-                          <li><a href="#" class="pinterest"><i class="ion-social-pinterest"></i></a></li>
-                          <li><a href="#" class="facebook"><i class="ion-social-facebook"></i></a></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="copy_right">
-              © 2018 <a href="#">Open List</a>. All rights reserved.
-          </div>
-      </footer>
+      <?php require('part/footer.php'); ?>
       <!-- End Footer area -->
 
       <!-- Add post poup area -->

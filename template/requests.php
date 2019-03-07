@@ -77,14 +77,14 @@ if (isset($_SESSION['Eleve'])) {
               <ul class="notifications_content follow">
               <?php
 
-              $SQL = "SELECT * FROM Eleve";
-              $req = $conn->Query($SQL) or die("Erreur selection des eleves");
-              while ($res = $req->fetch()) {
+              $uneleve = new Eleve();
+              $reseleve = $uneleve -> selectEleve($conn);
+              while ($res = $reseleve->fetch()) {
 
 
-                $id_user2 = $res['id_user'];
+                  $id_user2 = $res['id_user'];
 
-                $SQL2 = "SELECT * FROM Utilisateur
+                  $SQL2 = "SELECT * FROM Utilisateur
                            WHERE id_user = $id_user2
                            AND id_user != $id_user";
                   $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
@@ -117,7 +117,7 @@ if (isset($_SESSION['Eleve'])) {
                                      <table>
                                        <tr>
                                          <td><span onClick="window.location='requests.php?groupe=elve&ctc';" class="waves-effect follow_b">Contacter</span></td>
-                                         <td>
+                                         <td width="200px">
                                          <?php
 
                                          $SQL3 = "SELECT * FROM ajoute_amis
@@ -182,8 +182,8 @@ if (isset($_SESSION['Eleve'])) {
                 <?php
 
                 $SQL = "SELECT * FROM Entreprise";
-                $req = $conn->Query($SQL) or die("L'utilisateur n'existe pas");
-                while ($res = $req->fetch()) {
+                $resE = $conn -> query($SQL)or die($conn -> errorInfo());
+                while ($res = $resE -> fetch()) {
 
 
                   $id_user2 = $res['id_user'];
@@ -216,7 +216,7 @@ if (isset($_SESSION['Eleve'])) {
                                     <table>
                                       <tr>
                                         <td><span onClick="window.location='messages.php?ctc=<?php echo $res2['id_user']; ?>';" class="waves-effect follow_b">Contacter</span></td>
-                                        <td>
+                                        <td width="200px">
                                         <?php
                                         $SQL3 = "SELECT * FROM ajoute_amis
                                                  WHERE id_user_Eleve = $id_user_amis";
@@ -245,7 +245,7 @@ if (isset($_SESSION['Eleve'])) {
                   $res = $conn->Query($SQL)or die('');
                   ?>
                     <script type="text/javascript">
-                      window.location='requests.php?groupe=elve';
+                      window.location='requests.php?groupe=entr';
                     </script>
                   <?php
                 }
@@ -258,7 +258,7 @@ if (isset($_SESSION['Eleve'])) {
                   $res = $conn->Query($SQL)or die('');
                   ?>
                     <script type="text/javascript">
-                      window.location='requests.php?groupe=elve';
+                      window.location='requests.php?groupe=entr';
                     </script>
                   <?php
                 }
@@ -267,7 +267,6 @@ if (isset($_SESSION['Eleve'])) {
         </div>
     </section>
     <!-- End Notifications area -->
-
 
     <!-- Footer area -->
     <footer class="footer_area">
@@ -669,7 +668,7 @@ elseif (isset($_SESSION['Entreprise'])) {
                   $res = $conn->Query($SQL)or die('');
                   ?>
                     <script type="text/javascript">
-                      window.location='requests.php?groupe=elve';
+                      window.location='requests.php?groupe=entr';
                     </script>
                   <?php
                 }
@@ -682,7 +681,7 @@ elseif (isset($_SESSION['Entreprise'])) {
                   $res = $conn->Query($SQL)or die('');
                   ?>
                     <script type="text/javascript">
-                      window.location='requests.php?groupe=elve';
+                      window.location='requests.php?groupe=entr';
                     </script>
                   <?php
                 }
