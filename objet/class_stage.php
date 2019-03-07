@@ -90,7 +90,49 @@ class Stage extends Offre{
     {
         $this->desc_user = $desc_user;
     }
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                GetAll                                    ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+    //@param FiltreJoin jointure de tables -> ["INNER JOIN table ON table.id=table.id]
+    //@param FiltreWhere conditions
+    //@param FiltreSelect ajout select
+    function getAll(array $param,$conn){
+        if (isset($param['FiltreJoin'])){
+            $join = "";
+            foreach ($param['FiltreJoin'] as $data){
+                $join .= $data." ";
+            }
+        }
+        else{
+            $join = "";
+        }
 
+        if (isset($param['FiltreWhere'])){
+            $where = "WHERE ".$param['FiltreWhere'];
+        }
+        else{
+            $where = "";
+        }
+
+        if (isset($param['FiltreSelect'])){
+            $select = ",".$param['FiltreSelect'];
+        }
+        else{
+            $select = "";
+        }
+
+        $SQL = "SELECT Offre.*".$select." FROM Offre"
+            ." ".$join." "
+            ." ".$where." "
+            ."ORDER BY date_post_offre DESC";
+        $req = $conn->Query($SQL) or die('Erreur selection Stage');
+        $req = $req->fetchAll(PDO::FETCH_OBJ);
+        return $req;
+    }
 
     //////////////////////////////////////////////////////////////////////////////////
     ////                                                                          ////
@@ -188,6 +230,71 @@ class Stage extends Offre{
     }
 
 
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                                Affichage                                 ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+    ///
+    ///
+    function affichestage($lib_cat,$id_user,$photo_user,$nom_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){?>
+
+
+        <div class="post">
+            <div class="post_content">
+                <div class="post_img">
+                    <img src="images/post/hide.png" alt="">
+                    <span><i class="ion-android-radio-button-off"></i><?php print $lib_cat ?></span>
+                </div>
+                <div class="row author_area">
+                    <div class="col s4 author">
+                        <a href="about.php?visit=<?php print dec_enc('encrypt',$id_ent) ?>">
+                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php testphoto($photo_user) ?>" alt="profil picture" class="circle"></div>
+                        </a>
+                        <div class="col s8 media_body" style="padding-left: 10px;">
+
+                            <a href="#"><?php print $nom_user ?></a>
+                            <span><?php print $date_post_offre ?></span>
+                            <div class="float-right">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s4 btn_floating">
+
+                    </div>
+                </div>
+                <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
+                <p><b>Niveau requis &nbsp:&nbsp </b><?php print $niveau_req ?></p>
+                <p><b>Date de début &nbsp:&nbsp </b><?php print $date_debut_offre ?></p>
+                <p><b>Date de fin &nbsp:&nbsp </b><?php print $date_fin_stage ?></p>
+                <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
+            </div>
+            <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
+            <br>
+        </div>
+        <?php
+    }
+
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                                                          ////
+////                                Image                                     ////
+////                                                                          ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+
+    function testphoto($photo){
+        if(is_null($photo) || empty($photo)){
+            print 'avatar.png';
+        }
+        else {
+            print $photo;
+        }
+    }
 
 }//fin class
 ?>

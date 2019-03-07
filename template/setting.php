@@ -107,13 +107,16 @@ if (isset($_SESSION['Eleve'])) {
                 </ul>
             </div>
             <?php
-            $sqlP="SELECT COUNT(*) as post FROM Post WHERE id_user = '$id_user'";$sqlO="SELECT COUNT(*) as offre FROM Offre WHERE id_user = '$id_user'";
-            $resP = $conn -> query($sqlP)or die($conn -> errorInfo()); $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-            $dataP=$resP->fetch(); $dataO=$resO->fetch();$post=$dataP['post'];$offre=$dataO['offre'];$total=$post+$offre;
+            $sqlP="SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = '$id_user') + (SELECT COUNT(*) FROM Offre WHERE id_user = '$id_user') as resulta;";
+            $resP = $conn -> query($sqlP)or die($conn -> errorInfo());
+            $dataP=$resP->fetch();
+            $total=$dataP['resulta'];
 
-            $sqlAM="SELECT COUNT(*) as amis FROM ajoute_amis WHERE id_user = '$id_user'";$sqlF="SELECT COUNT(*) as suivi FROM ajoute_amis WHERE id_user_Eleve = '$id_user'";
-            $resAM = $conn -> query($sqlAM)or die($conn -> errorInfo());$resF = $conn -> query($sqlF)or die($conn -> errorInfo());
-            $dataAM=$resAM->fetch();$ami=$dataAM['amis']; $dataF=$resF->fetch();$suivi=$dataF['suivi'];
+            $sqlA="SELECT (SELECT COUNT(*) FROM ajoute_amis WHERE id_user = '$id_user') as amis, (SELECT COUNT(*) FROM ajoute_amis WHERE id_user_Eleve = '$id_user') as suivi";
+            $resA = $conn -> query($sqlA)or die($conn -> errorInfo());
+            $dataA=$resA->fetch();
+            $ami=$dataA['amis'];
+            $suivi=$dataA['suivi'];
 
              ?>
             <div class="col l4 m6">
