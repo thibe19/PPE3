@@ -28,7 +28,7 @@ if (isset($_SESSION['Eleve'])) {
   }
 }
 
-//left bar de la page profil est differents des autres sur le site un test est necessaire
+
 
 ?>
 <div class="interests">
@@ -84,21 +84,18 @@ if (isset($_SESSION['Eleve'])) {
         $id_user = $uneleve->getIdUser();
     }
 
-    $sql = "SELECT * FROM ajoute_amis
-            WHERE id_user_Eleve != '$id_user'
-            AND id_user = '$id_user'";
-    $req = $conn->Query($sql)or die('Erreur dans le requete cat');
-    while ($res = $req->fetch()) {
+    $unuser = new Utilisateur();
+    $resuser = $unuser -> selectAmisCompte($id_user, $conn);
+    while ($res = $resuser->fetch()) {
       $id_user2 = $res['id_user_Eleve'];
-      $SQL2 = "SELECT * FROM Utilisateur
-      WHERE id_user = $id_user2";
-      $req2 = $conn->Query($SQL2) or die("L'utilisateur n'existe pas");
-      $res2 = $req2->fetch();
+
+      $resuser1 = $unuser -> getAllUserDB($id_user2, $conn);
+      $res2 = $resuser1[0];
 
 
 
-      ?> <li><a href="about.php?visit=<?php print dec_enc('encrypt',$res2['id_user']) ?>"><img style='width: 40px;height: 40px;' src="images/profil/<?php select_image_profil($res2['id_user'], $conn) ?>" alt="" class="circle"></a></li> <?php
-    } ?>
+      ?> <li><a href="about.php?visit=<?php print dec_enc('encrypt',$res2->id_user) ?>"><img style='width: 40px;height: 40px;' src="images/profil/<?php select_image_profil($res2->id_user, $conn) ?>" alt="" class="circle"></a></li>
+       <?php } ?>
   </ul>
 </div>
 <div class="calendar_widget">

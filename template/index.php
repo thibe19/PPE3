@@ -375,7 +375,7 @@ if (isset($_SESSION['Eleve']) ) {
             <div class="col">
                 <div class="left_side_bar">
                     <div class="categories">
-                        <h3 class="categories_tittle me_tittle">About Me</h3>
+                        <h3 class="categories_tittle me_tittle">A PROPOS</h3>
                         <p><?php (!empty($uneleve->getDescUser()))? print urldecode($uneleve->getDescUser()) : print 'Encore aucune description' ?></p>
                     </div>
                     <?php require ('./part/left.php')?>

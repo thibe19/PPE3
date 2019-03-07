@@ -174,8 +174,10 @@ class Entreprise extends Utilisateur
     // Select toute les entreprises
 
     function selectEntreprise($conn){
-      print $SQL = "SELECT * FROM Entreprise";
+      $SQL = "SELECT * FROM Entreprise";
       $resE = $conn -> query($SQL)or die($conn -> errorInfo());
+
+      return $resE;
     }
 
 }// class

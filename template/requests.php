@@ -181,9 +181,9 @@ if (isset($_SESSION['Eleve'])) {
                 <ul class="notifications_content follow">
                 <?php
 
-                $SQL = "SELECT * FROM Entreprise";
-                $resE = $conn -> query($SQL)or die($conn -> errorInfo());
-                while ($res = $resE -> fetch()) {
+                $uneentreprise = new Entreprise();
+                $resentreprise = $uneentreprise -> selectEntreprise($conn);
+                while ($res = $resentreprise -> fetch()) {
 
 
                   $id_user2 = $res['id_user'];

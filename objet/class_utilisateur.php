@@ -369,6 +369,15 @@ function selectAllUtilisateur($id_user,$conn){
 
 }
 
+// Select les amis du Compte
+function selectAmisCompte($id_user, $conn) {
+  $sql = "SELECT * FROM ajoute_amis
+          WHERE id_user_Eleve != '$id_user'
+          AND id_user = '$id_user'";
+  $req = $conn->Query($sql)or die('Erreur dans le requete selectAmisCompte');
+
+  return $req;
+}
 
 
 }// fin class
