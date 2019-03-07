@@ -128,31 +128,18 @@ if (isset($_SESSION['Eleve'])) {
 
               <?php
 
-
-              $SQL = "SELECT p.id_post, p.id_cat, p.id_user, p.heure_post, p.date_post, p.titre_post, p.contenu_post FROM Post p, ajoute_amis am WHERE am.id_user_Eleve = p.id_user AND p.id_user != '$id_user' ORDER BY p.date_post DESC";
-              $req = $conn->Query($SQL) or die("La requete n'a pas aboutie (selection post amis)");
-              while ($res=$req->fetch()) {
-
-              $id_post_now = $res['id_post'];
-
-              $cat = $res['id_cat'];
-              $uncat = new Categorie;
-              $resC = $uncat->selectCategorie($cat,$conn);
-              $dataC=$resC->fetch();
-
-              $id_user_util = $res['id_user'];
-
-              $unuti = new utilisateur;
-              $resU = $unuti->selectAllUtilisateur($id_user_util,$conn);
-              $dataU = $resU -> fetch();
-              affichepost($res['id_post'],$dataC['id_cat'],$dataU['id_user'],$res['date_post'],$res['heure_post'],$res['titre_post'],$res['contenu_post'],$conn)
-              ?>
-
-               <!-- Post -->
-
-               <!-- End Post -->
-             <?php
-
+              $unpost = new Post();
+              $param = array(
+                  "FiltreSelect" => "u.nom_user,u.id_user,c.lib_cat,u.photo_user",
+                  "FiltreJoin" => array("INNER JOIN Categorie c ON Post.id_cat=c.id_cat",
+                      "INNER JOIN Utilisateur u ON Post.id_user=u.id_user
+                      INNER JOIN ajoute_amis ON Post.id_user=ajoute_amis.id_user_Eleve"),
+                  "FiltreWhere" => " Post.id_user != '$id_user' "
+              );
+              $res = $unpost->getAll($param,$conn);
+              foreach ($res as $data){
+                  $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
+                  print "<br>";
               }
                ?>
             </div>
