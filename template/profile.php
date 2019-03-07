@@ -113,8 +113,8 @@ if (isset($_SESSION['Eleve'])) {
             </div>
             <div class="col l4 m6">
                 <ul id="postpro"  class="tranding_select tabs">
-                  <li><a href="#postami" class="tab active">Posts de mes amis</a></li>
-                  <li><a href="#post" class="tab ">Mes Posts</a></li>
+                  <li class="tab"><a href="#postami" class="waves-effect btn active">>Posts de mes amis</a></li>
+                  <li class="tab"><a href="#postmoi" class="waves-effect btn ">>Mes Posts</a></li>
                 </ul>
             </div>
         </div>
@@ -126,6 +126,7 @@ if (isset($_SESSION['Eleve'])) {
         <div class="section_row">
             <div class="middle_section col">
 
+              <div id="postami">
               <?php
 
               $unpost = new Post();
@@ -143,6 +144,14 @@ if (isset($_SESSION['Eleve'])) {
               }
                ?>
             </div>
+            <div id="postmoi">
+
+
+              
+
+            </div>
+
+          </div>
             <!-- left side bar -->
             <div class="col">
                 <div class="left_side_bar">
