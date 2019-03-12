@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                             Post traitement                              ////
-////                               13/12/2018                                 ////
-////                                V0.0.3                                    ////
+////                               12/03/2019                                 ////
+////                                V0.0.5                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -62,4 +62,58 @@ if (isset($_SESSION['Eleve']) ) {
 
     }
 }
+
+
+if (isset($_SESSION['Entreprise']) ) {
+  $unentreprise = unserialize($_SESSION['Entreprise']);
+  $id = $unentreprise->getIdUser();
+
+    if (isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
+      $mdp=$_SESSION['mdp'];
+      $ndc=$_SESSION['login'];
+    }
+
+    if (isset($_POST['post']) ) {
+      $titre = $_POST['post_titre'];
+      $desc = $_POST['post_desc'];
+
+      if (($titre && $desc)!= NULL) {
+
+        $titre = $_POST['post_titre'];
+        $desc = $_POST['post_desc'];
+        $cat = $_POST['cat'];
+        $date = date("Y-m-d");
+        $heur = date("H:i:s");
+
+        $chemin = dirname(__DIR__);
+        $chemin = $chemin."/template/images/post/";
+
+        $namepho = $_FILES['file']['name'];
+        $logininf = $ndc;
+        $photo2 = $_FILES['file']['tmp_name'];
+
+
+        move_uploaded_file($photo2,$chemin.$namepho);
+        rename ($chemin.$namepho, $chemin.$logininf.date("dmYHi").".jpg");
+
+        $photo = $logininf.date("dmYHi").".jpg";
+
+        $unpost = new Post ('',$titre,$desc,$photo,$date,$heur,$cat,$id);
+        $unpost ->insert_post($conn);
+
+        echo "<script> alert('Le Post a été crée.');
+                        window.location.href='./index.php';
+              </script>";
+      }
+      else {
+
+        echo "<script> alert('Tous les champs n\'ont pas été remplis.');
+                        window.location.href='./index.php';
+              </script>";
+      }
+
+
+    }
+}
+
 ?>
