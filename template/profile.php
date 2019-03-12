@@ -111,8 +111,8 @@ if (isset($_SESSION['Eleve'])) {
                     <li>Followers <b><?php print $suivi; ?></b></li>
                 </ul>
             </div>
-            <div class="col l4 m6">
-                <ul id="postpro"  class="tranding_select tabs">
+            <div class="col l4 m6" >
+                <ul id="postpro" style="background-color:#ffffff" class="tranding_select tabs">
                   <li class="tab"><a href="#postami" class="waves-effect btn active">>Posts de mes amis</a></li>
                   <li class="tab"><a href="#postmoi" class="waves-effect btn ">>Mes Posts</a></li>
                 </ul>
@@ -146,11 +146,6 @@ if (isset($_SESSION['Eleve'])) {
                ?>
             </div>
             <div id="postmoi">
-<<<<<<< HEAD
-
-
-
-=======
                 <?php
 
                 $param = array(
@@ -166,7 +161,6 @@ if (isset($_SESSION['Eleve'])) {
                 }
                 print $mesposts;
                 ?>
->>>>>>> 70930b2b168993628e450a17583b67edecfcddc0
 
             </div>
 
