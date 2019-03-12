@@ -125,10 +125,9 @@ class Stage extends Offre{
             $select = "";
         }
 
-        $SQL = "SELECT Offre.*".$select." FROM Offre"
+        $SQL = "SELECT Stage.*".$select." FROM Stage"
             ." ".$join." "
-            ." ".$where." "
-            ."ORDER BY date_post_offre DESC";
+            ." ".$where." ";
         $req = $conn->Query($SQL) or die('Erreur selection Stage');
         $req = $req->fetchAll(PDO::FETCH_OBJ);
         return $req;

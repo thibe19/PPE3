@@ -186,6 +186,53 @@ class Offre
     //////////////////////////////////////////////////////////////////////////////////
     ////                                                                          ////
     ////                                                                          ////
+    ////                                GetAll                                    ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    //@param FiltreJoin jointure de tables -> ["INNER JOIN table ON table.id=table.id]
+    //@param FiltreWhere conditions
+    //@param FiltreSelect ajout select
+    public function getAll(array $param,$conn){
+
+      if (isset($param['FiltreJoin'])){
+        $join = "";
+        foreach ($param['FiltreJoin'] as $data){
+          $join .= $data." ";
+        }
+      }
+      else{
+        $join = "";
+      }
+
+      if (isset($param['FiltreWhere'])){
+        $where = "WHERE ".$param['FiltreWhere'];
+      }
+      else{
+        $where = "";
+      }
+
+      if (isset($param['FiltreSelect'])){
+          $select = ",".$param['FiltreSelect'];
+      }
+      else{
+        $select = "";
+      }
+
+      $SQL = "SELECT Offre.*".$select." FROM Offre"
+          ." ".$join." "
+          ." ".$where." ";
+      $req = $conn->Query($SQL) or die($SQL.'Erreur selection Post');
+      $req = $req->fetchAll(PDO::FETCH_OBJ);
+      return $req;
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
     ////                                Insert                                    ////
     ////                                                                          ////
     ////                                                                          ////
