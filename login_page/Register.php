@@ -319,7 +319,7 @@ session_start();
              </div>
 
 
-             <input type="file" name="photo" placeholder="Photo de Profil">
+             <input type="file" name="photo" placeholder="Photo de Profil" required>
              <!-- Champ inscription Mot de passe  -->
 
              <!-- TEST INPUT FILE  -->
@@ -351,8 +351,10 @@ session_start();
          $namepho = $_FILES['photo']['name'];
          $login = $_SESSION['login'];
          $photo2 = $_FILES['photo']['tmp_name'];
+         if ($photo2 == "") {
+           image_profil($namepho, $login, $photo2);
+         }
 
-         image_profil($namepho, $login, $photo2)
 
 
          ?>
@@ -669,7 +671,6 @@ session_start();
 
          $photo = $_SESSION['login'].".jpg";
 
-
          $date = $_POST['datenaisse'];
          $prenom = $_POST['name'];
          $choixpos = $_POST['stayp'];
@@ -824,6 +825,7 @@ session_start();
           $surname = $_SESSION['surname'];
           $numt = $_SESSION['numt'];
           $photo = $_SESSION['login'].".jpg";
+
 
           $nomresp = $_POST['nameresp'];
           $ape = $_POST['APE'];
