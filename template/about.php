@@ -146,7 +146,6 @@ require('part/header.php');
             <ul class="profile_menu">
                 <li><a href="profile.php">Activiter</a></li>
                 <li><a href="about.php">A propos</a></li>
-                <li class="post_d"><a class="dropdown-button" href="#!" data-activates="dro_pm">...</a>
                     <!-- Dropdown Structure -->
                     <!-- <ul id="dro_pm" class="dropdown-content">
                         <li><a href="#">Popular Post</a></li>
@@ -172,7 +171,7 @@ require('part/header.php');
         <div class="col l4 m6">
             <ul class="post_follow">
                 <li>Posts <b><?php print $total; ?></b></li>
-                <li>Following <b><?php print $ami;  ?></b></li>
+                <li>Following <b><?php print $amis;  ?></b></li>
                 <li>Followers <b><?php print $suivi; ?></b></li>
             </ul>
         </div>
@@ -257,19 +256,15 @@ require('part/header.php');
                                 <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
                                 <br>
                                 <?php
-                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OStage S
-                                                 WHERE O.id_offre = S.id_offre
-                                                 AND O.id_user = $id_user
-                                                 AND O.id_user_Eleve = $id_user
-                                                 ORDER BY O.date_debut_offre DESC";
-                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref1');
-                                while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
+                                $desoffres = new Offre();
+                                $resStg = $desoffres->selectStageEleve("OStage", $id_user,$conn);
+                                while ($res_aff_stg3 = $resStg->fetch()) {
 
                                   $id_offre_req = $res_aff_stg3['id_offre'];
-                                  $sql_aff_stg2 = "SELECT * FROM OStage
-                                                   WHERE id_offre = '$id_offre_req'";
-                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref2');
-                                  $res_aff_stg2 = $req_aff_stg2->fetch();
+
+                                  $unstagee = new Stage();
+                                  $resStge = $unstagee->selectUnStage($id_offre_req,$conn);
+                                  $res_aff_stg2 = $resStge->fetch();
                                  ?>
 
                                    <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
@@ -303,19 +298,15 @@ require('part/header.php');
                                 <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
 
                                 <?php
-                                $sql_aff_stg3 = "SELECT O.id_offre, O.lib_offre, O.date_debut_offre, O.id_cat, O.id_ent FROM Offre O, OEmploi E
-                                                 WHERE O.id_offre = E.id_offre
-                                                 AND O.id_user = $id_user
-                                                 AND O.id_user_Eleve = $id_user
-                                                 ORDER BY O.date_debut_offre DESC";
-                                $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref3');
-                                while ($res_aff_stg3 = $req_aff_stg3->fetch()) {
+                                $desoffres = new Offre();
+                                $resStg = $desoffres->selectStageEleve("OEmploi", $id_user,$conn);
+                                while ($res_aff_stg3 = $resStg->fetch()) {
 
                                   $id_offre_req = $res_aff_stg3['id_offre'];
-                                  $sql_aff_stg2 = "SELECT * FROM OStage
-                                                   WHERE id_offre = $id_offre_req";
-                                  $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref4');
-                                  $res_aff_stg2 = $req_aff_stg2->fetch();
+
+                                  $unstagee = new Stage();
+                                  $resStge = $unstagee->selectUnStage($id_offre_req,$conn);
+                                  $res_aff_stg2 = $resStge->fetch();
                                  ?>
 
                                    <h5><?php echo urldecode($res_aff_stg3['lib_offre']) ?></h5>
@@ -427,18 +418,15 @@ require('part/header.php');
                             <h5 class="categories_tittle">Stage <i class="fas fa-caret-down"></i></h5>
 
                             <?php
-                            $sql_aff_stg = "SELECT * FROM Offre O, OStage S
-                                            WHERE O.id_offre = S.id_offre
-                                            AND O.id_user = $id_user
-                                            AND O.id_user_Eleve = $id_user
-                                            ORDER BY O.date_debut_offre DESC";
-                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref5');
-                            while ($res_aff_stg = $req_aff_stg->fetch()) {
+                            $desoffres = new Offre();
+                            $resStg = $desoffres->selectStageEleve("OStage", $id_user,$conn);
+                            while ($res_aff_stg = $resStg->fetch()) {
+
                               $id_offre_req = $res_aff_stg['id_offre'];
-                              $sql_aff_stg2 = "SELECT * FROM Ostage
-                                               WHERE id_offre = $id_offre_req";
-                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref6');
-                              $res_aff_stg2 = $req_aff_stg2->fetch();
+
+                              $unstagee = new Stage();
+                              $resStge = $unstagee->selectUnStage($id_offre_req,$conn);
+                              $res_aff_stg2 = $resStge->fetch();
                              ?>
                              <form action="about.php" method="post">
                                Titre : <input type="text" name="titres" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
@@ -562,20 +550,15 @@ require('part/header.php');
                             <h5 class="categories_tittle">Travail <i class="fas fa-caret-down"></i></h5>
 
                             <?php
+                            $desoffres = new Offre();
+                            $resStg = $desoffres->selectStageEleve("OEmploi", $id_user,$conn);
+                            while ($res_aff_stg = $resStg->fetch()) {
 
-                            $sql_aff_stg = "SELECT * FROM Offre O, OEmploi E
-                                            WHERE O.id_offre = E.id_offre
-                                            AND O.id_user = $id_user
-                                            AND O.id_user_Eleve = $id_user
-                                            ORDER BY O.date_debut_offre DESC";
-                            $req_aff_stg = $conn->Query($sql_aff_stg)or die('Erreur dans le requete pref7');
-                            while ($res_aff_stg = $req_aff_stg->fetch()) {
                               $id_offre_req = $res_aff_stg['id_offre'];
-                              $sql_aff_stg2 = "SELECT * FROM OEmploi
-                                               WHERE id_offre = $id_offre_req";
-                              $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref8');
-                              $res_aff_stg2 = $req_aff_stg2->fetch();
 
+                              $unstagee = new Stage();
+                              $resStge = $unstagee->selectUnStage($id_offre_req,$conn);
+                              $res_aff_stg2 = $resStge->fetch();
                              ?>
 
                              <form action="about.php" method="post">

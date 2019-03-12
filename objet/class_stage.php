@@ -229,6 +229,14 @@ class Stage extends Offre{
       $res = $conn->Query($sql)or die('Erreur modification offre');
     }
 
+    function selectUnStage($id_stage, $conn){
+      $sql_aff_stg2 = "SELECT * FROM OStage
+                       WHERE id_offre = '$id_stage'";
+      $req_aff_stg2 = $conn->Query($sql_aff_stg2)or die('Erreur dans le requete pref2');
+
+      return $req_aff_stg2;
+    }
+
 
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -295,6 +303,8 @@ class Stage extends Offre{
             print $photo;
         }
     }
+
+
 
 }//fin class
 ?>
