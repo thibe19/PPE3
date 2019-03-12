@@ -125,10 +125,11 @@ if (isset($_SESSION['Eleve']) ) {
                                                     "INNER JOIN Utilisateur u ON Post.id_user=u.id_user")
                         );
                         $res = $unpost->getAll($param,$conn);
+                        $posts = "";
                         foreach ($res as $data){
-                            $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
-                            print "<br>";
+                            $posts .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
                         }
+                        print $posts;
 
                         ?>
                     </div>
@@ -159,12 +160,11 @@ if (isset($_SESSION['Eleve']) ) {
                         );
                         $res = $uneoffre->getAll($param,$conn);
 
-
+                        $lesstages ="";
                         foreach ($res as $re) {
-                            $uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
-                            print "<br>";
+                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
                         }
-
+                        print $lesstages;
                         ?>
 
                     </div>
@@ -192,10 +192,11 @@ if (isset($_SESSION['Eleve']) ) {
                         );
                         $res = $uneoffre->getAll($param,$conn);
 
+                        $lesoemploies = "";
                         foreach ($res as $re) {
-                            $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
-                            print "<br>";
+                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
                         }
+                        print $lesoemploies;
 
                         ?>
                     </div>

@@ -163,23 +163,23 @@ class Emploi extends Offre
     //////////////////////////////////////////////////////////////////////////////////
     ///
     ///
-    function afficheemploi($lib_cat,$id_user,$photo_user,$nom_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$salaire_emp,$desc_offre,$type_emp,$conn){?>
-
-        <div class="post">
+    function afficheemploi($lib_cat,$id_user,$photo_user,$nom_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$salaire_emp,$desc_offre,$type_emp,$conn){
+    $offre = new Offre();
+        $html = '<div class="post">
             <div class="post_content">
                 <div class="post_img">
                     <img src="images/post/hide.png" alt="">
-                    <span><i class="ion-android-radio-button-off"></i><?php print $lib_cat ?></span>
+                    <span><i class="ion-android-radio-button-off"></i>'.$lib_cat.'</span>
                 </div>
                 <div class="row author_area">
                     <div class="col s4 author">
-                        <a href="about.php?visit=<?php print dec_enc('encrypt',$id_ent) ?>">
-                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/<?php print $photo_user ?>" alt="" class="circle"></div>
+                        <a href="about.php?visit='.dec_enc('encrypt',$id_ent).'">
+                            <div class="col s4 media_left"><img height="53px" width="53px" src="images/profil/'.$photo_user.'" alt="" class="circle"></div>
                         </a>
                         <div class="col s8 media_body" style="padding-left: 10px;">
 
-                            <a href="#"><?php print $nom_user ?></a>
-                            <span><?php print $date_post_offre ?></span>
+                            <a href="#">'.$nom_user.'</a>
+                            <span>'.$date_post_offre.'</span>
 
                         </div>
                     </div>
@@ -187,17 +187,18 @@ class Emploi extends Offre
 
                     </div>
                 </div>
-                <a class="post_heding"><?php print urldecode($lib_offre) ?></a>
-                <p><b>Niveau requis &nbsp:&nbsp </b><?php print urldecode($niveau_req) ?></p>
-                <p><b>Salaire de départ &nbsp:&nbsp </b><?php print urldecode($salaire_emp) ?> €</p>
-                <p><b>Type de contrat &nbsp:&nbsp </b><?php print urldecode($type_emp) ?></p>
-                <p><b>Date de début &nbsp:&nbsp </b><?php print urldecode($date_debut_offre) ?></p>
-                <p><b>Description de l'offre &nbsp:&nbsp </b><?php print urldecode($desc_offre) ?></p>
+                <a class="post_heding">'.urldecode($lib_offre).'</a>
+                <p><b>Niveau requis &nbsp:&nbsp </b>'.urldecode($niveau_req).'</p>
+                <p><b>Salaire de départ &nbsp:&nbsp </b>'.urldecode($salaire_emp).' €</p>
+                <p><b>Type de contrat &nbsp:&nbsp </b>'.urldecode($type_emp).'</p>
+                <p><b>Date de début &nbsp:&nbsp </b>'.urldecode($date_debut_offre).'</p>
+                <p><b>'."Description de l'offre &nbsp:&nbsp".' </b>'.urldecode($desc_offre).'</p>
             </div>
-            <?php postule($id_offre,$id_user,$id_ent,$conn) ?>
+            '.$offre->postule($id_offre,$id_user,$id_ent,$conn).'
             <br>
-        </div>
-        <?php
+        </div>';
+
+        return $html;
     }
 
 

@@ -297,22 +297,6 @@ class Offre
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////
-    ////                                                                          ////
-    ////                                                                          ////
-    ////                                Fonction                                  ////
-    ////                                                                          ////
-    ////                                                                          ////
-    //////////////////////////////////////////////////////////////////////////////////
-
-    function selectAllOffre ($id_offre,$conn){
-
-      $sqlO="SELECT * FROM Offre WHERE id_offre = '$id_offre'";
-      $resO = $conn -> query($sqlO)or die($conn -> errorInfo());
-      return $resO;
-
-    }
-
     function selectRightDemande($id_user,$conn){
 
       $sqlD="SELECT * FROM demande WHERE  id_user_eleve = '$id_user'";
@@ -333,6 +317,42 @@ class Offre
             SET id_user_Eleve='$id_user_eleve'
             WHERE id_offre='$id_offre'";
       $res = $conn->Query($sql)or die('Erreur modification offre');
+    }
+
+
+    /*
+     *
+     * Fonction pour posutler a une offre
+     *
+     *
+     */
+
+    function postule($idoffre,$id_user,$id_ent,$conn){
+        $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+        if (testsql($sqlD,$conn)) {
+            $html = '<div id="paspostule'.$idoffre.'" style="display:none">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        </div>
+        <div id="postule'.$idoffre.'" style="display:block">
+        <center>
+            <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
+            <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-times"></i></div>
+        </center>
+        </div>';
+        }
+        else {
+            $html = '<div id="paspostule'.$idoffre.'" style="display:block">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        </div>
+        <div id="postule'.$idoffre.'" style="display:none">
+            <center>
+                <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
+                <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-times"></i></div>
+            </center>
+        </div>';
+        }
+
+        return $html;
     }
 
     function selectStageEleve($table, $id_user, $conn){
