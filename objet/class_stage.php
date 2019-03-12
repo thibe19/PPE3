@@ -19,7 +19,7 @@ class Stage extends Offre{
 
 
     public function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '',
-     $id_user_eleve = "", $date_fin_stage = '', $note_user = '', $desc_user = '')
+     $id_user_eleve = '', $date_fin_stage = '', $note_user = '', $desc_user = '')
     {
         parent::__construct($id_offre, $lib_offre, $niveau_req, $date_offre, $date_post, $desc_offre, $id_user, $id_cat, $id_ent, $id_user_eleve);
         $this->date_fin_stage = $date_fin_stage;

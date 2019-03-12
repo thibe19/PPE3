@@ -29,8 +29,11 @@
             {
               $id_offre=$dataD['id_offre'];
               $uneoffre = new Offre();
-              $resO = $uneoffre->selectAllOffre($id_offre,$conn);
-              $dataO=$resO->fetch();
+              $param = array(
+                "FiltreWhere" => "id_offre = $id_offre"
+              );
+              $resO = $uneoffre->getAll($param,$conn);
+              $dataO=$resO[0];
 
               $id_userE= $dataD['id_user_entreprise'];
 
@@ -41,14 +44,14 @@
 
               ?>
               <li id="demande<?php print $dataD['id_demande'] ?>">
-                  <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($dataO['lib_offre']);?></div>
+                  <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($dataO->lib_offre);?></div>
                   <div class="collapsible-body">
                       <div class="row collaps_wrpper">
                           <div class="col s11 media_b">
                             <a  class="close_btn"><i onclick="annuldemande2(<?php print $dataD['id_demande'] ?>)" style="font-size:20px;cursor:pointer;" class="ion-close-round"></i></a>
                               <h5><a href="#"><?php print($dataUE['nom_user']); ?></a></h5>
                               <h7><a href="#" ><?php print($dataUE['email_user']); ?></a></h7>
-                              <p><?php print urldecode($dataO['desc_offre']); ?></p>
+                              <p><?php print urldecode($dataO->desc_offre); ?></p>
                           </div>
                       </div>
                   </div>

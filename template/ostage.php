@@ -299,8 +299,8 @@ if (isset($_POST['validSE'])) {
           }
       }
 
-      $id_ent = isset($id_ent)?$id_ent:$ent;
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$id_ent,$dateFS,'','');
+    $id_ent = isset($id_ent)?$id_ent:$ent;
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$id_ent,'',$dateFS,'','');
     $unstage->insert_stage($conn);
 
 
@@ -309,14 +309,14 @@ if (isset($_POST['validSE'])) {
 
     if (($nomEnt && $telEnt) != NULL) {
 
-      echo "<script> alert('Le stage a été crée.');
-                      window.location.href='./index.php';
-            </script>";
-    }
-
-    echo "<script> alert('Le stage a été crée.');
-                    window.location.href='./index.php';
-          </script>";
+    //   echo "<script> alert('Le stage a été crée.');
+    //                   window.location.href='./index.php';
+    //         </script>";
+     }
+    //
+    // echo "<script> alert('Le stage a été crée.');
+    //                 window.location.href='./index.php';
+    //       </script>";
 
 
   }else {
@@ -576,7 +576,7 @@ if (isset($_SESSION['Entreprise'])) {
     $ent = unserialize($_SESSION['Entreprise'])->getIdUser();
     $date = date("Y-m-d");
 
-    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$ent,$dateFS,'','');
+    $unstage = new Stage('',$lib_offre,$nreq,$dateDS,$date,$descstage,$id_user,$cat,$ent,'',$dateFS,'','');
     $unstage->insert_stage($conn);
 
     echo "<script> alert('Le stage a été crée.');
