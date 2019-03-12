@@ -480,31 +480,29 @@ function postule($idoffre,$id_user,$id_ent,$conn){
     $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
     
     if (testsql($sqlD,$conn)) {
-        ?>
-        <div id="paspostule<?php print $idoffre;?>" style="display:none">
-            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        $html = '<div id="paspostule'.$idoffre.'" style="display:none">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
-        <div id="postule<?php print $idoffre;?>" style="display:block">
+        <div id="postule'.$idoffre.'" style="display:block">
         <center>
             <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-            <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-times"></i></div>
+            <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-times"></i></div>
         </center>
-        </div>
-        <?php
+        </div>';
     }
     else {
-        ?>
-        <div id="paspostule<?php print $idoffre;?>" style="display:block">
-            <center><button class="btn btn-primary " id='postulerS' onclick="postuler(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+        $html = '<div id="paspostule'.$idoffre.'" style="display:block">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
-        <div id="postule<?php print $idoffre;?>" style="display:none">
+        <div id="postule'.$idoffre.'" style="display:none">
             <center>
                 <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-                <div class="btn canceloffre" id="canceloffre<?php print $idoffre ?>" onclick="annuldemande(<?php print $idoffre?>,<?php print $id_ent ?>,<?php print $id_user ?>)"><i class="fa fa-times"></i></div>
+                <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-times"></i></div>
             </center>
-        </div>
-        <?php
+        </div>';
     }
+
+    return $html;
 }
 
 

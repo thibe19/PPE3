@@ -172,21 +172,17 @@ Public function getAllpost(){
 
   function affichepost($photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
 
-    ?>
-
-    <div class="post">
+    $html = '<div class="post">
       <div class="post_content">
         <div class="post_img">
-          <img width="600px" height="323px" src="images/post/<?php testphoto($photo_post); ?>" alt="">
-          <span><i class="ion-android-radio-button-off"></i>
-                    <?php print $lib_cat ?>
-                                                </span>
+          <img width="600px" height="323px" src="images/post/'.testphoto($photo_post).'" alt="">
+          <span><i class="ion-android-radio-button-off"></i>'.$lib_cat.'</span>
         </div>
         <div class="row author_area">
           <div class="col s4 author">
-            <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user) ?>">
+            <a href="about.php?visit='.dec_enc('encrypt',$id_user).'">
               <div class="col s4 media_left"><img height="53px" width="53px"
-                                                  src="images/profil/<?php testphoto($photo_user); ?>"
+                                                  src="images/profil/'.testphoto($photo_user).'"
                                                   alt="profil picture"
                                                   class="circle">
               </div>
@@ -195,8 +191,8 @@ Public function getAllpost(){
 
             <div class="col s8 media_body" style="padding-left: 10px;">
 
-              <a href="#"><?php print $nom_user ?></a>
-              <span><?php print $date_post."<br>".$heure_post ?></span>
+              <a href="#">'.$nom_user.'</a>
+              <span>'.$date_post.'<br>'.$heure_post.'</span>
             </div>
           </div>
           <div class="col s4 btn_floating">
@@ -204,15 +200,16 @@ Public function getAllpost(){
           </div>
 
         </div>
-        <a class="post_heding"><?php print $titre_post ?></a>
-        <p><?php print urldecode($contenu_post) ?></p>
+        <a class="post_heding">'.$titre_post.'</a>
+        <p>'.urldecode($contenu_post).'</p>
       </div>
       <center><a href="#" class="btn-floating waves-effect"><i
               class="ion-navicon-round"></i></a>
       </center>
       <br>
-    </div>
-    <?php
+    </div>';
+
+    return $html;
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -303,10 +300,10 @@ Public function getAllpost(){
 
 function testphoto($photo){
     if(is_null($photo) || empty($photo)){
-        print 'post.jpg';
+        return 'post.jpg';
     }
     else {
-        print $photo;
+        return $photo;
     }
 }
 

@@ -138,16 +138,29 @@ if (isset($_SESSION['Eleve'])) {
                   "FiltreWhere" => " Post.id_user != '$id_user' "
               );
               $res = $unpost->getAll($param,$conn);
+              $lespostsami = "";
               foreach ($res as $data){
-                  $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
-                  print "<br>";
+                  $lespostsami .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
               }
+              print $lespostsami;
                ?>
             </div>
             <div id="postmoi">
+                <?php
 
-
-              
+                $param = array(
+                    "FiltreSelect" => "u.nom_user,u.id_user,c.lib_cat,u.photo_user",
+                    "FiltreJoin" => array("INNER JOIN Categorie c ON Post.id_cat=c.id_cat",
+                        "INNER JOIN Utilisateur u ON Post.id_user=u.id_user"),
+                    "FiltreWhere" => " Post.id_user = '$id_user' "
+                );
+                $res = $unpost->getAll($param,$conn);
+                $mesposts = "";
+                foreach ($res as $data){
+                    $mesposts .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
+                }
+                print $mesposts;
+                ?>
 
             </div>
 
