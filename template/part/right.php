@@ -45,7 +45,7 @@
                   <div class="collapsible-body">
                       <div class="row collaps_wrpper">
                           <div class="col s11 media_b">
-                            <a  class="close_btn"><i onclick="annuldemande(<?php print $dataD['id_demande'] ?>)" style="font-size:20px;cursor:pointer;" class="ion-close-round"></i></a>
+                            <a  class="close_btn"><i onclick="annuldemande2(<?php print $dataD['id_demande'] ?>)" style="font-size:20px;cursor:pointer;" class="ion-close-round"></i></a>
                               <h5><a href="#"><?php print($dataUE['nom_user']); ?></a></h5>
                               <h7><a href="#" ><?php print($dataUE['email_user']); ?></a></h7>
                               <p><?php print urldecode($dataO['desc_offre']); ?></p>
