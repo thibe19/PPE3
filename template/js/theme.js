@@ -212,7 +212,7 @@ function refuserdemande(id_demande){
   }
 }
 
-function annuldemande(id_demande){
+function annuldemande2(id_demande){
   if (confirm('Etes vous sur de vouloir annuler cette demande?')) {
 
 
@@ -220,7 +220,7 @@ function annuldemande(id_demande){
         url: '../ToolBox/trait_ajax.php',
         type: "GET",
         data: {
-            'annuldemande' : 1,
+            'annuldemande2' : 1,
             'id_demande' : id_demande,
         },
         sucess:console.log('demande supp')

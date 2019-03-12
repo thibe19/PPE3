@@ -478,6 +478,7 @@ function req_recherche($searchs,$tables,$conn){
 
 function postule($idoffre,$id_user,$id_ent,$conn){
     $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+    
     if (testsql($sqlD,$conn)) {
         ?>
         <div id="paspostule<?php print $idoffre;?>" style="display:none">

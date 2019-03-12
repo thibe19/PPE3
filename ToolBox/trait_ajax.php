@@ -80,7 +80,7 @@ if ($_GET['refuserdemande']) {
 }
 
 
-if ($_GET['annuldemande']) {
+if ($_GET['annuldemande2']) {
   $id_demande=$_GET['id_demande'];
 
   $sql="DELETE FROM demande WHERE id_demande = '$id_demande'";
