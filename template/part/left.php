@@ -70,7 +70,7 @@ if (isset($_SESSION['Eleve'])) {
 
 ?>
 <div class="profile">
-  <h3 class="categories_tittle">Amis <span onclick="window.location='requests.php?groupe=elve'">Modifier</span></h3>
+  <h3 class="categories_tittle"><?php if (isset($_SESSION['Entreprise']) ) { ?>Contact<?php } if (isset($_SESSION['Eleve']) ) { ?>Amis<?php } ?> <span onclick="window.location='requests.php?groupe=elve'">Modifier</span></h3>
   <ul class="profile_pic">
 
     <?php

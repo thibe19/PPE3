@@ -369,8 +369,8 @@ elseif (isset($_SESSION['Entreprise'])) {
 
                                      <table>
                                        <tr>
-                                         <td><span onClick="window.location='requests.php?groupe=elve&ctc';" class="waves-effect follow_b">Contacter</span></td>
-                                         <td>
+                                         <td><a href="mailto:<?php print $res2['email_user'] ?>" class="waves-effect follow_b">Contacter</a></td>
+                                         <td width="200px">
                                          <?php
                                          $resuser = $unuser -> selectAllAmis($id_user,$id_user_amis,$conn);
 
@@ -445,8 +445,8 @@ elseif (isset($_SESSION['Entreprise'])) {
                                   <div class="btn_group">
                                     <table>
                                       <tr>
-                                        <td><span onClick="window.location='messages.php?ctc=<?php echo $res2['id_user']; ?>';" class="waves-effect follow_b">Contacter</span></td>
-                                        <td>
+                                        <td><a href="mailto:<?php print $res2['email_user'] ?>" class="waves-effect follow_b">Contacter</a></td>
+                                        <td width="200px">
                                         <?php
                                         $resuser = $unuser -> selectAllAmis($id_user,$id_user_amis,$conn);
 
