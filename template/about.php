@@ -80,6 +80,7 @@ if (isset($_SESSION['Eleve'])) {
 
     <!--Theme Styles CSS-->
     <link rel="stylesheet" href="css/style.css" media="all"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -90,6 +91,8 @@ if (isset($_SESSION['Eleve'])) {
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+
+
 </head>
 <body>
 <!-- Header_Area -->
@@ -615,12 +618,7 @@ require('part/header.php');
                                           </select>
                                   </div>
                                   <div class="select_option">
-                                      <table>
-                                          <tr>
-                                              <td>Entreprise</td>
-                                              <td><input id="ajoutent" type="text"></td>
-                                          </tr>
-                                      </table>
+                                      <?php include './part/searchent.php'?>
                                       <p> Entreprise :
                                           <select name="selectenttn">
                                               <?php foreach ($list_ent as $le) { ?>
@@ -1950,6 +1948,8 @@ require('part/post.php');
 
 <!-- jQuery JS -->
 <script src="js/jquery-3.3.1.min.js"></script>
+<!-- Jquery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Materialize JS -->
 <script src="js/materialize.min.js"></script>
 <!-- Calendar JS -->

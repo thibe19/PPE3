@@ -259,7 +259,6 @@ function onloadprofile() {
 
         var remelem = document.getElementById('postsamis');
         remelem.classList.add('active');
-
     }
 }
 function getQueryVariable(variable)

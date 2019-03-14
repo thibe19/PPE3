@@ -127,7 +127,7 @@ if (isset($_SESSION['Eleve']) ) {
                         $res = $unpost->getAll($param,$conn);
                         $posts = "";
                         foreach ($res as $data){
-                            $posts .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
+                            $posts .= $unpost->affichepost($data->id_post,$data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
                         }
                         print $posts;
 
@@ -562,7 +562,7 @@ if (isset($_SESSION['Entreprise']) ) {
                         $res = $unpost->getAll($param,$conn);
                         $html = "";
                         foreach ($res as $data){
-                            $html .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
+                            $html .= $unpost->affichepost($data->id_post,$data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
                         }
                         print $html;
                         ?>

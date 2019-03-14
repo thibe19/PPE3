@@ -148,7 +148,7 @@ if (isset($_SESSION['Eleve'])) {
                         $res = $unpost->getAll($param, $conn);
                         $lespostsami = "";
                         foreach ($res as $data) {
-                            $lespostsami .= $unpost->affichepost($data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
+                            $lespostsami .= $unpost->affichepost($data->id_post,$data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
                         }
                         print $lespostsami;
                         ?>
@@ -222,7 +222,7 @@ if (isset($_SESSION['Eleve'])) {
 
                         $mesposts ="";
                         foreach ($res as $data) {
-                            $mesposts.=$unpost->affichepost($data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
+                            $mesposts.=$unpost->affichepost($data->id_post,$data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
                         }
                         print $mesposts;
 
@@ -452,7 +452,7 @@ if (isset($_SESSION['Entreprise'])) {
                         $res = $unpost->getAll($param, $conn);
                         $lespostsami = "";
                         foreach ($res as $data) {
-                            $lespostsami .= $unpost->affichepost($data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
+                            $lespostsami .= $unpost->affichepost($data->id_post,$data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
                         }
                         print $lespostsami;
                         ?>
@@ -522,7 +522,7 @@ if (isset($_SESSION['Entreprise'])) {
 
                         $mesposts ="";
                         foreach ($res as $data) {
-                            $mesposts.=$unpost->affichepost($data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
+                            $mesposts.=$unpost->affichepost($data->id_post,$data->photo_post, $data->lib_cat, $data->id_user, $data->date_post, $data->heure_post, $data->titre_post, $data->contenu_post, $data->photo_user, $data->nom_user) . "<br>";
                         }
                         print $mesposts;
 

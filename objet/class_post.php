@@ -170,9 +170,9 @@ Public function getAllpost(){
   //////////////////////////////////////////////////////////////////////////////////
 
 
-  function affichepost($photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
+  function affichepost($idpost,$photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
 
-    $html = '<div class="post">
+    $html = '<div id="post'.$idpost.'" class="post">
       <div class="post_content">
         <div class="post_img" style="min-height:50px ">
           <img width="600px" height="323px" src="images/post/'.testphoto($photo_post).'" alt="">
