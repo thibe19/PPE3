@@ -92,26 +92,27 @@ elseif(isset($_SESSION['Entreprise'])){
                 <?php
 
                 $unedemande = new Offre();
-                $resD = $unedemande->selectRightDemandeEnt($id_user,$conn);
+                $resC = $unedemande->countdemande($id_user,$conn);
 
-                while ($dataD=$resD->fetch())
+                while ($dataC=$resC->fetch())
                 {
                   $T=0;
-                  $idoffre=$dataD['id_offre'];
-                 $sql="SELECT O.id_user_Eleve,O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
+                  $idoffre=$dataC['id_offre'];
+                  $sql="SELECT O.id_user_Eleve,O.lib_offre,COUNT(D.id_user_eleve) as total FROM Offre O,demande D
                           WHERE D.id_offre=O.id_offre
                           AND D.id_offre='$idoffre'";
 
 
                   foreach (reqtoobj($sql,$conn) as $data) {
+
                     if ($data->id_user_Eleve == 0) {
 
-                  $SQL = "SELECT U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
+                  $SQL = "SELECT D.id_demande,U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
                           WHERE D.id_user_Eleve=U.id_user
                           AND D.id_offre='$idoffre'";
 
                   ?>
-                  <li id="demande<?php print $dataD['id_demande'] ?>">
+                  <li id="demande+<?php print $data->lib_offre; ?>">
                       <div class="collapsible-header"><i class="ion-chevron-right"></i><?php print urldecode($data->lib_offre);?> avec <?php print ($data->total); ?> demande(s)</div>
                       <hr>
                       <?php foreach (reqtoobj($SQL,$conn) as $data_user) {
@@ -126,23 +127,29 @@ elseif(isset($_SESSION['Entreprise'])){
                               </div>
 
                               <div class="col s11 media_b">
-                                  <h5><a href="about.php?visit=<?php print dec_enc('encrypt',$data_user->id_user) ?>"><?php print($data_user->nom_user); ?></a></h5>
+                                  <h5><a href="about.php?visit=<?php print dec_enc('encrypt',$data_user->id_user); ?>"><?php print($data_user->nom_user); ?></a></h5>
 
                                   <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
                                   <p><?php print urldecode($data_user->desc_user); ?></p>
                               </div>
 
-                                <div class="col s11 media_b" id="demandeaccepte<?php print $dataD['id_demande'] ?>" style="display:block;">
+                                <div class="col s11 media_b" id="demandeaccepte<?php print $data_user->id_demande; ?>" style="display:none;">
                                   <center>
                                     <br>
-                                  <span  class="btn btn-primary" style="cursor:default;">demande accepté</span>
+                                  <span  class="btn btn-primary" style="cursor:default;">Accepté</span>
                                 </center>
                                 </div>
-                                  <div class="col s11 media_b" id="demandeencours<?php print $dataD['id_demande'] ?>" style="display:none;">
+                                <div class="col s11 media_b" id="demanderefuser<?php print $data_user->id_demande; ?>" style="display:none;">
+                                  <center>
+                                    <br>
+                                  <span  class="btn btn-primary" style="cursor:default;">Refuser</span>
+                                </center>
+                                </div>
+                                  <div class="col s11 media_b" id="demandeencours<?php print $data_user->id_demande; ?>" style="display:block;">
                                     <center>
-                                      <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
+                                      <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $data_user->id_demande; ?>,<?php print $data_user->id_user; ?>,<?php print $id_user; ?>)" name="accepte">Accepter</button>
                                       &nbsp&nbsp
-                                      <button type="submit" class="but_right_R" onclick="refuserdemande2(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
+                                      <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $data_user->id_demande; ?>,<?php print $data_user->id_user; ?>)"name="refuser">Refuser</button>
                                     </center>
                                   </div>
                           </div>

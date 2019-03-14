@@ -305,12 +305,14 @@ class Offre
       return $resD;
     }
 
-    function selectRightDemandeEnt($id_user,$conn){
+    
+    function countdemande($id_user,$conn){
+    $sqlC="SELECT DISTINCT(id_offre) FROM demande WHERE  id_user_entreprise = '$id_user'";
+    $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
 
-      $sqlD="SELECT  DISTINCT(id_offre), id_demande FROM demande WHERE  id_user_entreprise = '$id_user'";
-      $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
-      return $resD;
-    }
+    return $resC;
+  }
+
 
     function modifiOffreEleve($id_user_eleve,$id_offre,$conn){
       $sql="UPDATE Offre

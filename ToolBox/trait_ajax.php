@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Ajax                                       ////
-////                               20/12/2018                                 ////
-////                               V0.0.3                                     ////
+////                               14/03/2018                                 ////
+////                               V0.0.9                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -53,6 +53,8 @@ if ($_GET['modifpref']){
 //Traitement acceptation des demandes
 if ($_GET['acceptedemande']) {
   $id_demande=$_GET['id_demande'];
+  $id_user_eleve=$GET['id_user_eleve'];
+  $id_ent=$_GET['id_user'];
 
   $sql="SELECT id_offre,id_user_Eleve FROM demande WHERE id_demande = '$id_demande' ";
   $res = $conn -> query($sql)or die($conn -> errorInfo());
@@ -70,13 +72,15 @@ if ($_GET['acceptedemande']) {
     $uneoffre = new Stage($id_offre,'','','','','','','','',$id_user_eleve,'','');
     $uneoffre->modifiUserEleveStage($id_user_eleve,$id_offre,$conn);
   }
+
+  mail_acept($id_user_eleve,$id_ent,$conn);
 }
 
 if ($_GET['refuserdemande']) {
   $id_demande=$_GET['id_demande'];
-
-  $sql="DELETE FROM demande WHERE id_demande = '$id_demande'";
-  $res = $conn->Query($sql) or die();
+   $id_user_eleve=$_GET['id_user_eleve'];
+   $sql="DELETE FROM demande WHERE id_demande = '$id_demande' AND id_user_eleve = $id_user_eleve";
+   $res = $conn->Query($sql) or die();
 }
 
 
