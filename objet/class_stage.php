@@ -129,7 +129,7 @@ class Stage extends Offre{
             ." ".$join." "
             ." ".$where." "
             ."ORDER BY date_post_offre DESC";
-        $req = $conn->Query($SQL) or die('Erreur selection Stage');
+        $req = $conn->Query($SQL) or die('Erreur selection Stage : '.$SQL);
         $req = $req->fetchAll(PDO::FETCH_OBJ);
         return $req;
     }
@@ -249,9 +249,11 @@ class Stage extends Offre{
     ///
     ///
     function affichestage($lib_cat,$id_user,$photo_user,$nom_user,$id_offre,$id_ent,$date_post_offre,$lib_offre,$niveau_req,$date_debut_offre,$date_fin_stage,$desc_offre,$conn){
-
+        ?>
+        <?php
         $offre = new Offre();
-        $html = '<div class="post">
+        $html = '
+        <div class="post">
             <div class="post_content">
                 <div class="post_img">
                     <img src="images/post/hide.png" alt="">
