@@ -351,7 +351,7 @@ class Offre
             </center>
         </div>';
         }
-        if ($_REQUEST['mesposts']){
+        if (isset($_REQUEST['mesposts'])){
             $html = "";
         }
         return $html;
