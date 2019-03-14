@@ -172,7 +172,11 @@ Public function getAllpost(){
 
   function affichepost($idpost,$photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
 
-    $html = '<div id="post'.$idpost.'" class="post">
+  
+    $html = '
+
+    <div id="post'.$idpost.'" class="post">
+    <div id="update_ajax">
       <div class="post_content">
         <div class="post_img" style="min-height:50px ">
           <img width="600px" height="323px" src="images/post/'.testphoto($photo_post).'" alt="">
@@ -203,6 +207,7 @@ Public function getAllpost(){
         <a class="post_heding">'.$titre_post.'</a>
         <p>'.urldecode($contenu_post).'</p>
       </div>
+      </div>
       <center>';
 
       if (isset($_SESSION['Eleve']) ) {
@@ -218,8 +223,8 @@ Public function getAllpost(){
       if ($id_user == $id_user_eleve) {
         $html = $html.'
         <ul style="background:white;" class="tranding_select tabs">
-            <li class="tab"><a onclick="" class="waves-effect btn">Modifier</a></li>
-            <li class="tab"><a onclick="" class="waves-effect btn">Supprimer</a></li>
+            <li class="tab"><a onclick="modifierpost('.$idpost.')" class="waves-effect btn">Modifier</a></li>
+            <li class="tab"><a onclick="supprimepost('.$idpost.')" class="waves-effect btn">Supprimer</a></li>
             <li style="display:none;" class="tab"><a class="waves-effect btn active">Supprimer</a></li>
         </ul>';
       }
@@ -306,6 +311,20 @@ Public function getAllpost(){
         $resA = $conn->query($sqlA) or die($conn->errorInfo());
 
         return $resA;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ////                                                                          ////
+    ////                                                                          ////
+    ////                               SUPPRIMER                                  ////
+    ////                                                                          ////
+    ////                                                                          ////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    function supprimepost($id_post,$conn) {
+      $SQL = "DELETE FROM Post
+              WHERE id_post = $id_post;";
+      $res = $conn->Query($SQL)or die('');
     }
 
 }

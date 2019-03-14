@@ -142,7 +142,7 @@ elseif(isset($_SESSION['Entreprise'])){
                                     <center>
                                       <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
                                       &nbsp&nbsp
-                                      <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
+                                      <button type="submit" class="but_right_R" onclick="refuserdemande2(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
                                     </center>
                                   </div>
                           </div>

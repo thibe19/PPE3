@@ -478,7 +478,7 @@ function req_recherche($searchs,$tables,$conn){
 
 function postule($idoffre,$id_user,$id_ent,$conn){
     $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
-    
+
     if (testsql($sqlD,$conn)) {
         $html = '<div id="paspostule'.$idoffre.'" style="display:none">
             <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
