@@ -615,6 +615,12 @@ require('part/header.php');
                                           </select>
                                   </div>
                                   <div class="select_option">
+                                      <table>
+                                          <tr>
+                                              <td>Entreprise</td>
+                                              <td><input id="ajoutent" type="text"></td>
+                                          </tr>
+                                      </table>
                                       <p> Entreprise :
                                           <select name="selectenttn">
                                               <?php foreach ($list_ent as $le) { ?>

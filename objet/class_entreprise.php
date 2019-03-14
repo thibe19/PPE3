@@ -201,6 +201,8 @@ class Entreprise extends Utilisateur
     ////                                                                          ////
     //////////////////////////////////////////////////////////////////////////////////
 
+
+
     function selectAllEntreprise($id_user,$conn){
       $sqlEn="SELECT * FROM Entreprise WHERE id_user = '$id_user'";
       $resEn = $conn -> query($sqlEn)or die($conn -> errorInfo());
