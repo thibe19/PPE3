@@ -13,8 +13,8 @@ require('../ToolBox/toolbox_inc.php');
 require('../objet/classes.php');
 
 if (isset($_SESSION['Eleve'])) {
-    $uneleve = unserialize($_SESSION['Eleve']);
-    $id_user = $uneleve->getIdUser();
+    $eleveconnecte = unserialize($_SESSION['Eleve']);
+    $id_user = $eleveconnecte->getIdUser();
 
 
 //TODO PENSER A DESCTIVER LA SESSION Profilon quand navigation en dehors d'une page profil
@@ -170,7 +170,7 @@ if (isset($_SESSION['Eleve'])) {
 
                         $lesstages ="";
                         foreach ($res as $re) {
-                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
+                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
                         }
                         print $lesstages;
                         ?>
@@ -192,7 +192,7 @@ if (isset($_SESSION['Eleve'])) {
 
                         $lesoemploies = "";
                         foreach ($res as $re) {
-                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
+                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
                         }
                         print $lesoemploies;
                         ?>
@@ -244,7 +244,7 @@ if (isset($_SESSION['Eleve'])) {
 
                         $lesstages ="";
                         foreach ($res as $re) {
-                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
+                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
                         }
                         print $lesstages;
                         ?>
@@ -265,7 +265,7 @@ if (isset($_SESSION['Eleve'])) {
 
                         $lesoemploies = "";
                         foreach ($res as $re) {
-                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
+                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
                         }
                         print $lesoemploies;
                         ?>
@@ -474,7 +474,7 @@ if (isset($_SESSION['Entreprise'])) {
 
                         $lesstages ="";
                         foreach ($res as $re) {
-                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
+                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
                         }
                         print $lesstages;
                         ?>
@@ -544,7 +544,7 @@ if (isset($_SESSION['Entreprise'])) {
 
                         $lesstages ="";
                         foreach ($res as $re) {
-                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
+                            $lesstages.=$uneoffre->affichestage($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn)."<br>";
                         }
                         print $lesstages;
                         ?>
@@ -565,7 +565,7 @@ if (isset($_SESSION['Entreprise'])) {
 
                         $lesoemploies = "";
                         foreach ($res as $re) {
-                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
+                            $lesoemploies .= $uneoffre->afficheemploi($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn)."<br>";
                         }
                         print $lesoemploies;
                         ?>
