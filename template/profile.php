@@ -250,7 +250,7 @@ if (isset($_SESSION['Entreprise'])) {
 </head>
 <body>
 
-    <!-- Header_Area -->
+    <!-- Header_Area a -->
     <?php
     require('part/header.php');
     ?>
