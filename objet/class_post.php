@@ -172,7 +172,7 @@ Public function getAllpost(){
 
   function affichepost($idpost,$photo_post,$lib_cat,$id_user,$date_post,$heure_post,$titre_post,$contenu_post,$photo_user,$nom_user){
 
-  
+
     $html = '
 
     <div id="post'.$idpost.'" class="post">
