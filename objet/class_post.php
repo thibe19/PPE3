@@ -174,9 +174,9 @@ Public function getAllpost(){
 
     $html = '<div class="post">
       <div class="post_content">
-        <div class="post_img">
+        <div class="post_img" style="min-height:50px ">
           <img width="600px" height="323px" src="images/post/'.testphoto($photo_post).'" alt="">
-          <span><i class="ion-android-radio-button-off"></i>'.$lib_cat.'</span>
+          <span height="100px"><i class="ion-android-radio-button-off"></i>'.$lib_cat.'</span>
         </div>
         <div class="row author_area">
           <div class="col s4 author">
