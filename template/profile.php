@@ -116,8 +116,8 @@ if (isset($_SESSION['Eleve'])) {
             </div>
             <div class="col l4 m6">
                 <ul id="postpro" class="tranding_select tabs">
-                    <li class="tab"><a href="#postami" id="postsamis" onclick="window.location='profile.php?postsamis=true'" class="waves-effect btn active">>Posts de mes amis</a></li>
-                    <li class="tab"><a href="#postmoi" id="mesposts" onclick="window.location='profile.php?mesposts=true'" class="waves-effect btn ">>Mes Posts</a></li>
+                    <li class="tab"><a href="#postami" id="postsamis" onclick="window.location='profile.php?postsamis=true'" class="waves-effect btn active">> Posts de mes amis</a></li>
+                    <li class="tab"><a href="#postmoi" id="mesposts" onclick="window.location='profile.php?mesposts=true'" class="waves-effect btn ">> Mes Posts</a></li>
                 </ul>
             </div>
         </div>
