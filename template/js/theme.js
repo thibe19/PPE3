@@ -239,6 +239,35 @@ function supprimepost(id_post){
       }
 }
 
+// modifier posts
+
+
+  function modifierpost(str) {
+      if (str == "") {
+          document.getElementById("update_ajax").innerHTML = "";
+          return;
+      } else {
+          if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
+          } else {
+              // code for IE6, IE5
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("update_ajax").innerHTML = this.responseText;
+              }
+          };
+          xmlhttp.open("GET","../ToolBox/ajax_pUpdate.php?q="+str,true);
+          xmlhttp.send();
+      }
+}
+
+function UpdatePostVal(idpost){
+  alert(idpost);
+}
+
 function refuserdemande(id_demande){
 
   if (confirm('Etes vous sur de vouloir refuser cette demande?')) {
