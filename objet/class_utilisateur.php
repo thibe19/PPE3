@@ -484,5 +484,7 @@ function selectAllAmis($id_user,$id_user_amis,$conn) {
 
 
 
+
+
 }// fin class
 ?>

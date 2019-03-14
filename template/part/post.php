@@ -28,7 +28,7 @@
       <div id="photo" class="col s12 tabs_content">
         <div class="photo_u">
           <div class="fallback">
-            <input name="file" type="file" multiple />
+            <input name="file" type="file" multiple required/>
           </div>
           <h4>Select files to upload <small>or drag &amp; drop files</small></h4>
         </div>

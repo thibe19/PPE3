@@ -124,8 +124,8 @@ elseif(isset($_SESSION['Entreprise'])){
                               </div>
 
                               <div class="col s11 media_b">
+                                  <h5><a href="about.php?visit=<?php print dec_enc('encrypt',$data_user->id_user) ?>"><?php print($data_user->nom_user); ?></a></h5>
 
-                                  <h5><a href="#"><?php print($data_user->nom_user); ?></a></h5>
                                   <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
                                   <p><?php print urldecode($data_user->desc_user); ?></p>
                               </div>
