@@ -64,7 +64,7 @@ if (isset($_SESSION['Eleve'])) {
         $dataent = $ent->getAll($param,$conn);
         $resultent = '[';
         foreach ($dataent as $r){
-            $resultent .= '"'.$r->nom_user.'",';
+            $resultent .= '{label : "'.$r->nom_user.'", id:"'.$r->id_user.'"},';
         }
         $resultent .= ']';
 
@@ -553,24 +553,24 @@ require('part/header.php');
                              <form action="about.php" method="post">
                                Titre : <input type="text" name="titret" value="<?php echo urldecode($res_aff_stg['lib_offre']) ?>">
                             <div class="select_option">
-                                <p> Domaine :</p>
-                                    <select name="selectdomainet">
-                                        <?php foreach ($domaine as $d) { ?>
-                                            <option value="<?php print $d->id_cat ?>" <?php ($d->id_cat == $res_aff_stg['id_cat']) ? print "selected" : false ?> >
-                                                <?php print $d->lib_cat ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                            </div>
-                            <div class="select_option">
-                                <p> Entreprise :</p>
-                                    <select name="selectentt">
-                                        <?php foreach ($list_ent as $le) { ?>
-                                            <option value="<?php $le->id_user ?>" <?php ($le->id_user == $res_aff_stg['id_ent']) ? print "selected" : false ?> >
-                                                <?php print $le->nom_user ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
+                                <table>
+                                    <tr>
+                                        <td><p>Domaine :</p></td>
+                                        <td>
+                                            <select name="selectdomainetn">
+                                                <?php foreach ($domaine as $d) { ?>
+                                                    <option value="<?php print $d->id_cat ?>">
+                                                        <?php print $d->lib_cat ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><p>Entreprise :</p></td>
+                                        <td style="height: 100%;"><input id="ajoutent" type="text"><input type="hidden" id="idaddent"></td>
+                                    </tr>
+                                </table>
                             </div>
 
                             Date :
@@ -638,7 +638,7 @@ require('part/header.php');
                                           </tr>
                                           <tr>
                                               <td><p>Entreprise :</p></td>
-                                              <td style="height: 100%;"><input id="ajoutent" type="text"></td>
+                                              <td style="height: 100%;"><input id="ajoutent" type="text"><input type="hidden" name="idaddent" id="idaddent"></td>
                                           </tr>
                                       </table>
                                   </div>
@@ -1966,7 +1966,10 @@ require('part/post.php');
      $( function() {
         var availableTags = <?php print $resultent ?>;
         $( "#ajoutent" ).autocomplete({
-            source: availableTags
+            source: availableTags,
+            select: function (event, ui) {
+                $("#idaddent").val(ui.item.id);//Put Id in a hidden field
+            }
         });
      } );
 </script>
