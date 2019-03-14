@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                               Post class                                 ////
-////                               13/12/2018                                 ////
-////                               V0.0.4                                     ////
+////                               14/03/2018                                 ////
+////                               V0.0.7                                     ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -299,7 +299,7 @@ Public function getAllpost(){
 
     function countPosts($id_user, $conn)
     {
-        $sqlP = "SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = '$id_user') + (SELECT COUNT(*) FROM Offre WHERE id_user = '$id_user') as resulta;";
+        $sqlP = "SELECT(SELECT COUNT(*) FROM Post  WHERE id_user = 44) + (SELECT COUNT(*) FROM Offre WHERE id_user = 44 AND id_user_Eleve = 0) as resulta;";
         $resP = $conn->query($sqlP) or die($conn->errorInfo());
 
         return $resP;
