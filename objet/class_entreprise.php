@@ -130,7 +130,7 @@ class Entreprise extends Utilisateur
       $SQL = "SELECT Entreprise.*".$select." FROM Entreprise"
           ." ".$join." "
           ." ".$where." ";
-      $req = $conn->Query($SQL) or die($SQL.'Erreur selection Post');
+      $req = $conn->Query($SQL) or die($SQL.'Erreur selection Entreprise : '.$SQL);
       $req = $req->fetchAll(PDO::FETCH_OBJ);
       return $req;
     }

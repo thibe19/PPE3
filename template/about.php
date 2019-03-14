@@ -53,6 +53,21 @@ if (isset($_SESSION['Eleve'])) {
         $resE = $uneleve->selectAllEleve($id_user,$conn);
         $dataE = $resE -> fetch();
 
+
+
+        // Selection des entreprises
+        $ent = new Entreprise();
+        $param = array(
+            "FiltreSelect" => "Utilisateur.nom_user",
+            "FiltreJoin" => array("INNER JOIN Utilisateur ON Entreprise.id_user = Utilisateur.id_user")
+        );
+        $dataent = $ent->getAll($param,$conn);
+        $resultent = '[';
+        foreach ($dataent as $r){
+            $resultent .= '"'.$r->nom_user.'",';
+        }
+        $resultent .= ']';
+
 ?>
 
 <!DOCTYPE html>
@@ -608,25 +623,26 @@ require('part/header.php');
                               <form action="about.php" method="post">
                                 Titre : <input type="text" name="titretn" value="">
                                   <div class="select_option">
-                                      <p> Domaine :
-                                          <select name="selectdomainetn">
-                                              <?php foreach ($domaine as $d) { ?>
-                                                  <option value="<?php print $d->id_cat ?>">
-                                                      <?php print $d->lib_cat ?>
-                                                  </option>
-                                              <?php } ?>
-                                          </select>
+                                      <table>
+                                          <tr>
+                                              <td><p>Domaine :</p></td>
+                                              <td>
+                                                  <select name="selectdomainetn">
+                                                      <?php foreach ($domaine as $d) { ?>
+                                                          <option value="<?php print $d->id_cat ?>">
+                                                              <?php print $d->lib_cat ?>
+                                                          </option>
+                                                      <?php } ?>
+                                                  </select>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td><p>Entreprise :</p></td>
+                                              <td style="height: 100%;"><input id="ajoutent" type="text"></td>
+                                          </tr>
+                                      </table>
                                   </div>
                                   <div class="select_option">
-                                      <?php include './part/searchent.php'?>
-                                      <p> Entreprise :
-                                          <select name="selectenttn">
-                                              <?php foreach ($list_ent as $le) { ?>
-                                                  <option value="<?php print $le->id_user ?>">
-                                                      <?php print $le->nom_user ?>
-                                                  </option>
-                                              <?php } ?>
-                                          </select>
                                   </div>
 
                                   Date :
@@ -1945,7 +1961,15 @@ require('part/post.php');
 
 ?>
 <!-- End Add post poup area -->
-
+<!-- Script recherche entreprise -->
+<script>
+     $( function() {
+        var availableTags = <?php print $resultent ?>;
+        $( "#ajoutent" ).autocomplete({
+            source: availableTags
+        });
+     } );
+</script>
 <!-- jQuery JS -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <!-- Jquery UI -->
