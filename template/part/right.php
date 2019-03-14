@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                Right                                     ////
-////                                19/12/2018                                ////
-////                                V0.0.5                                    ////
+////                                14/03/2018                                ////
+////                                V0.0.6                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +102,9 @@ elseif(isset($_SESSION['Entreprise'])){
                           WHERE D.id_offre=O.id_offre
                           AND D.id_offre='$idoffre'";
 
+
                   foreach (reqtoobj($sql,$conn) as $data) {
+                    if ($data->id_user_Eleve == 0) {
 
                   $SQL = "SELECT U.id_user,U.nom_user, U.email_user, U.desc_user FROM demande D,Utilisateur U
                           WHERE D.id_user_Eleve=U.id_user
@@ -129,15 +131,13 @@ elseif(isset($_SESSION['Entreprise'])){
                                   <h7><a href="#" ><?php print($data_user->email_user); ?></a></h7>
                                   <p><?php print urldecode($data_user->desc_user); ?></p>
                               </div>
-                              <?php
-                              if ($data->id_user_Eleve != 0) { ?>
+
                                 <div class="col s11 media_b" id="demandeaccepte<?php print $dataD['id_demande'] ?>" style="display:block;">
                                   <center>
                                     <br>
                                   <span  class="btn btn-primary" style="cursor:default;">demande accepté</span>
                                 </center>
                                 </div>
-
                                   <div class="col s11 media_b" id="demandeencours<?php print $dataD['id_demande'] ?>" style="display:none;">
                                     <center>
                                       <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
@@ -145,32 +145,20 @@ elseif(isset($_SESSION['Entreprise'])){
                                       <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
                                     </center>
                                   </div>
-                              <?php
-                            }else { ?>
-                              <div class="col s11 media_b" id="demandeaccepte<?php print $dataD['id_demande'] ?>" style="display:none;">
-                                <center>
-                                  <br>
-                                <span  class="btn btn-primary" style="cursor:default;">demande accepté</span>
-                              </center>
-                              </div>
-                              <div class="col s11 media_b" id="demandeencours<?php print $dataD['id_demande'] ?>" style="display:block;">
-                                <center>
-                                  <button type="submit" class="but_right_A" onclick="acceptedemande(<?php print $dataD['id_demande'] ?>)" name="accepte">Accepter</button>
-                                  &nbsp&nbsp
-                                  <button type="submit" class="but_right_R" onclick="refuserdemande(<?php print $dataD['id_demande'] ?>)"name="refuser">Refuser</button>
-                                </center>
-                              </div>
-                            <?php
-                            } ?>
                           </div>
                           <hr>
                       </div>
 
                       <?php
-                      } ?>
+                    }//fin user spesifique ?>
                   </li>
-                <?php }
-              }?>
+                <?php
+               } //if test accepté
+
+             } //fin demande spesifique
+
+             }//fin Demande
+              ?>
               </ul>
 
           </div>

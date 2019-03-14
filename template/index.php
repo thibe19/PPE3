@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 ////                                                                          ////
 ////                                index                                     ////
-////                                12/12/2018                                ////
-////                                V0.0.6                                    ////
+////                                14/03/2018                                ////
+////                                V0.0.7                                    ////
 ////                                                                          ////
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -438,6 +438,15 @@ require('part/post.php');
 
 }//fin si eleves
 
+
+//////////////////////////////////////////////////////////////////////////////////
+////                                                                          ////
+////                                                                          ////
+////                             Entreprise                                   ////
+////                                                                          ////
+////                                                                          ////
+//////////////////////////////////////////////////////////////////////////////////
+
 if (isset($_SESSION['Entreprise']) ) {
   $uneleve = unserialize($_SESSION['Entreprise']);
   $id_user = $uneleve->getIdUser();
@@ -551,11 +560,11 @@ if (isset($_SESSION['Entreprise']) ) {
                                                     "INNER JOIN Utilisateur u ON Post.id_user=u.id_user")
                         );
                         $res = $unpost->getAll($param,$conn);
+                        $html = "";
                         foreach ($res as $data){
-                            $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
-                            print "<br>";
+                            $html .= $unpost->affichepost($data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user);
                         }
-
+                        print $html;
                         ?>
                     </div>
                 </div>
@@ -584,13 +593,12 @@ if (isset($_SESSION['Entreprise']) ) {
                            "FiltreWhere" => "Offre.id_user_Eleve = 0"
                         );
                         $res = $uneoffre->getAll($param,$conn);
-
-
+                        $html = "";
                         foreach ($res as $re) {
-                            $uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
-                            print "<br>";
-                        }
+                            $html .= $uneoffre->affichestage($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
 
+                        }
+                        print $html;
                         ?>
 
                     </div>
@@ -617,12 +625,12 @@ if (isset($_SESSION['Entreprise']) ) {
                             "FiltreWhere" => "Offre.id_user_Eleve = 0"
                         );
                         $res = $uneoffre->getAll($param,$conn);
-
+                        $html = "";
                         foreach ($res as $re) {
-                            $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
-                            print "<br>";
-                        }
+                          $html .= $uneoffre->afficheemploi($re->lib_cat,$re->id_user,$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
 
+                        }
+                        print $html;
                         ?>
                     </div>
                 </div>
@@ -670,6 +678,7 @@ if (isset($_SESSION['Entreprise']) ) {
 
                                 case "Post":
                                     foreach ($resultat as $data) {
+
                                     affichepost($data->id_post,$data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
                                     }
                                 break;
