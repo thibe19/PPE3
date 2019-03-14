@@ -238,3 +238,16 @@ function trirecherche(){
         document.getElementById('formrecherche').style.display="none";
     }
 }
+
+
+function chargemespots(){
+    window.location="profile.php?mesposts";
+
+    var elem = document.getElementById('mesposts');
+    elem.classList.add('active');
+
+    var remelem = document.getElementById('postsamis');
+    remelem.classList.remove('active');
+
+}
+

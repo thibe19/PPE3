@@ -330,7 +330,7 @@ class Offre
     function postule($idoffre,$id_user,$id_ent,$conn){
         $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
         if (testsql($sqlD,$conn)) {
-            $html = '<div id="paspostule'.$idoffre.'" style="display:none">
+            $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:none">
             <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
         <div id="postule'.$idoffre.'" style="display:block">
@@ -341,7 +341,7 @@ class Offre
         </div>';
         }
         else {
-            $html = '<div id="paspostule'.$idoffre.'" style="display:block">
+            $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:block">
             <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>
         <div id="postule'.$idoffre.'" style="display:none">

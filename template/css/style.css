@@ -1110,6 +1110,7 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
   padding: 30px;
   background: #fff;
   border-radius: 4px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 36, 90, 0.1);
 }
 .min_container .section_row .right_side_bar .right_sidebar_iner .categories_tittle {
   font: 700 15px/28px "Lato", sans-serif;
@@ -4531,5 +4532,5 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
 
 #postpro{
   height: auto !important;
-
+  background-color:#ffffff;
 }
