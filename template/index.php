@@ -448,8 +448,8 @@ require('part/post.php');
 //////////////////////////////////////////////////////////////////////////////////
 
 if (isset($_SESSION['Entreprise']) ) {
-  $uneleve = unserialize($_SESSION['Entreprise']);
-  $id_user = $uneleve->getIdUser();
+  $entrepriseconnect = unserialize($_SESSION['Entreprise']);
+  $id_user = $entrepriseconnect->getIdUser();
 
 
     ?>
@@ -595,7 +595,7 @@ if (isset($_SESSION['Entreprise']) ) {
                         $res = $uneoffre->getAll($param,$conn);
                         $html = "";
                         foreach ($res as $re) {
-                            $html .= $uneoffre->affichestage($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
+                            $html .= $uneoffre->affichestage($re->lib_cat,$entrepriseconnect->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->date_fin_stage,$re->desc_offre,$conn);
 
                         }
                         print $html;
@@ -627,7 +627,7 @@ if (isset($_SESSION['Entreprise']) ) {
                         $res = $uneoffre->getAll($param,$conn);
                         $html = "";
                         foreach ($res as $re) {
-                          $html .= $uneoffre->afficheemploi($re->lib_cat,$eleveconnecte->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
+                          $html .= $uneoffre->afficheemploi($re->lib_cat,$entrepriseconnect->getIdUser(),$re->photo_user,$re->nom_user,$re->id_offre,$re->id_ent,$re->date_post_offre,$re->lib_offre,$re->niveau_req,$re->date_debut_offre,$re->salaire_emp,$re->desc_offre,$re->type_emp,$conn);
 
                         }
                         print $html;
@@ -783,7 +783,7 @@ if (isset($_SESSION['Entreprise']) ) {
                 <div class="left_side_bar">
                     <div class="categories">
                         <h3 class="categories_tittle me_tittle">A PROPOS</h3>
-                        <p><?php (!empty($uneleve->getDescUser()))? print urldecode($uneleve->getDescUser()) : print 'Encore aucune description' ?></p>
+                        <p><?php (!empty($entrepriseconnect->getDescUser()))? print urldecode($entrepriseconnect->getDescUser()) : print 'Encore aucune description' ?></p>
                     </div>
                     <?php require ('./part/left.php')?>
             <!-- Right side bar -->
