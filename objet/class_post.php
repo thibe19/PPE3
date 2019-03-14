@@ -203,8 +203,28 @@ Public function getAllpost(){
         <a class="post_heding">'.$titre_post.'</a>
         <p>'.urldecode($contenu_post).'</p>
       </div>
-      <center><a href="#" class="btn-floating waves-effect"><i
-              class="ion-navicon-round"></i></a>
+      <center>';
+
+      if (isset($_SESSION['Eleve']) ) {
+        $uneleve = unserialize($_SESSION['Eleve']);
+        $id_user_eleve = $uneleve->getIdUser();
+      }
+
+      if (isset($_SESSION['Entreprise']) ) {
+        $uneleve = unserialize($_SESSION['Entreprise']);
+        $id_user_eleve = $uneleve->getIdUser();
+      }
+
+      if ($id_user == $id_user_eleve) {
+        $html = $html.'
+        <ul style="background:white;" class="tranding_select tabs">
+            <li class="tab"><a onclick="" class="waves-effect btn">Modifier</a></li>
+            <li class="tab"><a onclick="" class="waves-effect btn">Supprimer</a></li>
+            <li style="display:none;" class="tab"><a class="waves-effect btn active">Supprimer</a></li>
+        </ul>';
+      }
+
+      $html = $html.'
       </center>
       <br>
     </div>';
