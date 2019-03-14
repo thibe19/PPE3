@@ -51,7 +51,7 @@ if (isset($_SESSION['Eleve'])) {
         <script src="js/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body onload="onloadprofile()">
 
     <!-- Header_Area -->
     <?php
@@ -116,8 +116,8 @@ if (isset($_SESSION['Eleve'])) {
             </div>
             <div class="col l4 m6">
                 <ul id="postpro" class="tranding_select tabs">
-                    <li class="tab"><a href="#postami" id="postsamis" class="waves-effect btn active">>Posts de mes amis</a></li>
-                    <li class="tab"><a href="#postmoi" id="mesposts" onclick="chargemespots()" class="waves-effect btn ">>Mes Posts</a></li>
+                    <li class="tab"><a href="#postami" id="postsamis" onclick="window.location='profile.php?postsamis=true'" class="waves-effect btn active">>Posts de mes amis</a></li>
+                    <li class="tab"><a href="#postmoi" id="mesposts" onclick="window.location='profile.php?mesposts=true'" class="waves-effect btn ">>Mes Posts</a></li>
                 </ul>
             </div>
         </div>
@@ -127,6 +127,7 @@ if (isset($_SESSION['Eleve'])) {
     <section class="min_container profile_pages">
         <div class="section_row">
             <div class="middle_section col">
+                <?php if(empty($_REQUEST['mesposts'])){ ?>
                 <div id="postami">
                     <ul class="tranding_select tabs">
                         <li class="tab"><a href="#post" class="waves-effect btn active">Post</a></li>
@@ -197,6 +198,9 @@ if (isset($_SESSION['Eleve'])) {
                         ?>
                     </div>
                 </div>
+                <?php } //fin posts amis
+                if (!empty($_REQUEST['mesposts'])) {
+                ?>
                 <div id="postmoi">
                     <ul class="tranding_select tabs">
                         <li class="tab"><a href="#post1" class="waves-effect btn active">Post</a></li>
@@ -205,6 +209,7 @@ if (isset($_SESSION['Eleve'])) {
                     </ul><br>
                     <div id="post1">
                         <?php
+                        $unpost = new Post();
 
                         $param = array(
                             "FiltreSelect" => "u.nom_user,u.id_user,c.lib_cat,u.photo_user",
@@ -266,6 +271,7 @@ if (isset($_SESSION['Eleve'])) {
                         ?>
                     </div>
                 </div>
+                <?php } ?>
             </div>
             <!-- left side bar -->
             <div class="col">

@@ -240,14 +240,36 @@ function trirecherche(){
 }
 
 
-function chargemespots(){
-    window.location="profile.php?mesposts";
+function onloadprofile() {
+    if(getQueryVariable('mesposts')){
+        var elem = document.getElementById('mesposts');
+        elem.classList.add('active');
 
-    var elem = document.getElementById('mesposts');
-    elem.classList.add('active');
+        var remelem = document.getElementById('postsamis');
+        remelem.classList.remove('active');
 
-    var remelem = document.getElementById('postsamis');
-    remelem.classList.remove('active');
+        if(document.getElementById('postmoi').style.display == "none"){
+            document.getElementById('postmoi').style.display="block";
+        }
+    }
 
+    if (getQueryVariable('postsamis')) {
+        var elem = document.getElementById('mesposts');
+        elem.classList.remove('active');
+
+        var remelem = document.getElementById('postsamis');
+        remelem.classList.add('active');
+
+    }
+}
+function getQueryVariable(variable)
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
 }
 

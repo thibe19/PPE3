@@ -351,7 +351,9 @@ class Offre
             </center>
         </div>';
         }
-
+        if ($_REQUEST['mesposts']){
+            $html = "";
+        }
         return $html;
     }
 
