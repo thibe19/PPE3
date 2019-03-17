@@ -16,7 +16,7 @@ if (isset($_SESSION['Eleve']) ) {
   $eleveconnecte = unserialize($_SESSION['Eleve']);
   $id_user = $eleveconnecte->getIdUser();
 
-
+  
     ?>
     <!DOCTYPE html>
     <html lang="fr">

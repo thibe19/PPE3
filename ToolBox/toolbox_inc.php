@@ -255,10 +255,16 @@ function mail_accept($id_user, $id_ent, $conn) {
   $Req2 = $conn->Query($SQL2);
   $result2 = $Req2->fetch();
 
+  $SQL3 = "SELECT * FROM Utilisateur
+          WHERE id_user=$id_ent;";
+  $Req3 = $conn->Query($SQL3);
+  $result3 = $Req3->fetch();
+
   $text = "Bonjour\n";
-  $text = $text."Nous vous informons que votre demande chez".$result2['nom_user']."a été accepté votre demande de stage.\n";
-  $text = $text."Pour plus d'informations utiliser leur adresse mail : ".$result2['email.user']." \n\n\n";
+  $text = $text."Nous vous informons que votre demande chez ".$result3['nom_user']." a été accepté votre demande de stage.\n";
+  $text = $text."Pour plus d'informations utiliser leur adresse mail : ".$result3['email_user']." \n\n\n";
   $text = $text . "Ceci est un mail automatique, merci de ne pas y répondre.\n";
+  $text = $text."Ceci est un test, vous n'êtes pas concernés, nous nous sommes surement trompé d'adresse";
 
   mail($mail, $objet, $text, $entete);
 }

@@ -29,7 +29,7 @@ if (isset($_SESSION['Eleve'])) {
 }
 
 
-
+if (isset($_SESSION['Eleve']) ) {
 ?>
 <div class="interests">
     <h3 id="intersets" class="categories_tittle">Vos préférences <span onclick="modifpreferences(<?php print $iduser ?>)">Modifier</span>
@@ -66,7 +66,7 @@ if (isset($_SESSION['Eleve'])) {
     <input type="hidden" name="suprisok" value="1">
 </div>
 <?php
-
+}
 
 ?>
 <div class="profile">

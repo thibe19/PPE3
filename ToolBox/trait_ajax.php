@@ -72,8 +72,8 @@ if ($_GET['acceptedemande']) {
     $uneoffre = new Stage($id_offre,'','','','','','','','',$id_user_eleve,'','');
     $uneoffre->modifiUserEleveStage($id_user_eleve,$id_offre,$conn);
   }
+  mail_accept($id_user_eleve,$id_ent,$conn);
 
-  mail_acept($id_user_eleve,$id_ent,$conn);
 }
 
 if ($_GET['refuserdemande']) {

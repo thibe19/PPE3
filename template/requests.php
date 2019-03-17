@@ -362,7 +362,9 @@ elseif (isset($_SESSION['Entreprise'])) {
                 <li>
                    <a href="#">
                        <div class="media first_child">
+                         <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user_amis) ?>">
                             <img src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle responsive-img">
+                        </a>
                             <div class="media_body">
                                 <p><b><?php echo $res2['nom_user']; ?></b></p>
                                 <h6> <?php echo $res2['num_addr_user'].", ".$res2['rue_addr_user'].", ".$res2['CP_addr_user']." ".$res2['ville_addr_user']; ?> </h6>
@@ -440,7 +442,9 @@ elseif (isset($_SESSION['Entreprise'])) {
                   <li>
                      <a href="#">
                          <div class="media first_child">
+                           <a href="about.php?visit=<?php print dec_enc('encrypt',$id_user_amis) ?>">
                               <img src="<?php echo "images/profil/".$photo; ?>" alt="" class="circle responsive-img">
+                          </a>
                               <div class="media_body">
                                   <p><b><?php echo $res2['nom_user']; ?></b> </p>
                                   <h6> <?php echo $res2['num_addr_user'].", ".$res2['rue_addr_user'].", ".$res2['CP_addr_user']." ".$res2['ville_addr_user']; ?> </h6>
