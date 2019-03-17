@@ -481,24 +481,24 @@ require('part/header.php');
                                 <form action="about.php" method="post">
                                   Titre : <input type="text" name="titresn" value="">
                                     <div class="select_option">
-                                        <p> Domaine :
-                                            <select name="selectdomainesn">
-                                                <?php foreach ($domaine as $d) { ?>
-                                                    <option value="<?php print $d->id_cat ?>">
-                                                        <?php print $d->lib_cat ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                    </div>
-                                    <div class="select_option">
-                                        <p> Entreprise :
-                                            <select name="selectentsn">
-                                                <?php foreach ($list_ent as $le) { ?>
-                                                    <option value="<?php print $le->id_user ?>">
-                                                        <?php print $le->nom_user ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
+                                        <table>
+                                            <tr>
+                                                <td><p>Domaine :</p></td>
+                                                <td>
+                                                    <select name="selectdomainesn">
+                                                        <?php foreach ($domaine as $d) { ?>
+                                                            <option value="<?php print $d->id_cat ?>">
+                                                                <?php print $d->lib_cat ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Entreprise :</p></td>
+                                                <td style="height: 100%;"><input id="ajoutent" name="ajoutent" type="text"></td>
+                                            </tr>
+                                        </table>
                                     </div>
 
                                     Date :
@@ -641,7 +641,7 @@ require('part/header.php');
                                           </tr>
                                           <tr>
                                               <td><p>Entreprise :</p></td>
-                                              <td style="height: 100%;"><input id="ajoutent" type="text"></td>
+                                              <td style="height: 100%;"><input id="ajoutent" name="ajoutent" type="text"></td>
                                           </tr>
                                       </table>
                                   </div>
@@ -1774,18 +1774,37 @@ else {
 
 if (isset($_POST['valstabout'])) {
    $id_catsn = $_POST['selectdomainesn'];
-   $id_entsn = $_POST['selectentsn'];
+   $libent = $_REQUEST['ajoutent'];
+   $id_entsn = (!empty($_REQUEST['selectentsn']))?$_REQUEST['selectentsn']:null;
    $dated = $_POST['date_about_debut_sn'];
+   $datef = (isset($_POST['date_about_fin_sn']))?$_POST['date_about_fin_sn']:null;
    $datef = $_POST['date_about_fin_sn'];
-   //$addsn = $_POST['place_about_sn'];
    $descsn = $_POST['desc_about_sn'];
    $libo = $_POST['titresn'];
-   $notesn = $_POST['quantitysn'];
+   $notetn = (isset($_POST['quantitysn']))?$_POST['quantitysn']:null;
    $date = date("Y-m-d");
    $id_user_eleve = $id_user;
 
-    $unstage = new Stage('',$libo,'',$dated,$date,'',$id_user,$id_catsn,$id_entsn,$id_user_eleve,$datef,$notesn,$descsn);
-    $unstage->insert_stage($conn);
+    foreach ($noment as $n => $nom){
+        if (is_null($id_entsn) && (strtoupper($nom) == strtoupper($libent))){
+            $id_enttn = $n;
+            $trouve = true;
+            break;
+        }
+        else {
+            $trouve = false;
+        }
+    }
+    //TODO
+    if (!$trouve){
+        $newent = new Entreprise('',$libent,'','','','','','','','','','','','','','');
+        $newent->inscriptionent($newent,$conn);
+        $id_entsn = $newent->getAll(array("FiltreWhere" => "id_user = LAST_INSERT_ID()"),$conn);
+        $id_entsn = $id_entsn[0]->id_user;
+    }
+    $unemploi = new Emploi('',$libo,'',$dated,$date,$id_entsn,$id_user, $id_catsn,$id_enttn,$id_user_eleve,'','');
+    $unemploi->insert_emploi($conn);
+    die();
    ?>
      <script>
        window.location='./about.php';
@@ -1841,37 +1860,35 @@ if (isset($_POST['valstabouts'])) {
 //////////AJOUT TRAVAIL
 
 if (isset($_POST['valstaboutt'])) {
-   $id_cattn = $_POST['ajoutent'];
+   $id_cattn = $_POST['selectdomainetn'];
    $id_enttn = (!empty($_REQUEST['idaddent']))?$_REQUEST['idaddent']:null;
    $libent = $_REQUEST['ajoutent'];
    $dated = $_POST['date_about_debut_tn'];
-   $datef = $_POST['date_about_fin_tn'];
-   //$addsn = $_POST['place_about_sn'];
+   $datef = (isset($_POST['date_about_fin_tn']))?$_POST['date_about_fin_tn']:null;
    $desctn = $_POST['desc_about_tn'];
    $libo = $_POST['titretn'];
-   $notetn = $_POST['quantitytn'];
+   $notetn = (isset($_POST['quantitytn']))?$_POST['quantitytn']:null;
    $date = date("Y-m-d");
    $id_user_eleve = $id_user;
 
 
-    foreach ($noment as $n => $nom){
-        if (is_null($id_enttn) || (strtoupper($nom) == strtoupper($libent))){
 
+    foreach ($noment as $n => $nom){
+        if (is_null($id_enttn) && (strtoupper($nom) == strtoupper($libent))){
             $id_enttn = $n;
             $trouve = true;
+            break;
         }
         else {
-
             $trouve = false;
         }
     }
-
     //TODO
     if (!$trouve){
         $newent = new Entreprise('',$libent,'','','','','','','','','','','','','','');
-        $newent->inscriptionent($unentreprise,$conn);
+        $newent->inscriptionent($newent,$conn);
         $id_enttn = $newent->getAll(array("FiltreWhere" => "id_user = LAST_INSERT_ID()"),$conn);
-        print $id_enttn;
+        $id_enttn = $id_enttn[0]->id_user;
     }
    $unemploi = new Emploi('',$libo,'',$dated,$date,$desctn,$id_user,$id_cattn,$id_enttn,$id_user_eleve,'','');
    $unemploi->insert_emploi($conn);

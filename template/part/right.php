@@ -24,9 +24,11 @@
 
             $unedemande = new Offre();
             $resD = $unedemande->selectRightDemande($id_user,$conn);
-
+            $trouve = false;
             while ($dataD=$resD->fetch())
             {
+
+              $trouve = true;
               $id_offre=$dataD['id_offre'];
               $uneoffre = new Offre();
               $param = array(
@@ -58,7 +60,9 @@
               </li>
               <hr>
             <?php
-            }?>
+            }
+            print ($trouve === false)?"<p>aucune demande</p>":"";
+            ?>
           </ul>
       </div>
     </div>
