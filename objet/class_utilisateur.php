@@ -363,8 +363,7 @@ class Utilisateur
         AND email_user = '$email';";
         $req = $conn->Query($SQLtest) or die('Erreur dans la requete');
         $res_id_email = $req->fetchAll();
-
-        if ($res_id_email) {
+        if (!empty($res_id_email[0]->login_user)) {
           return;
         }
         else{
