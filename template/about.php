@@ -62,11 +62,14 @@ if (isset($_SESSION['Eleve'])) {
             "FiltreJoin" => array("INNER JOIN Utilisateur ON Entreprise.id_user = Utilisateur.id_user")
         );
         $dataent = $ent->getAll($param,$conn);
+        $noment = array();
         $resultent = '[';
         foreach ($dataent as $r){
             $resultent .= '{label : "'.$r->nom_user.'", id:"'.$r->id_user.'"},';
+            $noment[$r->id_user] = $r->nom_user;
         }
         $resultent .= ']';
+
 
 ?>
 
@@ -638,7 +641,7 @@ require('part/header.php');
                                           </tr>
                                           <tr>
                                               <td><p>Entreprise :</p></td>
-                                              <td style="height: 100%;"><input id="ajoutent" type="text"><input type="hidden" name="idaddent" id="idaddent"></td>
+                                              <td style="height: 100%;"><input id="ajoutent" type="text"></td>
                                           </tr>
                                       </table>
                                   </div>
@@ -1708,7 +1711,7 @@ else {
                                     <tr>
                                         <td><p>E-mail</p></td>
                                         <td><p> : </p></td>
-                                        <td><p><input type="text" name="mail_about" value="<?php echo $data['email_user']; ?>"></p>
+                                        <td><p><œinput type="text" name="mail_about" value="<?php echo $data['email_user']; ?>"></p>
                                         </td>
                                     </tr>
 
@@ -1838,8 +1841,9 @@ if (isset($_POST['valstabouts'])) {
 //////////AJOUT TRAVAIL
 
 if (isset($_POST['valstaboutt'])) {
-   $id_cattn = $_POST['selectdomainetn'];
-   $id_enttn = $_POST['selectenttn'];
+   $id_cattn = $_POST['ajoutent'];
+   $id_enttn = (!empty($_REQUEST['idaddent']))?$_REQUEST['idaddent']:null;
+   $libent = $_REQUEST['ajoutent'];
    $dated = $_POST['date_about_debut_tn'];
    $datef = $_POST['date_about_fin_tn'];
    //$addsn = $_POST['place_about_sn'];
@@ -1849,6 +1853,26 @@ if (isset($_POST['valstaboutt'])) {
    $date = date("Y-m-d");
    $id_user_eleve = $id_user;
 
+
+    foreach ($noment as $n => $nom){
+        if (is_null($id_enttn) || (strtoupper($nom) == strtoupper($libent))){
+
+            $id_enttn = $n;
+            $trouve = true;
+        }
+        else {
+
+            $trouve = false;
+        }
+    }
+
+    //TODO
+    if (!$trouve){
+        $newent = new Entreprise('',$libent,'','','','','','','','','','','','','','');
+        $newent->inscriptionent($unentreprise,$conn);
+        $id_enttn = $newent->getAll(array("FiltreWhere" => "id_user = LAST_INSERT_ID()"),$conn);
+        print $id_enttn;
+    }
    $unemploi = new Emploi('',$libo,'',$dated,$date,$desctn,$id_user,$id_cattn,$id_enttn,$id_user_eleve,'','');
    $unemploi->insert_emploi($conn);
    ?>
