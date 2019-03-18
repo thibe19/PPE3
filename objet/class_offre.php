@@ -305,7 +305,7 @@ class Offre
       return $resD;
     }
 
-    
+
     function countdemande($id_user,$conn){
     $sqlC="SELECT DISTINCT(id_offre) FROM demande WHERE  id_user_entreprise = '$id_user'";
     $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
@@ -334,18 +334,22 @@ class Offre
         if (testsql($sqlD,$conn)) {
             $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:none">
             <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
-        </div>
+        </div>';
+        if (isset($_SESSION['Eleve'])) { $html = $html.'
         <div id="postule'.$idoffre.'" style="display:block">
         <center>
             <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
             <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-times"></i></div>
         </center>
         </div>';
+      }
         }
         else {
             $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:block">
             <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
-        </div>
+        </div>';
+        if (isset($_SESSION['Eleve'])) {
+          $html=$html.'
         <div id="postule'.$idoffre.'" style="display:none">
             <center>
                 <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
