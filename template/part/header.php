@@ -123,7 +123,7 @@ $( function() {
                         </div>
                     </div> -->
                 </li>
-                <li><a href="profile.php">Profile</a></li>
+                <li><a href="profile.php">Profil</a></li>
                 <li><a href="ostage.php">Nouvelle offre</a></li>
                 <!-- <li><a href="dashboard.php">Dashboard</a></li> -->
                 <li class="notifications search_sm"><a class="dropdown-button" href="#!" data-activates="dropdown5"><i

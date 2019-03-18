@@ -193,9 +193,9 @@ class Emploi extends Offre
                 <p><b>Type de contrat &nbsp:&nbsp </b>'.urldecode($type_emp).'</p>
                 <p><b>Date de début &nbsp:&nbsp </b>'.urldecode($date_debut_offre).'</p>
                 <p><b>'."Description de l'offre &nbsp:&nbsp".' </b>'.urldecode($desc_offre).'</p>
-            </div>
-            '.$offre->postule($id_offre,$id_user,$id_ent,$conn).'
-            <br>
+            </div>';
+            if (isset($_SESSION['Eleve'])) { $html = $html.$offre->postule($id_offre,$id_user,$id_ent,$conn); }
+            $html = $html.'<br>
         </div>';
 
         return $html;

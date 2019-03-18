@@ -21,7 +21,7 @@ class Offre
     private $id_ent;
     private $id_user_eleve;
 
-    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '',$desc_offre = '', $id_user = '',$id_cat = '', $id_ent = '',$id_user_eleve='')
+    function __construct($id_offre = '', $lib_offre = '', $niveau_req = '', $date_offre = '', $date_post = '', $desc_offre = '', $id_user = '', $id_cat = '', $id_ent = '', $id_user_eleve = '')
     {
         $this->id_offre = $id_offre;
         $this->lib_offre = $lib_offre;
@@ -39,19 +39,21 @@ class Offre
     ///////////////////////////////////////// Get ///////////////////////////////////////////
 
 
-    public function getAllOffre(){
-        $data = $this->id_offre.' ';
-        $data = $data.$this->lib_offre.' ';
-        $data = $data.$this->niveau_req.' ';
-        $data = $data.$this->date_debut_offre.' ';
-        $data = $data.$this->date_post_offre.' ';
-        $data = $data.$this->desc_offre.' ';
-        $data = $data.$this->id_user.' ';
-        $data = $data.$this->id_cat.' ';
-        $data = $data.$this->id_ent.' ';
-        $data = $data.$this->id_user_eleve.' ';
+    public function getAllOffre()
+    {
+        $data = $this->id_offre . ' ';
+        $data = $data . $this->lib_offre . ' ';
+        $data = $data . $this->niveau_req . ' ';
+        $data = $data . $this->date_debut_offre . ' ';
+        $data = $data . $this->date_post_offre . ' ';
+        $data = $data . $this->desc_offre . ' ';
+        $data = $data . $this->id_user . ' ';
+        $data = $data . $this->id_cat . ' ';
+        $data = $data . $this->id_ent . ' ';
+        $data = $data . $this->id_user_eleve . ' ';
         return $data;
     }
+
     public function getid_offre()
     {
         return $this->id_offre;
@@ -95,6 +97,7 @@ class Offre
     {
         return $this->id_cat;
     }
+
     /**
      * @return string
      */
@@ -110,6 +113,7 @@ class Offre
     {
         return $this->desc_offre;
     }
+
     public function getIdUserEleve()
     {
         return $this->id_user_eleve;
@@ -141,6 +145,7 @@ class Offre
     {
         $this->id_cat = $id_cat;
     }
+
     public function setdate_debut_offre($date_debut_offre)
     {
         $this->date_debut_offre = $date_debut_offre;
@@ -194,38 +199,36 @@ class Offre
     //@param FiltreJoin jointure de tables -> ["INNER JOIN table ON table.id=table.id]
     //@param FiltreWhere conditions
     //@param FiltreSelect ajout select
-    public function getAll(array $param,$conn){
+    public function getAll(array $param, $conn)
+    {
 
-      if (isset($param['FiltreJoin'])){
-        $join = "";
-        foreach ($param['FiltreJoin'] as $data){
-          $join .= $data." ";
+        if (isset($param['FiltreJoin'])) {
+            $join = "";
+            foreach ($param['FiltreJoin'] as $data) {
+                $join .= $data . " ";
+            }
+        } else {
+            $join = "";
         }
-      }
-      else{
-        $join = "";
-      }
 
-      if (isset($param['FiltreWhere'])){
-        $where = "WHERE ".$param['FiltreWhere'];
-      }
-      else{
-        $where = "";
-      }
+        if (isset($param['FiltreWhere'])) {
+            $where = "WHERE " . $param['FiltreWhere'];
+        } else {
+            $where = "";
+        }
 
-      if (isset($param['FiltreSelect'])){
-          $select = ",".$param['FiltreSelect'];
-      }
-      else{
-        $select = "";
-      }
+        if (isset($param['FiltreSelect'])) {
+            $select = "," . $param['FiltreSelect'];
+        } else {
+            $select = "";
+        }
 
-      $SQL = "SELECT Offre.*".$select." FROM Offre"
-          ." ".$join." "
-          ." ".$where." ";
-      $req = $conn->Query($SQL) or die($SQL.'Erreur selection Post');
-      $req = $req->fetchAll(PDO::FETCH_OBJ);
-      return $req;
+        $SQL = "SELECT Offre.*" . $select . " FROM Offre"
+            . " " . $join . " "
+            . " " . $where . " ";
+        $req = $conn->Query($SQL) or die($SQL . 'Erreur selection Post');
+        $req = $req->fetchAll(PDO::FETCH_OBJ);
+        return $req;
     }
 
 
@@ -239,7 +242,8 @@ class Offre
     //////////////////////////////////////////////////////////////////////////////////
 
 
-    public function insert_offre($conn){
+    public function insert_offre($conn)
+    {
         $lib_offre = urlencode($this->lib_offre);
         $niveau_req = $this->niveau_req;
         $date_debut_offre = $this->date_debut_offre;
@@ -253,7 +257,7 @@ class Offre
 
         $SQL = "INSERT INTO Offre
                 VALUES(NULL,'$lib_offre','$niveau_req','$date_debut_offre','$date_post_offre','$desc_offre','$id_user','$id_cat','$id_ent','$id_user_eleve')";
-        $res = $conn->Query($SQL)or die(errorInfo());
+        $res = $conn->Query($SQL) or die(errorInfo());
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -264,11 +268,12 @@ class Offre
     ////                                                                          ////
     //////////////////////////////////////////////////////////////////////////////////
 
-    public function delete_offre($conn){
-      $id_offre = $this->id_offre;
+    public function delete_offre($conn)
+    {
+        $id_offre = $this->id_offre;
 
-      $SQL = "DELETE FROM Offre WHERE id_offre = $id_offre";
-      $res = $conn->Query($SQL)or die(errorInfo());
+        $SQL = "DELETE FROM Offre WHERE id_offre = $id_offre";
+        $res = $conn->Query($SQL) or die(errorInfo());
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -279,46 +284,50 @@ class Offre
     ////                                                                          ////
     //////////////////////////////////////////////////////////////////////////////////
 
-    public function modifier_offre($conn){
+    public function modifier_offre($conn)
+    {
 
-      $id_offre = $this->id_offre;
-      $lib_offre = $this->lib_offre;
-      $date_debut_offre = $this->date_debut_offre;
-      $id_cat = $this->id_cat;
-      $id_ent = $this->id_ent;
-      $desc_offre = $this->desc_offre;
-      $id_user_eleve = $this->id_user_eleve;
+        $id_offre = $this->id_offre;
+        $lib_offre = $this->lib_offre;
+        $date_debut_offre = $this->date_debut_offre;
+        $id_cat = $this->id_cat;
+        $id_ent = $this->id_ent;
+        $desc_offre = $this->desc_offre;
+        $id_user_eleve = $this->id_user_eleve;
 
-        $sql="UPDATE Offre
+        $sql = "UPDATE Offre
               SET lib_offre='$lib_offre', date_debut_offre='$date_debut_offre', desc_offre='$desc_offre', id_cat='$id_cat', id_ent='$id_ent', id_user_Eleve='$id_user_eleve'
               WHERE id_offre='$id_offre'";
-        $res = $conn->Query($sql)or die('Erreur modification offre');
+        $res = $conn->Query($sql) or die('Erreur modification offre');
 
 
     }
 
-    function selectRightDemande($id_user,$conn){
+    function selectRightDemande($id_user, $conn)
+    {
 
-      $sqlD="SELECT * FROM demande WHERE  id_user_eleve = '$id_user'";
-      $resD = $conn -> query($sqlD)or die($conn -> errorInfo());
+        $sqlD = "SELECT * FROM demande WHERE  id_user_eleve = '$id_user'";
+        $resD = $conn->query($sqlD) or die($conn->errorInfo());
 
-      return $resD;
+        return $resD;
     }
 
 
-    function countdemande($id_user,$conn){
-    $sqlC="SELECT DISTINCT(id_offre) FROM demande WHERE  id_user_entreprise = '$id_user'";
-    $resC = $conn -> query($sqlC)or die($conn -> errorInfo());
+    function countdemande($id_user, $conn)
+    {
+        $sqlC = "SELECT DISTINCT(id_offre) FROM demande WHERE  id_user_entreprise = '$id_user'";
+        $resC = $conn->query($sqlC) or die($conn->errorInfo());
 
-    return $resC;
-  }
+        return $resC;
+    }
 
 
-    function modifiOffreEleve($id_user_eleve,$id_offre,$conn){
-      $sql="UPDATE Offre
+    function modifiOffreEleve($id_user_eleve, $id_offre, $conn)
+    {
+        $sql = "UPDATE Offre
             SET id_user_Eleve='$id_user_eleve'
             WHERE id_offre='$id_offre'";
-      $res = $conn->Query($sql)or die('Erreur modification offre');
+        $res = $conn->Query($sql) or die('Erreur modification offre');
     }
 
 
@@ -329,48 +338,51 @@ class Offre
      *
      */
 
-    function postule($idoffre,$id_user,$id_ent,$conn){
-        $sqlD ="SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
-        if (testsql($sqlD,$conn)) {
-            $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:none">
-            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+    function postule($idoffre, $id_user, $id_ent, $conn)
+    {
+        $sqlD = "SELECT * FROM demande WHERE id_user_eleve = '$id_user' AND id_offre = '$idoffre'";
+        if (testsql($sqlD, $conn)) {
+            $html = '<div id="paspostule' . $idoffre . '" class="postule" style="display:none">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler(' . $idoffre . ',' . $id_ent . ',' . $id_user . ')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>';
-        if (isset($_SESSION['Eleve'])) { $html = $html.'
-        <div id="postule'.$idoffre.'" style="display:block">
+            if (isset($_SESSION['Eleve'])) {
+                $html = $html . '
+        <div id="postule' . $idoffre . '" style="display:block">
         <center>
             <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-            <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent.','.$id_user.')"><i class="fa fa-times"></i></div>
+            <div class="btn canceloffre" id="canceloffre' . $idoffre . '" onclick="annuldemande(' . $idoffre . ',' . $id_ent . ',' . $id_user . ')"><i class="fa fa-times"></i></div>
         </center>
         </div>';
-      }
-        }
-        else {
-            $html = '<div id="paspostule'.$idoffre.'" class="postule" style="display:block">
-            <center><button class="btn btn-primary " id="postulerS" onclick="postuler('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
+            }
+        } else {
+            $html = '<div id="paspostule' . $idoffre . '" class="postule" style="display:block">
+            <center><button class="btn btn-primary " id="postulerS" onclick="postuler(' . $idoffre . ',' . $id_ent . ',' . $id_user . ')"><i class="fa fa-bullhorn"> Postuler</i></button></center>
         </div>';
-        if (isset($_SESSION['Eleve'])) {
-          $html=$html.'
-        <div id="postule'.$idoffre.'" style="display:none">
+            if (isset($_SESSION['Eleve'])) {
+                $html = $html . '
+        <div id="postule' . $idoffre . '" style="display:none">
             <center>
                 <div class="btn btn-primary " style="cursor: default"><i class="fa fa-bullhorn"> En Attente</i></div>
-                <div class="btn canceloffre" id="canceloffre'.$idoffre.'" onclick="annuldemande('.$idoffre.','.$id_ent .','.$id_user .')"><i class="fa fa-times"></i></div>
+                <div class="btn canceloffre" id="canceloffre' . $idoffre . '" onclick="annuldemande(' . $idoffre . ',' . $id_ent . ',' . $id_user . ')"><i class="fa fa-times"></i></div>
             </center>
         </div>';
+            }
+            if (isset($_REQUEST['mesposts'])) {
+                $html = "";
+            }
+            return $html;
         }
-        if (isset($_REQUEST['mesposts'])){
-            $html = "";
-        }
-        return $html;
-    }
 
-    function selectStageEleve($table, $id_user, $conn){
-      $sql_aff_stg3 = "SELECT * FROM Offre O, $table S
+        function selectStageEleve($table, $id_user, $conn)
+        {
+            $sql_aff_stg3 = "SELECT * FROM Offre O, $table S
                        WHERE O.id_offre = S.id_offre
                        AND O.id_user = $id_user
                        AND O.id_user_Eleve = $id_user
                        ORDER BY O.date_debut_offre DESC";
-      $req_aff_stg3 = $conn->Query($sql_aff_stg3)or die('Erreur dans le requete pref1');
-      return $req_aff_stg3;
+            $req_aff_stg3 = $conn->Query($sql_aff_stg3) or die('Erreur dans le requete pref1');
+            return $req_aff_stg3;
+        }
     }
 }
 

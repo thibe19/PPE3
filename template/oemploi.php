@@ -311,7 +311,7 @@ if (isset($_POST['validOE'])) {
       }
 
       $id_ent = isset($id_ent)?$id_ent:$ent;
-      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$id_ent,$salaire,$typeC);
+      $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$id_ent,'',$salaire,$typeC);
       $unemploi->insert_emploi($conn);
 
 
@@ -550,7 +550,7 @@ if (isset($_SESSION['Entreprise'])) {
     $date = date("Y-m-d");
 
 
-    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$ent,$salaire,$typeC);
+    $unemploi = new Emploi('',$lib_offre,$nreq,$dateDemp,$date,$descemp,$id_user,$cat,$ent,'',$salaire,$typeC);
     $unemploi->insert_emploi($conn);
 
 
