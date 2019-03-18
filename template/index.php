@@ -214,14 +214,14 @@ if (isset($_SESSION['Eleve']) ) {
 
                     $table = array();
 
-                    if (($_POST['type_post']!=0) || ($_POST['cat_post']!=0)){
+                    /*if (($_POST['type_post']!=0) || ($_POST['cat_post']!=0)){
                         switch ($_POST['type_post']){
                             case "Post" :
                                 $table['Post'] = array("id_post","titre_post","contenu_post", "photo_post", "date_post","heure_post","id_user","id_cat");
                                 break;
 
                         }
-                    }
+                    }*/
 
                     $resultats = req_recherche($_POST['search'],'',$conn);
                     $trouve = 0;
@@ -244,9 +244,12 @@ if (isset($_SESSION['Eleve']) ) {
                                  */
 
                                 case "Post":
-                                    foreach ($resultat as $data) {
-                                    affichepost($data->id_post,$data->id_cat,$id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$conn);
+                                    $unpost = new Post();
+                                    $posts = "";
+                                    foreach ($resultat as $data){
+                                        $posts .= $unpost->affichepost($data->id_post,$data->photo_post,$data->lib_cat,$data->id_user,$data->date_post,$data->heure_post,$data->titre_post,$data->contenu_post,$data->photo_user,$data->nom_user)."<br>";
                                     }
+                                    print $posts;
                                 break;
 
 
