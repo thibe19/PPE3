@@ -283,8 +283,11 @@ class Stage extends Offre{
                 <p><b>Date de fin &nbsp:&nbsp </b>'.$date_fin_stage.'</p>
                 <p><b>'."Description de l'offre &nbsp:&nbsp".' </b>'.urldecode($desc_offre).'</p>
             </div>
-            '.$offre->postule($id_offre,$id_user,$id_ent,$conn).'
-            <br>
+            ';
+
+            if (isset($_SESSION['Eleve'])) { $html = $html.$offre->postule($id_offre,$id_user,$id_ent,$conn); }
+
+            $html = $html.'<br>
         </div>';
 
         return $html;
