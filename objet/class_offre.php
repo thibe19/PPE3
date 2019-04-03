@@ -372,17 +372,16 @@ class Offre
             }
             return $html;
         }
-
-        function selectStageEleve($table, $id_user, $conn)
-        {
-            $sql_aff_stg3 = "SELECT * FROM Offre O, $table S
-                       WHERE O.id_offre = S.id_offre
-                       AND O.id_user = $id_user
-                       AND O.id_user_Eleve = $id_user
-                       ORDER BY O.date_debut_offre DESC";
-            $req_aff_stg3 = $conn->Query($sql_aff_stg3) or die('Erreur dans le requete pref1');
-            return $req_aff_stg3;
-        }
+    }
+    function selectStageEleve($table, $id_user, $conn)
+    {
+        $sql_aff_stg3 = "SELECT * FROM Offre O, $table S
+                   WHERE O.id_offre = S.id_offre
+                   AND O.id_user = $id_user
+                   AND O.id_user_Eleve = $id_user
+                   ORDER BY O.date_debut_offre DESC";
+        $req_aff_stg3 = $conn->Query($sql_aff_stg3) or die('Erreur dans le requete pref1');
+        return $req_aff_stg3;
     }
 }
 
